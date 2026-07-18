@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium Longevity & Health Coaching for those who value quality, vitality, and long-term health." />
+  <title>Atlas Longevity | Premium Health Coaching</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  
+  <!-- Premium Loading Overlay -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <h2 class="loader-brand">Atlas</h2>
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <div class="nav-brand">Atlas Longevity</div>
+      <nav class="nav-links">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#method">Method</a>
+        <a href="#services">Services</a>
+        <a href="#assessment">Assessment</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-outline" id="dark-mode-toggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="btn btn-primary">Book Discovery</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-image-wrapper">
+      <img src="/images/hero.jpg" alt="Minimalist morning sunlight filtering through Japandi room" class="hero-image" />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-content">
+      <p class="hero-subtitle reveal-up">Human Optimization & Healthspan Coaching</p>
+      <h1 class="hero-title reveal-up delay-1">Live healthier,<br>stronger, longer.</h1>
+      <p class="hero-description reveal-up delay-2">
+        A premium longevity practice combining functional medicine, 
+        luxury wellness, and precision science for those who demand excellence.
+      </p>
+      <div class="hero-actions reveal-up delay-3">
+        <button class="btn btn-primary btn-large">Begin Your Journey</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <span>Scroll to explore</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- Brand Philosophy Section -->
+  <section class="section bg-linen" id="philosophy">
+    <div class="container grid-2 align-center">
+      <div class="content-block reveal-up">
+        <h3 class="section-label">The Philosophy</h3>
+        <h2 class="section-title">Train less, but smarter. Movement as medicine.</h2>
+        <p class="section-text">
+          The goal is not to simply add years to your life, but to add vitality to your years. We approach human performance as an integrated ecosystem—where sleep, movement, stress, and nutrition harmonize to create extraordinary longevity.
+        </p>
+        <ul class="feature-list">
+          <li>Health before performance.</li>
+          <li>Food as information.</li>
+          <li>Recovery is training.</li>
+        </ul>
+      </div>
+      <div class="image-block reveal-right">
+        <img src="/images/nature.jpg" alt="Serene misty green forest walk" class="rounded-image shadow-soft" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Longevity Age Section -->
+  <section class="section bg-white" id="assessment">
+    <div class="container text-center max-w-800">
+      <h3 class="section-label reveal-up">Precision Diagnostics</h3>
+      <h2 class="section-title reveal-up">Calculate Your Biological Age</h2>
+      <p class="section-text reveal-up">
+        True health is measured on a cellular level. Discover how your lifestyle choices are influencing your biological age.
+      </p>
+      
+      <div class="calculator-card reveal-up delay-1 shadow-premium">
+        <div class="calc-header">
+          <h4>Longevity Assessment Preview</h4>
+          <span class="badge">Interactive</span>
+        </div>
+        <div class="calc-body">
+          <div class="range-group">
+            <label>Chronological Age: <span id="age-val">40</span></label>
+            <input type="range" id="age-input" min="30" max="75" value="40" />
+          </div>
+          <div class="range-group">
+            <label>Sleep Quality (Hours): <span id="sleep-val">7</span></label>
+            <input type="range" id="sleep-input" min="4" max="10" value="7" />
+          </div>
+          <div class="range-group">
+            <label>Weekly Exercise (Hours): <span id="exercise-val">3</span></label>
+            <input type="range" id="exercise-input" min="0" max="15" value="3" />
+          </div>
+          <div class="calc-result">
+            <p>Estimated Biological Age</p>
+            <div class="result-number" id="bio-age-result">38</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="section bg-stone" id="services">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <h3 class="section-label">Our Expertise</h3>
+        <h2 class="section-title">Comprehensive Optimization</h2>
+      </div>
+      
+      <div class="grid-3 mt-12">
+        <div class="service-card reveal-up">
+          <div class="card-icon">01</div>
+          <h4 class="card-title">Lifestyle Medicine</h4>
+          <p class="card-text">Evidence-based protocols to optimize metabolic health, cellular resilience, and hormone balance.</p>
+        </div>
+        <div class="service-card reveal-up delay-1">
+          <div class="card-icon">02</div>
+          <h4 class="card-title">Sleep & Recovery</h4>
+          <p class="card-text">Precision tracking utilizing Oura and WHOOP data to engineer perfect sleep architecture.</p>
+        </div>
+        <div class="service-card reveal-up delay-2">
+          <div class="card-icon">03</div>
+          <h4 class="card-title">Strength & Mobility</h4>
+          <p class="card-text">Functional movement patterns designed to maintain structural integrity and prevent injury for decades.</p>
+        </div>
+        <div class="service-card reveal-up">
+          <div class="card-icon">04</div>
+          <h4 class="card-title">Heat & Cold Exposure</h4>
+          <p class="card-text">Guided sauna and cold plunge protocols to stimulate shock proteins and enhance mitochondrial function.</p>
+        </div>
+        <div class="service-card reveal-up delay-1">
+          <div class="card-icon">05</div>
+          <h4 class="card-title">Nutritional Biochemistry</h4>
+          <p class="card-text">Continuous glucose monitoring analysis (Levels) and personalized nutrigenomics.</p>
+        </div>
+        <div class="service-card reveal-up delay-2">
+          <div class="card-icon">06</div>
+          <h4 class="card-title">Stress Management</h4>
+          <p class="card-text">Advanced breathwork techniques to regulate the autonomic nervous system and build emotional resilience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="section bg-warm-black text-white text-center">
+    <div class="container max-w-800 reveal-up">
+      <blockquote class="premium-quote">
+        "Small habits create extraordinary longevity. We design systems that make health effortless."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Method & Dashboard Preview -->
+  <section class="section bg-white" id="method">
+    <div class="container grid-2 align-center">
+      <div class="image-block reveal-left">
+        <img src="/images/sauna.jpg" alt="Luxury Scandinavian sauna wellness" class="rounded-image shadow-soft" />
+      </div>
+      <div class="content-block reveal-up">
+        <h3 class="section-label">The Experience</h3>
+        <h2 class="section-title">An Intelligent Approach to Wellness</h2>
+        <p class="section-text">
+          As a client, you gain access to our bespoke dashboard. We integrate your wearable data—heart rate variability, sleep stages, resting heart rate—to provide dynamic, daily coaching adjustments.
+        </p>
+        <div class="dashboard-preview mt-8 shadow-premium">
+          <div class="dash-header">
+            <span>Daily Protocol</span>
+            <span class="status-dot"></span>
+          </div>
+          <div class="dash-item">
+            <span>Morning Sunlight</span>
+            <span class="check-circle active"></span>
+          </div>
+          <div class="dash-item">
+            <span>Zone 2 Training (45m)</span>
+            <span class="check-circle"></span>
+          </div>
+          <div class="dash-item">
+            <span>Heat Exposure (20m)</span>
+            <span class="check-circle"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer bg-warm-black text-white">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>Atlas Longevity</h3>
+        <p>Premium healthspan coaching for the driven.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#method">Method</a>
+        <a href="#services">Services</a>
+      </div>
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <div class="footer-newsletter">
+        <h4>The Journal</h4>
+        <p>Insights on longevity science.</p>
+        <div class="input-group">
+          <input type="email" placeholder="Your email address" />
+          <button>→</button>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Atlas Longevity. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
