@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Vite 8 vereist Node 20.19+ / 22.12+. Vastzetten zodat de build
+# niet afhangt van de standaardversie van Netlify.
+[build.environment]
+  NODE_VERSION = "22"
+
 # Let op: geen SPA catch-all (/* -> /index.html) zoals bij de vorige site.
 # Dit is een multi-page site; een catch-all zou elke pagina de homepage tonen.
 # Netlify serveert dist/404.html automatisch bij een onbekende URL.
