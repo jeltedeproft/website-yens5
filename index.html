@@ -1,251 +1,710 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Premium Longevity & Health Coaching for those who value quality, vitality, and long-term health." />
-  <title>Atlas Longevity | Premium Health Coaching</title>
-  
-  <!-- Preconnect to Google Fonts -->
+  <title>YENS | Personal Trainer & Strength Coach in Kontich en Ranst</title>
+  <meta name="description" content="Persoonlijke begeleiding rond krachttraining, beweging, herstel, voeding en leefstijl. Personal training in Kontich, Ranst en aan huis in regio Antwerpen." />
+  <link rel="canonical" href="https://www.yens.be/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="nl_BE" />
+  <meta property="og:title" content="YENS | Personal Trainer & Strength & Longevity Coach" />
+  <meta property="og:description" content="Sterker bewegen. Beter herstellen. Langer goed leven. Persoonlijke coaching in Kontich, Ranst en aan huis in regio Antwerpen." />
+  <meta property="og:image" content="/images/hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="./style.css" />
+
+  <!-- Thema meteen zetten, zodat er geen lichte flits is -->
+  <script>document.documentElement.classList.add('js'); if (localStorage.getItem('yens-theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "additionalType": "https://schema.org/SportsActivityLocation",
+    "name": "YENS — Personal Trainer, Strength & Longevity Coach",
+    "description": "Persoonlijke begeleiding rond krachttraining, beweging, herstel, voeding en leefstijl.",
+    "url": "https://www.yens.be/",
+    "areaServed": [
+      { "@type": "City", "name": "Kontich" },
+      { "@type": "City", "name": "Ranst" },
+      { "@type": "AdministrativeArea", "name": "Regio Antwerpen" }
+    ],
+    "founder": { "@type": "Person", "name": "Yens De Proft", "jobTitle": "Personal Trainer — Strength & Longevity Coach" },
+    "priceRange": "€€"
+  }
+  </script>
 </head>
 <body>
-  
-  <!-- Premium Loading Overlay -->
-  <div class="loader" id="loader">
-    <div class="loader-content">
-      <h2 class="loader-brand">Atlas</h2>
-      <div class="loader-line"></div>
+  <a class="skip-link" href="#main">Naar de inhoud</a>
+
+  <!-- Intro -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <p class="loader__brand">YENS</p>
+      <p class="loader__role">Strength &amp; Longevity Coach</p>
+      <div class="loader__line"></div>
     </div>
   </div>
 
-  <!-- Navigation -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-container">
-      <div class="nav-brand">Atlas Longevity</div>
-      <nav class="nav-links">
-        <a href="#philosophy">Philosophy</a>
-        <a href="#method">Method</a>
-        <a href="#services">Services</a>
-        <a href="#assessment">Assessment</a>
+  <!-- Navigatie -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="/" aria-label="YENS — naar de homepage">
+        <span class="brand__name">YENS</span>
+        <span class="brand__role">Personal Trainer — Strength &amp; Longevity Coach</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Hoofdnavigatie">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/begeleiding.html">Begeleiding</a>
+        <a href="/werkwijze.html">Werkwijze</a>
+        <a href="/over-mij.html">Over mij</a>
+        <a href="/kennis.html">Kennis</a>
+        <a href="/contact.html">Contact</a>
       </nav>
-      <div class="nav-actions">
-        <button class="btn btn-outline" id="dark-mode-toggle">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+
+      <div class="nav__actions">
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Wissel tussen licht en donker thema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>
         </button>
-        <button class="btn btn-primary">Book Discovery</button>
+        <a class="btn btn--primary" href="/contact.html">Plan een kennismaking</a>
+        <button class="icon-btn nav__burger" id="nav-burger" type="button" aria-expanded="false" aria-controls="nav-mobile" aria-label="Menu openen">
+          <span class="burger-lines"><span></span><span></span><span></span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-image-wrapper">
-      <img src="/images/hero.jpg" alt="Minimalist morning sunlight filtering through Japandi room" class="hero-image" />
-      <div class="hero-overlay"></div>
+  <!-- Mobiel menu -->
+  <div class="nav__mobile" id="nav-mobile">
+    <nav aria-label="Mobiele navigatie">
+      <a class="nav__mobile-link" style="--i:0" href="/">Home</a>
+      <a class="nav__mobile-link" style="--i:1" href="/begeleiding.html">Begeleiding</a>
+      <a class="nav__mobile-link" style="--i:2" href="/werkwijze.html">Werkwijze</a>
+      <a class="nav__mobile-link" style="--i:3" href="/over-mij.html">Over mij</a>
+      <a class="nav__mobile-link" style="--i:4" href="/kennis.html">Kennis</a>
+      <a class="nav__mobile-link" style="--i:5" href="/contact.html">Contact</a>
+    </nav>
+    <div class="nav__mobile-footer">
+      <a class="btn btn--primary btn--lg" href="/contact.html">Plan een kennismaking</a>
+      <p class="nav__mobile-meta">Kontich · Ranst · aan huis in regio Antwerpen</p>
     </div>
-    <div class="container hero-content">
-      <p class="hero-subtitle reveal-up">Human Optimization & Healthspan Coaching</p>
-      <h1 class="hero-title reveal-up delay-1">Live healthier,<br>stronger, longer.</h1>
-      <p class="hero-description reveal-up delay-2">
-        A premium longevity practice combining functional medicine, 
-        luxury wellness, and precision science for those who demand excellence.
-      </p>
-      <div class="hero-actions reveal-up delay-3">
-        <button class="btn btn-primary btn-large">Begin Your Journey</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Scroll Indicator -->
-  <div class="scroll-indicator">
-    <span>Scroll to explore</span>
-    <div class="line"></div>
   </div>
 
-  <!-- Brand Philosophy Section -->
-  <section class="section bg-linen" id="philosophy">
-    <div class="container grid-2 align-center">
-      <div class="content-block reveal-up">
-        <h3 class="section-label">The Philosophy</h3>
-        <h2 class="section-title">Train less, but smarter. Movement as medicine.</h2>
-        <p class="section-text">
-          The goal is not to simply add years to your life, but to add vitality to your years. We approach human performance as an integrated ecosystem—where sleep, movement, stress, and nutrition harmonize to create extraordinary longevity.
+  <main id="main">
+
+    <!-- 1. Hero -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="hero__eyebrow">Personal training · Strength · Health · Longevity</p>
+          <h1 class="h-hero hero__title">
+            <span class="line"><span style="--i:0">Sterker bewegen.</span></span>
+            <span class="line"><span style="--i:1">Beter herstellen.</span></span>
+            <span class="line"><span style="--i:2">Langer goed leven.</span></span>
+          </h1>
+          <p class="lead hero__desc">
+            Persoonlijke coaching rond kracht, beweging, voeding en herstel. Geen extreem regime,
+            maar een doordachte aanpak die past bij jouw lichaam, leven en doelen.
+          </p>
+          <div class="btn-group hero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact.html">Plan een vrijblijvende kennismaking</a>
+            <a class="btn btn--ghost btn--lg" href="/begeleiding.html">Ontdek de begeleiding</a>
+          </div>
+          <p class="hero__note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Personal training in Kontich, Ranst en aan huis in regio Antwerpen
+          </p>
+        </div>
+
+        <div class="hero__media">
+          <img src="/images/hero.jpg" alt="Rustige trainingsomgeving met natuurlijk licht" width="900" height="1125" fetchpriority="high" />
+          <span class="media-note">Tijdelijk beeld — te vervangen door foto van Yens tijdens begeleiding</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Herkenning -->
+    <section class="section" id="herkenning">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="h-1">Gezond leven hoeft niet ingewikkelder te worden</h2>
+          <p class="lead">
+            Misschien wil je sterker worden, minder fysieke klachten ervaren, opnieuw vertrouwen krijgen
+            in je lichaam of voorkomen dat je gezondheid langzaam achteruitgaat. Maar tussen werk, gezin,
+            stress en tegenstrijdig gezondheidsadvies is het niet altijd duidelijk wat je werkelijk nodig hebt.
+          </p>
+        </div>
+
+        <div class="situations">
+          <article class="situation" data-reveal style="--i:0">
+            <span class="situation__num">01</span>
+            <div>
+              <h3>Je wilt sterker worden</h3>
+              <p>Zonder dat training je lichaam uitput of je agenda overneemt.</p>
+            </div>
+          </article>
+          <article class="situation" data-reveal style="--i:1">
+            <span class="situation__num">02</span>
+            <div>
+              <h3>Je lichaam werkt minder vanzelfsprekend mee</h3>
+              <p>Je ervaart stijfheid, terugkerende klachten, vermoeidheid of een dalende conditie.</p>
+            </div>
+          </article>
+          <article class="situation" data-reveal style="--i:2">
+            <span class="situation__num">03</span>
+            <div>
+              <h3>Je weet veel, maar krijgt het niet duurzaam toegepast</h3>
+              <p>Je hebt niet méér informatie nodig, maar structuur, begeleiding en bijsturing.</p>
+            </div>
+          </article>
+          <article class="situation" data-reveal style="--i:3">
+            <span class="situation__num">04</span>
+            <div>
+              <h3>Je wilt investeren in gezondheid op lange termijn</h3>
+              <p>Niet alleen fitter worden, maar fysiek sterk, mobiel en zelfstandig blijven.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Filosofie -->
+    <section class="section section--alt" id="filosofie">
+      <div class="container">
+        <div class="split split--text-heavy split--top">
+          <div data-reveal>
+            <span class="eyebrow">De YENS-filosofie</span>
+            <h2 class="h-1">Gezondheid bouw je niet met één perfecte gewoonte</h2>
+          </div>
+          <div class="prose" data-reveal="right">
+            <p class="lead">
+              Een sterk en veerkrachtig lichaam ontstaat uit de wisselwerking tussen beweging, spierkracht,
+              voeding, herstel, stress en omgeving. Daarom kijk ik verder dan een trainingsschema alleen.
+              We zoeken naar de juiste prikkel op het juiste moment: voldoende om vooruitgang te creëren,
+              zonder het lichaam voortdurend te overbelasten.
+            </p>
+          </div>
+        </div>
+
+        <div class="principles">
+          <div class="principle" data-reveal="fade" style="--i:0">
+            <span class="principle__num">01</span>
+            <h3 class="principle__title">Kracht als fundament</h3>
+            <p class="principle__text">Spierkracht ondersteunt prestaties, mobiliteit, belastbaarheid en zelfstandigheid.</p>
+          </div>
+          <div class="principle" data-reveal="fade" style="--i:1">
+            <span class="principle__num">02</span>
+            <h3 class="principle__title">Herstel is onderdeel van training</h3>
+            <p class="principle__text">Vooruitgang ontstaat niet alleen tijdens de inspanning, maar vooral door hoe goed het lichaam zich daarna kan aanpassen.</p>
+          </div>
+          <div class="principle" data-reveal="fade" style="--i:2">
+            <span class="principle__num">03</span>
+            <h3 class="principle__title">Voeding moet ondersteunen</h3>
+            <p class="principle__text">Geen rigide dieet, wel praktische keuzes die passen bij doelen, vertering en dagelijks leven.</p>
+          </div>
+          <div class="principle" data-reveal="fade" style="--i:3">
+            <span class="principle__num">04</span>
+            <h3 class="principle__title">Duurzaamheid boven perfectie</h3>
+            <p class="principle__text">Een aanpak werkt pas wanneer ze ook haalbaar blijft op drukke of moeilijke dagen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Begeleidingsvormen -->
+    <section class="section" id="begeleiding">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Begeleiding</span>
+          <h2 class="h-1">Kies de vorm die bij jou past</h2>
+        </div>
+
+        <div class="offers">
+          <article class="offer offer--featured" data-reveal>
+            <div>
+              <span class="offer__tag">Meest gekozen</span>
+              <h3 class="offer__title">Personal training</h3>
+              <p class="offer__text">
+                Eén-op-één begeleiding met volledige aandacht voor techniek, belastbaarheid, doelen en progressie.
+              </p>
+              <div class="offer__foot">
+                <p class="offer__price">Vanaf <strong>€65</strong> per sessie</p>
+                <a class="link link--on-dark" href="/begeleiding.html#personal-training">Bekijk personal training <span class="arrow">→</span></a>
+              </div>
+            </div>
+            <div>
+              <ul class="offer__list">
+                <li>Sterker worden</li>
+                <li>Vetverlies en betere lichaamssamenstelling</li>
+                <li>Opnieuw starten na een langere pauze</li>
+                <li>Trainen met fysieke aandachtspunten</li>
+                <li>Gezond en sterk ouder worden</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="offer" data-reveal style="--i:1">
+            <span class="offer__tag">Met z'n tweeën</span>
+            <h3 class="offer__title">Duo training</h3>
+            <p class="offer__text">
+              Samen trainen met een partner, vriend of familielid, met persoonlijke begeleiding voor beide deelnemers.
+            </p>
+            <div class="offer__foot">
+              <p class="offer__price">Vanaf <strong>€40</strong> per persoon</p>
+              <a class="link" href="/begeleiding.html#duo-training">Bekijk duo training <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer" data-reveal style="--i:2">
+            <span class="offer__tag">Kleine groep</span>
+            <h3 class="offer__title">Semi-personal training</h3>
+            <p class="offer__text">
+              Training in een kleine groep van drie tot vier personen, met individuele aanpassingen, correcties en opvolging.
+            </p>
+            <div class="offer__foot">
+              <p class="offer__price">Vanaf <strong>€36</strong> per persoon</p>
+              <a class="link" href="/begeleiding.html#semi-personal">Bekijk semi-personal training <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer" data-reveal style="--i:3">
+            <span class="offer__tag">Breder traject</span>
+            <h3 class="offer__title">Health &amp; longevity coaching</h3>
+            <p class="offer__text">
+              Voor wie verder wil kijken dan training alleen en beweging, herstel, voeding, slaap en dagelijkse
+              gewoonten wil samenbrengen.
+            </p>
+            <div class="offer__foot">
+              <p class="offer__price">Prijs volgens duur en inhoud</p>
+              <a class="link" href="/begeleiding.html#coaching">Bekijk coaching <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="offer" data-reveal style="--i:4">
+            <span class="offer__tag">Locaties</span>
+            <h3 class="offer__title">Waar we trainen</h3>
+            <p class="offer__text">
+              Kontich, Ranst of bij jou aan huis in geselecteerde regio's rond Antwerpen — afhankelijk van
+              afstand en planning.
+            </p>
+            <div class="offer__foot">
+              <p class="offer__price">Kontich · Ranst · aan huis</p>
+              <a class="link" href="#locaties">Bekijk de locaties <span class="arrow">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Werkwijze -->
+    <section class="section section--alt" id="werkwijze">
+      <div class="container">
+        <div class="split split--top">
+          <div data-reveal>
+            <span class="eyebrow">De werkwijze</span>
+            <h2 class="h-1">Geen standaardprogramma, maar een logisch proces</h2>
+            <p class="lead" style="margin-top:1.5rem;">
+              Elk traject begint met begrijpen waar je staat. Pas daarna bepalen we wat je nodig hebt —
+              en hoeveel.
+            </p>
+            <div class="btn-group" style="margin-top:2rem;">
+              <a class="btn btn--ghost" href="/werkwijze.html">Zo verloopt een traject</a>
+            </div>
+          </div>
+
+          <div class="process" id="process">
+            <div class="process__track"><div class="process__progress" id="process-progress"></div></div>
+
+            <div class="step" data-step>
+              <span class="step__dot">1</span>
+              <h3>Kennismaking</h3>
+              <p>We bespreken doelen, context, klachten, eerdere ervaringen en verwachtingen.</p>
+            </div>
+            <div class="step" data-step>
+              <span class="step__dot">2</span>
+              <h3>Intake en startmeting</h3>
+              <p>We bekijken beweging, kracht, belastbaarheid, leefstijl en relevante aandachtspunten.</p>
+            </div>
+            <div class="step" data-step>
+              <span class="step__dot">3</span>
+              <h3>Persoonlijk plan</h3>
+              <p>De aanpak wordt afgestemd op niveau, beschikbare tijd, herstelcapaciteit en doelen.</p>
+            </div>
+            <div class="step" data-step>
+              <span class="step__dot">4</span>
+              <h3>Begeleiding en bijsturing</h3>
+              <p>We volgen de vooruitgang op, passen oefeningen aan en bouwen stap voor stap verder.</p>
+            </div>
+            <div class="step" data-step>
+              <span class="step__dot">5</span>
+              <h3>Zelfstandigheid</h3>
+              <p>Het doel is dat je je lichaam beter leert begrijpen en steeds zelfstandiger wordt.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Vooruitgang -->
+    <section class="section section--dark" id="vooruitgang">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Vooruitgang</span>
+          <h2 class="h-1">Vooruitgang die je kunt voelen én volgen</h2>
+        </div>
+
+        <div class="split split--top">
+          <div data-reveal="left">
+            <ul class="tags" style="margin-bottom:2.5rem;">
+              <li class="tag">Kracht</li>
+              <li class="tag">Mobiliteit</li>
+              <li class="tag">Conditie</li>
+              <li class="tag">Lichaamssamenstelling</li>
+              <li class="tag">Energieniveau</li>
+              <li class="tag">Slaap en herstel</li>
+              <li class="tag">Trainingsconsistentie</li>
+              <li class="tag">Ervaren klachten</li>
+              <li class="tag">Dagelijkse belastbaarheid</li>
+            </ul>
+          </div>
+          <div data-reveal="right">
+            <p class="callout">
+              Niet alles wat belangrijk is, past in één score. Daarom combineren we objectieve metingen
+              met hoe iemand zich functioneel voelt in het dagelijks leven.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Over Yens -->
+    <section class="section" id="over">
+      <div class="container split split--image-heavy">
+        <div class="photo-frame photo-frame--portrait parallax" data-reveal="left" data-parallax="0.04">
+          <div class="photo-placeholder">
+            <span class="photo-placeholder__label">Foto</span>
+            <span class="photo-placeholder__text">Portret van Yens — natuurlijk licht, rustige omgeving</span>
+          </div>
+        </div>
+
+        <div data-reveal="right">
+          <span class="eyebrow">Over YENS</span>
+          <h2 class="h-1">Persoonlijke begeleiding begint met goed kijken en luisteren</h2>
+          <div class="prose" style="margin-top:1.75rem;">
+            <p>
+              Ik ben Yens De Proft, personal trainer en strength &amp; longevity coach. Ik help mensen sterker,
+              belastbaarder en bewuster met hun gezondheid omgaan, zonder extreme methodes of een
+              alles-of-nietsmentaliteit.
+            </p>
+            <p>
+              Mijn aanpak vertrekt vanuit krachttraining en beweging, maar kijkt ook naar herstel, voeding,
+              stress en dagelijkse gewoonten. Niet omdat alles voortdurend geoptimaliseerd moet worden, maar
+              omdat die factoren samen bepalen hoeveel energie, veerkracht en fysieke vrijheid iemand ervaart.
+            </p>
+            <p>
+              Ik werk rustig, persoonlijk en nauwkeurig. Ik wil begrijpen wat het lichaam nodig heeft, maar
+              ook wat realistisch past binnen iemands leven.
+            </p>
+          </div>
+          <div class="btn-group" style="margin-top:2rem;">
+            <a class="btn btn--ghost" href="/over-mij.html">Meer over mij</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Voor wie -->
+    <section class="section section--alt" id="voor-wie">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="h-1">Voor mensen die niet alleen fitter willen worden, maar sterker willen leven</h2>
+        </div>
+
+        <div class="split split--text-heavy split--top">
+          <ul class="fit-list" data-reveal>
+            <li>Volwassenen die opnieuw willen starten</li>
+            <li>Drukke professionals</li>
+            <li>Mensen vanaf ongeveer 35 à 40 jaar die preventief willen investeren</li>
+            <li>Mensen die sterker willen worden zonder typische fitnesscultuur</li>
+            <li>Mensen met terugkerende stijfheid of fysieke onzekerheid</li>
+            <li>Sportieve mensen die slimmer willen trainen</li>
+            <li>Mensen die na akkoord van arts of kinesist veilig willen heropbouwen</li>
+          </ul>
+
+          <div class="note-block" data-reveal="right">
+            <h3>Wanneer past dit minder goed?</h3>
+            <p>
+              Deze begeleiding past minder goed wanneer iemand vooral een snelle oplossing, een extreem
+              voedingsschema of dagelijkse externe druk zoekt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Klantverhalen -->
+    <section class="section" id="verhalen">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Klantverhalen</span>
+          <h2 class="h-1">Ervaringen van mensen die ik begeleid</h2>
+        </div>
+
+        <!--
+          Plaats hier echte testimonials, zodra je toestemming hebt.
+          Een goede testimonial bevat: beginsituatie, doel, wat er veranderde,
+          hoe de begeleiding werd ervaren, een concreet resultaat, voornaam + eventueel leeftijd of beroep.
+
+          Template — kopieer per verhaal:
+
+          <figure class="quote-card" data-reveal>
+            <span class="quote-card__mark">"</span>
+            <blockquote>Tekst van de klant.</blockquote>
+            <figcaption>Voornaam, leeftijd — beroep</figcaption>
+          </figure>
+        -->
+        <div class="grid grid-3">
+          <div class="quote-card quote-card--empty" data-reveal style="--i:0">
+            <p>Hier komen echte ervaringen van klanten, zodra zij toestemming gaven om hun verhaal te delen.</p>
+          </div>
+          <div class="quote-card quote-card--empty" data-reveal style="--i:1">
+            <p>Geen overdreven claims of voor-en-na-foto's — wel eerlijke verhalen over wat er veranderde.</p>
+          </div>
+          <div class="quote-card quote-card--empty" data-reveal style="--i:2">
+            <p>Zelf getraind bij YENS en wil je jouw ervaring delen? Laat het gerust weten.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Locaties -->
+    <section class="section section--deep" id="locaties">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Locaties</span>
+          <h2 class="h-1">Begeleiding op een plek die werkt voor jou</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="location" data-reveal style="--i:0">
+            <h3>Kontich</h3>
+            <p>Personal training in een professionele, rustige trainingsomgeving.</p>
+            <dl>
+              <div><dt>Adres</dt><dd>Nog aan te vullen</dd></div>
+              <div><dt>Parking</dt><dd>Nog aan te vullen</dd></div>
+              <div><dt>Momenten</dt><dd>In overleg, weekdagen</dd></div>
+            </dl>
+            <a class="link" href="/contact.html?locatie=kontich">Kennismaken in Kontich <span class="arrow">→</span></a>
+          </article>
+
+          <article class="location" data-reveal style="--i:1">
+            <h3>Ranst</h3>
+            <p>Persoonlijke begeleiding op vaste momenten.</p>
+            <dl>
+              <div><dt>Adres</dt><dd>Nog aan te vullen</dd></div>
+              <div><dt>Parking</dt><dd>Nog aan te vullen</dd></div>
+              <div><dt>Momenten</dt><dd>Vaste momenten per week</dd></div>
+            </dl>
+            <a class="link" href="/contact.html?locatie=ranst">Kennismaken in Ranst <span class="arrow">→</span></a>
+          </article>
+
+          <article class="location" data-reveal style="--i:2">
+            <h3>Aan huis</h3>
+            <p>Beschikbaar in geselecteerde regio's rond Antwerpen, afhankelijk van afstand en planning.</p>
+            <dl>
+              <div><dt>Regio</dt><dd>Rond Antwerpen</dd></div>
+              <div><dt>Materiaal</dt><dd>In overleg, ik breng mee wat nodig is</dd></div>
+              <div><dt>Momenten</dt><dd>In overleg</dd></div>
+            </dl>
+            <a class="link" href="/contact.html?locatie=aan-huis">Vraag naar de mogelijkheden <span class="arrow">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Tarieven -->
+    <section class="section" id="tarieven">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Tarieven</span>
+          <h2 class="h-1">Transparant, zonder verrassingen</h2>
+        </div>
+
+        <div class="price-rows">
+          <div class="price-row" data-reveal="fade" style="--i:0">
+            <span class="price-row__name">Personal training</span>
+            <span class="price-row__desc">Eén-op-één, volledige aandacht voor techniek, belastbaarheid en progressie.</span>
+            <span class="price-row__amount">€65<small>vanaf, per sessie</small></span>
+          </div>
+          <div class="price-row" data-reveal="fade" style="--i:1">
+            <span class="price-row__name">Duo training</span>
+            <span class="price-row__desc">Samen trainen met partner, vriend of familielid — beiden persoonlijk begeleid.</span>
+            <span class="price-row__amount">€40<small>vanaf, per persoon</small></span>
+          </div>
+          <div class="price-row" data-reveal="fade" style="--i:2">
+            <span class="price-row__name">Semi-personal training</span>
+            <span class="price-row__desc">Kleine groep van drie tot vier personen, met individuele aanpassingen.</span>
+            <span class="price-row__amount">€36<small>vanaf, per persoon</small></span>
+          </div>
+          <div class="price-row" data-reveal="fade" style="--i:3">
+            <span class="price-row__name">Health &amp; longevity coaching</span>
+            <span class="price-row__desc">Training, herstel, voeding en gewoonten samengebracht in één traject.</span>
+            <span class="price-row__amount">Op maat<small>volgens duur en inhoud</small></span>
+          </div>
+        </div>
+
+        <p class="price-note" data-reveal>Prijzen kunnen verschillen volgens locatie, formule en trainingsfrequentie.</p>
+
+        <div class="btn-group" style="margin-top:2rem;" data-reveal>
+          <a class="btn btn--ghost" href="/begeleiding.html#tarieven">Bekijk formules en tarieven</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FAQ -->
+    <section class="section section--alt" id="faq">
+      <div class="container">
+        <div class="split split--top">
+          <div data-reveal>
+            <span class="eyebrow">Veelgestelde vragen</span>
+            <h2 class="h-1">Goed om te weten voor je start</h2>
+            <p class="lead" style="margin-top:1.5rem;">
+              Staat je vraag er niet bij? Stel ze gerust — een kennismaking is altijd vrijblijvend.
+            </p>
+          </div>
+
+          <div class="faq" data-faq>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Moet ik al fit zijn om te starten?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Nee. De begeleiding wordt aangepast aan je huidige niveau. We starten waar jij staat en bouwen van daaruit op.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Kan ik trainen met blessures of fysieke klachten?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Dat hangt af van de aard en de fase van de klacht. Bij medische problematiek vraag je eerst akkoord aan je arts of kinesist. Daarna kan de training aangepast worden binnen veilige grenzen.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Hoe vaak moet ik trainen?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Voor veel mensen zijn één tot twee begeleide sessies per week een goede basis. Wat voor jou werkt hangt af van je doel, je ervaring en wat je daarnaast zelfstandig doet.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Werk je met voedingsschema's?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Ik werk met praktische voedingsprincipes die passen bij je doelen en dagelijks leven — geen rigide schema's. Voor medische voedingsbegeleiding verwijs ik door naar een arts of diëtist.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Kan ik samen met iemand trainen?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Ja, via duo training of semi-personal training. Iedereen traint binnen hetzelfde moment, maar oefeningen, gewichten en progressie worden individueel aangepast.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Waar gaan de trainingen door?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>In Kontich, in Ranst of bij jou aan huis in geselecteerde regio's rond Antwerpen, in overleg.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Wat gebeurt er bij annulatie?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Sessies kunnen tot 24 uur op voorhand kosteloos verplaatst worden. Bij latere annulatie wordt de sessie aangerekend. De volledige voorwaarden krijg je bij de start van je traject.</p>
+              </div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__trigger" type="button" aria-expanded="false">Kan ik eerst vrijblijvend kennismaken?<span class="faq__icon"></span></button></h3>
+              <div class="faq__panel"><div class="faq__panel-inner">
+                <p>Ja. Een kennismaking is vrijblijvend en kosteloos. We bekijken samen waar je staat, wat je nodig hebt en of mijn begeleiding daarbij past.</p>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Eind-CTA -->
+    <section class="section section--dark">
+      <div class="container cta" data-reveal>
+        <h2 class="h-1">Je hoeft niet eerst fitter te worden om te mogen beginnen</h2>
+        <p class="lead">
+          Tijdens een vrijblijvende kennismaking bekijken we waar je nu staat, wat je nodig hebt en
+          welke vorm van begeleiding het beste past.
         </p>
-        <ul class="feature-list">
-          <li>Health before performance.</li>
-          <li>Food as information.</li>
-          <li>Recovery is training.</li>
-        </ul>
+        <div class="btn-group">
+          <a class="btn btn--on-dark btn--lg" href="/contact.html">Plan je kennismaking</a>
+          <a class="btn btn--outline-light btn--lg" href="/contact.html#contactgegevens">Stel eerst een vraag</a>
+        </div>
+        <p class="cta__alt">Liever eerst even overleggen? Bereik me via <a href="https://wa.me/32000000000">WhatsApp</a> of <a href="mailto:hallo@yens.be">e-mail</a>.</p>
       </div>
-      <div class="image-block reveal-right">
-        <img src="/images/nature.jpg" alt="Serene misty green forest walk" class="rounded-image shadow-soft" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Longevity Age Section -->
-  <section class="section bg-white" id="assessment">
-    <div class="container text-center max-w-800">
-      <h3 class="section-label reveal-up">Precision Diagnostics</h3>
-      <h2 class="section-title reveal-up">Calculate Your Biological Age</h2>
-      <p class="section-text reveal-up">
-        True health is measured on a cellular level. Discover how your lifestyle choices are influencing your biological age.
-      </p>
-      
-      <div class="calculator-card reveal-up delay-1 shadow-premium">
-        <div class="calc-header">
-          <h4>Longevity Assessment Preview</h4>
-          <span class="badge">Interactive</span>
-        </div>
-        <div class="calc-body">
-          <div class="range-group">
-            <label>Chronological Age: <span id="age-val">40</span></label>
-            <input type="range" id="age-input" min="30" max="75" value="40" />
-          </div>
-          <div class="range-group">
-            <label>Sleep Quality (Hours): <span id="sleep-val">7</span></label>
-            <input type="range" id="sleep-input" min="4" max="10" value="7" />
-          </div>
-          <div class="range-group">
-            <label>Weekly Exercise (Hours): <span id="exercise-val">3</span></label>
-            <input type="range" id="exercise-input" min="0" max="15" value="3" />
-          </div>
-          <div class="calc-result">
-            <p>Estimated Biological Age</p>
-            <div class="result-number" id="bio-age-result">38</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Grid -->
-  <section class="section bg-stone" id="services">
-    <div class="container">
-      <div class="section-header text-center reveal-up">
-        <h3 class="section-label">Our Expertise</h3>
-        <h2 class="section-title">Comprehensive Optimization</h2>
-      </div>
-      
-      <div class="grid-3 mt-12">
-        <div class="service-card reveal-up">
-          <div class="card-icon">01</div>
-          <h4 class="card-title">Lifestyle Medicine</h4>
-          <p class="card-text">Evidence-based protocols to optimize metabolic health, cellular resilience, and hormone balance.</p>
-        </div>
-        <div class="service-card reveal-up delay-1">
-          <div class="card-icon">02</div>
-          <h4 class="card-title">Sleep & Recovery</h4>
-          <p class="card-text">Precision tracking utilizing Oura and WHOOP data to engineer perfect sleep architecture.</p>
-        </div>
-        <div class="service-card reveal-up delay-2">
-          <div class="card-icon">03</div>
-          <h4 class="card-title">Strength & Mobility</h4>
-          <p class="card-text">Functional movement patterns designed to maintain structural integrity and prevent injury for decades.</p>
-        </div>
-        <div class="service-card reveal-up">
-          <div class="card-icon">04</div>
-          <h4 class="card-title">Heat & Cold Exposure</h4>
-          <p class="card-text">Guided sauna and cold plunge protocols to stimulate shock proteins and enhance mitochondrial function.</p>
-        </div>
-        <div class="service-card reveal-up delay-1">
-          <div class="card-icon">05</div>
-          <h4 class="card-title">Nutritional Biochemistry</h4>
-          <p class="card-text">Continuous glucose monitoring analysis (Levels) and personalized nutrigenomics.</p>
-        </div>
-        <div class="service-card reveal-up delay-2">
-          <div class="card-icon">06</div>
-          <h4 class="card-title">Stress Management</h4>
-          <p class="card-text">Advanced breathwork techniques to regulate the autonomic nervous system and build emotional resilience.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quote Section -->
-  <section class="section bg-warm-black text-white text-center">
-    <div class="container max-w-800 reveal-up">
-      <blockquote class="premium-quote">
-        "Small habits create extraordinary longevity. We design systems that make health effortless."
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- Method & Dashboard Preview -->
-  <section class="section bg-white" id="method">
-    <div class="container grid-2 align-center">
-      <div class="image-block reveal-left">
-        <img src="/images/sauna.jpg" alt="Luxury Scandinavian sauna wellness" class="rounded-image shadow-soft" />
-      </div>
-      <div class="content-block reveal-up">
-        <h3 class="section-label">The Experience</h3>
-        <h2 class="section-title">An Intelligent Approach to Wellness</h2>
-        <p class="section-text">
-          As a client, you gain access to our bespoke dashboard. We integrate your wearable data—heart rate variability, sleep stages, resting heart rate—to provide dynamic, daily coaching adjustments.
-        </p>
-        <div class="dashboard-preview mt-8 shadow-premium">
-          <div class="dash-header">
-            <span>Daily Protocol</span>
-            <span class="status-dot"></span>
-          </div>
-          <div class="dash-item">
-            <span>Morning Sunlight</span>
-            <span class="check-circle active"></span>
-          </div>
-          <div class="dash-item">
-            <span>Zone 2 Training (45m)</span>
-            <span class="check-circle"></span>
-          </div>
-          <div class="dash-item">
-            <span>Heat Exposure (20m)</span>
-            <span class="check-circle"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="footer bg-warm-black text-white">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <h3>Atlas Longevity</h3>
-        <p>Premium healthspan coaching for the driven.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Navigation</h4>
-        <a href="#philosophy">Philosophy</a>
-        <a href="#method">Method</a>
-        <a href="#services">Services</a>
-      </div>
-      <div class="footer-links">
-        <h4>Connect</h4>
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
-        <a href="#">LinkedIn</a>
-      </div>
-      <div class="footer-newsletter">
-        <h4>The Journal</h4>
-        <p>Insights on longevity science.</p>
-        <div class="input-group">
-          <input type="email" placeholder="Your email address" />
-          <button>→</button>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <span class="brand__name">YENS</span>
+          <p class="brand__role" style="margin-top:0.5rem;">Personal Trainer<br>Strength &amp; Longevity Coach</p>
+          <p class="footer__tagline">Sterker bewegen. Beter herstellen. Langer goed leven.</p>
+        </div>
+        <div class="footer__col">
+          <h3>Begeleiding</h3>
+          <a href="/begeleiding.html#personal-training">Personal training</a>
+          <a href="/begeleiding.html#duo-training">Duo training</a>
+          <a href="/begeleiding.html#semi-personal">Semi-personal training</a>
+          <a href="/begeleiding.html#coaching">Health coaching</a>
+        </div>
+        <div class="footer__col">
+          <h3>Praktisch</h3>
+          <a href="/werkwijze.html">Werkwijze</a>
+          <a href="/begeleiding.html#tarieven">Tarieven</a>
+          <a href="/#locaties">Locaties</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer__col">
+          <h3>Volgen</h3>
+          <a href="https://instagram.com/" rel="noopener">Instagram</a>
+          <a href="https://linkedin.com/" rel="noopener">LinkedIn</a>
+          <a href="mailto:hallo@yens.be">E-mail</a>
         </div>
       </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>&copy; 2026 Atlas Longevity. All rights reserved.</p>
-      <div class="legal-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+      <div class="footer__bottom">
+        <p>&copy; <span data-year>2026</span> YENS · Ondernemingsnummer BE 0000.000.000</p>
+        <div class="footer__legal">
+          <a href="/privacy.html">Privacyverklaring</a>
+          <a href="/privacy.html#cookies">Cookiebeleid</a>
+          <a href="/voorwaarden.html">Algemene voorwaarden</a>
+          <a href="/voorwaarden.html#annulatie">Annulatievoorwaarden</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- Sticky mobiele CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a class="btn btn--primary" href="/contact.html">Kennismaken</a>
+    <a class="icon-btn" href="https://wa.me/32000000000" aria-label="Stuur een bericht via WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 8.24 8.24c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+    </a>
+  </div>
 
   <script type="module" src="./main.js"></script>
 </body>

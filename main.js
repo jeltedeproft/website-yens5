@@ -1,126 +1,394 @@
-// ==========================================================================
-// Premium Interactivity & Logic
-// ==========================================================================
+/* ==========================================================================
+   YENS — interactie & subtiel bewegingsontwerp
+   ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-  
-  // 1. Loader Animation
-  const loader = document.getElementById('loader');
-  setTimeout(() => {
-    loader.classList.add('hidden');
-  }, 2000); // 2 second premium loading feel
+/**
+ * Endpoint voor het contactformulier (bv. Formspree, Netlify Forms, eigen API).
+ * Zolang dit leeg is, valt het formulier terug op een vooringevulde e-mail.
+ */
+const FORM_ENDPOINT = '';
+const CONTACT_EMAIL = 'hallo@yens.be';
 
-  // 2. Navbar Scroll Effect
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  // 3. Dark Mode Toggle
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
-  const html = document.documentElement;
-  
-  // Check local storage or system preference
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const storedTheme = localStorage.getItem('theme');
-  
-  if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-    html.setAttribute('data-theme', 'dark');
+/* --------------------------------------------------------------------------
+   Thema — licht is de standaardidentiteit, donker is een bewuste keuze
+   -------------------------------------------------------------------------- */
+function initTheme() {
+  const root = document.documentElement;
+  if (localStorage.getItem('yens-theme') === 'dark') {
+    root.setAttribute('data-theme', 'dark');
   }
 
-  darkModeToggle.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-      html.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'light');
+  const toggle = $('#theme-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('yens-theme', 'light');
     } else {
-      html.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('yens-theme', 'dark');
     }
   });
+}
 
-  // 4. Scroll Reveal Animations (Intersection Observer)
-  const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-  
-  const revealOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+/* --------------------------------------------------------------------------
+   Intro-overlay
+   -------------------------------------------------------------------------- */
+function initLoader() {
+  const loader = $('#loader');
+  const reveal = () => document.body.classList.add('is-loaded');
+
+  if (!loader) {
+    reveal();
+    return;
+  }
+  if (reduceMotion) {
+    loader.classList.add('is-hidden');
+    reveal();
+    return;
+  }
+
+  window.setTimeout(() => {
+    loader.classList.add('is-hidden');
+    reveal();
+  }, 1400);
+}
+
+/* --------------------------------------------------------------------------
+   Navigatie: scrollstatus + mobiel menu
+   -------------------------------------------------------------------------- */
+function initNav() {
+  const nav = $('#nav');
+  const burger = $('#nav-burger');
+  const panel = $('#nav-mobile');
+
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  if (!burger || !panel) return;
+
+  const setOpen = (open) => {
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+    panel.classList.toggle('is-open', open);
+    document.body.classList.toggle('is-locked', open);
   };
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, revealOptions);
-
-  revealElements.forEach(el => {
-    revealObserver.observe(el);
+  burger.addEventListener('click', () => {
+    setOpen(burger.getAttribute('aria-expanded') !== 'true');
   });
 
-  // 5. Interactive Longevity Age Calculator
-  const ageInput = document.getElementById('age-input');
-  const sleepInput = document.getElementById('sleep-input');
-  const exerciseInput = document.getElementById('exercise-input');
-  
-  const ageVal = document.getElementById('age-val');
-  const sleepVal = document.getElementById('sleep-val');
-  const exerciseVal = document.getElementById('exercise-val');
-  const bioAgeResult = document.getElementById('bio-age-result');
+  $$('a', panel).forEach((link) => link.addEventListener('click', () => setOpen(false)));
 
-  function calculateBioAge() {
-    const chronAge = parseInt(ageInput.value);
-    const sleep = parseInt(sleepInput.value);
-    const exercise = parseInt(exerciseInput.value);
-    
-    // Simple heuristic calculation for preview purposes
-    let bioAge = chronAge;
-    
-    // Sleep impact
-    if (sleep >= 7 && sleep <= 8) bioAge -= 2;
-    else if (sleep < 6) bioAge += 3;
-    else if (sleep > 9) bioAge += 1;
-    
-    // Exercise impact
-    if (exercise >= 4) bioAge -= 3;
-    else if (exercise >= 2) bioAge -= 1;
-    else if (exercise === 0) bioAge += 4;
-    
-    // Animate the result change
-    animateValue(bioAgeResult, parseInt(bioAgeResult.innerText), bioAge, 500);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      burger.focus();
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Reveal-animaties
+   -------------------------------------------------------------------------- */
+function initReveal() {
+  const items = $$('[data-reveal]');
+  if (!items.length) return;
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    items.forEach((el) => el.classList.add('is-revealed'));
+    return;
   }
 
-  function animateValue(obj, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      obj.innerHTML = Math.floor(progress * (end - start) + start);
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  );
+
+  items.forEach((el) => observer.observe(el));
+}
+
+/* --------------------------------------------------------------------------
+   Werkwijze: lijn die meeloopt met de scrollpositie
+   -------------------------------------------------------------------------- */
+function initProcess() {
+  const process = $('#process');
+  const progress = $('#process-progress');
+  if (!process || !progress) return;
+
+  const steps = $$('[data-step]', process);
+
+  if (reduceMotion) {
+    progress.style.height = '100%';
+    steps.forEach((s) => s.classList.add('is-reached'));
+    return;
   }
 
-  // Add event listeners to inputs
-  [ageInput, sleepInput, exerciseInput].forEach(input => {
-    input.addEventListener('input', (e) => {
-      // Update labels immediately
-      if(e.target.id === 'age-input') ageVal.innerText = e.target.value;
-      if(e.target.id === 'sleep-input') sleepVal.innerText = e.target.value;
-      if(e.target.id === 'exercise-input') exerciseVal.innerText = e.target.value;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const rect = process.getBoundingClientRect();
+    const anchor = window.innerHeight * 0.62;
+    const ratio = (anchor - rect.top) / rect.height;
+    const clamped = Math.min(Math.max(ratio, 0), 1);
+
+    progress.style.height = `${clamped * 100}%`;
+    steps.forEach((step) => {
+      const dot = $('.step__dot', step);
+      const dotRect = dot.getBoundingClientRect();
+      step.classList.toggle('is-reached', dotRect.top + dotRect.height / 2 < anchor);
     });
-    
-    input.addEventListener('change', calculateBioAge);
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+}
+
+/* --------------------------------------------------------------------------
+   Zachte parallax op beeldkaders
+   -------------------------------------------------------------------------- */
+function initParallax() {
+  const items = $$('[data-parallax]');
+  if (!items.length || reduceMotion) return;
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const viewport = window.innerHeight;
+    items.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > viewport) return;
+      const strength = parseFloat(el.dataset.parallax) || 0.05;
+      const offset = (rect.top + rect.height / 2 - viewport / 2) * -strength;
+      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+    });
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+}
+
+/* --------------------------------------------------------------------------
+   FAQ-accordion
+   -------------------------------------------------------------------------- */
+function initFaq() {
+  $$('[data-faq]').forEach((group) => {
+    const triggers = $$('.faq__trigger', group);
+
+    triggers.forEach((trigger) => {
+      const panel = trigger.closest('.faq__item').querySelector('.faq__panel');
+
+      trigger.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Eén vraag tegelijk open — rustiger beeld
+        triggers.forEach((other) => {
+          if (other === trigger) return;
+          other.setAttribute('aria-expanded', 'false');
+          const otherPanel = other.closest('.faq__item').querySelector('.faq__panel');
+          otherPanel.style.height = '0px';
+        });
+
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+        panel.style.height = isOpen ? '0px' : `${panel.scrollHeight}px`;
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      triggers.forEach((trigger) => {
+        if (trigger.getAttribute('aria-expanded') !== 'true') return;
+        const panel = trigger.closest('.faq__item').querySelector('.faq__panel');
+        panel.style.height = `${panel.scrollHeight}px`;
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Sticky mobiele CTA — verschijnt pas voorbij de hero
+   -------------------------------------------------------------------------- */
+function initStickyCta() {
+  const cta = $('#sticky-cta');
+  if (!cta) return;
+
+  const onScroll = () => {
+    cta.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.7);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   Kennis: filteren op categorie
+   -------------------------------------------------------------------------- */
+function initFilters() {
+  const bar = $('[data-filters]');
+  if (!bar) return;
+
+  const buttons = $$('.filter', bar);
+  const cards = $$('[data-category]');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const value = button.dataset.filter;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      cards.forEach((card) => {
+        const match = value === 'alle' || card.dataset.category === value;
+        card.classList.toggle('is-hidden', !match);
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Contactformulier: validatie, spamveld en verzending
+   -------------------------------------------------------------------------- */
+function initForm() {
+  const form = $('#contact-form');
+  if (!form) return;
+
+  const status = $('#form-status');
+
+  // Velden voorinvullen vanuit een link, bv. /contact.html?locatie=kontich
+  const params = new URLSearchParams(window.location.search);
+  ['locatie', 'begeleiding'].forEach((name) => {
+    const value = params.get(name);
+    const field = form.querySelector(`[name="${name}"]`);
+    if (!value || !field) return;
+    if (Array.from(field.options).some((o) => o.value === value)) field.value = value;
   });
 
-  // Initial calculation
-  calculateBioAge();
+  const showStatus = (message) => {
+    if (!status) return;
+    status.textContent = message;
+    status.hidden = false;
+  };
+
+  const clearError = (field) => {
+    field.closest('.field')?.classList.remove('field--error');
+    field.closest('.field')?.querySelector('.field__error')?.remove();
+  };
+
+  const setError = (field, message) => {
+    const wrapper = field.closest('.field');
+    if (!wrapper || wrapper.querySelector('.field__error')) return;
+    wrapper.classList.add('field--error');
+    const error = document.createElement('p');
+    error.className = 'field__error';
+    error.textContent = message;
+    wrapper.appendChild(error);
+  };
+
+  form.addEventListener('input', (e) => clearError(e.target));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Honeypot: ingevuld door bots, onzichtbaar voor bezoekers
+    if (form.querySelector('[name="website"]')?.value) return;
+
+    let valid = true;
+    $$('[required]', form).forEach((field) => {
+      const empty = field.type === 'checkbox' ? !field.checked : !field.value.trim();
+      const badEmail = field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
+      if (empty || badEmail) {
+        valid = false;
+        setError(field, badEmail ? 'Vul een geldig e-mailadres in.' : 'Dit veld is nog leeg.');
+      }
+    });
+
+    if (!valid) {
+      const first = form.querySelector('.field--error input, .field--error select, .field--error textarea');
+      first?.focus();
+      showStatus('Enkele velden zijn nog niet ingevuld.');
+      return;
+    }
+
+    const data = new FormData(form);
+    data.delete('website');
+
+    if (FORM_ENDPOINT) {
+      const submit = form.querySelector('[type="submit"]');
+      submit.disabled = true;
+      submit.textContent = 'Versturen…';
+      try {
+        const response = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error('Verzenden mislukt');
+        form.reset();
+        showStatus('Bedankt. Je aanvraag is verstuurd — ik neem binnen twee werkdagen persoonlijk contact op.');
+      } catch (error) {
+        showStatus(`Verzenden lukte niet. Mail gerust rechtstreeks naar ${CONTACT_EMAIL}.`);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Verstuur je aanvraag';
+      }
+      return;
+    }
+
+    // Fallback zolang er nog geen endpoint is ingesteld
+    const lines = [];
+    data.forEach((value, key) => {
+      if (value) lines.push(`${key}: ${value}`);
+    });
+    const subject = encodeURIComponent('Aanvraag kennismaking via de website');
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    showStatus('Je mailprogramma opent met je aanvraag. Lukt dat niet? Mail dan rechtstreeks naar ' + CONTACT_EMAIL + '.');
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Kleine details
+   -------------------------------------------------------------------------- */
+function initMisc() {
+  $$('[data-year]').forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initLoader();
+  initNav();
+  initReveal();
+  initProcess();
+  initParallax();
+  initFaq();
+  initStickyCta();
+  initFilters();
+  initForm();
+  initMisc();
 });
