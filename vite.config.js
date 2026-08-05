@@ -14,6 +14,8 @@ export default defineConfig({
         overMij: page('over-mij.html'),
         kennis: page('kennis.html'),
         contact: page('contact.html'),
+        privacy: page('privacy.html'),
+        voorwaarden: page('voorwaarden.html'),
         notFound: page('404.html'),
       },
     },

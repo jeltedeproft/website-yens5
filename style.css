@@ -919,7 +919,7 @@ body.is-locked { overflow: hidden; }
   padding: 0.6rem 0;
   border-bottom: 1px solid var(--line);
 }
-.spec-list dt { color: var(--text-muted); min-width: 9rem; flex: none; }
+.spec-list dt { color: var(--text-muted); min-width: 11rem; flex: none; }
 .spec-list dd { color: var(--text-body); }
 @media (max-width: 560px) {
   .spec-list > div { flex-direction: column; gap: 0.1rem; }
@@ -1057,6 +1057,12 @@ body.is-locked { overflow: hidden; }
   color: var(--text-body);
 }
 .form__status[hidden] { display: none; }
+.form__status--error {
+  border-color: #A4443B;
+  background: rgba(164, 68, 59, 0.07);
+  color: #8C3A32;
+}
+[data-theme="dark"] .form__status--error { color: #E39A92; }
 
 .contact-aside { display: grid; gap: 1.25rem; align-content: start; }
 .contact-card {
@@ -1125,6 +1131,51 @@ body.is-locked { overflow: hidden; }
 .article-card p { color: var(--text-body); font-size: 0.9375rem; }
 .article-card__meta { margin-top: auto; padding-top: 0.5rem; font-size: 0.8125rem; color: var(--text-muted); }
 .article-card.is-hidden { display: none; }
+
+/* ==========================================================================
+   Juridische pagina's (privacy, voorwaarden)
+   ========================================================================== */
+.legal { max-width: 68ch; }
+.legal > * + * { margin-top: 1.15rem; }
+.legal h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin-top: 3rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.legal h3 {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 2rem;
+}
+.legal p, .legal li { color: var(--text-body); }
+.legal ul, .legal ol { padding-left: 1.35rem; }
+.legal ul li { list-style: disc; margin-top: 0.5rem; }
+.legal ol li { list-style: decimal; margin-top: 0.5rem; }
+.legal a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal__meta {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding-bottom: 1.5rem;
+}
+.legal__toc {
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
+.legal__toc ul { padding-left: 1.1rem; }
+.legal__toc ul li { list-style: decimal; margin-top: 0.35rem; }
+.legal__toc a { text-decoration: none; color: var(--text-body); }
+.legal__toc a:hover { color: var(--accent-text); text-decoration: underline; }
 
 /* ==========================================================================
    Footer

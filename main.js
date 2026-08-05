@@ -3,10 +3,11 @@
    ========================================================================== */
 
 /**
- * Endpoint voor het contactformulier (bv. Formspree, Netlify Forms, eigen API).
- * Zolang dit leeg is, valt het formulier terug op een vooringevulde e-mail.
+ * Het contactformulier verstuurt naar Netlify Forms. Inzendingen komen binnen in
+ * de Netlify-dashboard onder Forms → kennismaking; stel daar een e-mailmelding in.
+ * Netlify verwerkt formulieren op de root van de site.
  */
-const FORM_ENDPOINT = '';
+const FORM_ACTION = '/';
 const CONTACT_EMAIL = 'hallo@yens.be';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -333,40 +334,32 @@ function initForm() {
       return;
     }
 
+    // Het honeypot-veld gaat bewust mee: Netlify controleert het serverside.
     const data = new FormData(form);
-    data.delete('website');
+    const submit = form.querySelector('[type="submit"]');
+    const label = submit.textContent;
 
-    if (FORM_ENDPOINT) {
-      const submit = form.querySelector('[type="submit"]');
-      submit.disabled = true;
-      submit.textContent = 'Versturen…';
-      try {
-        const response = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' },
-        });
-        if (!response.ok) throw new Error('Verzenden mislukt');
-        form.reset();
-        showStatus('Bedankt. Je aanvraag is verstuurd — ik neem binnen twee werkdagen persoonlijk contact op.');
-      } catch (error) {
-        showStatus(`Verzenden lukte niet. Mail gerust rechtstreeks naar ${CONTACT_EMAIL}.`);
-      } finally {
-        submit.disabled = false;
-        submit.textContent = 'Verstuur je aanvraag';
-      }
-      return;
+    submit.disabled = true;
+    submit.textContent = 'Versturen…';
+    status.classList.remove('form__status--error');
+
+    try {
+      const response = await fetch(FORM_ACTION, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString(),
+      });
+      if (!response.ok) throw new Error(`Netlify gaf status ${response.status}`);
+
+      form.reset();
+      showStatus('Bedankt, je aanvraag is verstuurd. Ik neem binnen twee werkdagen persoonlijk contact met je op.');
+    } catch (error) {
+      status.classList.add('form__status--error');
+      showStatus(`Verzenden lukte niet. Probeer het later opnieuw of mail rechtstreeks naar ${CONTACT_EMAIL}.`);
+    } finally {
+      submit.disabled = false;
+      submit.textContent = label;
     }
-
-    // Fallback zolang er nog geen endpoint is ingesteld
-    const lines = [];
-    data.forEach((value, key) => {
-      if (value) lines.push(`${key}: ${value}`);
-    });
-    const subject = encodeURIComponent('Aanvraag kennismaking via de website');
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    showStatus('Je mailprogramma opent met je aanvraag. Lukt dat niet? Mail dan rechtstreeks naar ' + CONTACT_EMAIL + '.');
   });
 }
 
