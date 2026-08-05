@@ -1,0 +1,68 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Let op: geen SPA catch-all (/* -> /index.html) zoals bij de vorige site.
+# Dit is een multi-page site; een catch-all zou elke pagina de homepage tonen.
+# Netlify serveert dist/404.html automatisch bij een onbekende URL.
+
+# Redirects van de URL's van de vorige site, zodat bestaande links
+# en zoekresultaten niet doodlopen.
+[[redirects]]
+  from = "/over"
+  to = "/over-mij.html"
+  status = 301
+
+[[redirects]]
+  from = "/personal-training"
+  to = "/begeleiding.html#personal-training"
+  status = 301
+
+[[redirects]]
+  from = "/online-coaching"
+  to = "/begeleiding.html#coaching"
+  status = 301
+
+[[redirects]]
+  from = "/training-aan-huis"
+  to = "/#locaties"
+  status = 301
+
+[[redirects]]
+  from = "/book"
+  to = "/contact.html"
+  status = 301
+
+# Klantomgeving en betalingen bestaan niet meer op deze site.
+# Voorlopig naar de contactpagina, zodat bezoekers niet stranden.
+[[redirects]]
+  from = "/login"
+  to = "/contact.html"
+  status = 302
+
+[[redirects]]
+  from = "/register"
+  to = "/contact.html"
+  status = 302
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/contact.html"
+  status = 302
+
+[[redirects]]
+  from = "/admin"
+  to = "/contact.html"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
