@@ -454,8 +454,11 @@ body.is-locked { overflow: hidden; }
    ========================================================================== */
 .hero {
   position: relative;
-  padding-top: clamp(7.5rem, 14vw, 10.5rem);
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+  min-height: 100svh;
+  padding-top: clamp(8rem, 14vh, 10.5rem);
+  padding-bottom: clamp(4rem, 8vh, 6rem);
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 .hero::after {
@@ -466,10 +469,12 @@ body.is-locked { overflow: hidden; }
   background: var(--line);
 }
 .hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.hero__content {
+  width: min(100%, 42rem);
 }
 .hero__eyebrow {
   font-size: 0.75rem;
@@ -494,18 +499,27 @@ body.is-locked { overflow: hidden; }
 .hero__note svg { width: 16px; height: 16px; flex: none; color: var(--accent-text); }
 
 .hero__media {
-  position: relative;
-  border-radius: var(--radius-lg);
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background-color: var(--bg-alt);
-  box-shadow: var(--shadow-lift);
+  background-color: var(--bg);
 }
 .hero__media img {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center center;
   transform: scale(1.06);
   animation: heroZoom 12s var(--ease) forwards;
+}
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    var(--bg) 0%,
+    color-mix(in srgb, var(--bg) 97%, transparent) 27%,
+    color-mix(in srgb, var(--bg) 70%, transparent) 48%,
+    transparent 72%);
 }
 @keyframes heroZoom { to { transform: scale(1); } }
 
@@ -1354,8 +1368,14 @@ html:not(.js) .loader { display: none; }
   /* Pagina's zonder hamburgermenu (bv. 404) houden hun knop wel */
   .nav__actions--keep .btn { display: inline-flex; }
   .nav__burger { display: inline-flex; }
-  .hero__grid { grid-template-columns: 1fr; }
-  .hero__media { aspect-ratio: 3 / 2; order: -1; margin-bottom: 2rem; }
+  .hero__media img { object-position: 62% center; }
+  .hero__media::after {
+    background: linear-gradient(90deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 96%, transparent) 36%,
+      color-mix(in srgb, var(--bg) 65%, transparent) 68%,
+      transparent 100%);
+  }
   .split, .split--text-heavy, .split--image-heavy { grid-template-columns: 1fr; }
   .situations { grid-template-columns: 1fr; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
@@ -1370,7 +1390,17 @@ html:not(.js) .loader { display: none; }
 
 @media (max-width: 560px) {
   body { font-size: 1rem; }
-  .hero { padding-top: 6.5rem; }
+  .hero { min-height: 100svh; padding-top: 7rem; }
+  .hero__content { width: 100%; }
+  .hero__media img { object-position: 68% center; }
+  .hero__media::after {
+    background:
+      linear-gradient(0deg, var(--bg) 0%, transparent 32%),
+      linear-gradient(90deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--bg) 94%, transparent) 52%,
+        color-mix(in srgb, var(--bg) 55%, transparent) 100%);
+  }
   .btn { width: 100%; }
   .btn-group { flex-direction: column; }
   .sticky-cta .btn { width: auto; }
