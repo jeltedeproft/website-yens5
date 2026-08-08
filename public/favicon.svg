@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="13" fill="#3A4A3D"/>
-  <!-- Y als lijnvorm, zodat het beeldmerk niet van een lettertype afhangt -->
-  <g stroke="#F4F1EB" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M20 19 L32 34 L44 19" />
-    <path d="M32 34 L32 46" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#252722"/>
+  <g transform="translate(8 8)" fill="none" stroke="#f1ede4" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M17 7H8v34h9"/>
+    <path d="M31 7h9v34h-9"/>
+    <path d="M17 14c0 6.4 2.7 10 7 10s7-3.6 7-10"/>
+    <path d="M17 34c0-6.4 2.7-10 7-10s7 3.6 7 10"/>
   </g>
 </svg>

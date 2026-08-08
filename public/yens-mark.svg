@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <title>YENS beeldmerk</title>
+  <g fill="none" stroke="#20231f" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M17 7H8v34h9"/>
+    <path d="M31 7h9v34h-9"/>
+    <path d="M17 14c0 6.4 2.7 10 7 10s7-3.6 7-10"/>
+    <path d="M17 34c0-6.4 2.7-10 7-10s7 3.6 7 10"/>
+  </g>
+</svg>

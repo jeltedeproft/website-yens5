@@ -13,6 +13,29 @@ const CONTACT_EMAIL = 'hallo@yens.be';
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+const INTRO_SESSION_KEY = 'yensIntroPlayed';
+
+function setIntroPlayed(hasPlayed) {
+  try {
+    if (hasPlayed) sessionStorage.setItem(INTRO_SESSION_KEY, 'true');
+    else sessionStorage.removeItem(INTRO_SESSION_KEY);
+  } catch (_) {
+    /* De website en intro blijven bruikbaar wanneer sessionStorage niet beschikbaar is. */
+  }
+}
+
+function initIntroNavigation() {
+  const replayLogo = $('.nav .brand');
+
+  if (replayLogo) {
+    replayLogo.setAttribute('aria-label', 'YENS-intro opnieuw bekijken en naar home');
+    replayLogo.addEventListener('click', () => setIntroPlayed(false));
+  }
+
+  $$('a[href="/"]:not(.brand)').forEach((homeLink) => {
+    homeLink.addEventListener('click', () => setIntroPlayed(true));
+  });
+}
 
 /* --------------------------------------------------------------------------
    Thema — licht is de standaardidentiteit, donker is een bewuste keuze
@@ -49,16 +72,27 @@ function initLoader() {
     reveal();
     return;
   }
+  if (document.documentElement.classList.contains('intro-skip')) {
+    loader.classList.add('is-hidden');
+    reveal();
+    return;
+  }
   if (reduceMotion) {
     loader.classList.add('is-hidden');
+    setIntroPlayed(true);
     reveal();
     return;
   }
 
   window.setTimeout(() => {
-    loader.classList.add('is-hidden');
+    loader.classList.add('is-exiting');
     reveal();
-  }, 1400);
+
+    window.setTimeout(() => {
+      loader.classList.add('is-hidden');
+      setIntroPlayed(true);
+    }, 1100);
+  }, 3600);
 }
 
 /* --------------------------------------------------------------------------
@@ -374,6 +408,7 @@ function initMisc() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  initIntroNavigation();
   initLoader();
   initNav();
   initReveal();
