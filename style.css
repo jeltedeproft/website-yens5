@@ -352,12 +352,12 @@ h4, h5, h6 {
 .brand { display: flex; flex-direction: row; align-items: center; gap: .85rem; line-height: 1.05; }
 .brand::before {
   content: '';
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   flex: none;
   background: var(--text);
-  -webkit-mask: url('/yens-mark.svg') center / contain no-repeat;
-  mask: url('/yens-mark.svg') center / contain no-repeat;
+  -webkit-mask: url('/images/yens-symbol-signature.png') center / contain no-repeat;
+  mask: url('/images/yens-symbol-signature.png') center / contain no-repeat;
   transition: transform .7s var(--ease), background-color var(--t-med);
 }
 .brand:hover::before { transform: translateY(-1px) scale(1.025); }
@@ -1676,7 +1676,7 @@ main > .section:first-child:not(.section--dark) {
   -webkit-backdrop-filter: none;
 }
 .home-page .nav__inner { min-height: 5rem; }
-.home-page .brand::before { width: 2.375rem; height: 2.375rem; }
+.home-page .brand::before { width: 2.65rem; height: 2.65rem; }
 .home-page .brand__name { font-size: 1.18rem; font-weight: 500; }
 .home-page .nav__links a { font-size: .75rem; font-weight: 500; letter-spacing: .115em; color: #625F59; }
 .home-page .nav__links { gap: clamp(.95rem, 1.65vw, 1.75rem); }
@@ -1830,6 +1830,7 @@ main > .section:first-child:not(.section--dark) {
   }
 }
 @media (max-width: 640px) {
+  .home-page .brand::before { width: 2.25rem; height: 2.25rem; }
   .home-page .hero {
     display: grid; grid-template-rows: auto minmax(17rem, 34svh);
     min-height: auto; padding: 7rem 0 0; overflow: hidden;
@@ -1860,4 +1861,42 @@ main > .section:first-child:not(.section--dark) {
   [data-theme="dark"] .home-page .hero__media::after {
     background: linear-gradient(180deg, #141312 0%, rgba(20,19,18,.52) 14%, transparent 34%);
   }
+}
+
+/* Header-wordmark: het aangeleverde symbool vervangt de letter Y. */
+.nav .brand {
+  --wordmark-color: #2B2A28;
+  gap: .55rem;
+  min-height: 44px;
+}
+[data-theme="dark"] .nav .brand { --wordmark-color: #E8E4DC; }
+.nav .brand::before,
+.home-page .nav .brand::before {
+  width: 1.3rem;
+  height: 1.3rem;
+  background: var(--wordmark-color);
+  -webkit-mask: url('/images/yens-symbol-signature.png') center / 170% no-repeat;
+  mask: url('/images/yens-symbol-signature.png') center / 170% no-repeat;
+  transform: none;
+  transition: none;
+}
+.nav .brand:hover::before { transform: none; }
+.nav .brand__name,
+.home-page .nav .brand__name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .46em;
+  font-size: 1.32rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--wordmark-color);
+}
+
+@media (max-width: 900px) {
+  .nav .brand { gap: .45rem; }
+  .nav .brand::before,
+  .home-page .nav .brand::before { width: 1.15rem; height: 1.15rem; }
+  .nav .brand__name,
+  .home-page .nav .brand__name { gap: .4em; font-size: 1.15rem; }
 }
