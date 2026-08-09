@@ -109,6 +109,9 @@ function initNav() {
   let navTicking = false;
 
   if (nav) {
+    nav.classList.add('is-initializing');
+    if (desktopLinks) nav.appendChild(desktopLinks);
+
     const updateNav = () => {
       const currentScrollY = Math.max(window.scrollY, 0);
       const scrollingDown = currentScrollY > lastScrollY + 0.5;
@@ -118,7 +121,7 @@ function initNav() {
       const isMobile = viewportWidth <= 900;
       const wideWidth = viewportWidth;
       const wideHeight = isMobile ? 76 : 84;
-      const compactHeight = 48;
+      const compactHeight = 46;
       const widePadding = isMobile
         ? 24
         : Math.min(Math.max(viewportWidth * 0.032, 24), 60);
@@ -142,7 +145,9 @@ function initNav() {
         Math.ceil(measuredCompactWidth),
         viewportWidth - (isMobile ? 16 : 32)
       );
-      const shouldCompact = !homeHero || currentScrollY > 0;
+      const compactLinksLeft = (viewportWidth - compactWidth) / 2
+        + compactPadding + compactBrandWidth + compactGap;
+      const shouldCompact = currentScrollY > 0;
       const morphProgress = shouldCompact ? 1 : 0;
       let heroIsOutOfView = true;
 
@@ -161,6 +166,7 @@ function initNav() {
         + (compactOffset - expandedOffset) * morphProgress;
 
       nav.style.setProperty('--nav-shell-width', `${Math.round(shellWidth)}px`);
+      nav.style.setProperty('--nav-compact-links-left', `${compactLinksLeft.toFixed(2)}px`);
       nav.style.setProperty('--nav-shell-height', `${shellHeight.toFixed(2)}px`);
       nav.style.setProperty('--nav-shell-padding', `${shellPadding.toFixed(2)}px`);
       nav.style.setProperty('--nav-surface-opacity', morphProgress.toFixed(3));
@@ -172,7 +178,7 @@ function initNav() {
 
       if (!heroIsOutOfView || menuOpen) {
         nav.classList.remove('is-hidden');
-      } else if (!reduceMotion && currentScrollY > 160 && scrollingDown) {
+      } else if (currentScrollY > 160 && scrollingDown) {
         nav.classList.add('is-hidden');
       } else if (scrollingUp || currentScrollY <= 80) {
         nav.classList.remove('is-hidden');
@@ -189,6 +195,9 @@ function initNav() {
     };
 
     updateNav();
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => nav.classList.remove('is-initializing'));
+    });
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
   }

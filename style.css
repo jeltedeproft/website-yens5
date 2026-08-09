@@ -2095,7 +2095,7 @@ body .nav.is-scrolled {
   backdrop-filter: blur(10px) saturate(1.05);
   -webkit-backdrop-filter: blur(10px) saturate(1.05);
 }
-body .nav.is-hidden { transform: translateY(calc(-100% - 2px)); }
+body .nav.is-hidden { transform: translate3d(0, calc(-100% - 48px), 0); }
 body .nav__inner,
 body.home-page .nav__inner,
 body:not(.home-page) .nav__inner {
@@ -2394,11 +2394,57 @@ body:not(.home-page) .nav__actions {
 body .nav__actions .theme-toggle,
 body.home-page .nav__actions .theme-toggle,
 body:not(.home-page) .nav__actions .theme-toggle { margin-right: 0; }
+
+@media (min-width: 901px) {
+  body .nav__actions .theme-toggle,
+  body.home-page .nav__actions .theme-toggle,
+  body:not(.home-page) .nav__actions .theme-toggle {
+    transform: translateX(11px);
+  }
+}
+
+body .nav__actions .theme-toggle {
+  position: relative;
+  isolation: isolate;
+}
+body .nav__actions .theme-toggle::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+body .nav__actions .theme-toggle:hover { background: transparent; }
+body .nav__actions .theme-toggle:hover::before { opacity: 1; }
+
+/* Links staan direct op hun eindpositie; merk en theme-toggle reizen naar binnen. */
+@media (min-width: 901px) {
+  body .nav .nav__links {
+    position: absolute;
+    z-index: 1;
+    top: 55px;
+    left: var(--nav-compact-links-left);
+    transform: translateY(-50%);
+    transition: none;
+  }
+}
+
 .nav .brand {
   transition: width .54s cubic-bezier(.22, 1, .36, 1);
 }
 body .nav__inner::before {
   transition: opacity .54s cubic-bezier(.22, 1, .36, 1);
+}
+
+body .nav.is-initializing,
+body .nav.is-initializing .nav__inner,
+body .nav.is-initializing .nav__inner::before,
+body .nav.is-initializing .brand {
+  transition: none !important;
 }
 
 @media (max-width: 900px) {
