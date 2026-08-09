@@ -581,6 +581,50 @@ function initGuidanceCursor() {
 }
 
 /* --------------------------------------------------------------------------
+   Klantverhalen — klikbare panelen naast de desktop-hover en mobiele swipe
+   -------------------------------------------------------------------------- */
+function initStoryPanels() {
+  const stories = $('[data-stories]');
+  if (!stories) return;
+
+  const panels = $$('.story-panel', stories);
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const closePanels = (except = null) => {
+    panels.forEach((panel) => {
+      if (panel === except) return;
+      panel.classList.remove('is-active');
+      panel.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  panels.forEach((panel) => {
+    const toggle = () => {
+      const willOpen = !panel.classList.contains('is-active');
+      closePanels(panel);
+      panel.classList.toggle('is-active', willOpen);
+      panel.setAttribute('aria-expanded', String(willOpen));
+    };
+
+    panel.addEventListener('click', toggle);
+    panel.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggle();
+      }
+      if (event.key === 'Escape') closePanels();
+    });
+
+    if (finePointer) {
+      panel.addEventListener('pointerleave', () => {
+        panel.classList.remove('is-active');
+        panel.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
    Kleine details
    -------------------------------------------------------------------------- */
 function initMisc() {
@@ -603,6 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilters();
   initForm();
   initPartnerMarquee();
+  initStoryPanels();
   initGuidanceCursor();
   initMisc();
 });
