@@ -2441,6 +2441,157 @@ main > .section:first-child:not(.section--dark) {
   .story-panel.is-active .story-panel__portrait { transform: scale(1.01); }
 }
 
+/* Succes stories — rustige profielen met inhoudelijke diepte. */
+.home-page #verhalen .section-head { margin-bottom: clamp(3rem, 5vw, 4.75rem); }
+.home-page #verhalen .stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  height: auto;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.home-page #verhalen .story-panel,
+.home-page #verhalen .story-panel--two,
+.home-page #verhalen .stories-grid:has(.story-panel:hover) .story-panel,
+.home-page #verhalen .stories-grid:has(.story-panel:focus-visible) .story-panel,
+.home-page #verhalen .stories-grid:has(.story-panel.is-active) .story-panel,
+.home-page #verhalen .stories-grid .story-panel:hover,
+.home-page #verhalen .stories-grid .story-panel:focus-visible,
+.home-page #verhalen .stories-grid .story-panel.is-active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  min-height: 31rem;
+  padding: clamp(2.25rem, 4vw, 3.5rem);
+  overflow: visible;
+  cursor: default;
+  filter: none;
+  background: transparent;
+  border-right: 1px solid var(--line);
+  transition: background-color 600ms var(--ease);
+}
+.home-page #verhalen .story-panel:last-child { border-right: 0; }
+.home-page #verhalen .story-panel:hover {
+  background: color-mix(in srgb, var(--bg-alt) 52%, transparent);
+}
+.home-page #verhalen .story-panel::after { display: none; }
+.home-page #verhalen .story-panel__portrait {
+  position: relative;
+  z-index: 0;
+  inset: auto;
+  flex: 0 0 auto;
+  width: clamp(5.75rem, 7.5vw, 7rem);
+  height: clamp(5.75rem, 7.5vw, 7rem);
+  border-radius: 50%;
+  background-size: 300% auto;
+  background-repeat: no-repeat;
+  filter: saturate(.58) contrast(.94);
+  transform: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line-strong) 55%, transparent);
+  transition: filter 650ms var(--ease), transform 650ms var(--ease);
+}
+.home-page #verhalen .story-panel--one .story-panel__portrait { background-position: left 12%; }
+.home-page #verhalen .story-panel--two .story-panel__portrait { background-position: center 12%; }
+.home-page #verhalen .story-panel--three .story-panel__portrait { background-position: right 12%; }
+.home-page #verhalen .story-panel:hover .story-panel__portrait {
+  filter: saturate(.72) contrast(.98);
+  transform: translateY(-2px);
+}
+.home-page #verhalen .story-panel__content {
+  position: static;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: clamp(1.75rem, 3vw, 2.25rem) 0 0;
+  color: var(--text-body);
+}
+.home-page #verhalen .story-panel__meta {
+  color: var(--text-muted);
+  font-size: .66rem;
+}
+.home-page #verhalen .story-panel__title {
+  max-width: 17ch;
+  margin-top: .65rem;
+  color: var(--text);
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  line-height: 1.12;
+}
+.home-page #verhalen .story-panel__extra,
+.home-page #verhalen .story-panel:hover .story-panel__extra,
+.home-page #verhalen .story-panel:focus-visible .story-panel__extra,
+.home-page #verhalen .story-panel.is-active .story-panel__extra {
+  max-width: 100%;
+  max-height: none;
+  margin-top: 1.5rem;
+  overflow: visible;
+  opacity: 1;
+  transform: none;
+}
+.home-page #verhalen .story-panel__extra blockquote {
+  max-width: 34ch;
+  color: var(--text-body);
+  font-size: clamp(.94rem, 1.15vw, 1.02rem);
+  line-height: 1.68;
+}
+.home-page #verhalen .story-panel__outcome {
+  max-width: 34ch;
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  color: var(--text-muted);
+  font-size: .78rem;
+  line-height: 1.55;
+  border-top: 1px solid var(--line);
+}
+.home-page #verhalen .story-panel__outcome span {
+  display: block;
+  margin: 0 0 .35rem;
+  color: var(--accent-text);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .home-page #verhalen .stories-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .home-page #verhalen .story-panel,
+  .home-page #verhalen .story-panel--two,
+  .home-page #verhalen .stories-grid:has(.story-panel:hover) .story-panel,
+  .home-page #verhalen .stories-grid:has(.story-panel:focus-visible) .story-panel,
+  .home-page #verhalen .stories-grid:has(.story-panel.is-active) .story-panel,
+  .home-page #verhalen .stories-grid .story-panel:hover,
+  .home-page #verhalen .stories-grid .story-panel:focus-visible,
+  .home-page #verhalen .stories-grid .story-panel.is-active {
+    width: 100%;
+    min-height: 0;
+    padding: clamp(2.25rem, 7vw, 3.5rem) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .home-page #verhalen .story-panel:last-child { border-bottom: 0; }
+  .home-page #verhalen .story-panel__portrait { width: 6rem; height: 6rem; }
+  .home-page #verhalen .story-panel__content { max-width: 38rem; }
+  .home-page #verhalen .story-panel__extra blockquote,
+  .home-page #verhalen .story-panel__outcome { max-width: 38rem; }
+}
+
 /* ========================================================================== 
    Samenwerkingen — rustige, doorlopende partner-marquee
    ========================================================================== */
