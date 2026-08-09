@@ -1137,8 +1137,8 @@ body.is-locked { overflow: hidden; }
 }
 .guidance-category--semi .guidance-category__media {
   width: min(58%, 48rem);
-  background-image: url('/images/semi-pt-editorial.png');
-  background-position: right center;
+  background-image: url('/images/semi-pt-group-editorial.jpg');
+  background-position: 68% 52%;
   opacity: .82;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .06) 10%, rgba(0, 0, 0, .18) 25%, rgba(0, 0, 0, .36) 42%, rgba(0, 0, 0, .56) 58%, rgba(0, 0, 0, .76) 74%, rgba(0, 0, 0, .9) 88%, #000 100%);
   mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .06) 10%, rgba(0, 0, 0, .18) 25%, rgba(0, 0, 0, .36) 42%, rgba(0, 0, 0, .56) 58%, rgba(0, 0, 0, .76) 74%, rgba(0, 0, 0, .9) 88%, #000 100%);
