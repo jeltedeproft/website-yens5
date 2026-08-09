@@ -2,6 +2,9 @@
    YENS — interactie & subtiel bewegingsontwerp
    ========================================================================== */
 
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+
 /**
  * Het contactformulier verstuurt naar Netlify Forms. Inzendingen komen binnen in
  * de Netlify-dashboard onder Forms → kennismaking; stel daar een e-mailmelding in.
@@ -14,6 +17,29 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 const INTRO_SESSION_KEY = 'yensIntroPlayed';
+let smoothScroll = null;
+
+/* --------------------------------------------------------------------------
+   Scrollgevoel — subtiele desktopinertie, native touch en reduced motion
+   -------------------------------------------------------------------------- */
+function initSmoothScroll() {
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduceMotion || !finePointer) return;
+
+  smoothScroll = new Lenis({
+    autoRaf: true,
+    duration: 0.82,
+    easing: (t) => 1 - Math.pow(1 - t, 4),
+    smoothWheel: true,
+    syncTouch: false,
+    wheelMultiplier: 0.92,
+    anchors: {
+      offset: -96,
+      duration: 0.68,
+      easing: (t) => 1 - Math.pow(1 - t, 4)
+    }
+  });
+}
 
 function setIntroPlayed(hasPlayed) {
   try {
@@ -209,6 +235,10 @@ function initNav() {
     burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
     panel.classList.toggle('is-open', open);
     document.body.classList.toggle('is-locked', open);
+    if (smoothScroll) {
+      if (open) smoothScroll.stop();
+      else smoothScroll.start();
+    }
     nav?.classList.remove('is-hidden');
   };
 
@@ -492,6 +522,41 @@ function initForm() {
 }
 
 /* --------------------------------------------------------------------------
+   Partner-marquee: exact één groepsbreedte per naadloze iteratie
+   -------------------------------------------------------------------------- */
+function initPartnerMarquee() {
+  const track = $('.partners__track');
+  const group = track ? $('.partners__group', track) : null;
+  if (!track || !group) return;
+
+  const measure = () => {
+    const dpr = window.devicePixelRatio || 1;
+    const width = Math.round(group.getBoundingClientRect().width * dpr) / dpr;
+    const template = track.children[1];
+    const requiredWidth = window.innerWidth + width;
+
+    while (template && track.children.length * width < requiredWidth) {
+      const clone = template.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      $$('a', clone).forEach((link) => link.setAttribute('tabindex', '-1'));
+      $$('img', clone).forEach((image) => { image.loading = 'eager'; });
+      track.appendChild(clone);
+    }
+
+    track.style.setProperty('--partners-shift', `${-width}px`);
+    track.classList.add('is-ready');
+  };
+
+  measure();
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(measure);
+    observer.observe(group);
+  } else {
+    window.addEventListener('resize', measure, { passive: true });
+  }
+}
+
+/* --------------------------------------------------------------------------
    Kleine details
    -------------------------------------------------------------------------- */
 function initMisc() {
@@ -501,6 +566,7 @@ function initMisc() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSmoothScroll();
   initTheme();
   initIntroNavigation();
   initLoader();
@@ -512,5 +578,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyCta();
   initFilters();
   initForm();
+  initPartnerMarquee();
   initMisc();
 });

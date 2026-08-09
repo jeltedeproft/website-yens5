@@ -788,7 +788,7 @@ body.is-locked { overflow: hidden; }
 }
 .home-page .offer { border-radius: 0; box-shadow: none; }
 .home-page .offer__tag { border-radius: 0; }
-.home-page .offers { gap: 0; border-top: 1px solid var(--line-strong); }
+.home-page .offers { gap: clamp(.75rem, 1.4vw, 1.125rem); border-top: 1px solid var(--line-strong); }
 .home-page .offer {
   padding: clamp(2rem, 4vw, 4rem) 0;
   border: 0;
@@ -807,6 +807,16 @@ body.is-locked { overflow: hidden; }
 .home-page .offer:not(.offer--featured) .offer__text { grid-column: 2; }
 .home-page .offer:not(.offer--featured) .offer__foot { grid-column: 3; grid-row: 1 / span 3; align-self: stretch; }
 .home-page .offer:hover { transform: none; box-shadow: none; }
+.home-page a.offer { cursor: pointer; }
+.home-page a.offer:not(.offer--featured):hover,
+.home-page a.offer:not(.offer--featured):focus-visible {
+  background-color: color-mix(in srgb, var(--text) 2.5%, transparent);
+}
+.home-page a.offer--featured:hover,
+.home-page a.offer--featured:focus-visible {
+  background-color: color-mix(in srgb, var(--bg-dark) 96%, var(--text-on-dark));
+}
+.home-page a.offer:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .offer:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lift);
@@ -1601,6 +1611,81 @@ main > .section:first-child:not(.section--dark) {
 .quote-card, .note-block, .article-card, .location, .form-card { border-radius: 0; box-shadow: none; }
 .grid-3 .quote-card { border-width: 1px 0 0; background: transparent; padding-inline: 0; }
 
+/* Tijdelijke, expliciet fictieve voorbeeldverhalen */
+.stories__disclaimer { max-width: 38rem; margin-top: 1.25rem; color: var(--text-muted); font-size: .76rem; letter-spacing: .035em; }
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.75rem, 1.6vw, 1.5rem);
+}
+.story-panel {
+  position: relative;
+  min-width: 0;
+  background: color-mix(in srgb, var(--bg-raised) 72%, transparent);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform .55s var(--ease), background-color .55s var(--ease), border-color .55s var(--ease);
+}
+.story-panel:hover,
+.story-panel:focus-visible {
+  transform: translateY(-6px);
+  background: var(--bg-raised);
+  border-color: var(--line-strong);
+}
+.story-panel:focus-visible { outline: 1px solid var(--text); outline-offset: 5px; }
+.story-panel__portrait {
+  aspect-ratio: 4 / 4.7;
+  background-image: url('/images/customer-stories-editorial.png');
+  background-repeat: no-repeat;
+  background-size: 300% 100%;
+  filter: saturate(.78) contrast(.96);
+  transition: transform .8s var(--ease), filter .6s ease;
+}
+.story-panel--one .story-panel__portrait { background-position: left center; }
+.story-panel--two .story-panel__portrait { background-position: center center; }
+.story-panel--three .story-panel__portrait { background-position: right center; }
+.story-panel:hover .story-panel__portrait,
+.story-panel:focus-visible .story-panel__portrait { transform: scale(1.025); filter: saturate(.88) contrast(.98); }
+.story-panel__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 19rem;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+.story-panel__content::before {
+  content: '“';
+  position: absolute;
+  top: 1.05rem;
+  right: 1.35rem;
+  color: var(--line-strong);
+  font-family: var(--font-serif);
+  font-size: 3.4rem;
+  line-height: 1;
+  transition: color .45s ease, transform .55s var(--ease);
+}
+.story-panel:hover .story-panel__content::before,
+.story-panel:focus-visible .story-panel__content::before { color: var(--text-muted); transform: translateY(-3px); }
+.story-panel__meta { padding-right: 3rem; color: var(--text-muted); font-size: .65rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; }
+.story-panel__title { max-width: 14ch; margin-top: 1rem; color: var(--text); font-size: clamp(1.35rem, 1.8vw, 1.8rem); font-weight: 430; line-height: 1.08; letter-spacing: -.025em; }
+.story-panel blockquote { margin-top: 1.5rem; color: var(--text-body); font-size: clamp(.95rem, 1.15vw, 1.08rem); line-height: 1.65; }
+.story-panel__result { margin-top: auto; padding-top: 1.75rem; color: var(--text-muted); font-size: .78rem; line-height: 1.55; border-top: 1px solid var(--line); }
+@media (max-width: 900px) {
+  .stories-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .story-panel { display: grid; grid-template-columns: minmax(12rem, .8fr) 1.2fr; }
+  .story-panel__portrait { aspect-ratio: auto; min-height: 22rem; }
+  .story-panel__content { min-height: 22rem; }
+}
+@media (max-width: 560px) {
+  .story-panel { display: block; }
+  .story-panel__portrait { aspect-ratio: 4 / 4.2; min-height: 0; }
+  .story-panel__content { min-height: 18rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-panel, .story-panel__portrait, .story-panel__content::before { transition: none; }
+  .story-panel:hover, .story-panel:focus-visible, .story-panel:hover .story-panel__portrait, .story-panel:focus-visible .story-panel__portrait { transform: none; }
+}
+
 /* ========================================================================== 
    Samenwerkingen — rustige, doorlopende partner-marquee
    ========================================================================== */
@@ -1627,9 +1712,14 @@ main > .section:first-child:not(.section--dark) {
 .partners__track {
   display: flex;
   width: max-content;
+  transform: translate3d(0, 0, 0);
   will-change: transform;
   animation: partners-marquee 32s linear infinite;
+  animation-play-state: paused;
+  backface-visibility: hidden;
+  contain: layout paint;
 }
+.partners__track.is-ready { animation-play-state: running; }
 .partners__group {
   display: flex;
   flex: none;
@@ -1645,6 +1735,13 @@ main > .section:first-child:not(.section--dark) {
   width: 13rem;
   height: 6rem;
   color: #292A27;
+  text-decoration: none;
+}
+.partner:is(a) { transition: opacity var(--t-fast); }
+.partner:is(a):hover { opacity: .72; }
+.partner:is(a):focus-visible {
+  outline: 1px solid #555850;
+  outline-offset: .5rem;
 }
 .partner img {
   display: block;
@@ -1693,7 +1790,7 @@ main > .section:first-child:not(.section--dark) {
 .partner--vorm img { width: 13rem; opacity: .9; }
 
 @keyframes partners-marquee {
-  to { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(var(--partners-shift, -50%), 0, 0); }
 }
 
 @media (max-width: 700px) {
