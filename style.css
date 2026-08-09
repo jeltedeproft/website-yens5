@@ -1139,12 +1139,12 @@ body.is-locked { overflow: hidden; }
   width: min(58%, 48rem);
   background-image: url('/images/semi-pt-group-editorial.jpg');
   background-position: 68% 52%;
-  opacity: .82;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .06) 10%, rgba(0, 0, 0, .18) 25%, rgba(0, 0, 0, .36) 42%, rgba(0, 0, 0, .56) 58%, rgba(0, 0, 0, .76) 74%, rgba(0, 0, 0, .9) 88%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .06) 10%, rgba(0, 0, 0, .18) 25%, rgba(0, 0, 0, .36) 42%, rgba(0, 0, 0, .56) 58%, rgba(0, 0, 0, .76) 74%, rgba(0, 0, 0, .9) 88%, #000 100%);
+  opacity: .9;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .08) 3%, rgba(0, 0, 0, .2) 8%, rgba(0, 0, 0, .36) 14%, rgba(0, 0, 0, .52) 20%, rgba(0, 0, 0, .66) 27%, rgba(0, 0, 0, .77) 34%, rgba(0, 0, 0, .85) 42%, rgba(0, 0, 0, .91) 52%, rgba(0, 0, 0, .95) 64%, rgba(0, 0, 0, .98) 78%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .08) 3%, rgba(0, 0, 0, .2) 8%, rgba(0, 0, 0, .36) 14%, rgba(0, 0, 0, .52) 20%, rgba(0, 0, 0, .66) 27%, rgba(0, 0, 0, .77) 34%, rgba(0, 0, 0, .85) 42%, rgba(0, 0, 0, .91) 52%, rgba(0, 0, 0, .95) 64%, rgba(0, 0, 0, .98) 78%, #000 100%);
 }
 .guidance-category--semi .guidance-category__media::after {
-  background: linear-gradient(90deg, #292B29 0%, rgba(41, 43, 41, .94) 12%, rgba(41, 43, 41, .82) 28%, rgba(41, 43, 41, .66) 44%, rgba(41, 43, 41, .48) 60%, rgba(41, 43, 41, .3) 74%, rgba(41, 43, 41, .16) 86%, rgba(41, 43, 41, .06) 95%, transparent 100%);
+  background: linear-gradient(90deg, #292B29 0%, rgba(41, 43, 41, .9) 5%, rgba(41, 43, 41, .7) 12%, rgba(41, 43, 41, .5) 20%, rgba(41, 43, 41, .32) 28%, rgba(41, 43, 41, .19) 36%, rgba(41, 43, 41, .11) 45%, rgba(41, 43, 41, .06) 56%, rgba(41, 43, 41, .03) 70%, transparent 100%);
 }
 .guidance-category--semi .guidance-category__label { color: var(--c-sage); }
 .guidance-category--semi .guidance-row__title { color: var(--text-on-dark); }
