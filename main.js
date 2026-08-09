@@ -383,6 +383,12 @@ function initFaq() {
       });
     });
 
+    triggers.forEach((trigger) => {
+      if (trigger.getAttribute('aria-expanded') !== 'true') return;
+      const panel = trigger.closest('.faq__item').querySelector('.faq__panel');
+      panel.style.height = `${panel.scrollHeight}px`;
+    });
+
     window.addEventListener('resize', () => {
       triggers.forEach((trigger) => {
         if (trigger.getAttribute('aria-expanded') !== 'true') return;
