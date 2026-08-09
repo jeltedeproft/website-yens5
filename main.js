@@ -102,11 +102,95 @@ function initNav() {
   const nav = $('#nav');
   const burger = $('#nav-burger');
   const panel = $('#nav-mobile');
+  const homeHero = $('.home-page .hero');
+  const desktopLinks = nav ? $('.nav__links', nav) : null;
+  const navActions = nav ? $('.nav__actions', nav) : null;
+  let lastScrollY = window.scrollY;
+  let navTicking = false;
 
   if (nav) {
-    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
-    onScroll();
+    const updateNav = () => {
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const scrollingDown = currentScrollY > lastScrollY + 0.5;
+      const scrollingUp = currentScrollY < lastScrollY - 0.5;
+      const menuOpen = panel?.classList.contains('is-open');
+      const viewportWidth = window.innerWidth;
+      const isMobile = viewportWidth <= 900;
+      const wideWidth = viewportWidth;
+      const wideHeight = isMobile ? 76 : 84;
+      const compactHeight = 48;
+      const widePadding = isMobile
+        ? 24
+        : Math.min(Math.max(viewportWidth * 0.032, 24), 60);
+      const compactPadding = isMobile ? 12 : 14;
+      const fullBrandWidth = isMobile ? 87.15 : 105.26;
+      const compactBrandWidth = isMobile ? 27 : 31;
+      const compactGap = isMobile ? 7 : 15;
+      const linkItems = desktopLinks ? Array.from(desktopLinks.children) : [];
+      const linksWidth = linkItems.reduce((total, item) => total + item.offsetWidth, 0)
+        + Math.max(linkItems.length - 1, 0) * compactGap;
+      const actionItems = navActions ? Array.from(navActions.children) : [];
+      const actionsWidth = actionItems.reduce((total, item) => total + item.offsetWidth, 0);
+      const measuredCompactWidth = isMobile
+        ? 216
+        : compactBrandWidth
+          + (linksWidth || 410)
+          + (actionsWidth || 44)
+          + compactGap * 2
+          + compactPadding * 2;
+      const compactWidth = Math.min(
+        Math.ceil(measuredCompactWidth),
+        viewportWidth - (isMobile ? 16 : 32)
+      );
+      const shouldCompact = !homeHero || currentScrollY > 0;
+      const morphProgress = shouldCompact ? 1 : 0;
+      let heroIsOutOfView = true;
+
+      if (homeHero) {
+        const heroRect = homeHero.getBoundingClientRect();
+        heroIsOutOfView = heroRect.bottom <= 0;
+      }
+
+      const shellWidth = wideWidth + (compactWidth - wideWidth) * morphProgress;
+      const shellHeight = wideHeight + (compactHeight - wideHeight) * morphProgress;
+      const shellPadding = widePadding + (compactPadding - widePadding) * morphProgress;
+      const brandWidth = fullBrandWidth + (compactBrandWidth - fullBrandWidth) * morphProgress;
+      const expandedOffset = isMobile ? 12 : 18;
+      const compactOffset = isMobile ? 24 : 32;
+      const shellOffset = expandedOffset
+        + (compactOffset - expandedOffset) * morphProgress;
+
+      nav.style.setProperty('--nav-shell-width', `${Math.round(shellWidth)}px`);
+      nav.style.setProperty('--nav-shell-height', `${shellHeight.toFixed(2)}px`);
+      nav.style.setProperty('--nav-shell-padding', `${shellPadding.toFixed(2)}px`);
+      nav.style.setProperty('--nav-surface-opacity', morphProgress.toFixed(3));
+      nav.style.setProperty('--nav-brand-width', `${brandWidth.toFixed(2)}px`);
+      nav.style.setProperty('--nav-shell-y', `${shellOffset.toFixed(2)}px`);
+
+      nav.classList.toggle('is-scrolled', shouldCompact);
+      nav.classList.toggle('is-compact', shouldCompact);
+
+      if (!heroIsOutOfView || menuOpen) {
+        nav.classList.remove('is-hidden');
+      } else if (!reduceMotion && currentScrollY > 160 && scrollingDown) {
+        nav.classList.add('is-hidden');
+      } else if (scrollingUp || currentScrollY <= 80) {
+        nav.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+      navTicking = false;
+    };
+
+    const onScroll = () => {
+      if (navTicking) return;
+      navTicking = true;
+      window.requestAnimationFrame(updateNav);
+    };
+
+    updateNav();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
   }
 
   if (!burger || !panel) return;
@@ -116,6 +200,7 @@ function initNav() {
     burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
     panel.classList.toggle('is-open', open);
     document.body.classList.toggle('is-locked', open);
+    nav?.classList.remove('is-hidden');
   };
 
   burger.addEventListener('click', () => {
