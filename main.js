@@ -308,7 +308,7 @@ function initProcess() {
 
     progress.style.height = `${clamped * 100}%`;
     steps.forEach((step) => {
-      const dot = $('.process__point', step);
+      const dot = $('.process__point, .step__dot', step);
       if (!dot) return;
       const dotRect = dot.getBoundingClientRect();
       step.classList.toggle('is-reached', dotRect.top + dotRect.height / 2 < anchor);
@@ -331,7 +331,8 @@ function initProcess() {
    -------------------------------------------------------------------------- */
 function initParallax() {
   const items = $$('[data-parallax]');
-  if (!items.length || reduceMotion) return;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!items.length || reduceMotion || !finePointer) return;
 
   let ticking = false;
   const update = () => {
