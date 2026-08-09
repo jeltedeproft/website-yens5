@@ -915,40 +915,41 @@ body.is-locked { overflow: hidden; }
   inset: 0;
 }
 .guidance-category:has(.guidance-row:hover) .guidance-category__media,
-.guidance-category:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .58; transform: scale(1); }
+.guidance-category:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .78; transform: scale(1); }
 .guidance-category--personal {
   padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 2.75rem);
-  background: var(--bg);
+  background: rgba(222, 221, 214, .88);
 }
 .guidance-category--personal .guidance-category__media {
   background-image: url('/images/coaching-editorial.jpg');
   background-position: center 45%;
-  opacity: .16;
+  opacity: .36;
 }
 .guidance-category--personal .guidance-category__media::after {
-  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 30%, transparent 88%);
+  background: linear-gradient(90deg, rgba(222, 221, 214, .94) 0%, rgba(222, 221, 214, .6) 30%, transparent 88%);
 }
 .guidance-category--personal:has(.guidance-row:hover) .guidance-category__media,
-.guidance-category--personal:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .3; }
+.guidance-category--personal:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .58; }
 .guidance-category--personal .guidance-category__label { color: var(--text-muted); }
 .guidance-category--personal .guidance-row::after {
-  background: linear-gradient(90deg, var(--line) 0%, var(--line) 54%, transparent 100%);
+  background: linear-gradient(90deg, rgba(37, 39, 34, .16) 0%, rgba(37, 39, 34, .12) 54%, transparent 100%);
 }
-.guidance-category--personal .guidance-row__title { color: var(--text); }
-.guidance-category--personal .guidance-row__desc { color: var(--text-muted); }
+.guidance-category--personal .guidance-row__title { color: #252722; }
+.guidance-category--personal .guidance-row__desc,
+.guidance-category--personal .guidance-category__label { color: #62665D; }
 .guidance-category--semi {
   margin-top: clamp(2.75rem, 5vw, 4.5rem);
   padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 4vw, 4rem) clamp(1rem, 2vw, 2rem);
-  background: #292B29;
+  background: rgba(74, 81, 67, .86);
 }
 .guidance-category--semi .guidance-category__media {
   width: min(46%, 38rem);
   background-image: url('/images/strength-still-life.jpg');
   background-position: center 62%;
-  opacity: .34;
+  opacity: .56;
 }
 .guidance-category--semi .guidance-category__media::after {
-  background: linear-gradient(90deg, #292B29 0%, rgba(41, 43, 41, .92) 20%, rgba(41, 43, 41, .28) 72%, rgba(41, 43, 41, .12) 100%);
+  background: linear-gradient(90deg, rgba(74, 81, 67, .9) 0%, rgba(74, 81, 67, .56) 22%, rgba(74, 81, 67, .14) 70%, rgba(74, 81, 67, .03) 100%);
 }
 .guidance-category--semi .guidance-category__label { color: var(--c-sage); }
 .guidance-category--semi .guidance-row__title { color: var(--text-on-dark); }
@@ -1013,7 +1014,7 @@ body.is-locked { overflow: hidden; }
 .guidance-row:hover,
 .guidance-row:focus-visible { min-height: clamp(10.5rem, 14vw, 12.5rem); }
 .guidance-row--personal:hover,
-.guidance-row--personal:focus-visible { background-color: color-mix(in srgb, var(--c-sage) 12%, transparent); }
+.guidance-row--personal:focus-visible { background-color: color-mix(in srgb, var(--c-sand) 22%, transparent); }
 .guidance-row--duo:hover,
 .guidance-row--duo:focus-visible { background-color: color-mix(in srgb, var(--c-sand) 20%, transparent); }
 .guidance-row--semi:hover,
@@ -1104,8 +1105,8 @@ body.is-locked { overflow: hidden; }
 @media (max-width: 700px) {
   .guidance-category--personal,
   .guidance-category--semi { padding-inline: 1rem; }
-  .guidance-category__media { width: 76%; opacity: .1; }
-  .guidance-category--semi .guidance-category__media { width: 66%; opacity: .22; }
+  .guidance-category__media { width: 76%; opacity: .24; }
+  .guidance-category--semi .guidance-category__media { width: 66%; opacity: .38; }
   .guidance-row {
     grid-template-columns: minmax(0, 1fr);
     min-height: 7.5rem;
