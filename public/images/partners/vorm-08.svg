@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-labelledby="title desc">
+  <title id="title">VORM 08</title>
+  <desc id="desc">Minimalistisch woordmerk van de fictieve movement studio VORM 08.</desc>
+  <g fill="none" stroke="#292A27" stroke-width="2">
+    <path d="M18 22 38 74 58 22M76 48c0-18 11-28 27-28s27 10 27 28-11 28-27 28-27-10-27-28ZM151 76V20h20c15 0 24 7 24 19 0 9-5 15-14 18l17 19M216 76V20l24 38 24-38v56"/>
+    <path d="M292 20v56M282 30l10-10 10 10M282 66l10 10 10-10" opacity=".45"/>
+  </g>
+  <text x="320" y="56" fill="#292A27" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="2">08</text>
+</svg>
