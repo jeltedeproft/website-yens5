@@ -882,7 +882,212 @@ body.is-locked { overflow: hidden; }
 .offer--featured .offer__price { color: var(--text-on-dark-muted); }
 .offer--featured .offer__price strong { color: var(--text-on-dark); }
 
-/* ==========================================================================
+/* Homepage — interactieve begeleidingsteaser */
+.guidance-list { border-top: 0; }
+.guidance-category {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.guidance-category__label {
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(.25rem, 1vw, .75rem) 1rem;
+  color: var(--text-muted);
+  font-size: .67rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.guidance-category__media {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 auto;
+  width: min(58%, 48rem);
+  background-position: center;
+  background-size: cover;
+  opacity: .34;
+  transform: scale(1.035);
+  transition: opacity .65s var(--ease), transform .7s var(--ease);
+}
+.guidance-category__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.guidance-category:has(.guidance-row:hover) .guidance-category__media,
+.guidance-category:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .58; transform: scale(1); }
+.guidance-category--personal {
+  padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 2.75rem);
+  background: #292B29;
+}
+.guidance-category--personal .guidance-category__media {
+  background-image: url('/images/coaching-editorial.jpg');
+  background-position: center 45%;
+}
+.guidance-category--personal .guidance-category__media::after {
+  background: linear-gradient(90deg, #292B29 0%, rgba(41, 43, 41, .92) 20%, rgba(41, 43, 41, .28) 72%, rgba(41, 43, 41, .12) 100%);
+}
+.guidance-category--personal .guidance-category__label { color: var(--c-sage); }
+.guidance-category--personal .guidance-row::after {
+  background: linear-gradient(90deg, rgba(244, 241, 235, .2) 0%, rgba(244, 241, 235, .14) 54%, transparent 100%);
+}
+.guidance-category--personal .guidance-row__title { color: var(--text-on-dark); }
+.guidance-category--personal .guidance-row__desc { color: var(--text-on-dark-muted); }
+.guidance-category--semi {
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 4vw, 4rem) clamp(1rem, 2vw, 2rem);
+  background: var(--bg);
+}
+.guidance-category--semi .guidance-category__media {
+  width: min(46%, 38rem);
+  background-image: url('/images/strength-still-life.jpg');
+  background-position: center 62%;
+  opacity: .16;
+}
+.guidance-category--semi .guidance-category__media::after {
+  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 30%, transparent 88%);
+}
+.guidance-row {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  min-height: clamp(7.75rem, 10vw, 9.5rem);
+  padding: 1.5rem clamp(.25rem, 1vw, .75rem);
+  border-bottom: 0;
+  overflow: hidden;
+  transition: min-height .65s var(--ease), opacity .55s var(--ease), padding .65s var(--ease), background-color .6s var(--ease);
+}
+.guidance-row::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--line) 0%, var(--line) 54%, transparent 100%);
+}
+.guidance-row__media {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 auto;
+  width: min(44%, 40rem);
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  clip-path: inset(0 0 0 100%);
+  transform: scale(1.035);
+  transition: opacity .65s var(--ease), clip-path .65s var(--ease), transform .7s var(--ease);
+}
+.guidance-row__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 78%, transparent) 24%, transparent 72%);
+}
+.guidance-row--personal .guidance-row__media { background-image: url('/images/coaching-editorial.jpg'); }
+.guidance-row--duo .guidance-row__media { background-image: url('/images/studio-architectural.jpg'); background-position: center 58%; }
+.guidance-row--semi .guidance-row__media { background-image: url('/images/strength-still-life.jpg'); background-position: center 62%; }
+.guidance-row__copy { display: grid; gap: .55rem; width: min(54%, 40rem); transition: transform .6s var(--ease); }
+.guidance-row__title {
+  color: var(--text);
+  font-size: clamp(1.55rem, 3vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+.guidance-row__desc { color: var(--text-muted); font-size: clamp(.86rem, 1.2vw, 1rem); line-height: 1.5; }
+.guidance-category:has(.guidance-row:hover) .guidance-row:not(:hover) { opacity: .46; }
+.guidance-row:hover,
+.guidance-row:focus-visible { min-height: clamp(10.5rem, 14vw, 12.5rem); }
+.guidance-row--personal:hover,
+.guidance-row--personal:focus-visible { background-color: rgba(167, 175, 157, .09); }
+.guidance-row--duo:hover,
+.guidance-row--duo:focus-visible { background-color: rgba(244, 241, 235, .055); }
+.guidance-row--semi:hover,
+.guidance-row--semi:focus-visible { background-color: color-mix(in srgb, var(--c-clay) 12%, var(--bg)); }
+.guidance-row:hover .guidance-row__media,
+.guidance-row:focus-visible .guidance-row__media { opacity: .9; clip-path: inset(0); transform: scale(1); }
+.guidance-row:hover .guidance-row__copy,
+.guidance-row:focus-visible .guidance-row__copy { transform: translateX(clamp(.25rem, 1vw, .75rem)); }
+.guidance-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; z-index: 2; }
+.guidance-cursor {
+  position: fixed;
+  z-index: 400;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  border-radius: 50%;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  font-size: .44rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(.8);
+  transition: opacity .22s ease, scale .4s var(--ease);
+}
+.guidance-cursor.is-visible { opacity: .68; scale: 1; }
+.guidance-locations {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .75rem clamp(.75rem, 1.3vw, 1.25rem);
+  width: fit-content;
+  min-height: 3rem;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  color: var(--text-muted);
+  font-size: .7rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.guidance-locations strong { color: var(--text); font-weight: 500; }
+.guidance-locations i { width: 2px; height: 2px; border-radius: 50%; background: var(--text-muted); }
+
+@media (max-width: 700px) {
+  .guidance-category--personal,
+  .guidance-category--semi { padding-inline: 1rem; }
+  .guidance-category__media { width: 76%; opacity: .2; }
+  .guidance-category--semi .guidance-category__media { width: 66%; opacity: .1; }
+  .guidance-row {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 7.5rem;
+    padding-block: 1.35rem;
+  }
+  .guidance-row__media { display: none; }
+  .guidance-row__copy { width: 100%; }
+  .guidance-category:has(.guidance-row:hover) .guidance-row:not(:hover) { opacity: 1; }
+  .guidance-row:hover,
+  .guidance-row:focus-visible { min-height: 7.5rem; }
+  .guidance-row:hover .guidance-row__copy,
+  .guidance-row:focus-visible .guidance-row__copy { transform: none; }
+  .guidance-row__title { font-size: clamp(1.35rem, 7vw, 1.8rem); }
+  .guidance-row__desc { max-width: 28ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guidance-row,
+  .guidance-row__media,
+  .guidance-category__media,
+  .guidance-row__copy { transition: none; }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .guidance-row { cursor: none; }
+}
+
+/* ========================================================================== 
    Werkwijze — tijdlijn met meelopende lijn
    ========================================================================== */
 .process { position: relative; padding-left: 3.25rem; }

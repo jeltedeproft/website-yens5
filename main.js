@@ -557,6 +557,29 @@ function initPartnerMarquee() {
 }
 
 /* --------------------------------------------------------------------------
+   Begeleidingsteaser — lokale editorial cursor op desktop
+   -------------------------------------------------------------------------- */
+function initGuidanceCursor() {
+  const cursor = $('.guidance-cursor');
+  const rows = $$('.guidance-row');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!cursor || !rows.length || reduceMotion || !finePointer) return;
+
+  const moveCursor = (event) => {
+    cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
+  };
+
+  rows.forEach((row) => {
+    row.addEventListener('pointerenter', (event) => {
+      moveCursor(event);
+      cursor.classList.add('is-visible');
+    });
+    row.addEventListener('pointermove', moveCursor);
+    row.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
+  });
+}
+
+/* --------------------------------------------------------------------------
    Kleine details
    -------------------------------------------------------------------------- */
 function initMisc() {
@@ -579,5 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilters();
   initForm();
   initPartnerMarquee();
+  initGuidanceCursor();
   initMisc();
 });
