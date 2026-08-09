@@ -906,6 +906,8 @@ body.is-locked { overflow: hidden; }
   background-position: center;
   background-size: cover;
   opacity: .34;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .14) 8%, rgba(0, 0, 0, .52) 20%, #000 34%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .14) 8%, rgba(0, 0, 0, .52) 20%, #000 34%);
   transform: scale(1.035);
   transition: opacity .65s var(--ease), transform .7s var(--ease);
 }
@@ -915,21 +917,21 @@ body.is-locked { overflow: hidden; }
   inset: 0;
 }
 .guidance-category:has(.guidance-row:hover) .guidance-category__media,
-.guidance-category:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .78; transform: scale(1); }
+.guidance-category:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .96; transform: scale(1); }
 .guidance-category--personal {
   padding: clamp(1.25rem, 2.5vw, 2.25rem) clamp(1.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 2.75rem);
-  background: rgba(222, 221, 214, .88);
+  background: #DED2C0;
 }
 .guidance-category--personal .guidance-category__media {
-  background-image: url('/images/coaching-editorial.jpg');
-  background-position: center 45%;
-  opacity: .36;
+  background-image: url('/images/personal-training-editorial.png');
+  background-position: right center;
+  opacity: .74;
 }
 .guidance-category--personal .guidance-category__media::after {
-  background: linear-gradient(90deg, rgba(222, 221, 214, .94) 0%, rgba(222, 221, 214, .6) 30%, transparent 88%);
+  background: linear-gradient(90deg, #DED2C0 0%, rgba(222, 210, 192, .78) 3%, rgba(222, 210, 192, .58) 15%, rgba(222, 210, 192, .4) 30%, rgba(222, 210, 192, .25) 45%, rgba(222, 210, 192, .12) 62%, rgba(222, 210, 192, .04) 80%, transparent 98%);
 }
 .guidance-category--personal:has(.guidance-row:hover) .guidance-category__media,
-.guidance-category--personal:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .58; }
+.guidance-category--personal:has(.guidance-row:focus-visible) .guidance-category__media { opacity: .92; }
 .guidance-category--personal .guidance-category__label { color: var(--text-muted); }
 .guidance-category--personal .guidance-row::after {
   background: linear-gradient(90deg, rgba(37, 39, 34, .16) 0%, rgba(37, 39, 34, .12) 54%, transparent 100%);
@@ -940,16 +942,16 @@ body.is-locked { overflow: hidden; }
 .guidance-category--semi {
   margin-top: clamp(2.75rem, 5vw, 4.5rem);
   padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 4vw, 4rem) clamp(1rem, 2vw, 2rem);
-  background: rgba(74, 81, 67, .86);
+  background: #292B29;
 }
 .guidance-category--semi .guidance-category__media {
   width: min(46%, 38rem);
-  background-image: url('/images/strength-still-life.jpg');
-  background-position: center 62%;
-  opacity: .56;
+  background-image: url('/images/semi-pt-editorial.png');
+  background-position: right center;
+  opacity: .82;
 }
 .guidance-category--semi .guidance-category__media::after {
-  background: linear-gradient(90deg, rgba(74, 81, 67, .9) 0%, rgba(74, 81, 67, .56) 22%, rgba(74, 81, 67, .14) 70%, rgba(74, 81, 67, .03) 100%);
+  background: linear-gradient(90deg, #292B29 0%, rgba(41, 43, 41, .92) 9%, rgba(41, 43, 41, .75) 25%, rgba(41, 43, 41, .55) 40%, rgba(41, 43, 41, .36) 55%, rgba(41, 43, 41, .2) 70%, rgba(41, 43, 41, .08) 85%, transparent 100%);
 }
 .guidance-category--semi .guidance-category__label { color: var(--c-sage); }
 .guidance-category--semi .guidance-row__title { color: var(--text-on-dark); }
@@ -973,9 +975,10 @@ body.is-locked { overflow: hidden; }
   content: '';
   position: absolute;
   z-index: 2;
-  right: 0;
+  right: auto;
   bottom: 0;
   left: 0;
+  width: min(52%, 40rem);
   height: 1px;
   pointer-events: none;
   background: linear-gradient(90deg, var(--line) 0%, var(--line) 54%, transparent 100%);
@@ -1029,26 +1032,32 @@ body.is-locked { overflow: hidden; }
   z-index: 400;
   top: 0;
   left: 0;
-  display: grid;
-  place-items: center;
-  width: 2.65rem;
-  height: 2.65rem;
-  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  display: block;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid currentColor;
   border-radius: 50%;
-  color: var(--text);
-  background: color-mix(in srgb, var(--bg) 72%, transparent);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  font-size: .44rem;
-  font-weight: 500;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  mix-blend-mode: difference;
   pointer-events: none;
   opacity: 0;
-  transform: translate3d(-50%, -50%, 0) scale(.8);
-  transition: opacity .22s ease, scale .4s var(--ease);
+  transform: translate3d(-50%, -50%, 0);
+  scale: .82;
+  transition: opacity .2s ease, scale .35s var(--ease);
 }
-.guidance-cursor.is-visible { opacity: .68; scale: 1; }
+.guidance-cursor::before,
+.guidance-cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+.guidance-cursor::before { width: .62rem; height: 1px; }
+.guidance-cursor::after { width: 1px; height: .62rem; }
+.guidance-cursor.is-visible { opacity: .66; scale: 1; }
 .guidance-locations {
   display: flex;
   align-items: center;
@@ -1105,8 +1114,8 @@ body.is-locked { overflow: hidden; }
 @media (max-width: 700px) {
   .guidance-category--personal,
   .guidance-category--semi { padding-inline: 1rem; }
-  .guidance-category__media { width: 76%; opacity: .24; }
-  .guidance-category--semi .guidance-category__media { width: 66%; opacity: .38; }
+  .guidance-category__media { width: 76%; opacity: .5; }
+  .guidance-category--semi .guidance-category__media { width: 66%; opacity: .62; }
   .guidance-row {
     grid-template-columns: minmax(0, 1fr);
     min-height: 7.5rem;
