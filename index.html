@@ -138,16 +138,26 @@
     <section class="home-pillars" aria-label="De kern van de begeleiding">
       <div class="container home-pillars__grid">
         <article class="home-pillar">
-          <span class="home-pillar__number">01</span>
-          <div><h2>Persoonlijke begeleiding</h2><p>Met aandacht voor jouw lichaam, context en tempo.</p></div>
+          <svg class="home-pillar__icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="17" r="4"/>
+            <path d="M15 36v-4c0-5 4-9 9-9s9 4 9 9v4M10 13v23h5M38 13v23h-5"/>
+          </svg>
+          <h2>Echt persoonlijk</h2>
+          <p>Afgestemd op jouw lichaam, leven en tempo.</p>
         </article>
         <article class="home-pillar">
-          <span class="home-pillar__number">02</span>
-          <div><h2>Strength &amp; longevity</h2><p>Sterker worden, beter bewegen en langer vitaal blijven.</p></div>
+          <svg class="home-pillar__icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M10 36h28M14 36V29h6v7M21 36V22h6v14M28 36V14h6v22M11 25l10-7 7-7 9-2"/>
+          </svg>
+          <h2>Meer kunnen</h2>
+          <p>Sterker worden, beter bewegen en vertrouwen op je lichaam.</p>
         </article>
         <article class="home-pillar">
-          <span class="home-pillar__number">03</span>
-          <div><h2>Duurzame progressie</h2><p>Gericht opgebouwd, voelbaar in het dagelijks leven.</p></div>
+          <svg class="home-pillar__icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M10 35V29M38 19v-6M10 32c6 0 8-7 14-7s8-7 14-7M10 38h28"/>
+          </svg>
+          <h2>Voor nu én later</h2>
+          <p>Duurzaam opbouwen zodat je sterk en actief kunt blijven.</p>
         </article>
       </div>
     </section>
@@ -204,66 +214,63 @@
     </figure>
 
     <!-- 5. Werkwijze -->
-    <section class="section section--alt" id="werkwijze">
-      <div class="container">
-        <div class="split split--top">
-          <div data-reveal>
-            <span class="eyebrow">De werkwijze</span>
-            <h2 class="h-1">Geen formule.<br>Wel een helder proces.</h2>
-            <p class="lead" style="margin-top:1.5rem;">We kijken. We bouwen. We sturen bij. Altijd met jouw leven als vertrekpunt.</p>
-            <a class="link" href="/werkwijze.html" style="margin-top:2rem;">Zo verloopt een traject <span class="arrow">→</span></a>
+    <section class="section section--alt process-teaser" id="werkwijze">
+      <div class="container process-teaser__grid">
+        <div class="process-teaser__intro" data-reveal>
+          <span class="eyebrow">De werkwijze</span>
+          <h2 class="h-1">Je lichaam verandert.<br>Je training beweegt mee.</h2>
+          <p class="lead">Geen vast recept. Wel een duidelijke richting.</p>
+          <a class="process-teaser__link" href="/werkwijze.html">Ontdek wat daarachter zit <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="process" id="process" aria-label="Kern van de werkwijze">
+          <div class="process__track" aria-hidden="true"><div class="process__progress" id="process-progress"></div></div>
+
+          <div class="process-word" data-step tabindex="0">
+            <span class="process__point" aria-hidden="true"></span>
+            <h3>Kijken</h3>
+            <p>Wat vertelt je lichaam?</p>
           </div>
-
-          <div class="process" id="process">
-            <div class="process__track"><div class="process__progress" id="process-progress"></div></div>
-
-            <div class="step" data-step>
-              <span class="step__dot">1</span>
-              <h3>Kennismaking</h3>
-              <p>We bespreken doelen, context, klachten, eerdere ervaringen en verwachtingen.</p>
-            </div>
-            <div class="step" data-step>
-              <span class="step__dot">2</span>
-              <h3>Intake en startmeting</h3>
-              <p>We bekijken beweging, kracht, belastbaarheid, leefstijl en relevante aandachtspunten.</p>
-            </div>
-            <div class="step" data-step>
-              <span class="step__dot">3</span>
-              <h3>Persoonlijk plan</h3>
-              <p>De aanpak wordt afgestemd op niveau, beschikbare tijd, herstelcapaciteit en doelen.</p>
-            </div>
-            <div class="step" data-step>
-              <span class="step__dot">4</span>
-              <h3>Begeleiding en bijsturing</h3>
-              <p>We volgen de vooruitgang op, passen oefeningen aan en bouwen stap voor stap verder.</p>
-            </div>
-            <div class="step" data-step>
-              <span class="step__dot">5</span>
-              <h3>Zelfstandigheid</h3>
-              <p>Het doel is dat je je lichaam beter leert begrijpen en steeds zelfstandiger wordt.</p>
-            </div>
+          <div class="process-word" data-step tabindex="0">
+            <span class="process__point" aria-hidden="true"></span>
+            <h3>Prikkelen</h3>
+            <p>Genoeg om iets te veranderen.</p>
+          </div>
+          <div class="process-word" data-step tabindex="0">
+            <span class="process__point" aria-hidden="true"></span>
+            <h3>Aanpassen</h3>
+            <p>Omdat geen dag hetzelfde is.</p>
+          </div>
+          <div class="process-word" data-step tabindex="0">
+            <span class="process__point" aria-hidden="true"></span>
+            <h3>Opbouwen</h3>
+            <p>Voor wat nog komt.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 7. Over Yens -->
-    <section class="section" id="over">
-      <div class="container split split--image-heavy">
-        <div class="photo-frame photo-frame--portrait photo-frame--yens parallax" data-reveal="left" data-parallax="0.04">
+    <section class="section about-teaser" id="over">
+      <div class="container about-editorial">
+        <span class="about-editorial__word" aria-hidden="true">YENS</span>
+
+        <figure class="about-editorial__media" data-reveal="right">
           <img src="/images/coaching-editorial.jpg" alt="Persoonlijke begeleiding tijdens een gecontroleerde krachtoefening" loading="lazy" width="1200" height="1800" />
-          <span class="media-note">Strength &amp; longevity coach</span>
+        </figure>
+
+        <div class="about-editorial__content" data-reveal="left">
+          <span class="eyebrow">Over YENS</span>
+          <h2>Geen snelle oplossing.<br>Wel iets dat blijft.</h2>
+          <p>YENS vertrekt vanuit een eenvoudige gedachte: bouwen aan een lichaam waar je op kunt blijven rekenen.</p>
+          <a href="/over-mij.html">Waarom YENS bestaat <span class="arrow" aria-hidden="true">→</span></a>
         </div>
 
-        <div data-reveal="right">
-          <span class="eyebrow">Over YENS</span>
-          <h2 class="h-1">Aandacht is waar vooruitgang begint.</h2>
-          <div class="prose" style="margin-top:1.75rem;">
-            <p>YENS brengt kracht, beweging en herstel samen in persoonlijke begeleiding.</p>
-            <p>Rustig in de aanpak. Nauwkeurig in de uitvoering. Gebouwd voor duurzame vooruitgang.</p>
-          </div>
-          <a class="link" href="/over-mij.html" style="margin-top:2rem;">Meer over YENS <span class="arrow">→</span></a>
-        </div>
+        <figure class="about-editorial__detail" data-reveal="fade" aria-hidden="true">
+          <img src="/images/coaching-editorial.jpg" alt="" loading="lazy" width="1200" height="1800" />
+        </figure>
+
+        <p class="about-editorial__principles">Strength&nbsp;&nbsp; Health&nbsp;&nbsp; Longevity</p>
       </div>
     </section>
 

@@ -308,7 +308,8 @@ function initProcess() {
 
     progress.style.height = `${clamped * 100}%`;
     steps.forEach((step) => {
-      const dot = $('.step__dot', step);
+      const dot = $('.process__point', step);
+      if (!dot) return;
       const dotRect = dot.getBoundingClientRect();
       step.classList.toggle('is-reached', dotRect.top + dotRect.height / 2 < anchor);
     });
