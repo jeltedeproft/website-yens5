@@ -16,8 +16,51 @@ const CONTACT_EMAIL = 'hallo@yens.be';
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-const INTRO_SESSION_KEY = 'yensIntroPlayed';
 let smoothScroll = null;
+
+/* --------------------------------------------------------------------------
+   Merkintro — Y E N S vloeit samen tot het Y-symbool
+   -------------------------------------------------------------------------- */
+function initBrandIntro() {
+  const intro = $('[data-brand-intro]');
+  if (!intro) return;
+
+  if (reduceMotion) {
+    intro.remove();
+    return;
+  }
+
+  document.body.classList.add('intro-active');
+  const assemblyStage = $('.brand-intro__assembly', intro);
+  const impulse = $('.brand-intro__impulse', intro);
+
+  const setImpulseDistance = () => {
+    if (!assemblyStage || !impulse) return;
+    const impulseX = assemblyStage.getBoundingClientRect().width * .86;
+    impulse.style.setProperty('--impulse-x', `${impulseX}px`);
+    impulse.style.setProperty('--impulse-x-52', `${impulseX * .52}px`);
+  };
+  const finish = () => {
+    intro.classList.add('is-finished');
+    window.setTimeout(() => {
+      document.body.classList.remove('intro-active');
+      intro.remove();
+    }, 660);
+  };
+
+  let hasStarted = false;
+  const play = () => {
+    if (hasStarted) return;
+    hasStarted = true;
+    setImpulseDistance();
+    window.requestAnimationFrame(() => intro.classList.add('is-playing'));
+    window.setTimeout(finish, 4400);
+  };
+
+  if (document.fonts?.ready) document.fonts.ready.then(play);
+  else play();
+  window.setTimeout(play, 1200);
+}
 
 /* --------------------------------------------------------------------------
    Scrollgevoel — subtiele desktopinertie, native touch en reduced motion
@@ -38,28 +81,6 @@ function initSmoothScroll() {
       duration: 0.68,
       easing: (t) => 1 - Math.pow(1 - t, 4)
     }
-  });
-}
-
-function setIntroPlayed(hasPlayed) {
-  try {
-    if (hasPlayed) sessionStorage.setItem(INTRO_SESSION_KEY, 'true');
-    else sessionStorage.removeItem(INTRO_SESSION_KEY);
-  } catch (_) {
-    /* De website en intro blijven bruikbaar wanneer sessionStorage niet beschikbaar is. */
-  }
-}
-
-function initIntroNavigation() {
-  const replayLogo = $('.nav .brand');
-
-  if (replayLogo) {
-    replayLogo.setAttribute('aria-label', 'YENS-intro opnieuw bekijken en naar home');
-    replayLogo.addEventListener('click', () => setIntroPlayed(false));
-  }
-
-  $$('a[href="/"]:not(.brand)').forEach((homeLink) => {
-    homeLink.addEventListener('click', () => setIntroPlayed(true));
   });
 }
 
@@ -85,40 +106,6 @@ function initTheme() {
       localStorage.setItem('yens-theme', 'dark');
     }
   });
-}
-
-/* --------------------------------------------------------------------------
-   Intro-overlay
-   -------------------------------------------------------------------------- */
-function initLoader() {
-  const loader = $('#loader');
-  const reveal = () => document.body.classList.add('is-loaded');
-
-  if (!loader) {
-    reveal();
-    return;
-  }
-  if (document.documentElement.classList.contains('intro-skip')) {
-    loader.classList.add('is-hidden');
-    reveal();
-    return;
-  }
-  if (reduceMotion) {
-    loader.classList.add('is-hidden');
-    setIntroPlayed(true);
-    reveal();
-    return;
-  }
-
-  window.setTimeout(() => {
-    loader.classList.add('is-exiting');
-    reveal();
-
-    window.setTimeout(() => {
-      loader.classList.add('is-hidden');
-      setIntroPlayed(true);
-    }, 1100);
-  }, 3600);
 }
 
 /* --------------------------------------------------------------------------
@@ -152,7 +139,7 @@ function initNav() {
         ? 24
         : Math.min(Math.max(viewportWidth * 0.032, 24), 60);
       const compactPadding = isMobile ? 12 : 14;
-      const fullBrandWidth = isMobile ? 87.15 : 105.26;
+      const fullBrandWidth = isMobile ? 80 : 94;
       const compactBrandWidth = isMobile ? 27 : 31;
       const compactGap = isMobile ? 7 : 15;
       const linkItems = desktopLinks ? Array.from(desktopLinks.children) : [];
@@ -173,7 +160,7 @@ function initNav() {
       );
       const compactLinksLeft = (viewportWidth - compactWidth) / 2
         + compactPadding + compactBrandWidth + compactGap;
-      const shouldCompact = currentScrollY > 0;
+      const shouldCompact = currentScrollY > 24;
       const morphProgress = shouldCompact ? 1 : 0;
       let heroIsOutOfView = true;
 
@@ -641,10 +628,9 @@ function initMisc() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initBrandIntro();
   initSmoothScroll();
   initTheme();
-  initIntroNavigation();
-  initLoader();
   initNav();
   initReveal();
   initProcess();
