@@ -5263,21 +5263,19 @@ body.intro-active { overflow: hidden; }
 .brand-intro.is-playing::after { animation: brand-intro-progress 1.35s var(--architect-ease) both; }
 .brand-intro.is-playing .brand-intro__assembly-word { animation: architect-word .48s var(--architect-ease) both; }
 .brand-intro.is-playing .brand-intro__assembly-letter { animation: architect-letter-compress .86s var(--architect-ease) .5s both; }
-.brand-intro__assembly-letter--y { --letter-mid-scale: .82; --letter-end-scale: .62; }
-.brand-intro__assembly-letter--e,
-.brand-intro__assembly-letter--n,
-.brand-intro__assembly-letter--s { --letter-mid-scale: .55; --letter-end-scale: .07; }
 .brand-intro.is-playing .brand-intro__impulse { animation: architect-ruler 1.05s var(--architect-ease) .28s both; }
 .brand-intro.is-playing .brand-intro__energy { animation: architect-grid .96s var(--architect-ease) .18s both; }
 .brand-intro.is-playing .brand-intro__energy span { animation: architect-column .72s var(--architect-ease) .2s both; }
 .brand-intro.is-playing .brand-intro__energy span:nth-child(2) { animation-delay: .24s; }
 .brand-intro.is-playing .brand-intro__energy span:nth-child(3) { animation-delay: .28s; }
 .brand-intro.is-playing .brand-intro__energy span:nth-child(4) { animation-delay: .32s; }
-.brand-intro.is-playing .brand-intro__part--left { animation: architect-left .72s var(--architect-ease) .82s both; }
-.brand-intro.is-playing .brand-intro__part--right { animation: architect-right .72s var(--architect-ease) .84s both; }
-.brand-intro.is-playing .brand-intro__part--stem { animation: architect-stem .68s var(--architect-ease) .86s both; }
+.brand-intro.is-playing .brand-intro__part { opacity: 1; animation: none; }
 .brand-intro.is-playing .brand-intro__long-arc { animation: architect-frame 1.34s var(--architect-ease) .1s both; }
-.brand-intro.is-playing .brand-intro__assembled-symbol { animation: architect-symbol-flight 2.42s linear both; }
+.brand-intro.is-playing .brand-intro__assembled-symbol {
+  animation:
+    architect-symbol-flight 2.42s linear both,
+    architect-symbol-reveal .72s var(--architect-ease) .82s both;
+}
 body.intro-active .hero { opacity: 0; transition: opacity .56s cubic-bezier(.45, 0, .15, 1); }
 body.intro-active.intro-revealing .hero { opacity: 1; }
 body.intro-active .nav .brand__image { opacity: 0; transition: none; }
@@ -5287,10 +5285,10 @@ body.intro-active .nav .brand__image { opacity: 0; transition: none; }
   42%, 100% { opacity: 1; transform: translate3d(-50%, -50%, 0); }
 }
 @keyframes architect-letter-compress {
-  0% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-  64% { opacity: 1; transform: translate3d(var(--letter-x-mid), var(--letter-y-mid), 0) scale(var(--letter-mid-scale)); }
-  88% { opacity: .45; transform: translate3d(var(--letter-x), var(--letter-y), 0) scale(var(--letter-end-scale)); }
-  100% { opacity: 0; transform: translate3d(var(--letter-x), var(--letter-y), 0) scale(var(--letter-end-scale)); }
+  0% { opacity: 1; transform: translate3d(0, 0, 0); }
+  68% { opacity: 1; transform: translate3d(var(--letter-x-mid), var(--letter-y-mid), 0); }
+  84% { opacity: .38; transform: translate3d(var(--letter-x), var(--letter-y), 0); }
+  100% { opacity: 0; transform: translate3d(var(--letter-x), var(--letter-y), 0); }
 }
 @keyframes architect-grid { 0%, 100% { opacity: 0; } 16%, 72% { opacity: 1; } }
 @keyframes architect-column {
@@ -5331,6 +5329,11 @@ body.intro-active .nav .brand__image { opacity: 0; transition: none; }
   100% {
     transform: translate3d(calc(-50% + var(--header-x, 0px)), calc(-50% + var(--header-y, 0px)), 0) scale(var(--header-scale, .3));
   }
+}
+@keyframes architect-symbol-reveal {
+  0% { clip-path: circle(0% at 50% 46%); }
+  72% { clip-path: circle(58% at 50% 46%); }
+  100% { clip-path: circle(82% at 50% 46%); }
 }
 @keyframes architect-surface {
   0%, 72% { background-color: var(--intro-surface); }
