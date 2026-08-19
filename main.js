@@ -33,33 +33,59 @@ function initBrandIntro() {
   document.body.classList.add('intro-active');
   const assemblyStage = $('.brand-intro__assembly', intro);
   const impulse = $('.brand-intro__impulse', intro);
+  const assembledSymbol = $('.brand-intro__assembled-symbol', intro);
+  const assemblyLetters = $$('.brand-intro__assembly-letter', intro);
+  const headerWordmark = $('.nav .brand__image');
 
-  const setImpulseDistance = () => {
-    if (!assemblyStage || !impulse) return;
-    const impulseX = assemblyStage.getBoundingClientRect().width * .86;
-    impulse.style.setProperty('--impulse-x', `${impulseX}px`);
-    impulse.style.setProperty('--impulse-x-52', `${impulseX * .52}px`);
+  const setIntroGeometry = () => {
+    if (assemblyStage && impulse) {
+      const impulseX = assemblyStage.getBoundingClientRect().width * .86;
+      impulse.style.setProperty('--impulse-x', `${impulseX}px`);
+      impulse.style.setProperty('--impulse-x-52', `${impulseX * .52}px`);
+    }
+
+    if (!assembledSymbol) return;
+    const symbolRect = assembledSymbol.getBoundingClientRect();
+    const symbolX = symbolRect.left + symbolRect.width / 2;
+    const symbolY = symbolRect.top + symbolRect.height * .46;
+
+    assemblyLetters.forEach((letter) => {
+      const rect = letter.getBoundingClientRect();
+      const x = symbolX - (rect.left + rect.width / 2);
+      const y = symbolY - (rect.top + rect.height / 2);
+      letter.style.setProperty('--letter-x', `${x}px`);
+      letter.style.setProperty('--letter-y', `${y}px`);
+      letter.style.setProperty('--letter-x-mid', `${x * .64}px`);
+      letter.style.setProperty('--letter-y-mid', `${y * .64}px`);
+    });
+
+    if (headerWordmark) {
+      const headerRect = headerWordmark.getBoundingClientRect();
+      const targetX = headerRect.left + headerRect.width * .188;
+      const targetY = headerRect.top + headerRect.height * .5;
+      assembledSymbol.style.setProperty('--header-x', `${targetX - symbolX}px`);
+      assembledSymbol.style.setProperty('--header-y', `${targetY - symbolY}px`);
+      assembledSymbol.style.setProperty('--header-scale', `${Math.max(.2, (headerRect.height * .846) / symbolRect.height)}`);
+    }
   };
   const finish = () => {
-    intro.classList.add('is-finished');
-    window.setTimeout(() => {
-      document.body.classList.remove('intro-active');
-      intro.remove();
-    }, 660);
+    document.body.classList.remove('intro-active', 'intro-revealing');
+    intro.remove();
   };
 
   let hasStarted = false;
   const play = () => {
     if (hasStarted) return;
     hasStarted = true;
-    setImpulseDistance();
+    setIntroGeometry();
     window.requestAnimationFrame(() => intro.classList.add('is-playing'));
-    window.setTimeout(finish, 4400);
+    window.setTimeout(() => document.body.classList.add('intro-revealing'), 1840);
+    window.setTimeout(finish, 2500);
   };
 
   if (document.fonts?.ready) document.fonts.ready.then(play);
   else play();
-  window.setTimeout(play, 1200);
+  window.setTimeout(play, 120);
 }
 
 /* --------------------------------------------------------------------------
