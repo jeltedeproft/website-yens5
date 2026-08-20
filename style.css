@@ -4650,7 +4650,7 @@ body .nav.is-initializing .brand {
 .signature-intro__wordmark {
   position: relative;
   z-index: 2;
-  width: min(64vw, 34rem);
+  width: min(60vw, 32rem);
   aspect-ratio: 1073 / 390;
 }
 .signature-intro__letter {
@@ -4696,8 +4696,8 @@ body .nav.is-initializing .brand {
   z-index: 1;
   left: 50%;
   top: 50%;
-  width: min(68vw, 36rem);
-  height: min(22vw, 7.5rem);
+  width: min(62vw, 34rem);
+  height: min(16vw, 5.5rem);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -4729,8 +4729,8 @@ html.intro-seen body.intro-active { overflow: auto; }
 html.intro-seen body.intro-active .nav .brand__image { opacity: 1; }
 
 @media (max-width: 600px) {
-  .signature-intro__wordmark { width: min(72vw, 22rem); }
-  .signature-intro__guides { width: 76vw; height: min(28vw, 6.5rem); }
+  .signature-intro__wordmark { width: min(68vw, 21rem); }
+  .signature-intro__guides { width: 72vw; height: min(22vw, 5rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   .signature-intro { display: none; }
