@@ -4590,761 +4590,6 @@ body .nav.is-initializing .brand {
   .stories-grid { max-width: 100%; }
 }
 
-/* ========================================================================== 
-   Merkintro — vier letters worden één Y
-   ========================================================================== */
-.brand-intro {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background: var(--bg, #f4f1ea);
-  opacity: 1;
-  visibility: visible;
-  transition: opacity .65s cubic-bezier(.22, 1, .36, 1), visibility .65s;
-}
-.brand-intro::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: clamp(1.5rem, 4vw, 3rem);
-  width: 2.5rem;
-  height: 1px;
-  background: currentColor;
-  opacity: .18;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: left;
-}
-.brand-intro.is-playing::after {
-  animation: brand-intro-progress 2.65s cubic-bezier(.65, 0, .35, 1) both;
-}
-.brand-intro__stage {
-  position: relative;
-  width: min(72vw, 34rem);
-  height: clamp(6rem, 16vw, 9.5rem);
-  display: grid;
-  place-items: center;
-  isolation: isolate;
-}
-.brand-intro__letters {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(.75rem, 3vw, 2.4rem);
-  color: var(--text, #171816);
-  font-family: "Instrument Sans", sans-serif;
-  font-size: clamp(3rem, 10vw, 6.4rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -.055em;
-}
-.brand-intro__letter {
-  display: block;
-  opacity: 0;
-  filter: blur(6px);
-  transform: translateY(.8rem) scale(.98);
-  will-change: transform, opacity, filter;
-}
-.brand-intro.is-playing .brand-intro__letter {
-  animation: brand-letter-in .9s cubic-bezier(.16, 1, .3, 1) forwards,
-             brand-letter-merge 1.2s cubic-bezier(.65, 0, .2, 1) 1.28s forwards;
-  animation-delay: calc(var(--letter-index, 0) * 75ms), 1.28s;
-}
-.brand-intro__letter--y { --letter-index: 0; --merge-x: 2.28em; --merge-mid: 1.41em; --merge-y: -.04em; --merge-r: -9deg; }
-.brand-intro__letter--e { --letter-index: 1; --merge-x: .73em; --merge-mid: .45em; --merge-y: .07em; --merge-r: 11deg; }
-.brand-intro__letter--n { --letter-index: 2; --merge-x: -.73em; --merge-mid: -.45em; --merge-y: .08em; --merge-r: -11deg; }
-.brand-intro__letter--s { --letter-index: 3; --merge-x: -2.28em; --merge-mid: -1.41em; --merge-y: -.04em; --merge-r: 9deg; }
-.brand-intro__fusion {
-  position: absolute;
-  z-index: 1;
-  width: clamp(5.6rem, 15vw, 9rem);
-  height: auto;
-  overflow: visible;
-  opacity: .7;
-  pointer-events: none;
-}
-.brand-intro__fusion-line {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.1;
-  stroke-linecap: round;
-  stroke-dasharray: 150;
-  stroke-dashoffset: 150;
-  vector-effect: non-scaling-stroke;
-}
-.brand-intro.is-playing .brand-intro__fusion-line {
-  animation: brand-fusion-line .78s cubic-bezier(.65, 0, .35, 1) 1.64s both;
-}
-.brand-intro.is-playing .brand-intro__fusion-line--right { animation-delay: 1.72s; }
-.brand-intro.is-playing .brand-intro__fusion-line--stem { animation-delay: 1.8s; }
-.brand-intro__symbol {
-  position: absolute;
-  z-index: 2;
-  width: clamp(3.7rem, 11vw, 6.8rem);
-  height: auto;
-  opacity: 0;
-  filter: blur(3px);
-  clip-path: inset(50% 50% 50% 50% round 50%);
-  transform: scale(.82);
-  will-change: transform, opacity, filter;
-}
-.brand-intro.is-playing .brand-intro__symbol {
-  animation: brand-symbol-in 1.02s cubic-bezier(.16, 1, .3, 1) 1.88s forwards;
-}
-.brand-intro__pulse {
-  position: absolute;
-  z-index: 0;
-  width: clamp(4.5rem, 13vw, 7.7rem);
-  aspect-ratio: 1;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(.65);
-}
-.brand-intro.is-playing .brand-intro__pulse {
-  animation: brand-adaptation-pulse 1.15s cubic-bezier(.16, 1, .3, 1) 2.28s both;
-}
-.brand-intro.is-finished { opacity: 0; visibility: hidden; pointer-events: none; }
-body.intro-active { overflow: hidden; }
-
-@keyframes brand-letter-in {
-  to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
-}
-@keyframes brand-letter-merge {
-  0% { opacity: 1; filter: blur(0); transform: translate(0, 0) scale(1); }
-  42% { opacity: 1; filter: blur(0); transform: translate(var(--merge-mid), var(--merge-y)) scaleX(.78) rotate(var(--merge-r)); }
-  72% { opacity: .46; filter: blur(.5px); transform: translate(var(--merge-x), var(--merge-y)) scale(.46) rotate(var(--merge-r)); }
-  100% { opacity: 0; filter: blur(3px); transform: translate(var(--merge-x), var(--merge-y)) scale(.16) rotate(var(--merge-r)); }
-}
-@keyframes brand-symbol-in {
-  0% { opacity: 0; filter: blur(3px); clip-path: inset(50% 50% 50% 50% round 50%); transform: scale(.82); }
-  58% { opacity: 1; filter: blur(0); clip-path: inset(0 0 0 0 round 0); transform: scale(1.045); }
-  78% { transform: scale(.985); }
-  100% { opacity: 1; filter: blur(0); clip-path: inset(0 0 0 0 round 0); transform: scale(1); }
-}
-@keyframes brand-fusion-line {
-  0% { opacity: 0; stroke-dashoffset: 150; }
-  28% { opacity: .75; }
-  70% { opacity: .45; stroke-dashoffset: 0; }
-  100% { opacity: 0; stroke-dashoffset: -35; }
-}
-@keyframes brand-adaptation-pulse {
-  0% { opacity: 0; transform: scale(.65); }
-  18% { opacity: .12; }
-  100% { opacity: 0; transform: scale(1.7); }
-}
-@keyframes brand-intro-progress {
-  0% { transform: translateX(-50%) scaleX(0); }
-  100% { transform: translateX(-50%) scaleX(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .brand-intro { display: none; }
-}
-
-/* Merkintro concept 02 — spanning, adaptatie, herstel. */
-.brand-intro__stage {
-  width: min(76vw, 38rem);
-  height: clamp(7rem, 18vw, 10.5rem);
-}
-.brand-intro__word {
-  position: absolute;
-  z-index: 2;
-  left: 50%;
-  top: 50%;
-  width: min(76vw, 38rem);
-  overflow: hidden;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  clip-path: inset(0 100% 0 0);
-  will-change: opacity, clip-path, transform;
-}
-.brand-intro__wordmark {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.brand-intro__scan {
-  position: absolute;
-  inset-block: 5%;
-  left: 0;
-  width: 1px;
-  background: currentColor;
-  opacity: 0;
-  box-shadow: 0 0 1.25rem color-mix(in srgb, currentColor 28%, transparent);
-}
-.brand-intro__core {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  top: 50%;
-  width: clamp(3.8rem, 11vw, 6.9rem);
-  transform: translate(-50%, -50%);
-}
-.brand-intro__core .brand-intro__symbol {
-  position: relative;
-  width: 100%;
-  opacity: 0;
-  filter: none;
-  transform: scale(.96);
-}
-.brand-intro__breath {
-  position: absolute;
-  inset: 18%;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  opacity: 0;
-}
-.brand-intro__baseline {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  top: calc(50% + clamp(3.35rem, 8.5vw, 5.1rem));
-  width: min(76vw, 38rem);
-  height: 1px;
-  background: currentColor;
-  opacity: .14;
-  transform: translateX(-50%) scaleX(0);
-}
-.brand-intro.is-playing .brand-intro__word {
-  animation: brand-cycle-word 2.7s cubic-bezier(.65, 0, .35, 1) both;
-}
-.brand-intro.is-playing .brand-intro__scan {
-  animation: brand-cycle-scan 2.45s cubic-bezier(.65, 0, .35, 1) .12s both;
-}
-.brand-intro.is-playing .brand-intro__core .brand-intro__symbol {
-  animation: brand-cycle-symbol 1.5s cubic-bezier(.16, 1, .3, 1) 2.05s both;
-}
-.brand-intro.is-playing .brand-intro__breath {
-  animation: brand-cycle-breath 1.25s cubic-bezier(.16, 1, .3, 1) 2.52s both;
-}
-.brand-intro.is-playing .brand-intro__baseline {
-  animation: brand-cycle-baseline 3.15s cubic-bezier(.65, 0, .35, 1) both;
-}
-
-@keyframes brand-cycle-word {
-  0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translate(-50%, -50%); }
-  12% { opacity: 1; }
-  44% { opacity: 1; clip-path: inset(0 0 0 0); transform: translate(-50%, -50%); }
-  62% { opacity: 1; clip-path: inset(0 0 0 0); transform: translate(-50%, -50%); }
-  100% { opacity: 0; clip-path: inset(0 0 0 76%); transform: translate(-50%, -50%); }
-}
-@keyframes brand-cycle-scan {
-  0% { left: 0; opacity: 0; }
-  8% { opacity: .5; }
-  48% { left: 100%; opacity: .5; }
-  58% { left: 100%; opacity: 0; }
-  66% { left: 100%; opacity: 0; }
-  76% { opacity: .45; }
-  100% { left: 24%; opacity: 0; }
-}
-@keyframes brand-cycle-symbol {
-  0% { opacity: 0; transform: scale(.96); }
-  48% { opacity: 1; transform: scale(1.018); }
-  72% { transform: scale(.994); }
-  100% { opacity: 1; transform: scale(1); }
-}
-@keyframes brand-cycle-breath {
-  0% { opacity: 0; transform: scale(.75); }
-  18% { opacity: .11; }
-  100% { opacity: 0; transform: scale(2.05); }
-}
-@keyframes brand-cycle-baseline {
-  0% { transform: translateX(-50%) scaleX(0); transform-origin: left; }
-  38% { transform: translateX(-50%) scaleX(1); transform-origin: left; }
-  68% { transform: translateX(-50%) scaleX(1); transform-origin: right; }
-  100% { transform: translateX(-50%) scaleX(0); transform-origin: right; }
-}
-
-@media (max-width: 600px) {
-  .brand-intro__stage,
-  .brand-intro__word,
-  .brand-intro__baseline { width: min(82vw, 25rem); }
-}
-
-/* Merkintro concept 03 — kinetisch evenwicht. */
-.brand-intro__kinetic {
-  width: min(78vw, 31rem);
-  height: clamp(15rem, 38vw, 22rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(1.65rem, 4vw, 2.5rem);
-}
-.brand-intro__kinetic-symbol {
-  position: relative;
-  z-index: 3;
-  width: clamp(4.5rem, 12vw, 7rem);
-  height: auto;
-  opacity: 0;
-  filter: none;
-  transform: translateY(1.1rem) scale(.94);
-  transform-origin: 50% 62%;
-}
-.brand-intro__kinetic-word {
-  position: relative;
-  z-index: 3;
-  width: min(70vw, 24rem);
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transform: translateY(.5rem);
-}
-.brand-intro__kinetic-word img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.brand-intro__orbit {
-  position: absolute;
-  z-index: 1;
-  top: 43%;
-  left: 50%;
-  width: clamp(8.5rem, 23vw, 13rem);
-  aspect-ratio: 1;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(.72, .88) rotate(-8deg);
-  will-change: transform, opacity, border-radius;
-}
-.brand-intro__orbit-dot {
-  position: absolute;
-  top: 50%;
-  left: -2px;
-  width: 5px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 .7rem color-mix(in srgb, currentColor 24%, transparent);
-  transform: translate(-50%, -50%);
-}
-.brand-intro__load {
-  position: absolute;
-  z-index: 2;
-  top: calc(43% + clamp(4.8rem, 13vw, 7.3rem));
-  left: 50%;
-  width: clamp(3rem, 9vw, 5rem);
-  height: 1px;
-  background: currentColor;
-  opacity: 0;
-  transform: translateX(-50%) scaleX(.18);
-}
-.brand-intro.is-playing .brand-intro__kinetic-symbol {
-  animation: kinetic-symbol 3.25s cubic-bezier(.16, 1, .3, 1) .3s both;
-}
-.brand-intro.is-playing .brand-intro__kinetic-word {
-  animation: kinetic-word 2.05s cubic-bezier(.65, 0, .35, 1) 1.45s both;
-}
-.brand-intro.is-playing .brand-intro__orbit {
-  animation: kinetic-orbit 3.25s cubic-bezier(.65, 0, .35, 1) .15s both;
-}
-.brand-intro.is-playing .brand-intro__orbit-dot {
-  animation: kinetic-dot 2.5s cubic-bezier(.45, 0, .2, 1) .45s both;
-}
-.brand-intro.is-playing .brand-intro__load {
-  animation: kinetic-load 2.45s cubic-bezier(.16, 1, .3, 1) .85s both;
-}
-
-@keyframes kinetic-symbol {
-  0% { opacity: 0; transform: translateY(1.1rem) scale(.94); }
-  24% { opacity: 1; transform: translateY(-.18rem) scale(1.012); }
-  38% { transform: translateY(0) scale(1); }
-  68% { transform: translateY(-.28rem) scale(1.018, .985); }
-  82%, 100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes kinetic-word {
-  0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(.5rem); }
-  18% { opacity: 1; }
-  72%, 100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
-}
-@keyframes kinetic-orbit {
-  0% { opacity: 0; border-radius: 46% 54% 51% 49%; transform: translate(-50%, -50%) scale(.72, .88) rotate(-8deg); }
-  18% { opacity: .13; }
-  48% { opacity: .18; border-radius: 50%; transform: translate(-50%, -50%) scale(1.05, .96) rotate(5deg); }
-  72% { opacity: .1; transform: translate(-50%, -50%) scale(.98, 1.02) rotate(0); }
-  100% { opacity: 0; border-radius: 50%; transform: translate(-50%, -50%) scale(1) rotate(0); }
-}
-@keyframes kinetic-dot {
-  0% { top: 50%; left: 0; opacity: 0; }
-  8% { opacity: .75; }
-  27% { top: 0; left: 50%; }
-  52% { top: 50%; left: 100%; }
-  77% { top: 100%; left: 50%; }
-  94% { opacity: .75; }
-  100% { top: 50%; left: 0; opacity: 0; }
-}
-@keyframes kinetic-load {
-  0% { opacity: 0; transform: translateX(-50%) scaleX(.18); }
-  18% { opacity: .28; }
-  42% { opacity: .28; transform: translateX(-50%) scaleX(1.35); }
-  63% { opacity: .16; transform: translateX(-50%) scaleX(.82); }
-  100% { opacity: 0; transform: translateX(-50%) scaleX(1); }
-}
-
-@media (max-width: 600px) {
-  .brand-intro__kinetic { width: 84vw; height: 18rem; gap: 1.75rem; }
-  .brand-intro__kinetic-word { width: min(76vw, 21rem); }
-  .brand-intro__orbit { top: 42%; }
-  .brand-intro__load { top: calc(42% + 5rem); }
-}
-
-/* Touchapparaten behouden native scroll en vermijden zware hovermotion. */
-
-/* Merkintro concept 04 — het woord condenseert tot zijn kern. */
-.brand-intro__transform { width: min(82vw, 34rem); height: clamp(11rem, 27vw, 16rem); }
-.brand-intro__transform-word {
-  position: absolute; z-index: 3; left: 50%; top: 50%; width: min(82vw, 34rem);
-  opacity: 0; clip-path: inset(0); transform: translate(-50%, -50%);
-  transform-origin: 18.8% 50%; will-change: transform, opacity, clip-path;
-}
-.brand-intro__transform-word img { display: block; width: 100%; height: auto; }
-.brand-intro__measures {
-  position: absolute; z-index: 2; left: 50%; top: calc(50% + clamp(3rem, 7.5vw, 4.5rem));
-  width: min(72vw, 29rem); height: 1.6rem; display: flex; align-items: flex-start;
-  justify-content: space-around; opacity: 0; transform: translateX(-50%);
-}
-.brand-intro__measures span { width: 1px; height: .45rem; background: currentColor; opacity: .26; transform-origin: top; }
-.brand-intro__motion-path {
-  position: absolute; z-index: 1; left: 50%; top: 50%; width: min(86vw, 36rem);
-  height: clamp(8rem, 20vw, 12rem); border: 1px solid currentColor; border-radius: 50%;
-  opacity: 0; transform: translate(-50%, -50%) scale(.88, .72);
-}
-.brand-intro__motion-dot {
-  position: absolute; top: 50%; right: -3px; width: 5px; aspect-ratio: 1;
-  border-radius: 50%; background: currentColor; transform: translate(50%, -50%) scale(.8);
-  will-change: opacity, transform;
-}
-.brand-intro__final-core {
-  position: absolute; z-index: 4; left: 50%; top: 50%; width: clamp(4.2rem, 11vw, 6.7rem);
-  transform: translate(-50%, -50%);
-}
-.brand-intro__transform-symbol { position: relative; width: 100%; opacity: 0; filter: none; transform: scale(.985); }
-.brand-intro__recovery-ring {
-  position: absolute; inset: 8%; border: 1px solid currentColor; border-radius: 50%; opacity: 0;
-}
-.brand-intro.is-playing .brand-intro__transform-word { animation: transform-word 3.45s linear .18s both; }
-.brand-intro.is-playing .brand-intro__measures { animation: transform-measures 2.45s ease .55s both; }
-.brand-intro.is-playing .brand-intro__measures span { animation: transform-measure 1.15s cubic-bezier(.16, 1, .3, 1) .62s both; }
-.brand-intro.is-playing .brand-intro__measures span:nth-child(2) { animation-delay: .71s; }
-.brand-intro.is-playing .brand-intro__measures span:nth-child(3) { animation-delay: .8s; }
-.brand-intro.is-playing .brand-intro__measures span:nth-child(4) { animation-delay: .89s; }
-.brand-intro.is-playing .brand-intro__motion-path { animation: transform-path 3.15s linear .38s both; }
-.brand-intro.is-playing .brand-intro__motion-dot { animation: transform-dot 2.65s cubic-bezier(.45, 0, .2, 1) .48s both; }
-.brand-intro.is-playing .brand-intro__transform-symbol { animation: transform-symbol 1.55s linear 2.42s both; }
-.brand-intro.is-playing .brand-intro__recovery-ring { animation: transform-recovery 1.45s cubic-bezier(.16, 1, .3, 1) 2.82s both; }
-
-@keyframes transform-word {
-  0% { opacity: 0; clip-path: inset(0 100% 0 0); transform: translate(-50%, -50%); }
-  20% { opacity: 1; clip-path: inset(0); transform: translate(-50%, -50%); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
-  46% { opacity: 1; clip-path: inset(0); transform: translate(-50%, -50%); animation-timing-function: cubic-bezier(.72, 0, .2, 1); }
-  66% { opacity: 1; clip-path: inset(0 28% 0 0); transform: translate(-39%, -50%) scale(.96); }
-  86% { opacity: .96; clip-path: inset(0 68% 0 0); transform: translate(-18.8%, -50%) scale(.82); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
-  100% { opacity: 0; clip-path: inset(0 68% 0 0); transform: translate(-18.8%, -50%) scale(.82); }
-}
-@keyframes transform-measures { 0%, 100% { opacity: 0; } 16%, 68% { opacity: 1; } }
-@keyframes transform-measure {
-  0% { transform: scaleY(.3); opacity: .08; }
-  42% { transform: scaleY(2.7); opacity: .3; }
-  72%, 100% { transform: scaleY(1); opacity: .16; }
-}
-@keyframes transform-path {
-  0% { opacity: 0; transform: translate(-50%, -50%) rotate(-18deg) scale(.88, .72); }
-  16% { opacity: .09; transform: translate(-50%, -50%) rotate(0) scale(.94, .8); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
-  64% { opacity: .12; transform: translate(-50%, -50%) rotate(205deg) scale(1, .9); animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-  100% { opacity: 0; transform: translate(-50%, -50%) rotate(330deg) scale(.3); }
-}
-@keyframes transform-dot {
-  0% { opacity: 0; transform: translate(50%, -50%) scale(.55); }
-  12% { opacity: .7; transform: translate(50%, -50%) scale(1); }
-  78% { opacity: .7; transform: translate(50%, -50%) scale(1); }
-  100% { opacity: 0; transform: translate(50%, -50%) scale(.55); }
-}
-@keyframes transform-symbol {
-  0% { opacity: 0; transform: scale(.82); }
-  34% { opacity: .3; transform: scale(.88); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
-  72% { opacity: 1; transform: scale(1.012); }
-  88%, 100% { opacity: 1; transform: scale(1); }
-}
-@keyframes transform-recovery {
-  0% { opacity: 0; transform: scale(.72); } 16% { opacity: .12; }
-  100% { opacity: 0; transform: scale(2); }
-}
-@media (max-width: 600px) {
-  .brand-intro__transform, .brand-intro__transform-word { width: 84vw; }
-  .brand-intro__motion-path { width: 88vw; }
-  .brand-intro__measures { width: 76vw; }
-}
-
-/* Touchapparaten behouden native scroll en vermijden zware hovermotion. */
-
-/* Merkintro concept 05 — impuls wordt vorm. */
-.brand-intro__assembly { width: min(84vw, 36rem); height: clamp(13rem, 31vw, 19rem); }
-.brand-intro__assembly-word {
-  position: absolute; z-index: 3; left: 50%; top: 50%; width: min(82vw, 34rem);
-  opacity: 0; color: var(--text, #171816); text-align: center;
-  transform: translate(-50%, -50%) scale(.985); overflow: hidden;
-}
-.brand-intro__assembly-word span {
-  display: block;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: clamp(3.3rem, 10vw, 6.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: .08em;
-  transform: translateX(.04em);
-  will-change: letter-spacing, transform;
-}
-.brand-intro__impulse {
-  position: absolute; z-index: 5; left: 7%; top: 50%; width: 1px;
-  height: clamp(5rem, 14vw, 8rem); opacity: 0;
-  background: linear-gradient(to bottom, transparent, currentColor 28%, currentColor 72%, transparent);
-  transform: translate3d(0, -50%, 0); box-shadow: 0 0 1.1rem color-mix(in srgb, currentColor 20%, transparent);
-  will-change: transform, opacity;
-}
-.brand-intro__energy {
-  position: absolute; z-index: 2; inset: 50% 8% auto; display: flex;
-  display: none;
-}
-.brand-intro__energy span { width: 1px; height: 1px; background: currentColor; border-radius: 50%; }
-.brand-intro__assembled-symbol {
-  position: absolute; z-index: 4; left: 50%; top: 50%; width: clamp(4.5rem, 12vw, 7.2rem);
-  height: auto; overflow: visible; transform: translate(-50%, -50%);
-  will-change: transform;
-}
-.brand-intro__part {
-  fill: currentColor; opacity: 0; transform-box: fill-box; transform-origin: center;
-  will-change: transform, opacity;
-}
-.brand-intro__long-arc {
-  position: absolute; z-index: 1; left: 50%; top: 50%; width: clamp(8rem, 22vw, 13rem);
-  aspect-ratio: 1; border: 1px solid currentColor; border-right-color: transparent;
-  border-bottom-color: transparent; border-radius: 50%; opacity: 0;
-  transform: translate(-50%, -50%) rotate(-45deg) scale(.72);
-}
-.brand-intro.is-playing .brand-intro__assembly-word { animation: assembly-word 2.62s linear .12s both; }
-.brand-intro.is-playing .brand-intro__assembly-word span { animation: assembly-type 2.62s linear .12s both; }
-.brand-intro.is-playing .brand-intro__impulse { animation: assembly-impulse 2.25s cubic-bezier(.65, 0, .35, 1) .42s both; }
-.brand-intro.is-playing .brand-intro__energy { animation: assembly-energy 1.55s ease 1.28s both; }
-.brand-intro.is-playing .brand-intro__energy span { animation: assembly-particle 1.4s cubic-bezier(.16, 1, .3, 1) 1.32s both; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(2) { animation-delay: 1.39s; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(3) { animation-delay: 1.46s; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(4) { animation-delay: 1.53s; }
-.brand-intro.is-playing .brand-intro__part--left { animation: assembly-left 1.58s cubic-bezier(.16, 1, .3, 1) 1.72s both; }
-.brand-intro.is-playing .brand-intro__part--right { animation: assembly-right 1.58s cubic-bezier(.16, 1, .3, 1) 1.76s both; }
-.brand-intro.is-playing .brand-intro__part--stem { animation: assembly-stem 1.62s cubic-bezier(.16, 1, .3, 1) 1.82s both; }
-.brand-intro.is-playing .brand-intro__long-arc { animation: assembly-arc 1.55s cubic-bezier(.16, 1, .3, 1) 2.5s both; }
-
-@keyframes assembly-word {
-  0% { opacity: 0; transform: translate3d(-50%, calc(-50% + .55rem), 0) scale(.985); }
-  22% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
-  54% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
-  82% { opacity: .42; transform: translate3d(-50%, -50%, 0) scale(.88); }
-  100% { opacity: 0; transform: translate3d(-50%, -50%, 0) scale(.78); }
-}
-@keyframes assembly-type {
-  0%, 54% { letter-spacing: .08em; transform: translate3d(.04em, 0, 0) scaleX(1); }
-  82% { letter-spacing: .035em; transform: translate3d(.0175em, 0, 0) scaleX(.985); }
-  100% { letter-spacing: .015em; transform: translate3d(.0075em, 0, 0) scaleX(.97); }
-}
-@keyframes assembly-impulse {
-  0% { opacity: 0; transform: translate3d(0, -50%, 0) scaleY(.55); }
-  10% { opacity: .52; }
-  52% { opacity: .68; transform: translate3d(var(--impulse-x-52), -50%, 0) scaleY(1); }
-  92% { opacity: .45; }
-  100% { opacity: 0; transform: translate3d(var(--impulse-x), -50%, 0) scaleY(.55); }
-}
-@keyframes assembly-energy { 0%, 100% { opacity: 0; } 18%, 72% { opacity: .3; } }
-@keyframes assembly-particle {
-  0% { transform: translate3d(0, 0, 0) scale(.5); opacity: 0; }
-  20% { opacity: .55; }
-  100% { transform: translate3d(var(--particle-x, 0), var(--particle-y, 0), 0) scale(1.8); opacity: 0; }
-}
-.brand-intro__energy span:nth-child(1) { --particle-x: 9rem; --particle-y: -2rem; }
-.brand-intro__energy span:nth-child(2) { --particle-x: 3rem; --particle-y: 2rem; }
-.brand-intro__energy span:nth-child(3) { --particle-x: -3rem; --particle-y: -1rem; }
-.brand-intro__energy span:nth-child(4) { --particle-x: -9rem; --particle-y: 2rem; }
-@keyframes assembly-left {
-  0% { opacity: 0; transform: translate3d(-30px, -12px, 0) rotate(-4deg) scale(.9); }
-  68% { opacity: 1; transform: translate3d(1px, 0, 0) rotate(.2deg) scale(1.004); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-}
-@keyframes assembly-right {
-  0% { opacity: 0; transform: translate3d(30px, -12px, 0) rotate(4deg) scale(.9); }
-  68% { opacity: 1; transform: translate3d(-1px, 0, 0) rotate(-.2deg) scale(1.004); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-}
-@keyframes assembly-stem {
-  0% { opacity: 0; transform: translate3d(0, 42px, 0) scaleY(.8); }
-  68% { opacity: 1; transform: translate3d(0, -1px, 0) scaleY(1.006); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scaleY(1); }
-}
-@keyframes assembly-arc {
-  0% { opacity: 0; transform: translate(-50%, -50%) rotate(-45deg) scale(.72); }
-  18% { opacity: .14; }
-  72% { opacity: .1; transform: translate(-50%, -50%) rotate(235deg) scale(1.04); }
-  100% { opacity: 0; transform: translate(-50%, -50%) rotate(315deg) scale(1); }
-}
-@media (max-width: 600px) {
-  .brand-intro__assembly, .brand-intro__assembly-word { width: 84vw; }
-  .brand-intro__energy span:nth-child(1) { --particle-x: 6rem; }
-  .brand-intro__energy span:nth-child(4) { --particle-x: -6rem; }
-}
-
-/* Touchapparaten behouden native scroll en vermijden zware hovermotion. */
-
-/* Merkintro concept 06 — architecturale constructie. */
-.brand-intro {
-  --intro-surface: #E6E0D5;
-  --architect-ease: cubic-bezier(.45, 0, .15, 1);
-  color: #556056;
-  background: var(--intro-surface);
-}
-[data-theme="dark"] .brand-intro {
-  --intro-surface: #252724;
-  color: #B5BEB6;
-  background: var(--intro-surface);
-}
-.brand-intro__assembly { width: min(82vw, 38rem); height: clamp(14rem, 34vw, 20rem); }
-.brand-intro__assembly-word {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(.65rem, 2.7vw, 1.8rem);
-  color: currentColor;
-  overflow: visible;
-}
-.brand-intro__assembly-word span {
-  font-family: "Instrument Sans", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0;
-  transform: none;
-  will-change: transform, opacity;
-}
-.brand-intro__energy {
-  position: absolute;
-  z-index: 1;
-  inset: 50% 7% auto;
-  display: flex;
-  justify-content: space-between;
-  opacity: 0;
-  transform: translateY(-50%);
-}
-.brand-intro__energy span {
-  width: 1px;
-  height: clamp(8rem, 21vw, 12rem);
-  border-radius: 0;
-  background: currentColor;
-  opacity: .1;
-  transform: translateY(-50%) scaleY(0);
-}
-.brand-intro__impulse {
-  left: 7%;
-  height: clamp(9rem, 23vw, 13rem);
-  background: currentColor;
-  box-shadow: none;
-  opacity: 0;
-}
-.brand-intro__long-arc {
-  width: min(88vw, 40rem);
-  height: clamp(10rem, 26vw, 15rem);
-  aspect-ratio: auto;
-  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
-  border-radius: 0;
-  opacity: 0;
-  transform: translate(-50%, -50%) scaleX(.15);
-}
-.brand-intro__assembled-symbol {
-  width: clamp(4.7rem, 12vw, 7.2rem);
-  will-change: transform;
-}
-.brand-intro.is-playing { animation: architect-surface 2.5s linear both; }
-.brand-intro.is-playing::after { animation: brand-intro-progress 1.35s var(--architect-ease) both; }
-.brand-intro.is-playing .brand-intro__assembly-word { animation: architect-word .48s var(--architect-ease) both; }
-.brand-intro.is-playing .brand-intro__assembly-letter { animation: architect-letter-compress .86s var(--architect-ease) .5s both; }
-.brand-intro.is-playing .brand-intro__impulse { animation: architect-ruler 1.05s var(--architect-ease) .28s both; }
-.brand-intro.is-playing .brand-intro__energy { animation: architect-grid .96s var(--architect-ease) .18s both; }
-.brand-intro.is-playing .brand-intro__energy span { animation: architect-column .72s var(--architect-ease) .2s both; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(2) { animation-delay: .24s; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(3) { animation-delay: .28s; }
-.brand-intro.is-playing .brand-intro__energy span:nth-child(4) { animation-delay: .32s; }
-.brand-intro.is-playing .brand-intro__part { opacity: 1; animation: none; }
-.brand-intro.is-playing .brand-intro__long-arc { animation: architect-frame 1.34s var(--architect-ease) .1s both; }
-.brand-intro.is-playing .brand-intro__assembled-symbol {
-  animation:
-    architect-symbol-flight 2.42s linear both,
-    architect-symbol-reveal .72s var(--architect-ease) .82s both;
-}
-body.intro-active .hero { opacity: 0; transition: opacity .56s cubic-bezier(.45, 0, .15, 1); }
-body.intro-active.intro-revealing .hero { opacity: 1; }
-body.intro-active .nav .brand__image { opacity: 0; transition: none; }
-
-@keyframes architect-word {
-  0% { opacity: 0; transform: translate3d(-50%, calc(-50% + .35rem), 0); }
-  42%, 100% { opacity: 1; transform: translate3d(-50%, -50%, 0); }
-}
-@keyframes architect-letter-compress {
-  0% { opacity: 1; transform: translate3d(0, 0, 0); }
-  68% { opacity: 1; transform: translate3d(var(--letter-x-mid), var(--letter-y-mid), 0); }
-  84% { opacity: .38; transform: translate3d(var(--letter-x), var(--letter-y), 0); }
-  100% { opacity: 0; transform: translate3d(var(--letter-x), var(--letter-y), 0); }
-}
-@keyframes architect-grid { 0%, 100% { opacity: 0; } 16%, 72% { opacity: 1; } }
-@keyframes architect-column {
-  0% { transform: translateY(-50%) scaleY(0); }
-  54% { transform: translateY(-50%) scaleY(1); }
-  100% { transform: translateY(-50%) scaleY(.22); }
-}
-@keyframes architect-ruler {
-  0% { opacity: 0; transform: translate3d(0, -50%, 0) scaleY(.35); }
-  12% { opacity: .42; }
-  54% { opacity: .55; transform: translate3d(var(--impulse-x-52), -50%, 0) scaleY(1); }
-  100% { opacity: 0; transform: translate3d(var(--impulse-x), -50%, 0) scaleY(.35); }
-}
-@keyframes architect-left {
-  0% { opacity: 0; transform: translate3d(-26px, 0, 0) scaleX(.78); }
-  72% { opacity: 1; transform: translate3d(1px, 0, 0) scaleX(1.004); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scaleX(1); }
-}
-@keyframes architect-right {
-  0% { opacity: 0; transform: translate3d(26px, 0, 0) scaleX(.78); }
-  72% { opacity: 1; transform: translate3d(-1px, 0, 0) scaleX(1.004); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scaleX(1); }
-}
-@keyframes architect-stem {
-  0% { opacity: 0; transform: translate3d(0, 34px, 0) scaleY(.82); }
-  72% { opacity: 1; transform: translate3d(0, -1px, 0) scaleY(1.004); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scaleY(1); }
-}
-@keyframes architect-frame {
-  0% { opacity: 0; transform: translate(-50%, -50%) scaleX(.15); }
-  18% { opacity: .07; }
-  48% { opacity: .09; transform: translate(-50%, -50%) scaleX(1); }
-  76% { opacity: .05; transform: translate(-50%, -50%) scaleX(.38); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scaleX(.15); }
-}
-@keyframes architect-symbol-flight {
-  0%, 75% { transform: translate3d(-50%, -50%, 0) scale(1); animation-timing-function: var(--architect-ease); }
-  100% {
-    transform: translate3d(calc(-50% + var(--header-x, 0px)), calc(-50% + var(--header-y, 0px)), 0) scale(var(--header-scale, .3));
-  }
-}
-@keyframes architect-symbol-reveal {
-  0% { clip-path: circle(0% at 50% 46%); }
-  72% { clip-path: circle(58% at 50% 46%); }
-  100% { clip-path: circle(82% at 50% 46%); }
-}
-@keyframes architect-surface {
-  0%, 72% { background-color: var(--intro-surface); }
-  100% { background-color: transparent; }
-}
-
-@media (max-width: 600px) {
-  .brand-intro__assembly { width: 86vw; }
-  .brand-intro__long-arc { width: 90vw; }
-}
-
 /* Touchapparaten behouden native scroll en vermijden zware hovermotion. */
 @media (max-width: 900px) and (hover: none) {
   .hero__media img { animation: none; }
@@ -5356,4 +4601,90 @@ body.intro-active .nav .brand__image { opacity: 0; transition: none; }
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+}
+
+/* ========================================================================== 
+   Signature intro — één merkteken, één gedeelde JavaScript-timeline
+   ========================================================================== */
+.signature-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #556056;
+  background: #E6E0D5;
+  opacity: 1;
+  visibility: visible;
+}
+
+.signature-intro__mark {
+  --signature-symbol-width: clamp(4.9rem, 11vw, 6.8rem);
+  --signature-ens-width: clamp(10rem, 23.7vw, 14.6rem);
+  --signature-gap: clamp(.65rem, 1.6vw, 1rem);
+  --signature-ens-offset: calc((var(--signature-ens-width) + var(--signature-gap)) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--signature-gap);
+  width: max-content;
+  opacity: 1;
+  will-change: opacity, transform;
+}
+
+.signature-intro__symbol {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--signature-symbol-width);
+  height: auto;
+  overflow: visible;
+}
+
+.signature-intro__symbol path,
+.signature-intro__ens path {
+  fill: currentColor;
+}
+
+.signature-intro__arm,
+.signature-intro__stem {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: clip-path, opacity;
+}
+
+.signature-intro__ens {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--signature-ens-width);
+  height: auto;
+  opacity: 0;
+  will-change: opacity;
+}
+
+body.intro-active { overflow: hidden; }
+
+body.intro-active .hero {
+  opacity: 1;
+  transition: none;
+}
+
+body.intro-active .nav .brand__image {
+  opacity: 0;
+  transition: none;
+}
+
+@media (max-width: 600px) {
+  .signature-intro__mark {
+    --signature-symbol-width: clamp(4.25rem, 19vw, 5.35rem);
+    --signature-ens-width: clamp(8.75rem, 39vw, 11rem);
+    --signature-gap: clamp(.5rem, 2.5vw, .75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-intro { display: none; }
+  body.intro-active { overflow: auto; }
+  body.intro-active .nav .brand__image { opacity: 1; }
 }

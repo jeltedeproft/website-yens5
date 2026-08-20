@@ -19,73 +19,64 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 let smoothScroll = null;
 
 /* --------------------------------------------------------------------------
-   Merkintro — Y E N S vloeit samen tot het Y-symbool
+   Merkintro — minimalistische signature reveal
    -------------------------------------------------------------------------- */
 function initBrandIntro() {
   const intro = $('[data-brand-intro]');
   if (!intro) return;
 
   if (reduceMotion) {
+    document.body.classList.remove('intro-active');
     intro.remove();
     return;
   }
 
-  document.body.classList.add('intro-active');
-  const assemblyStage = $('.brand-intro__assembly', intro);
-  const impulse = $('.brand-intro__impulse', intro);
-  const assembledSymbol = $('.brand-intro__assembled-symbol', intro);
-  const assemblyLetters = $$('.brand-intro__assembly-letter', intro);
+  const mark = $('.signature-intro__mark', intro);
+  const leftArm = $('.signature-intro__arm--left', intro);
+  const rightArm = $('.signature-intro__arm--right', intro);
+  const stem = $('.signature-intro__stem', intro);
+  const ens = $('.signature-intro__ens', intro);
   const headerWordmark = $('.nav .brand__image');
+  const ease = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+  const at = (delay, duration) => ({ delay, duration, easing: ease, fill: 'both' });
 
-  const setIntroGeometry = () => {
-    if (assemblyStage && impulse) {
-      const impulseX = assemblyStage.getBoundingClientRect().width * .86;
-      impulse.style.setProperty('--impulse-x', `${impulseX}px`);
-      impulse.style.setProperty('--impulse-x-52', `${impulseX * .52}px`);
-    }
+  window.requestAnimationFrame(() => {
+    const startTime = document.timeline.currentTime;
+    const animations = [
+      leftArm.animate([
+        { opacity: .08, clipPath: 'circle(1.5% at 100% 53%)' },
+        { opacity: 1, clipPath: 'circle(145% at 100% 53%)' }
+      ], at(80, 500)),
+      rightArm.animate([
+        { opacity: .08, clipPath: 'circle(1.5% at 0% 53%)' },
+        { opacity: 1, clipPath: 'circle(145% at 0% 53%)' }
+      ], at(80, 500)),
+      stem.animate([
+        { opacity: .08, clipPath: 'circle(2% at 50% 0%)' },
+        { opacity: 1, clipPath: 'circle(145% at 50% 0%)' }
+      ], at(130, 450)),
+      mark.animate([
+        { transform: 'translateX(var(--signature-ens-offset))' },
+        { transform: 'translateX(var(--signature-ens-offset))', offset: .34 },
+        { transform: 'translateX(0)' }
+      ], at(0, 940)),
+      ens.animate([{ opacity: 0 }, { opacity: 1 }], at(600, 340)),
+      mark.animate([{ opacity: 1 }, { opacity: 0 }], at(1200, 160)),
+      intro.animate([
+        { opacity: 1 },
+        { opacity: 1, offset: .8 },
+        { opacity: 0 }
+      ], at(0, 1700)),
+      headerWordmark?.animate([{ opacity: 0 }, { opacity: 1 }], at(1380, 150))
+    ].filter(Boolean);
 
-    if (!assembledSymbol) return;
-    const symbolRect = assembledSymbol.getBoundingClientRect();
-    const symbolX = symbolRect.left + symbolRect.width / 2;
-    const symbolY = symbolRect.top + symbolRect.height * .46;
-
-    assemblyLetters.forEach((letter) => {
-      const rect = letter.getBoundingClientRect();
-      const x = symbolX - (rect.left + rect.width / 2);
-      const y = symbolY - (rect.top + rect.height / 2);
-      letter.style.setProperty('--letter-x', `${x}px`);
-      letter.style.setProperty('--letter-y', `${y}px`);
-      letter.style.setProperty('--letter-x-mid', `${x * .64}px`);
-      letter.style.setProperty('--letter-y-mid', `${y * .64}px`);
+    animations.forEach((animation) => { animation.startTime = startTime; });
+    animations[6].finished.then(() => {
+      animations.forEach((animation) => animation.cancel());
+      document.body.classList.remove('intro-active');
+      intro.remove();
     });
-
-    if (headerWordmark) {
-      const headerRect = headerWordmark.getBoundingClientRect();
-      const targetX = headerRect.left + headerRect.width * .188;
-      const targetY = headerRect.top + headerRect.height * .5;
-      assembledSymbol.style.setProperty('--header-x', `${targetX - symbolX}px`);
-      assembledSymbol.style.setProperty('--header-y', `${targetY - symbolY}px`);
-      assembledSymbol.style.setProperty('--header-scale', `${Math.max(.2, (headerRect.height * .846) / symbolRect.height)}`);
-    }
-  };
-  const finish = () => {
-    document.body.classList.remove('intro-active', 'intro-revealing');
-    intro.remove();
-  };
-
-  let hasStarted = false;
-  const play = () => {
-    if (hasStarted) return;
-    hasStarted = true;
-    setIntroGeometry();
-    window.requestAnimationFrame(() => intro.classList.add('is-playing'));
-    window.setTimeout(() => document.body.classList.add('intro-revealing'), 1840);
-    window.setTimeout(finish, 2500);
-  };
-
-  if (document.fonts?.ready) document.fonts.ready.then(play);
-  else play();
-  window.setTimeout(play, 120);
+  });
 }
 
 /* --------------------------------------------------------------------------
