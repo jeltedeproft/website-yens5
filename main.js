@@ -24,54 +24,76 @@ let smoothScroll = null;
 function initBrandIntro() {
   const intro = $('[data-brand-intro]');
   if (!intro) return;
+
   const surface = $('.signature-intro__surface', intro);
+  const introWordmark = $('.signature-intro__wordmark', intro);
   const y = $('.signature-intro__letter--y', intro);
   const e = $('.signature-intro__letter--e', intro);
   const n = $('.signature-intro__letter--n', intro);
   const s = $('.signature-intro__letter--s', intro);
+  const yArchitectural = $('.signature-intro__y-part--architectural', y);
+  const yOrganic = $('.signature-intro__y-part--organic', y);
+  const yStem = $('.signature-intro__y-part--stem', y);
   const guideLines = $$('.signature-intro__guides span', intro);
   const headerBrand = $('.nav .brand');
   const headerWordmark = $('.nav .brand__image');
-  const heroParts = [
-    $('.hero__media'),
-    $('.hero__eyebrow'),
-    $('.hero__title'),
-    $('.hero__desc'),
-    $('.hero__actions'),
-    $('.hero__note')
-  ].filter(Boolean);
-  const ease = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+  const navInner = $('.nav__inner');
+  const heroLabel = $('.hero__eyebrow');
+  const heroTitle = $('.hero__title');
+  const heroCopy = [$('.hero__desc'), $('.hero__actions'), $('.hero__note')].filter(Boolean);
+  const heroMedia = $('.hero__media');
+
+  const easing = Object.freeze({
+    arrival: 'cubic-bezier(0.16, 0.82, 0.30, 0.96)',
+    lock: 'cubic-bezier(0.20, 0.55, 0.35, 0.95)',
+    compression: 'cubic-bezier(0.65, 0, 0.35, 1)',
+    settle: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
+    handoff: 'cubic-bezier(0.22, 1, 0.36, 1)'
+  });
   const labels = Object.freeze({
-    arrival: 0,
-    lock: 1200,
-    compression: 1650,
-    symbolLock: 2850,
-    heroHandoff: 3300,
+    arrival: 150,
+    lock: 1150,
+    arrivalEnd: 1260,
+    compression: 1500,
+    lockEnd: 1450,
+    symbolLock: 2750,
+    symbolSettled: 2820,
+    heroHandoff: 3050,
+    sharedMotion: 3090,
+    headerReveal: 4050,
+    surfaceClear: 4100,
     complete: 4200
   });
   let activeAnimations = [];
   let isPlaying = false;
 
-  const timing = (delay, duration, fill = 'forwards') => ({
-    delay,
-    duration,
-    easing: ease,
-    fill
-  });
   const transformTo = (rect, x, yPosition, scale = 1) => {
     const dx = x - (rect.left + rect.width / 2);
     const dy = yPosition - (rect.top + rect.height / 2);
-    return `translate3d(${dx}px, ${dy}px, 0) scale(${scale})`;
+    return 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(' + scale + ')';
   };
+  const at = (milliseconds) => milliseconds / labels.complete;
   const cancelActiveAnimations = () => {
     activeAnimations.forEach((animation) => animation.cancel());
     activeAnimations = [];
+  };
+  const restoreSharedSymbol = () => {
+    if (y.parentElement !== introWordmark) introWordmark.prepend(y);
+    y.classList.remove('brand__shared-y');
+    headerBrand?.classList.remove('has-shared-y');
+  };
+  const lockSharedSymbolInHeader = () => {
+    if (!headerBrand) return;
+    headerBrand.append(y);
+    y.classList.add('brand__shared-y');
+    headerBrand.classList.add('has-shared-y');
   };
 
   const play = () => {
     if (reduceMotion || isPlaying) return;
     isPlaying = true;
     cancelActiveAnimations();
+    restoreSharedSymbol();
     document.documentElement.classList.remove('intro-seen');
     document.body.classList.add('intro-active');
     intro.style.visibility = 'visible';
@@ -81,105 +103,179 @@ function initBrandIntro() {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
       const yRect = y.getBoundingClientRect();
-      const letterRects = new Map([[e, e.getBoundingClientRect()], [n, n.getBoundingClientRect()], [s, s.getBoundingClientRect()]]);
-      const headerRect = headerWordmark.getBoundingClientRect();
-      const symbolWidth = Math.min(112, Math.max(78, window.innerWidth * .105));
+      const symbolWidth = Math.min(104, Math.max(74, window.innerWidth * .092));
       const symbolScale = symbolWidth / yRect.width;
       const symbolTransform = transformTo(yRect, centerX, centerY, symbolScale);
-      const symbolApproach = transformTo(yRect, centerX, centerY + 10, symbolScale);
-      const symbolCorrection = transformTo(yRect, centerX, centerY - 2, symbolScale);
-      const headerX = headerRect.left + headerRect.width * .189;
-      const headerY = headerRect.top + headerRect.height * .5;
-      const headerScale = (headerRect.width * .285) / yRect.width;
+      const symbolApproach = transformTo(yRect, centerX, centerY + 1, symbolScale);
+      // Meet de echte finale CSS-box in de header. Dit voorkomt afrondingsverschillen
+      // tussen de SVG-viewBox, responsieve brandbreedte en browser-subpixels.
+      const headerProbe = y.cloneNode(true);
+      headerProbe.classList.add('brand__shared-y');
+      headerProbe.style.visibility = 'hidden';
+      headerProbe.style.opacity = '0';
+      headerBrand.append(headerProbe);
+      const headerSymbolRect = headerProbe.getBoundingClientRect();
+      headerProbe.remove();
+      const headerX = headerSymbolRect.left + headerSymbolRect.width / 2;
+      const headerY = headerSymbolRect.top + headerSymbolRect.height / 2;
+      const headerScale = headerSymbolRect.width / yRect.width;
+      const headerOpacity = document.documentElement.hasAttribute('data-theme') ? .78 : .72;
       const headerTransform = transformTo(yRect, headerX, headerY, headerScale);
       const animations = [];
-      const add = (target, keyframes, options) => {
-        const animation = target.animate(keyframes, options);
+      const addTrack = (target, keyframes) => {
+        const animation = target.animate(keyframes, {
+          duration: labels.complete,
+          easing: 'linear',
+          fill: 'both'
+        });
         animations.push(animation);
         return animation;
       };
 
-      [
-        { target: y, delay: 0, from: 'translate3d(-115vw, 0, 0)', overshoot: 'translate3d(10px, 0, 0)' },
-        { target: e, delay: 60, from: 'translate3d(-78vw, 0, 0)', overshoot: 'translate3d(8px, 0, 0)' },
-        { target: n, delay: 120, from: 'translate3d(78vw, 0, 0)', overshoot: 'translate3d(-8px, 0, 0)' },
-        { target: s, delay: 180, from: 'translate3d(115vw, 0, 0)', overshoot: 'translate3d(-10px, 0, 0)' }
-      ].forEach(({ target, delay, from, overshoot }) => {
-        add(target, [
-          { opacity: 1, transform: from },
-          { opacity: 1, transform: overshoot }
-        ], timing(labels.arrival + delay, labels.lock - delay));
-        add(target, [
-          { transform: overshoot },
-          { transform: overshoot.replace(/-?\d+px/, (value) => `${Number.parseFloat(value) * -.2}px`), offset: .72 },
-          { transform: 'translate3d(0, 0, 0)' }
-        ], timing(labels.lock, labels.compression - labels.lock));
+      const yKeyframes = [
+        { offset: 0, opacity: .18, transform: 'translate3d(-28vw, 0, 0)', easing: easing.arrival },
+        { offset: at(labels.arrival), opacity: .18, transform: 'translate3d(-28vw, 0, 0)', easing: easing.arrival },
+        { offset: at(labels.arrivalEnd), opacity: 1, transform: 'translate3d(8px, 0, 0)', easing: easing.lock },
+        { offset: at(labels.lockEnd), opacity: 1, transform: 'translate3d(-1px, 0, 0)', easing: easing.compression },
+        { offset: at(labels.symbolLock), opacity: 1, transform: symbolApproach, easing: easing.settle },
+        { offset: at(labels.symbolSettled), opacity: 1, transform: symbolTransform, easing: easing.settle },
+        { offset: at(labels.sharedMotion), opacity: 1, transform: symbolTransform, easing: 'linear' }
+      ];
+      const handoffDuration = labels.headerReveal - labels.sharedMotion;
+      const handoffX = headerX - centerX;
+      const handoffY = headerY - centerY;
+      const control1 = {
+        x: centerX + handoffX * .16 + Math.min(16, window.innerWidth * .01),
+        y: centerY + handoffY * .08
+      };
+      const control2 = {
+        x: centerX + handoffX * .78 + Math.min(10, window.innerWidth * .007),
+        y: centerY + handoffY * .74 - Math.min(8, window.innerHeight * .008)
+      };
+      for (let index = 1; index <= 40; index += 1) {
+        const timeProgress = index / 40;
+        const motionProgress = timeProgress * timeProgress * (3 - 2 * timeProgress);
+        const inverse = 1 - motionProgress;
+        const xPosition = inverse ** 3 * centerX
+          + 3 * inverse ** 2 * motionProgress * control1.x
+          + 3 * inverse * motionProgress ** 2 * control2.x
+          + motionProgress ** 3 * headerX;
+        const yPosition = inverse ** 3 * centerY
+          + 3 * inverse ** 2 * motionProgress * control1.y
+          + 3 * inverse * motionProgress ** 2 * control2.y
+          + motionProgress ** 3 * headerY;
+        const scale = symbolScale + (headerScale - symbolScale) * motionProgress;
+        yKeyframes.push({
+          offset: at(labels.sharedMotion + handoffDuration * timeProgress),
+          opacity: 1,
+          transform: transformTo(yRect, xPosition, yPosition, scale),
+          easing: 'linear'
+        });
+      }
+      yKeyframes.push({ offset: 1, opacity: 1, transform: headerTransform });
+      addTrack(y, yKeyframes);
+
+      const letterTracks = [
+        { target: e, from: '-21vw', stagger: 50, overshoot: 6, compression: 1530 },
+        { target: n, from: '21vw', stagger: 100, overshoot: -6, compression: 1490 },
+        { target: s, from: '28vw', stagger: 150, overshoot: -8, compression: 1450 }
+      ];
+      letterTracks.forEach(({ target, from, stagger, overshoot, compression }) => {
+        const rect = target.getBoundingClientRect();
+        addTrack(target, [
+          { offset: 0, transform: 'translate3d(' + from + ', 0, 0)', easing: easing.arrival },
+          { offset: at(labels.arrival + stagger), transform: 'translate3d(' + from + ', 0, 0)', easing: easing.arrival },
+          { offset: at(1260 + stagger * .12), transform: 'translate3d(' + overshoot + 'px, 0, 0)', easing: easing.lock },
+          { offset: at(compression), transform: 'translate3d(' + (overshoot * -.12) + 'px, 0, 0)', easing: easing.compression },
+          { offset: at(labels.symbolLock), transform: transformTo(rect, centerX, centerY, .94), easing: easing.compression },
+          { offset: 1, transform: transformTo(rect, centerX, centerY, .94) }
+        ]);
+        addTrack(target, [
+          { offset: 0, opacity: .18, easing: easing.arrival },
+          { offset: at(labels.arrival + stagger), opacity: .18, easing: easing.arrival },
+          { offset: at(1050 + stagger * .2), opacity: .82, easing: easing.arrival },
+          { offset: at(1260 + stagger * .12), opacity: 1 },
+          { offset: at(2580), opacity: 1, easing: easing.compression },
+          { offset: at(labels.symbolLock), opacity: 0 },
+          { offset: 1, opacity: 0 }
+        ]);
+        addTrack(target, [
+          { offset: 0, clipPath: 'inset(0 0 0 0)' },
+          { offset: at(compression + (labels.symbolLock - compression) * .72), clipPath: 'inset(0 0 0 0)', easing: easing.compression },
+          { offset: at(compression + (labels.symbolLock - compression) * .88), clipPath: 'inset(38% 8% 38% 8%)', easing: easing.compression },
+          { offset: at(labels.symbolLock), clipPath: 'inset(49% 49% 49% 49%)' },
+          { offset: 1, clipPath: 'inset(49% 49% 49% 49%)' }
+        ]);
       });
 
       guideLines.forEach((line, index) => {
-        add(line, [
-          { opacity: .04, transform: 'scaleX(0)' },
-          { opacity: .12, transform: 'scaleX(1)' }
-        ], timing(labels.arrival + index * 60, labels.lock - index * 60));
-        add(line, [
-          { opacity: .12, transform: 'scaleX(1)' },
-          { opacity: .16, transform: 'scaleX(.985)', offset: .68 },
-          { opacity: .12, transform: 'scaleX(1)' }
-        ], timing(labels.lock, labels.compression - labels.lock));
-        add(line, [
-          { opacity: .12, transform: 'scaleX(1)' },
-          { opacity: 0, transform: 'scaleX(0)' }
-        ], timing(labels.compression, labels.symbolLock - labels.compression));
+        const direction = index === 0 ? '-16vw' : '16vw';
+        addTrack(line, [
+          { offset: 0, opacity: .025, transform: 'translateX(' + direction + ') scaleX(.18)', easing: easing.arrival },
+          { offset: at(labels.arrival + index * 50), opacity: .025, transform: 'translateX(' + direction + ') scaleX(.18)', easing: easing.arrival },
+          { offset: at(1260), opacity: .09, transform: 'translateX(0) scaleX(1)', easing: easing.lock },
+          { offset: at(1450), opacity: .075, transform: 'translateX(0) scaleX(.97)', easing: easing.compression },
+          { offset: at(labels.symbolLock), opacity: 0, transform: 'translateX(0) scaleX(0)', easing: easing.compression },
+          { offset: 1, opacity: 0, transform: 'translateX(0) scaleX(0)' }
+        ]);
       });
 
-      add(y, [
-        { transform: 'translate3d(0, 0, 0)' },
-        { transform: symbolApproach }
-      ], timing(labels.compression, labels.symbolLock - labels.compression));
-
-      letterRects.forEach((rect, letter) => {
-        const scale = letter === s ? .12 : .16;
-        add(letter, [
-          { opacity: 1, clipPath: 'inset(0 0 0 0)', transform: 'translate3d(0, 0, 0) scale(1)' },
-          { opacity: 1, clipPath: 'inset(0 18% 0 18%)', transform: transformTo(rect, centerX, centerY, .55), offset: .64 },
-          { opacity: 0, clipPath: 'inset(0 50% 0 50%)', transform: transformTo(rect, centerX, centerY, scale) }
-        ], timing(labels.compression, labels.symbolLock - labels.compression));
+      [
+        { target: yArchitectural, start: 2750, end: 2780, from: 'translate3d(.8px, 0, 0)' },
+        { target: yStem, start: 2770, end: 2800, from: 'translate3d(0, 1px, 0)' },
+        { target: yOrganic, start: 2790, end: 2820, from: 'translate3d(-.8px, 0, 0)' }
+      ].forEach(({ target, start, end, from }) => {
+        addTrack(target, [
+          { offset: 0, transform: 'translate3d(0, 0, 0)' },
+          { offset: at(start - 60), transform: 'translate3d(0, 0, 0)', easing: easing.compression },
+          { offset: at(start), transform: from, easing: easing.settle },
+          { offset: at(end), transform: 'translate3d(0, 0, 0)', easing: easing.settle },
+          { offset: 1, transform: 'translate3d(0, 0, 0)' }
+        ]);
       });
 
-      add(y, [
-        { transform: symbolApproach },
-        { transform: symbolCorrection, offset: .46 },
-        { transform: symbolTransform, offset: .56 },
-        { transform: symbolTransform }
-      ], timing(labels.symbolLock, labels.heroHandoff - labels.symbolLock));
+      addTrack(surface, [
+        { offset: 0, opacity: 1 },
+        { offset: at(labels.heroHandoff), opacity: 1, easing: easing.handoff },
+        { offset: at(labels.surfaceClear), opacity: 0, easing: easing.handoff },
+        { offset: 1, opacity: 0 }
+      ]);
 
-      add(surface, [
-        { opacity: 1 },
-        { opacity: 0 }
-      ], timing(labels.heroHandoff, 800, 'both'));
-      add(y, [
-        { opacity: 1, transform: symbolTransform },
-        { opacity: 1, transform: headerTransform }
-      ], timing(labels.heroHandoff, 700));
-
-      heroParts.forEach((part, index) => {
-        add(part, [
-          { opacity: 0, transform: 'translate3d(0, 14px, 0)' },
-          { opacity: 1, transform: 'translate3d(0, 0, 0)' }
-        ], timing(labels.heroHandoff + 120 + index * 55, 470, 'both'));
+      const heroTracks = [
+        { targets: [navInner], start: 3120 },
+        { targets: [heroLabel], start: 3185 },
+        { targets: [heroTitle], start: 3250 },
+        { targets: heroCopy, start: 3315 },
+        { targets: [heroMedia], start: 3380 }
+      ];
+      heroTracks.forEach(({ targets, start }) => {
+        targets.filter(Boolean).forEach((target) => {
+          addTrack(target, [
+            { offset: 0, opacity: 0 },
+            { offset: at(start), opacity: 0, easing: easing.handoff },
+            { offset: at(start + 520), opacity: 1, easing: easing.handoff },
+            { offset: 1, opacity: 1 }
+          ]);
+        });
       });
 
-      if (headerWordmark) {
-        add(headerWordmark, [
-          { opacity: 0, clipPath: 'inset(0 0 0 100%)' },
-          { opacity: 1, clipPath: 'inset(0 0 0 28.5%)' }
-        ], timing(labels.heroHandoff + 700, 200, 'both'));
-      }
+      addTrack(headerWordmark, [
+        { offset: 0, opacity: 0, clipPath: 'inset(0 0 0 100%)' },
+        { offset: at(labels.headerReveal), opacity: 0, clipPath: 'inset(0 0 0 100%)', easing: easing.handoff },
+        { offset: 1, opacity: headerOpacity, clipPath: 'inset(0 0 0 35.48%)' }
+      ]);
 
-      const masterClock = add(intro, [{ opacity: 1 }, { opacity: 1 }], timing(0, labels.complete, 'both'));
+      const masterClock = addTrack(intro, [
+        { offset: 0, opacity: 1 },
+        { offset: 1, opacity: 1 }
+      ]);
       animations.forEach((animation) => { animation.startTime = startTime; });
       activeAnimations = animations;
       masterClock.finished.then(() => {
+        // Behoud exact hetzelfde SVG-element na de landing. Zo is er geen
+        // frame waarin het geanimeerde symbool wordt verwisseld voor de Y in
+        // de headerafbeelding (die wissel veroorzaakte de zichtbare naschuif).
+        lockSharedSymbolInHeader();
         intro.style.visibility = 'hidden';
         document.body.classList.remove('intro-active');
         document.documentElement.classList.add('intro-seen');
@@ -206,7 +302,6 @@ function initBrandIntro() {
     window.requestAnimationFrame(play);
   }
 }
-
 /* --------------------------------------------------------------------------
    Scrollgevoel — subtiele desktopinertie, native touch en reduced motion
    -------------------------------------------------------------------------- */
