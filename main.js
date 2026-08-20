@@ -24,59 +24,187 @@ let smoothScroll = null;
 function initBrandIntro() {
   const intro = $('[data-brand-intro]');
   if (!intro) return;
-
-  if (reduceMotion) {
-    document.body.classList.remove('intro-active');
-    intro.remove();
-    return;
-  }
-
-  const mark = $('.signature-intro__mark', intro);
-  const leftArm = $('.signature-intro__arm--left', intro);
-  const rightArm = $('.signature-intro__arm--right', intro);
-  const stem = $('.signature-intro__stem', intro);
-  const ens = $('.signature-intro__ens', intro);
+  const surface = $('.signature-intro__surface', intro);
+  const y = $('.signature-intro__letter--y', intro);
+  const e = $('.signature-intro__letter--e', intro);
+  const n = $('.signature-intro__letter--n', intro);
+  const s = $('.signature-intro__letter--s', intro);
+  const guideLines = $$('.signature-intro__guides span', intro);
+  const headerBrand = $('.nav .brand');
   const headerWordmark = $('.nav .brand__image');
+  const heroParts = [
+    $('.hero__media'),
+    $('.hero__eyebrow'),
+    $('.hero__title'),
+    $('.hero__desc'),
+    $('.hero__actions'),
+    $('.hero__note')
+  ].filter(Boolean);
   const ease = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
-  const at = (delay, duration) => ({ delay, duration, easing: ease, fill: 'both' });
-
-  window.requestAnimationFrame(() => {
-    const startTime = document.timeline.currentTime;
-    const animations = [
-      leftArm.animate([
-        { opacity: .08, clipPath: 'circle(1.5% at 100% 53%)' },
-        { opacity: 1, clipPath: 'circle(145% at 100% 53%)' }
-      ], at(80, 500)),
-      rightArm.animate([
-        { opacity: .08, clipPath: 'circle(1.5% at 0% 53%)' },
-        { opacity: 1, clipPath: 'circle(145% at 0% 53%)' }
-      ], at(80, 500)),
-      stem.animate([
-        { opacity: .08, clipPath: 'circle(2% at 50% 0%)' },
-        { opacity: 1, clipPath: 'circle(145% at 50% 0%)' }
-      ], at(130, 450)),
-      mark.animate([
-        { transform: 'translateX(var(--signature-ens-offset))' },
-        { transform: 'translateX(var(--signature-ens-offset))', offset: .34 },
-        { transform: 'translateX(0)' }
-      ], at(0, 940)),
-      ens.animate([{ opacity: 0 }, { opacity: 1 }], at(600, 340)),
-      mark.animate([{ opacity: 1 }, { opacity: 0 }], at(1200, 160)),
-      intro.animate([
-        { opacity: 1 },
-        { opacity: 1, offset: .8 },
-        { opacity: 0 }
-      ], at(0, 1700)),
-      headerWordmark?.animate([{ opacity: 0 }, { opacity: 1 }], at(1380, 150))
-    ].filter(Boolean);
-
-    animations.forEach((animation) => { animation.startTime = startTime; });
-    animations[6].finished.then(() => {
-      animations.forEach((animation) => animation.cancel());
-      document.body.classList.remove('intro-active');
-      intro.remove();
-    });
+  const labels = Object.freeze({
+    arrival: 0,
+    lock: 1200,
+    compression: 1650,
+    symbolLock: 2850,
+    heroHandoff: 3300,
+    complete: 4200
   });
+  let activeAnimations = [];
+  let isPlaying = false;
+
+  const timing = (delay, duration, fill = 'forwards') => ({
+    delay,
+    duration,
+    easing: ease,
+    fill
+  });
+  const transformTo = (rect, x, yPosition, scale = 1) => {
+    const dx = x - (rect.left + rect.width / 2);
+    const dy = yPosition - (rect.top + rect.height / 2);
+    return `translate3d(${dx}px, ${dy}px, 0) scale(${scale})`;
+  };
+  const cancelActiveAnimations = () => {
+    activeAnimations.forEach((animation) => animation.cancel());
+    activeAnimations = [];
+  };
+
+  const play = () => {
+    if (reduceMotion || isPlaying) return;
+    isPlaying = true;
+    cancelActiveAnimations();
+    document.documentElement.classList.remove('intro-seen');
+    document.body.classList.add('intro-active');
+    intro.style.visibility = 'visible';
+
+    window.requestAnimationFrame(() => {
+      const startTime = document.timeline.currentTime;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const yRect = y.getBoundingClientRect();
+      const letterRects = new Map([[e, e.getBoundingClientRect()], [n, n.getBoundingClientRect()], [s, s.getBoundingClientRect()]]);
+      const headerRect = headerWordmark.getBoundingClientRect();
+      const symbolWidth = Math.min(112, Math.max(78, window.innerWidth * .105));
+      const symbolScale = symbolWidth / yRect.width;
+      const symbolTransform = transformTo(yRect, centerX, centerY, symbolScale);
+      const symbolApproach = transformTo(yRect, centerX, centerY + 10, symbolScale);
+      const symbolCorrection = transformTo(yRect, centerX, centerY - 2, symbolScale);
+      const headerX = headerRect.left + headerRect.width * .189;
+      const headerY = headerRect.top + headerRect.height * .5;
+      const headerScale = (headerRect.width * .285) / yRect.width;
+      const headerTransform = transformTo(yRect, headerX, headerY, headerScale);
+      const animations = [];
+      const add = (target, keyframes, options) => {
+        const animation = target.animate(keyframes, options);
+        animations.push(animation);
+        return animation;
+      };
+
+      [
+        { target: y, delay: 0, from: 'translate3d(-115vw, 0, 0)', overshoot: 'translate3d(10px, 0, 0)' },
+        { target: e, delay: 60, from: 'translate3d(-78vw, 0, 0)', overshoot: 'translate3d(8px, 0, 0)' },
+        { target: n, delay: 120, from: 'translate3d(78vw, 0, 0)', overshoot: 'translate3d(-8px, 0, 0)' },
+        { target: s, delay: 180, from: 'translate3d(115vw, 0, 0)', overshoot: 'translate3d(-10px, 0, 0)' }
+      ].forEach(({ target, delay, from, overshoot }) => {
+        add(target, [
+          { opacity: 1, transform: from },
+          { opacity: 1, transform: overshoot }
+        ], timing(labels.arrival + delay, labels.lock - delay));
+        add(target, [
+          { transform: overshoot },
+          { transform: overshoot.replace(/-?\d+px/, (value) => `${Number.parseFloat(value) * -.2}px`), offset: .72 },
+          { transform: 'translate3d(0, 0, 0)' }
+        ], timing(labels.lock, labels.compression - labels.lock));
+      });
+
+      guideLines.forEach((line, index) => {
+        add(line, [
+          { opacity: .04, transform: 'scaleX(0)' },
+          { opacity: .12, transform: 'scaleX(1)' }
+        ], timing(labels.arrival + index * 60, labels.lock - index * 60));
+        add(line, [
+          { opacity: .12, transform: 'scaleX(1)' },
+          { opacity: .16, transform: 'scaleX(.985)', offset: .68 },
+          { opacity: .12, transform: 'scaleX(1)' }
+        ], timing(labels.lock, labels.compression - labels.lock));
+        add(line, [
+          { opacity: .12, transform: 'scaleX(1)' },
+          { opacity: 0, transform: 'scaleX(0)' }
+        ], timing(labels.compression, labels.symbolLock - labels.compression));
+      });
+
+      add(y, [
+        { transform: 'translate3d(0, 0, 0)' },
+        { transform: symbolApproach }
+      ], timing(labels.compression, labels.symbolLock - labels.compression));
+
+      letterRects.forEach((rect, letter) => {
+        const scale = letter === s ? .12 : .16;
+        add(letter, [
+          { opacity: 1, clipPath: 'inset(0 0 0 0)', transform: 'translate3d(0, 0, 0) scale(1)' },
+          { opacity: 1, clipPath: 'inset(0 18% 0 18%)', transform: transformTo(rect, centerX, centerY, .55), offset: .64 },
+          { opacity: 0, clipPath: 'inset(0 50% 0 50%)', transform: transformTo(rect, centerX, centerY, scale) }
+        ], timing(labels.compression, labels.symbolLock - labels.compression));
+      });
+
+      add(y, [
+        { transform: symbolApproach },
+        { transform: symbolCorrection, offset: .46 },
+        { transform: symbolTransform, offset: .56 },
+        { transform: symbolTransform }
+      ], timing(labels.symbolLock, labels.heroHandoff - labels.symbolLock));
+
+      add(surface, [
+        { opacity: 1 },
+        { opacity: 0 }
+      ], timing(labels.heroHandoff, 800, 'both'));
+      add(y, [
+        { opacity: 1, transform: symbolTransform },
+        { opacity: 1, transform: headerTransform }
+      ], timing(labels.heroHandoff, 700));
+
+      heroParts.forEach((part, index) => {
+        add(part, [
+          { opacity: 0, transform: 'translate3d(0, 14px, 0)' },
+          { opacity: 1, transform: 'translate3d(0, 0, 0)' }
+        ], timing(labels.heroHandoff + 120 + index * 55, 470, 'both'));
+      });
+
+      if (headerWordmark) {
+        add(headerWordmark, [
+          { opacity: 0, clipPath: 'inset(0 0 0 100%)' },
+          { opacity: 1, clipPath: 'inset(0 0 0 28.5%)' }
+        ], timing(labels.heroHandoff + 700, 200, 'both'));
+      }
+
+      const masterClock = add(intro, [{ opacity: 1 }, { opacity: 1 }], timing(0, labels.complete, 'both'));
+      animations.forEach((animation) => { animation.startTime = startTime; });
+      activeAnimations = animations;
+      masterClock.finished.then(() => {
+        intro.style.visibility = 'hidden';
+        document.body.classList.remove('intro-active');
+        document.documentElement.classList.add('intro-seen');
+        cancelActiveAnimations();
+        isPlaying = false;
+        try { sessionStorage.setItem('yens-brand-intro-v4', '1'); } catch (_) {}
+      });
+    });
+  };
+
+  headerBrand?.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    play();
+  });
+
+  let hasSeenIntro = false;
+  const isIntroPreview = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  try { hasSeenIntro = !isIntroPreview && sessionStorage.getItem('yens-brand-intro-v4') === '1'; } catch (_) {}
+  if (reduceMotion || hasSeenIntro) {
+    intro.style.visibility = 'hidden';
+    document.body.classList.remove('intro-active');
+  } else {
+    window.requestAnimationFrame(play);
+  }
 }
 
 /* --------------------------------------------------------------------------

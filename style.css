@@ -110,7 +110,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
 }
@@ -4604,7 +4604,7 @@ body .nav.is-initializing .brand {
 }
 
 /* ========================================================================== 
-   Signature intro — één merkteken, één gedeelde JavaScript-timeline
+   YENS brand intro — mastertimeline
    ========================================================================== */
 .signature-intro {
   position: fixed;
@@ -4614,75 +4614,87 @@ body .nav.is-initializing .brand {
   place-items: center;
   overflow: hidden;
   color: #556056;
+  visibility: visible;
+  pointer-events: none;
+}
+.signature-intro__surface {
+  position: absolute;
+  inset: 0;
   background: #E6E0D5;
   opacity: 1;
-  visibility: visible;
-}
-
-.signature-intro__mark {
-  --signature-symbol-width: clamp(4.9rem, 11vw, 6.8rem);
-  --signature-ens-width: clamp(10rem, 23.7vw, 14.6rem);
-  --signature-gap: clamp(.65rem, 1.6vw, 1rem);
-  --signature-ens-offset: calc((var(--signature-ens-width) + var(--signature-gap)) / 2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--signature-gap);
-  width: max-content;
-  opacity: 1;
-  will-change: opacity, transform;
-}
-
-.signature-intro__symbol {
-  display: block;
-  flex: 0 0 auto;
-  width: var(--signature-symbol-width);
-  height: auto;
-  overflow: visible;
-}
-
-.signature-intro__symbol path,
-.signature-intro__ens path {
-  fill: currentColor;
-}
-
-.signature-intro__arm,
-.signature-intro__stem {
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: clip-path, opacity;
-}
-
-.signature-intro__ens {
-  display: block;
-  flex: 0 0 auto;
-  width: var(--signature-ens-width);
-  height: auto;
-  opacity: 0;
   will-change: opacity;
 }
-
-body.intro-active { overflow: hidden; }
-
-body.intro-active .hero {
-  opacity: 1;
-  transition: none;
+.signature-intro__wordmark {
+  position: relative;
+  z-index: 2;
+  width: min(78vw, 41rem);
+  aspect-ratio: 1073 / 390;
 }
-
-body.intro-active .nav .brand__image {
+.signature-intro__letter {
+  position: absolute;
+  display: block;
+  overflow: visible;
+  fill: currentColor;
   opacity: 0;
-  transition: none;
+  will-change: transform, clip-path, opacity;
 }
+.signature-intro__letter--y {
+  left: 4.67%;
+  top: 7.69%;
+  width: 28.49%;
+  height: 84.62%;
+  transform-origin: center;
+}
+.signature-intro__letter--e {
+  left: 35.48%;
+  top: 11.54%;
+  width: 16.40%;
+  height: 76.92%;
+}
+.signature-intro__letter--n {
+  left: 56.11%;
+  top: 11.54%;
+  width: 18.45%;
+  height: 76.92%;
+}
+.signature-intro__letter--s {
+  left: 78.91%;
+  top: 11.54%;
+  width: 16.89%;
+  height: 76.92%;
+}
+.signature-intro__guides {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: min(88vw, 47rem);
+  height: min(29vw, 10rem);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.signature-intro__guides span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: .12;
+  transform: scaleX(0);
+  will-change: transform, opacity;
+}
+.signature-intro__guides span:first-child { top: 0; transform-origin: left; }
+.signature-intro__guides span:last-child { bottom: 0; transform-origin: right; }
+body.intro-active { overflow: hidden; }
+body.intro-active .nav .brand__image { opacity: 0; transition: none; }
+html.intro-seen .signature-intro { display: none; }
+html.intro-seen body.intro-active { overflow: auto; }
+html.intro-seen body.intro-active .nav .brand__image { opacity: 1; }
 
 @media (max-width: 600px) {
-  .signature-intro__mark {
-    --signature-symbol-width: clamp(4.25rem, 19vw, 5.35rem);
-    --signature-ens-width: clamp(8.75rem, 39vw, 11rem);
-    --signature-gap: clamp(.5rem, 2.5vw, .75rem);
-  }
+  .signature-intro__wordmark { width: min(86vw, 25rem); }
+  .signature-intro__guides { width: 92vw; height: min(34vw, 8rem); }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .signature-intro { display: none; }
   body.intro-active { overflow: auto; }
