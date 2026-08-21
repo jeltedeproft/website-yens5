@@ -4640,6 +4640,8 @@ body .nav.is-initializing .brand {
   visibility: visible;
   pointer-events: auto;
 }
+/* De merkintro is uitgeschakeld; het headerlogo herlaadt voortaan de homepage. */
+.signature-intro { display: none !important; }
 .signature-intro__surface {
   position: absolute;
   inset: 0;
@@ -4736,4 +4738,45 @@ html.intro-seen body.intro-active .nav .brand__image { opacity: 1; }
   .signature-intro { display: none; }
   body.intro-active { overflow: auto; }
   body.intro-active .nav .brand__image { opacity: 1; }
+}
+
+/* ========================================================================== 
+   Canonieke header — identiek op iedere pagina
+   ========================================================================== */
+body .nav,
+body.home-page .nav,
+body:not(.home-page) .nav,
+body.home-page .nav:not(.is-scrolled),
+body:not(.home-page) .nav:not(.is-scrolled) {
+  --nav-shell-width: 100vw;
+  --nav-shell-height: 84px;
+  --nav-shell-padding: clamp(24px, 3.2vw, 60px);
+  --nav-surface-opacity: 0;
+  --nav-brand-width: 94px;
+  --nav-shell-y: 18px;
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body .nav:not(.is-compact) .brand,
+body.home-page .nav:not(.is-compact) .brand,
+body:not(.home-page) .nav:not(.is-compact) .brand {
+  margin-left: 0;
+}
+
+@media (max-width: 900px) {
+  body .nav,
+  body.home-page .nav,
+  body:not(.home-page) .nav,
+  body.home-page .nav:not(.is-scrolled),
+  body:not(.home-page) .nav:not(.is-scrolled) {
+    --nav-shell-width: 100vw;
+    --nav-shell-height: 76px;
+    --nav-shell-padding: 24px;
+    --nav-brand-width: 80px;
+    --nav-shell-y: 12px;
+  }
 }

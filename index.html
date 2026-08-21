@@ -26,10 +26,6 @@
   <script>
     document.documentElement.classList.add('js');
     if (localStorage.getItem('yens-theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    try {
-      const isIntroPreview = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      if (!isIntroPreview && sessionStorage.getItem('yens-brand-intro-v7')) document.documentElement.classList.add('intro-seen');
-    } catch (_) {}
   </script>
 
   <script type="application/ld+json">
@@ -50,7 +46,7 @@
   }
   </script>
 </head>
-<body class="home-page is-loaded intro-active">
+<body class="home-page is-loaded">
   <a class="skip-link" href="#main">Naar de inhoud</a>
 
   <div class="signature-intro" data-brand-intro aria-hidden="true">

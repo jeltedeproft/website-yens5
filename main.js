@@ -608,7 +608,6 @@ function initNav() {
   const nav = $('#nav');
   const burger = $('#nav-burger');
   const panel = $('#nav-mobile');
-  const homeHero = $('.home-page .hero');
   const desktopLinks = nav ? $('.nav__links', nav) : null;
   const navActions = nav ? $('.nav__actions', nav) : null;
   let lastScrollY = window.scrollY;
@@ -655,12 +654,7 @@ function initNav() {
         + compactPadding + compactBrandWidth + compactGap;
       const shouldCompact = currentScrollY > 24;
       const morphProgress = shouldCompact ? 1 : 0;
-      let heroIsOutOfView = true;
-
-      if (homeHero) {
-        const heroRect = homeHero.getBoundingClientRect();
-        heroIsOutOfView = heroRect.bottom <= 0;
-      }
+      const firstScreenIsOutOfView = currentScrollY >= window.innerHeight;
 
       const shellWidth = wideWidth + (compactWidth - wideWidth) * morphProgress;
       const shellHeight = wideHeight + (compactHeight - wideHeight) * morphProgress;
@@ -682,9 +676,9 @@ function initNav() {
       nav.classList.toggle('is-scrolled', shouldCompact);
       nav.classList.toggle('is-compact', shouldCompact);
 
-      if (!heroIsOutOfView || menuOpen) {
+      if (!firstScreenIsOutOfView || menuOpen) {
         nav.classList.remove('is-hidden');
-      } else if (currentScrollY > 160 && scrollingDown) {
+      } else if (scrollingDown) {
         nav.classList.add('is-hidden');
       } else if (scrollingUp || currentScrollY <= 80) {
         nav.classList.remove('is-hidden');
@@ -1120,8 +1114,19 @@ function initMisc() {
   });
 }
 
+function initBrandRefresh() {
+  const brand = $('.nav .brand');
+  if (!brand) return;
+  brand.addEventListener('click', (event) => {
+    const isHomepage = location.pathname === '/' || location.pathname.endsWith('/index.html');
+    if (!isHomepage) return;
+    event.preventDefault();
+    location.reload();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  initBrandIntro();
+  initBrandRefresh();
   initSmoothScroll();
   initTheme();
   initNav();
