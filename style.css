@@ -3125,37 +3125,14 @@ main > .section:first-child:not(.section--dark) {
   user-select: none;
   transition: opacity var(--t-fast);
 }
-.nav .brand.has-shared-y .brand__image {
-  clip-path: inset(0 0 0 35.48%);
-}
-.nav .brand__shared-y {
-  position: absolute;
-  z-index: 1;
-  left: 4.67%;
-  top: 50%;
-  width: 28.49%;
-  height: auto;
-  color: #171816;
-  opacity: .72;
-  transform: translate3d(0, -50%, 0);
-  transform-origin: center;
-  will-change: auto;
-  pointer-events: none;
-}
 .nav .brand:hover .brand__image { opacity: .9; }
-.nav .brand:hover .brand__shared-y { opacity: .9; }
 [data-theme="dark"] .nav .brand__image {
   filter: invert(1);
-  opacity: .78;
-}
-[data-theme="dark"] .nav .brand__shared-y {
-  color: #e8e7e5;
   opacity: .78;
 }
 
 /* In de compacte witte balk blijft alleen het Y-symbool zichtbaar. */
 .nav.is-compact .brand__image { opacity: 0; }
-.nav.is-compact .brand__shared-y { opacity: 0; }
 .nav.is-compact .brand::before,
 .home-page .nav.is-compact .brand::before {
   content: '';
@@ -4626,119 +4603,6 @@ body .nav.is-initializing .brand {
   }
 }
 
-/* ========================================================================== 
-   YENS brand intro — mastertimeline
-   ========================================================================== */
-.signature-intro {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  color: #556056;
-  visibility: visible;
-  pointer-events: auto;
-}
-/* De merkintro is uitgeschakeld; het headerlogo herlaadt voortaan de homepage. */
-.signature-intro { display: none !important; }
-.signature-intro__surface {
-  position: absolute;
-  inset: 0;
-  background: #E6E0D5;
-  opacity: 1;
-  will-change: opacity;
-}
-.signature-intro__wordmark {
-  position: relative;
-  z-index: 2;
-  width: min(60vw, 32rem);
-  aspect-ratio: 1073 / 390;
-}
-.signature-intro__letter {
-  position: absolute;
-  display: block;
-  overflow: visible;
-  fill: currentColor;
-  opacity: 0;
-  will-change: transform, clip-path, opacity;
-}
-.signature-intro__y-part {
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform;
-}
-.signature-intro__letter--y {
-  left: 4.67%;
-  top: 7.69%;
-  width: 28.49%;
-  height: 84.62%;
-  transform-origin: center;
-}
-.signature-intro__letter--e {
-  left: 35.48%;
-  top: 11.54%;
-  width: 16.40%;
-  height: 76.92%;
-}
-.signature-intro__letter--n {
-  left: 56.11%;
-  top: 11.54%;
-  width: 18.45%;
-  height: 76.92%;
-}
-.signature-intro__letter--s {
-  left: 78.91%;
-  top: 11.54%;
-  width: 16.89%;
-  height: 76.92%;
-}
-.signature-intro__guides {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  top: 50%;
-  width: min(62vw, 34rem);
-  height: min(16vw, 5.5rem);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.signature-intro__guides span {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  opacity: .08;
-  transform: scaleX(0);
-  will-change: transform, opacity;
-}
-.signature-intro__guides span:first-child { top: 0; transform-origin: left; }
-.signature-intro__guides span:last-child { bottom: 0; transform-origin: right; }
-body.intro-active { overflow: hidden; }
-body.intro-active .hero__eyebrow,
-body.intro-active .hero__title,
-body.intro-active .hero__desc,
-body.intro-active .hero__actions,
-body.intro-active .hero__note,
-body.intro-active .hero__media,
-body.intro-active .nav__inner {
-  transition: none;
-}
-body.intro-active .nav .brand__image { opacity: 0; transition: none; }
-html.intro-seen .signature-intro { display: none; }
-html.intro-seen body.intro-active { overflow: auto; }
-html.intro-seen body.intro-active .nav .brand__image { opacity: 1; }
-
-@media (max-width: 600px) {
-  .signature-intro__wordmark { width: min(68vw, 21rem); }
-  .signature-intro__guides { width: 72vw; height: min(22vw, 5rem); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .signature-intro { display: none; }
-  body.intro-active { overflow: auto; }
-  body.intro-active .nav .brand__image { opacity: 1; }
-}
 
 /* ========================================================================== 
    Canonieke header — identiek op iedere pagina
