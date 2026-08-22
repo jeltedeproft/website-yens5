@@ -578,6 +578,122 @@ function initMisc() {
   });
 }
 
+/* --------------------------------------------------------------------------
+   Merkintro — plan, section, space
+   -------------------------------------------------------------------------- */
+function initBrandIntro() {
+  const intro = $('[data-brand-intro]');
+  if (!intro) return;
+
+  if (reduceMotion) {
+    intro.hidden = true;
+    document.body.classList.remove('brand-intro-active');
+    return;
+  }
+
+  const symbol = $('.brand-intro__symbol', intro);
+  const symbolParts = $$('.brand-intro__symbol-part', symbol);
+  const letters = $$('.brand-intro__letter', intro);
+  const planes = $$('.brand-intro__plane', intro);
+  const timing = {
+    duration: 2720,
+    formStart: 100,
+    travelStart: 680,
+    wordComplete: 1450,
+    lockRelease: 1630,
+    revealStart: 1700,
+    sideRevealStart: 1760,
+    logoClear: 1990,
+    sideClear: 2600,
+    planesClear: 2660
+  };
+  const duration = timing.duration;
+  const at = (ms) => ms / duration;
+
+  requestAnimationFrame(() => {
+    const symbolRect = symbol.getBoundingClientRect();
+    const centerOffset = window.innerWidth / 2 - (symbolRect.left + symbolRect.width / 2);
+    const draw = 'cubic-bezier(.16, 1, .3, 1)';
+    const assemble = 'cubic-bezier(.65, 0, .35, 1)';
+    const open = 'cubic-bezier(.22, 1, .36, 1)';
+    const animations = [symbol.animate([
+      { offset: 0, opacity: 1, transform: `translate3d(${centerOffset}px,0,0)` },
+      { offset: at(timing.travelStart), opacity: 1, transform: `translate3d(${centerOffset}px,0,0)`, easing: assemble },
+      { offset: at(timing.wordComplete), opacity: 1, transform: 'translate3d(0,0,0)', easing: assemble },
+      { offset: at(timing.lockRelease), opacity: 1, transform: 'translate3d(0,0,0)', easing: open },
+      { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,0,0)' },
+      { offset: 1, opacity: 0, transform: 'translate3d(0,0,0)' }
+    ], { duration, easing: 'linear', fill: 'both' })];
+
+    const partMotion = [
+      { start: 170, end: 840, from: 'translate3d(0,5px,0)', clip: 'inset(0 58% 76% 0)' },
+      { start: 240, end: 910, from: 'translate3d(0,7px,0)', clip: 'inset(0 0 76% 58%)' },
+      { start: timing.formStart, end: 720, from: 'translate3d(0,12px,0)', clip: 'inset(48% 38% 0 38%)' }
+    ];
+    symbolParts.forEach((part, index) => {
+      const motion = partMotion[index];
+      animations.push(part.animate([
+        { offset: 0, opacity: 0, transform: motion.from, clipPath: motion.clip },
+        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.clip, easing: draw },
+        { offset: at(motion.end), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' },
+        { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' }
+      ], { duration, easing: 'linear', fill: 'both' }));
+    });
+
+    const letterMotion = [
+      { start: 830, end: 1320, from: 'translate3d(-10px,0,0)', closed: 'inset(48% 48.12% 48% 35.48%)', open: 'inset(0 48.12% 0 35.48%)' },
+      { start: 885, end: 1390, from: 'translate3d(0,7px,0)', closed: 'inset(0 33.8% 0 65.2%)', open: 'inset(0 25.44% 0 56.11%)' },
+      { start: 940, end: timing.wordComplete, from: 'translate3d(10px,0,0)', closed: 'inset(48% 4.2% 48% 78.91%)', open: 'inset(0 4.2% 0 78.91%)' }
+    ];
+    letters.forEach((letter, index) => {
+      const motion = letterMotion[index];
+      animations.push(letter.animate([
+        { offset: 0, opacity: 0, transform: motion.from, clipPath: motion.closed },
+        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.closed, easing: draw },
+        { offset: at(motion.start + 90), opacity: .14, transform: motion.from, clipPath: motion.closed, easing: draw },
+        { offset: at(motion.end), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open },
+        { offset: at(timing.lockRelease), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open, easing: open },
+        { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,0,0)', clipPath: motion.open },
+        { offset: 1, opacity: 0, transform: 'translate3d(0,0,0)', clipPath: motion.open }
+      ], { duration, easing: 'linear', fill: 'both' }));
+    });
+
+    const planeFrames = [
+      [
+        { offset: 0, transform: 'scaleY(1)' },
+        { offset: at(timing.revealStart), transform: 'scaleY(1)', easing: open },
+        { offset: at(timing.planesClear), transform: 'scaleY(0)' },
+        { offset: 1, transform: 'scaleY(0)' }
+      ],
+      [
+        { offset: 0, transform: 'scaleX(1)' },
+        { offset: at(timing.sideRevealStart), transform: 'scaleX(1)', easing: open },
+        { offset: at(timing.sideClear), transform: 'scaleX(0)' },
+        { offset: 1, transform: 'scaleX(0)' }
+      ]
+    ];
+    planes.forEach((plane, index) => {
+      const axis = index === 0 || index === 2 ? 0 : 1;
+      animations.push(plane.animate(planeFrames[axis], { duration, easing: 'linear', fill: 'both' }));
+    });
+
+    const clock = intro.animate([
+      { offset: 0, opacity: 1 },
+      { offset: at(timing.planesClear), opacity: 1 },
+      { offset: 1, opacity: 0 }
+    ], { duration, easing: 'linear', fill: 'both' });
+    animations.push(clock);
+
+    const startTime = document.timeline.currentTime;
+    animations.forEach((animation) => { animation.startTime = startTime; });
+    clock.finished.then(() => {
+      intro.hidden = true;
+      document.body.classList.remove('brand-intro-active');
+      animations.forEach((animation) => animation.cancel());
+    });
+  });
+}
+
 function initBrandRefresh() {
   const brand = $('.nav .brand');
   if (!brand) return;
@@ -590,6 +706,7 @@ function initBrandRefresh() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initBrandIntro();
   initBrandRefresh();
   initSmoothScroll();
   initTheme();

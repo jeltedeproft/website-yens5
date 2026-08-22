@@ -4605,6 +4605,106 @@ body .nav.is-initializing .brand {
 
 
 /* ========================================================================== 
+   YENS signature intro
+   ========================================================================== */
+.brand-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: transparent;
+  color: #556056;
+  pointer-events: auto;
+  will-change: opacity;
+}
+.brand-intro[hidden] { display: none !important; }
+.brand-intro__planes,
+.brand-intro__plane {
+  position: absolute;
+  inset: 0;
+}
+.brand-intro__planes { z-index: 0; }
+.brand-intro__plane {
+  display: block;
+  background: #E6E0D5;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.brand-intro__plane--top,
+.brand-intro__plane--bottom { height: 50.1%; }
+.brand-intro__plane--top {
+  bottom: auto;
+  transform-origin: 50% 0;
+}
+.brand-intro__plane--bottom {
+  top: auto;
+  transform-origin: 50% 100%;
+}
+.brand-intro__plane--left,
+.brand-intro__plane--right {
+  top: 32%;
+  width: 50.1%;
+  height: 36%;
+}
+.brand-intro__plane--left {
+  right: auto;
+  transform-origin: 0 50%;
+}
+.brand-intro__plane--right {
+  left: auto;
+  transform-origin: 100% 50%;
+}
+.brand-intro__lockup {
+  position: relative;
+  z-index: 1;
+  width: min(58vw, 30rem);
+  aspect-ratio: 1073 / 390;
+}
+.brand-intro__symbol,
+.brand-intro__letter {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  will-change: transform, opacity, clip-path;
+}
+.brand-intro__symbol {
+  z-index: 2;
+  left: 4.67%;
+  top: 7.69%;
+  width: 28.49%;
+  height: 84.62%;
+  fill: currentColor;
+}
+.brand-intro__symbol-part {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity, clip-path;
+}
+.brand-intro__letter {
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.brand-intro__letter--e { clip-path: inset(0 48.12% 0 35.48%); }
+.brand-intro__letter--n { clip-path: inset(0 25.44% 0 56.11%); }
+.brand-intro__letter--s { clip-path: inset(0 4.2% 0 78.91%); }
+body.brand-intro-active { overflow: hidden; }
+body.brand-intro-active .nav { opacity: 0; }
+
+@media (max-width: 600px) {
+  .brand-intro__lockup { width: min(72vw, 20rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-intro { display: none; }
+  body.brand-intro-active { overflow: auto; }
+  body.brand-intro-active .nav { opacity: 1; }
+}
+
+/* ========================================================================== 
    Canonieke header — identiek op iedere pagina
    ========================================================================== */
 body .nav,
