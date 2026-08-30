@@ -4972,3 +4972,76 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
   .home-page .hero__media img { object-position: 64% center; }
   .home-page .about-editorial__media img { object-position: 50% 44%; }
 }
+
+/* Editoriale fotografie op de inhoudspagina's. */
+.page-editorial-pair {
+  padding: 0 0 clamp(4.5rem, 8vw, 8rem);
+}
+
+.page-editorial-pair__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: end;
+  gap: clamp(.75rem, 1.5vw, 1.5rem);
+}
+
+.page-editorial-photo,
+.contact-aside__portrait {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-deep);
+}
+
+.page-editorial-photo img,
+.contact-aside__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.82) sepia(.045) brightness(.94) contrast(1.045);
+  transition: transform 1.1s var(--ease), filter .8s var(--ease);
+}
+
+.page-editorial-photo:hover img,
+.contact-aside__portrait:hover img {
+  transform: scale(1.018);
+  filter: saturate(.86) sepia(.04) brightness(.95) contrast(1.04);
+}
+
+.page-editorial-pair__grid--aanbod .page-editorial-photo--personal { aspect-ratio: 3 / 2; }
+.page-editorial-pair__grid--aanbod .page-editorial-photo--group { aspect-ratio: 16 / 9; }
+.page-editorial-pair__grid--workflow { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+.page-editorial-pair__grid--workflow .page-editorial-photo--board { aspect-ratio: 4 / 5; }
+.page-editorial-pair__grid--workflow .page-editorial-photo--assessment { aspect-ratio: 3 / 2; }
+.page-editorial-photo--board img { object-position: 50% 30%; }
+
+.contact-aside__portrait {
+  aspect-ratio: 4 / 5;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), 62% 100%, 0 calc(100% - 4px));
+}
+
+.contact-aside__portrait img { object-position: 58% center; }
+
+.over-intro-photo img {
+  object-position: 50% 8%;
+}
+
+@media (min-width: 901px) {
+  .page-editorial-photo--personal,
+  .page-editorial-photo--board {
+    clip-path: polygon(0 0, 100% var(--y-cut-soft), 100% 100%, var(--y-axis) calc(100% - var(--y-cut-soft)), 0 100%);
+  }
+
+  .page-editorial-photo--group,
+  .page-editorial-photo--assessment {
+    clip-path: polygon(0 var(--y-cut-soft), var(--y-axis-mirror) 0, 100% var(--y-cut-detail), 100% 100%, 0 calc(100% - var(--y-cut-soft)));
+  }
+}
+
+@media (max-width: 900px) {
+  .page-editorial-pair { padding-bottom: 4rem; }
+  .page-editorial-pair__grid,
+  .page-editorial-pair__grid--workflow { grid-template-columns: 1fr; }
+  .page-editorial-photo { aspect-ratio: 4 / 3 !important; }
+  .page-editorial-photo--board img { object-position: 50% 24%; }
+}
