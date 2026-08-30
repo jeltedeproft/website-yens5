@@ -42,30 +42,6 @@ function initSmoothScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   Thema — licht is de standaardidentiteit, donker is een bewuste keuze
-   -------------------------------------------------------------------------- */
-function initTheme() {
-  const root = document.documentElement;
-  if (localStorage.getItem('yens-theme') === 'dark') {
-    root.setAttribute('data-theme', 'dark');
-  }
-
-  const toggle = $('#theme-toggle');
-  if (!toggle) return;
-
-  toggle.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      root.removeAttribute('data-theme');
-      localStorage.setItem('yens-theme', 'light');
-    } else {
-      root.setAttribute('data-theme', 'dark');
-      localStorage.setItem('yens-theme', 'dark');
-    }
-  });
-}
-
-/* --------------------------------------------------------------------------
    Navigatie: scrollstatus + mobiel menu
    -------------------------------------------------------------------------- */
 function initNav() {
@@ -74,7 +50,7 @@ function initNav() {
   const panel = $('#nav-mobile');
   const desktopLinks = nav ? $('.nav__links', nav) : null;
   const navActions = nav ? $('.nav__actions', nav) : null;
-  let lastScrollY = window.scrollY;
+  let directionAnchorY = Math.max(window.scrollY, 0);
   let navTicking = false;
 
   if (nav) {
@@ -83,40 +59,39 @@ function initNav() {
 
     const updateNav = () => {
       const currentScrollY = Math.max(window.scrollY, 0);
-      const scrollingDown = currentScrollY > lastScrollY + 0.5;
-      const scrollingUp = currentScrollY < lastScrollY - 0.5;
+      const directionDelta = currentScrollY - directionAnchorY;
+      const hasDirectionChange = Math.abs(directionDelta) >= 2;
+      const scrollingDown = hasDirectionChange && directionDelta > 0;
+      const scrollingUp = hasDirectionChange && directionDelta < 0;
+      if (hasDirectionChange) directionAnchorY = currentScrollY;
       const menuOpen = panel?.classList.contains('is-open');
       const viewportWidth = window.innerWidth;
       const isMobile = viewportWidth <= 900;
+      const shouldCompact = currentScrollY > 24;
+      nav.classList.toggle('is-compact', shouldCompact);
       const wideWidth = viewportWidth;
       const wideHeight = isMobile ? 76 : 84;
-      const compactHeight = 46;
+      const compactHeight = 50;
       const widePadding = isMobile
         ? 24
         : Math.min(Math.max(viewportWidth * 0.032, 24), 60);
-      const compactPadding = isMobile ? 12 : 14;
+      const compactPadding = isMobile ? 14 : 16;
       const fullBrandWidth = isMobile ? 80 : 94;
-      const compactBrandWidth = isMobile ? 27 : 31;
-      const compactGap = isMobile ? 7 : 15;
-      const linkItems = desktopLinks ? Array.from(desktopLinks.children) : [];
-      const linksWidth = linkItems.reduce((total, item) => total + item.offsetWidth, 0)
-        + Math.max(linkItems.length - 1, 0) * compactGap;
+      const compactBrandWidth = isMobile ? 31 : 35;
+      const compactGap = isMobile ? 8 : 16;
+      const linksWidth = desktopLinks?.offsetWidth || 0;
       const actionItems = navActions ? Array.from(navActions.children) : [];
       const actionsWidth = actionItems.reduce((total, item) => total + item.offsetWidth, 0);
       const measuredCompactWidth = isMobile
         ? 216
-        : compactBrandWidth
+        : Math.max(compactBrandWidth, actionsWidth) * 2
           + (linksWidth || 410)
-          + (actionsWidth || 44)
           + compactGap * 2
           + compactPadding * 2;
       const compactWidth = Math.min(
         Math.ceil(measuredCompactWidth),
         viewportWidth - (isMobile ? 16 : 32)
       );
-      const compactLinksLeft = (viewportWidth - compactWidth) / 2
-        + compactPadding + compactBrandWidth + compactGap;
-      const shouldCompact = currentScrollY > 24;
       const morphProgress = shouldCompact ? 1 : 0;
       const firstScreenIsOutOfView = currentScrollY >= window.innerHeight;
 
@@ -125,12 +100,11 @@ function initNav() {
       const shellPadding = widePadding + (compactPadding - widePadding) * morphProgress;
       const brandWidth = fullBrandWidth + (compactBrandWidth - fullBrandWidth) * morphProgress;
       const expandedOffset = isMobile ? 12 : 18;
-      const compactOffset = isMobile ? 24 : 32;
+      const compactOffset = isMobile ? 24 : 35;
       const shellOffset = expandedOffset
         + (compactOffset - expandedOffset) * morphProgress;
 
       nav.style.setProperty('--nav-shell-width', `${Math.round(shellWidth)}px`);
-      nav.style.setProperty('--nav-compact-links-left', `${compactLinksLeft.toFixed(2)}px`);
       nav.style.setProperty('--nav-shell-height', `${shellHeight.toFixed(2)}px`);
       nav.style.setProperty('--nav-shell-padding', `${shellPadding.toFixed(2)}px`);
       nav.style.setProperty('--nav-surface-opacity', morphProgress.toFixed(3));
@@ -138,17 +112,15 @@ function initNav() {
       nav.style.setProperty('--nav-shell-y', `${shellOffset.toFixed(2)}px`);
 
       nav.classList.toggle('is-scrolled', shouldCompact);
-      nav.classList.toggle('is-compact', shouldCompact);
 
       if (!firstScreenIsOutOfView || menuOpen) {
         nav.classList.remove('is-hidden');
-      } else if (scrollingDown) {
+      } else if (scrollingDown || nav.classList.contains('is-initializing')) {
         nav.classList.add('is-hidden');
-      } else if (scrollingUp || currentScrollY <= 80) {
+      } else if (scrollingUp) {
         nav.classList.remove('is-hidden');
       }
 
-      lastScrollY = currentScrollY;
       navTicking = false;
     };
 
@@ -581,31 +553,262 @@ function initMisc() {
 /* --------------------------------------------------------------------------
    Merkintro — plan, section, space
    -------------------------------------------------------------------------- */
-function initBrandIntro() {
+function initBrandIntroStructural() {
   const intro = $('[data-brand-intro]');
   if (!intro) return;
 
   if (reduceMotion) {
     intro.hidden = true;
     document.body.classList.remove('brand-intro-active');
+    document.body.classList.add('is-loaded');
     return;
   }
 
-  const symbol = $('.brand-intro__symbol', intro);
-  const symbolParts = $$('.brand-intro__symbol-part', symbol);
-  const letters = $$('.brand-intro__letter', intro);
-  const planes = $$('.brand-intro__plane', intro);
+  const lockup = $('.brand-intro__lockup', intro);
+  const wordmark = $('.brand-intro__wordmark', intro);
+  const yFrame = $('.brand-intro__y-frame', intro);
+  const yParts = $$('.brand-intro__y-part', intro);
+  const colorWipe = $('.brand-intro__color-wipe', intro);
+  const letters = $$('.brand-intro__letter-group:not(.brand-intro__letter-group--y)', intro);
+  const surfaces = $$('.brand-intro__surface', intro);
+  const axis = $('.brand-intro__axis', intro);
+  const nav = $('.nav');
+  const heroMedia = $('.hero__media');
+  const heroImage = $('.hero__media img');
+  const heroEyebrow = $('.hero__eyebrow');
+  const heroLines = $$('.hero__title .line > span');
+  const heroDesc = $('.hero__desc');
+  const heroActions = $('.hero__actions');
   const timing = {
-    duration: 2720,
+    duration: 2960,
+    axisIn: 80,
+    stemStart: 130,
+    stemEnd: 650,
+    leftStart: 210,
+    leftEnd: 750,
+    rightStart: 265,
+    rightEnd: 815,
+    spaceStart: 610,
+    eStart: 790,
+    nStart: 840,
+    sStart: 890,
+    eEnd: 1280,
+    nEnd: 1360,
+    wordComplete: 1440,
+    colorStart: 835,
+    colorEnd: 1230,
+    releaseStart: 1580,
+    apertureStart: 1640,
+    mediaStart: 1690,
+    logoClear: 1900,
+    navStart: 1980,
+    copyStart: 1880,
+    surfacesClear: 2860
+  };
+  const duration = timing.duration;
+  const at = (ms) => ms / duration;
+  const formEase = 'cubic-bezier(.16, 1, .3, 1)';
+  const assembleEase = 'cubic-bezier(.45, 0, .2, 1)';
+  const releaseEase = 'cubic-bezier(.22, 1, .36, 1)';
+  let animations = [];
+  let clock = null;
+  let resizeFrame = 0;
+  let finished = false;
+
+  const addTrack = (element, frames) => {
+    if (!element) return null;
+    const animation = element.animate(frames, { duration, easing: 'linear', fill: 'both' });
+    animations.push(animation);
+    return animation;
+  };
+
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    window.removeEventListener('resize', onResize);
+    document.body.classList.add('is-loaded', 'hero-intro-complete');
+    document.body.classList.remove('brand-intro-active');
+    intro.hidden = true;
+    animations.forEach((animation) => animation.cancel());
+  };
+
+  const buildTimeline = (resumeAt = 0) => {
+    animations.forEach((animation) => animation.cancel());
+    animations = [];
+
+    const lockupRect = lockup.getBoundingClientRect();
+    // Exacte geometrie uit het officiële 1073 × 390 woordmerk.
+    // De Y loopt lokaal van x=25 tot x=738 en gebruikt de officiële schaal/offset.
+    const yCenterInViewBox = 50.113171 + ((25 + 738) / 2) * 0.4024390243902439;
+    const centerOffset = (1073 / 2 - yCenterInViewBox) * (lockupRect.width / 1073);
+
+    addTrack(axis, [
+      { offset: 0, opacity: 0, transform: 'translate3d(-.5px,-50%,0) scaleY(0)' },
+      { offset: at(timing.axisIn), opacity: 0, transform: 'translate3d(-.5px,-50%,0) scaleY(0)', easing: formEase },
+      { offset: at(430), opacity: .58, transform: 'translate3d(-.5px,-50%,0) scaleY(1)' },
+      { offset: at(timing.wordComplete), opacity: .24, transform: 'translate3d(-.5px,-50%,0) scaleY(1)', easing: assembleEase },
+      { offset: at(timing.apertureStart), opacity: 0, transform: 'translate3d(-.5px,-50%,0) scaleY(.08)' },
+      { offset: 1, opacity: 0, transform: 'translate3d(-.5px,-50%,0) scaleY(0)' }
+    ]);
+
+    addTrack(yFrame, [
+      { offset: 0, transform: `translate3d(${centerOffset}px,0,0)` },
+      { offset: at(timing.spaceStart), transform: `translate3d(${centerOffset}px,0,0)`, easing: assembleEase },
+      { offset: at(timing.wordComplete), transform: 'translate3d(0,0,0)' },
+      { offset: 1, transform: 'translate3d(0,0,0)' }
+    ]);
+
+    const yMotion = [
+      { start: timing.leftStart, end: timing.leftEnd, from: 'translate3d(1px,5px,0)' },
+      { start: timing.rightStart, end: timing.rightEnd, from: 'translate3d(-1px,7px,0)' },
+      { start: timing.stemStart, end: timing.stemEnd, from: 'translate3d(0,10px,0)' }
+    ];
+    yParts.forEach((part, index) => {
+      const motion = yMotion[index];
+      addTrack(part, [
+        { offset: 0, opacity: 0, transform: motion.from },
+        { offset: at(motion.start), opacity: 0, transform: motion.from, easing: formEase },
+        { offset: at(motion.end), opacity: 1, transform: 'translate3d(0,0,0)' },
+        { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)' }
+      ]);
+    });
+
+    addTrack(colorWipe, [
+      { offset: 0, transform: 'scaleX(0)' },
+      { offset: at(timing.colorStart), transform: 'scaleX(0)', easing: assembleEase },
+      { offset: at(timing.colorEnd), transform: 'scaleX(1)' },
+      { offset: 1, transform: 'scaleX(1)' }
+    ]);
+
+    const letterTimes = [
+      [timing.eStart, timing.eEnd],
+      [timing.nStart, timing.nEnd],
+      [timing.sStart, timing.wordComplete]
+    ];
+    letters.forEach((letter, index) => {
+      const [start, end] = letterTimes[index];
+      addTrack(letter, [
+        { offset: 0, opacity: 0, transform: 'translate3d(-5px,0,0)', clipPath: 'inset(0 100% 0 0)' },
+        { offset: at(start), opacity: 0, transform: 'translate3d(-5px,0,0)', clipPath: 'inset(0 100% 0 0)', easing: assembleEase },
+        { offset: at(end), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' },
+        { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' }
+      ]);
+    });
+
+    addTrack(wordmark, [
+      { offset: 0, opacity: 1 },
+      { offset: at(timing.releaseStart), opacity: 1, easing: releaseEase },
+      { offset: at(timing.logoClear), opacity: 0 },
+      { offset: 1, opacity: 0 }
+    ]);
+
+    surfaces.forEach((surface, index) => addTrack(surface, [
+      { offset: 0, transform: 'translate3d(0,0,0)' },
+      { offset: at(timing.apertureStart), transform: 'translate3d(0,0,0)', easing: releaseEase },
+      { offset: at(timing.surfacesClear), transform: `translate3d(0,${index === 0 ? '-100.2%' : '100.2%'},0)` },
+      { offset: 1, transform: `translate3d(0,${index === 0 ? '-100.2%' : '100.2%'},0)` }
+    ]));
+
+    addTrack(heroMedia, [
+      { offset: 0, opacity: 0 },
+      { offset: at(timing.mediaStart), opacity: 0, easing: releaseEase },
+      { offset: at(2360), opacity: 1 },
+      { offset: 1, opacity: 1 }
+    ]);
+    addTrack(heroImage, [
+      { offset: 0, transform: 'scale(1.06)' },
+      { offset: at(timing.mediaStart), transform: 'scale(1.06)', easing: releaseEase },
+      { offset: 1, transform: 'scale(1.035)' }
+    ]);
+    addTrack(nav, [
+      { offset: 0, opacity: 0 },
+      { offset: at(timing.navStart), opacity: 0, easing: formEase },
+      { offset: at(2250), opacity: 1 },
+      { offset: 1, opacity: 1 }
+    ]);
+
+    const revealTrack = (element, start, end, from = 'translate3d(0,16px,0)') => addTrack(element, [
+      { offset: 0, opacity: 0, transform: from },
+      { offset: at(start), opacity: 0, transform: from, easing: formEase },
+      { offset: at(end), opacity: 1, transform: 'translate3d(0,0,0)' },
+      { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)' }
+    ]);
+    revealTrack(heroEyebrow, timing.copyStart, 2250, 'translate3d(0,12px,0)');
+    heroLines.forEach((line, index) => revealTrack(line, 1940 + index * 55, 2390 + index * 55, 'translate3d(0,108%,0)'));
+    revealTrack(heroDesc, 2080, 2510);
+    revealTrack(heroActions, 2140, 2570);
+
+    clock = addTrack(intro, [
+      { offset: 0, opacity: 1 },
+      { offset: at(timing.surfacesClear), opacity: 1 },
+      { offset: 1, opacity: 0 }
+    ]);
+
+    const startTime = document.timeline.currentTime - resumeAt;
+    animations.forEach((animation) => { animation.startTime = startTime; });
+    clock.finished.then(finish).catch(() => {});
+  };
+
+  const onResize = () => {
+    if (finished || resizeFrame) return;
+    resizeFrame = requestAnimationFrame(() => {
+      resizeFrame = 0;
+      const currentTime = Math.min(clock?.currentTime || 0, duration - 1);
+      buildTimeline(currentTime);
+    });
+  };
+
+  window.addEventListener('resize', onResize, { passive: true });
+  requestAnimationFrame(() => buildTimeline());
+}
+
+function initBrandIntro() {
+  const intro = $('[data-brand-intro]');
+  if (!intro) return;
+
+  const isRefresh = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+  let replayRequested = false;
+  try {
+    replayRequested = sessionStorage.getItem('yens-intro-replay') === '1';
+    sessionStorage.removeItem('yens-intro-replay');
+  } catch (_) {}
+
+  if (!isRefresh && !replayRequested) {
+    intro.hidden = true;
+    document.documentElement.classList.remove('skip-brand-intro');
+    document.body.classList.remove('brand-intro-active');
+    document.body.classList.add('intro-complete');
+    return;
+  }
+
+  if (reduceMotion) {
+    intro.hidden = true;
+    document.body.classList.remove('brand-intro-active');
+    document.body.classList.add('intro-complete');
+    return;
+  }
+
+  // De homepage staat vanaf het begin stabiel achter het volledig dekkende vlak.
+  // Daardoor worden logo en copy niet pas na de aperture opnieuw gepositioneerd.
+  document.body.classList.add('intro-complete');
+
+  const symbol = $('.brand-intro__symbol', intro);
+  const letters = $$('.brand-intro__letter', intro);
+  const timing = {
+    duration: 2800,
     formStart: 100,
     travelStart: 680,
     wordComplete: 1450,
-    lockRelease: 1630,
-    revealStart: 1700,
-    sideRevealStart: 1760,
-    logoClear: 1990,
-    sideClear: 2600,
-    planesClear: 2660
+    lockRelease: 1560,
+    sExitStart: 1560,
+    nExitStart: 1580,
+    eExitStart: 1600,
+    yExitStart: 1620,
+    sExitEnd: 2060,
+    nExitEnd: 2080,
+    eExitEnd: 2100,
+    logoClear: 2120,
+    overlayFadeStart: 1860
   };
   const duration = timing.duration;
   const at = (ms) => ms / duration;
@@ -613,73 +816,41 @@ function initBrandIntro() {
   requestAnimationFrame(() => {
     const symbolRect = symbol.getBoundingClientRect();
     const centerOffset = window.innerWidth / 2 - (symbolRect.left + symbolRect.width / 2);
-    const draw = 'cubic-bezier(.16, 1, .3, 1)';
-    const assemble = 'cubic-bezier(.65, 0, .35, 1)';
-    const open = 'cubic-bezier(.22, 1, .36, 1)';
+    const easing = {
+      form: 'cubic-bezier(.16, 1, .3, 1)',
+      assemble: 'cubic-bezier(.45, 0, .2, 1)',
+      release: 'cubic-bezier(.22, .61, .36, 1)'
+    };
     const animations = [symbol.animate([
-      { offset: 0, opacity: 1, transform: `translate3d(${centerOffset}px,0,0)` },
-      { offset: at(timing.travelStart), opacity: 1, transform: `translate3d(${centerOffset}px,0,0)`, easing: assemble },
-      { offset: at(timing.wordComplete), opacity: 1, transform: 'translate3d(0,0,0)', easing: assemble },
-      { offset: at(timing.lockRelease), opacity: 1, transform: 'translate3d(0,0,0)', easing: open },
-      { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,0,0)' },
-      { offset: 1, opacity: 0, transform: 'translate3d(0,0,0)' }
+      { offset: 0, opacity: 0, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(49% 24% 49% 24%)' },
+      { offset: at(timing.formStart), opacity: 0, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(49% 24% 49% 24%)', easing: easing.form },
+      { offset: at(timing.travelStart), opacity: 1, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(0)', easing: easing.assemble },
+      { offset: at(timing.wordComplete), opacity: 1, transform: 'translate3d(0,0,0)' },
+      { offset: at(timing.yExitStart), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)', easing: easing.release },
+      { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: 'inset(0)' },
+      { offset: 1, opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: 'inset(0)' }
     ], { duration, easing: 'linear', fill: 'both' })];
 
-    const partMotion = [
-      { start: 170, end: 840, from: 'translate3d(0,5px,0)', clip: 'inset(0 58% 76% 0)' },
-      { start: 240, end: 910, from: 'translate3d(0,7px,0)', clip: 'inset(0 0 76% 58%)' },
-      { start: timing.formStart, end: 720, from: 'translate3d(0,12px,0)', clip: 'inset(48% 38% 0 38%)' }
-    ];
-    symbolParts.forEach((part, index) => {
-      const motion = partMotion[index];
-      animations.push(part.animate([
-        { offset: 0, opacity: 0, transform: motion.from, clipPath: motion.clip },
-        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.clip, easing: draw },
-        { offset: at(motion.end), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' },
-        { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)' }
-      ], { duration, easing: 'linear', fill: 'both' }));
-    });
-
     const letterMotion = [
-      { start: 830, end: 1320, from: 'translate3d(-10px,0,0)', closed: 'inset(48% 48.12% 48% 35.48%)', open: 'inset(0 48.12% 0 35.48%)' },
-      { start: 885, end: 1390, from: 'translate3d(0,7px,0)', closed: 'inset(0 33.8% 0 65.2%)', open: 'inset(0 25.44% 0 56.11%)' },
-      { start: 940, end: timing.wordComplete, from: 'translate3d(10px,0,0)', closed: 'inset(48% 4.2% 48% 78.91%)', open: 'inset(0 4.2% 0 78.91%)' }
+      { start: 820, end: 1300, exitStart: timing.eExitStart, exitEnd: timing.eExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 72.125% 0 27.875%)', open: 'inset(0 53.426% 0 27.875%)' },
+      { start: 875, end: 1375, exitStart: timing.nExitStart, exitEnd: timing.nExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 48.432% 0 51.568%)', open: 'inset(0 27.294% 0 51.568%)' },
+      { start: 930, end: timing.wordComplete, exitStart: timing.sExitStart, exitEnd: timing.sExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 22.764% 0 77.236%)', open: 'inset(0 1.858% 0 77.236%)' }
     ];
     letters.forEach((letter, index) => {
       const motion = letterMotion[index];
       animations.push(letter.animate([
         { offset: 0, opacity: 0, transform: motion.from, clipPath: motion.closed },
-        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.closed, easing: draw },
-        { offset: at(motion.start + 90), opacity: .14, transform: motion.from, clipPath: motion.closed, easing: draw },
+        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.closed, easing: easing.form },
         { offset: at(motion.end), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open },
-        { offset: at(timing.lockRelease), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open, easing: open },
-        { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,0,0)', clipPath: motion.open },
-        { offset: 1, opacity: 0, transform: 'translate3d(0,0,0)', clipPath: motion.open }
+        { offset: at(motion.exitStart), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open, easing: easing.release },
+        { offset: at(motion.exitEnd), opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: motion.open },
+        { offset: 1, opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: motion.open }
       ], { duration, easing: 'linear', fill: 'both' }));
-    });
-
-    const planeFrames = [
-      [
-        { offset: 0, transform: 'scaleY(1)' },
-        { offset: at(timing.revealStart), transform: 'scaleY(1)', easing: open },
-        { offset: at(timing.planesClear), transform: 'scaleY(0)' },
-        { offset: 1, transform: 'scaleY(0)' }
-      ],
-      [
-        { offset: 0, transform: 'scaleX(1)' },
-        { offset: at(timing.sideRevealStart), transform: 'scaleX(1)', easing: open },
-        { offset: at(timing.sideClear), transform: 'scaleX(0)' },
-        { offset: 1, transform: 'scaleX(0)' }
-      ]
-    ];
-    planes.forEach((plane, index) => {
-      const axis = index === 0 || index === 2 ? 0 : 1;
-      animations.push(plane.animate(planeFrames[axis], { duration, easing: 'linear', fill: 'both' }));
     });
 
     const clock = intro.animate([
       { offset: 0, opacity: 1 },
-      { offset: at(timing.planesClear), opacity: 1 },
+      { offset: at(timing.overlayFadeStart), opacity: 1, easing: easing.release },
       { offset: 1, opacity: 0 }
     ], { duration, easing: 'linear', fill: 'both' });
     animations.push(clock);
@@ -687,8 +858,9 @@ function initBrandIntro() {
     const startTime = document.timeline.currentTime;
     animations.forEach((animation) => { animation.startTime = startTime; });
     clock.finished.then(() => {
-      intro.hidden = true;
+      document.body.classList.add('intro-complete');
       document.body.classList.remove('brand-intro-active');
+      intro.hidden = true;
       animations.forEach((animation) => animation.cancel());
     });
   });
@@ -698,10 +870,14 @@ function initBrandRefresh() {
   const brand = $('.nav .brand');
   if (!brand) return;
   brand.addEventListener('click', (event) => {
-    const isHomepage = location.pathname === '/' || location.pathname.endsWith('/index.html');
-    if (!isHomepage) return;
     event.preventDefault();
-    location.reload();
+    try {
+      sessionStorage.setItem('yens-intro-replay', '1');
+    } catch (_) {}
+    const target = new URL(brand.href, location.href);
+    const isCurrentPage = target.pathname === location.pathname;
+    if (isCurrentPage) location.reload();
+    else location.assign(target.href);
   });
 }
 
@@ -709,7 +885,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initBrandIntro();
   initBrandRefresh();
   initSmoothScroll();
-  initTheme();
   initNav();
   initReveal();
   initProcess();
