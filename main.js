@@ -766,20 +766,24 @@ function initBrandIntro() {
   const intro = $('[data-brand-intro]');
   if (!intro) return;
 
-  const isRefresh = performance.getEntriesByType('navigation')[0]?.type === 'reload';
   let replayRequested = false;
   try {
     replayRequested = sessionStorage.getItem('yens-intro-replay') === '1';
     sessionStorage.removeItem('yens-intro-replay');
   } catch (_) {}
+  const shouldPlay = typeof window.yensBrandIntroShouldPlay === 'boolean'
+    ? window.yensBrandIntroShouldPlay
+    : performance.getEntriesByType('navigation')[0]?.type === 'reload' || replayRequested;
 
-  if (!isRefresh && !replayRequested) {
+  if (!shouldPlay) {
     intro.hidden = true;
     document.documentElement.classList.remove('skip-brand-intro');
     document.body.classList.remove('brand-intro-active');
     document.body.classList.add('intro-complete');
     return;
   }
+
+  try { sessionStorage.setItem('yens-intro-seen', '1'); } catch (_) {}
 
   if (reduceMotion) {
     intro.hidden = true;
@@ -881,9 +885,25 @@ function initBrandRefresh() {
   });
 }
 
+function initInternalHomeNavigation() {
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    const link = event.target.closest('a[href]');
+    if (!link || link.closest('.brand') || link.target === '_blank' || link.hasAttribute('download')) return;
+
+    const target = new URL(link.href, location.href);
+    const isHome = target.origin === location.origin
+      && (target.pathname === '/' || target.pathname.endsWith('/index.html'));
+    if (!isHome) return;
+
+    try { sessionStorage.setItem('yens-internal-home-navigation', String(Date.now())); } catch (_) {}
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initBrandIntro();
   initBrandRefresh();
+  initInternalHomeNavigation();
   initSmoothScroll();
   initNav();
   initReveal();

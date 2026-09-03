@@ -16,8 +16,20 @@
 
   <script>
     let yensReplayRequested = false;
-    try { yensReplayRequested = sessionStorage.getItem('yens-intro-replay') === '1'; } catch (_) {}
-    if (performance.getEntriesByType('navigation')[0]?.type !== 'reload' && !yensReplayRequested) {
+    let yensIntroSeen = false;
+    let yensInternalHomeNavigation = false;
+    try {
+      yensReplayRequested = sessionStorage.getItem('yens-intro-replay') === '1';
+      yensIntroSeen = sessionStorage.getItem('yens-intro-seen') === '1';
+      const internalNavigationAt = Number(sessionStorage.getItem('yens-internal-home-navigation') || 0);
+      yensInternalHomeNavigation = internalNavigationAt > 0 && Date.now() - internalNavigationAt < 15000;
+      sessionStorage.removeItem('yens-internal-home-navigation');
+    } catch (_) {}
+    const yensNavigationType = performance.getEntriesByType('navigation')[0]?.type;
+    window.yensBrandIntroShouldPlay = yensNavigationType === 'reload'
+      || yensReplayRequested
+      || (!yensInternalHomeNavigation && !yensIntroSeen);
+    if (!window.yensBrandIntroShouldPlay) {
       document.documentElement.classList.add('skip-brand-intro');
     }
   </script>
