@@ -7349,11 +7349,11 @@ body .nav.is-compact .nav__links a[href='/contact.html'][aria-current='page']::a
 }
 
 /* Navigatieverhaal — vrije, handgetekende strokes in één doorlopend ritme. */
-body .nav .nav__links a[href='/'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C12 7 17 7 23 6.25S33 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/begeleiding.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C10 7 14 7 19 5.5S24 7 27 7s5-2.5 9-1.5S42 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/werkwijze.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C11 7 14 6.75 18 6.25S25 5.5 30 5.25 38 6.25 42 6.75 46 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/over-mij.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C12 7 16 6.75 21 5S27 4.25 32 5.75 39 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/contact.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C10 7 14 6.75 19 5.5S25 7 28 7s5-1.75 9-1.25S43 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 10' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 6.2C13 5.2 24 6.8 35 5.8S47 5.7 54 5.4' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/begeleiding.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 10' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 6.5C14 5.7 21 5.8 31 6.2S46 5.1 54 5.6' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/werkwijze.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 10' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 6.7C10 6.8 17 5.3 25 5.7s17 .8 29-.4' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/over-mij.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 10' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 6C12 5.6 18 6.5 28 5.7S45 5.2 54 6' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/contact.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 10' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 6.4C11 5.1 19 6 27 6.1s17-.9 27-.4' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E"); }
 body .nav .nav__links a::after,
 body.home-page .nav .nav__links a::after,
 body:not(.home-page) .nav .nav__links a::after {
@@ -7544,4 +7544,299 @@ body:not(.home-page) .nav.is-compact .nav__links a[href]:not([aria-current='page
 body.home-page.intro-complete .hero__title .line > span {
   transform: none !important;
   transition: none !important;
+}
+
+/* Homepage begeleiding — studio-afwerking met rustig licht en één motionlaag. */
+.home-page .guidance-list[data-reveal] {
+  transform: translateY(16px);
+  transition:
+    opacity 1s cubic-bezier(.22, 1, .36, 1),
+    transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+.home-page .guidance-list[data-reveal].is-revealed { transform: none; }
+.home-page .guidance-category {
+  overflow: hidden;
+  border: 1px solid rgba(28, 26, 24, .09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
+}
+.home-page .guidance-category--personal {
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, .16), transparent 42%),
+    #E2D6C5;
+}
+.home-page .guidance-category--semi {
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, .035), transparent 44%),
+    #343A33;
+  border-color: rgba(244, 241, 235, .09);
+}
+.home-page .guidance-category__label {
+  position: relative;
+  z-index: 2;
+  letter-spacing: .17em;
+}
+.home-page .guidance-category__media,
+.home-page .guidance-category--semi .guidance-category__media {
+  opacity: .66;
+  filter: saturate(.72) contrast(.97) brightness(.98);
+  transform: scale(1.018);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .2) 10%, rgba(0, 0, 0, .68) 29%, #000 48%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, .2) 10%, rgba(0, 0, 0, .68) 29%, #000 48%);
+  transition:
+    opacity .85s cubic-bezier(.22, 1, .36, 1),
+    transform 1.1s cubic-bezier(.22, 1, .36, 1),
+    filter .85s ease;
+}
+.home-page .guidance-category--semi .guidance-category__media { opacity: .74; }
+.home-page .guidance-category--personal .guidance-category__media::after {
+  background: linear-gradient(90deg, #E2D6C5 0%, rgba(226, 214, 197, .9) 14%, rgba(226, 214, 197, .5) 37%, rgba(226, 214, 197, .1) 72%, transparent 100%);
+}
+.home-page .guidance-category--semi .guidance-category__media::after {
+  background: linear-gradient(90deg, #343A33 0%, rgba(52, 58, 51, .92) 14%, rgba(52, 58, 51, .54) 37%, rgba(52, 58, 51, .11) 72%, transparent 100%);
+}
+.home-page .guidance-category:has(.guidance-row:hover) .guidance-category__media,
+.home-page .guidance-category:has(.guidance-row:focus-visible) .guidance-category__media {
+  opacity: .9;
+  filter: saturate(.84) contrast(1) brightness(1);
+  transform: scale(1);
+}
+.home-page .guidance-row {
+  transition:
+    min-height .78s cubic-bezier(.22, 1, .36, 1),
+    opacity .55s ease,
+    padding .78s cubic-bezier(.22, 1, .36, 1),
+    background-color .55s ease;
+}
+.home-page .guidance-category:has(.guidance-row:hover) .guidance-row:not(:hover) { opacity: .7; }
+.home-page .guidance-row::before { transition: opacity .65s ease; }
+.home-page .guidance-row::after {
+  transition: width .75s cubic-bezier(.22, 1, .36, 1), opacity .55s ease;
+}
+.home-page .guidance-row:hover::after,
+.home-page .guidance-row:focus-visible::after { width: min(58%, 42rem); }
+.home-page .guidance-row__copy {
+  transition: transform .72s cubic-bezier(.22, 1, .36, 1), opacity .5s ease;
+}
+.home-page .guidance-row:hover .guidance-row__copy,
+.home-page .guidance-row:focus-visible .guidance-row__copy {
+  transform: translateX(clamp(.2rem, .45vw, .4rem));
+}
+
+@media (min-width: 701px) {
+  .home-page .guidance-category--personal:has(.guidance-row--personal:hover),
+  .home-page .guidance-category--personal:has(.guidance-row--personal:focus-visible) {
+    grid-template-rows: auto minmax(0, 1.08fr) minmax(0, .92fr);
+  }
+  .home-page .guidance-category--personal:has(.guidance-row--duo:hover),
+  .home-page .guidance-category--personal:has(.guidance-row--duo:focus-visible) {
+    grid-template-rows: auto minmax(0, .92fr) minmax(0, 1.08fr);
+  }
+  .home-page .guidance-category--semi .guidance-row { height: 84%; }
+}
+
+@media (max-width: 700px) {
+  .home-page .guidance-category__media,
+  .home-page .guidance-category--semi .guidance-category__media {
+    opacity: .48;
+    transform: none;
+  }
+  .home-page .guidance-category:has(.guidance-row:hover) .guidance-category__media { opacity: .58; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .guidance-list[data-reveal],
+  .home-page .guidance-category__media,
+  .home-page .guidance-row,
+  .home-page .guidance-row__copy,
+  .home-page .guidance-row::after { transition: none; }
+}
+
+/* Over YENS — ruimere portretcrop met het volledige hoofd in beeld. */
+.home-page .about-editorial__media img {
+  object-position: 50% 40%;
+  transform: scale(1.01);
+}
+.home-page .about-editorial__media:hover img {
+  object-position: 51% 41%;
+  transform: scale(1.025);
+}
+@media (max-width: 900px) {
+  .home-page .about-editorial__media img,
+  .home-page .about-editorial__media:hover img {
+    object-position: 50% 38%;
+    transform: scale(1.01);
+  }
+}
+
+/* Headerletters — normale schrijfwijze met zachte, geometrisch stabiele glans. */
+body .nav .nav__links a,
+body.home-page .nav .nav__links a,
+body:not(.home-page) .nav .nav__links a,
+body .nav__mobile a.nav__mobile-link {
+  text-transform: none;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, .5),
+    0 0 10px rgba(255, 255, 255, .2);
+  transition:
+    color .48s cubic-bezier(.22, 1, .36, 1),
+    opacity .48s cubic-bezier(.22, 1, .36, 1),
+    text-shadow .48s cubic-bezier(.22, 1, .36, 1);
+}
+body .nav:not(.is-compact) .nav__links a:hover,
+body .nav:not(.is-compact) .nav__links a:focus-visible,
+body .nav:not(.is-compact) .nav__links a[aria-current='page'] {
+  color: #171915;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, .72),
+    0 0 13px rgba(255, 255, 255, .42);
+}
+body .nav.is-compact .nav__links a {
+  color: rgba(225, 228, 220, .76);
+  text-shadow: 0 0 9px rgba(243, 244, 238, .12);
+}
+body .nav.is-compact .nav__links a:hover,
+body .nav.is-compact .nav__links a:focus-visible,
+body .nav.is-compact .nav__links a[aria-current='page'] {
+  color: #FAF9F4;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  text-shadow:
+    0 0 7px rgba(250, 249, 244, .38),
+    0 0 15px rgba(250, 249, 244, .18);
+}
+
+/* Handgetekende navigatiestroke — uitsluitend zichtbaar tijdens hover. */
+body .nav .nav__links a[href]::after,
+body.home-page .nav .nav__links a[href]::after,
+body:not(.home-page) .nav .nav__links a[href]::after,
+body .nav.is-compact .nav__links a[href][aria-current='page']::after,
+body.home-page .nav.is-compact .nav__links a[href][aria-current='page']::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href][aria-current='page']::after {
+  width: 2.1rem;
+  height: .48rem;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-50%) translateY(1px);
+}
+body .nav .nav__links a[href]:hover::after,
+body.home-page .nav .nav__links a[href]:hover::after,
+body:not(.home-page) .nav .nav__links a[href]:hover::after,
+body .nav.is-compact .nav__links a[href]:hover::after,
+body.home-page .nav.is-compact .nav__links a[href]:hover::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:hover::after {
+  opacity: .96;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0) rotate(var(--nav-mark-tilt, 0deg)) scaleX(1.035);
+}
+
+body .nav .nav__links a[href='/'] {
+  --nav-mark-a: #596855;
+  --nav-mark-b: #839077;
+  --nav-mark-tilt: -.7deg;
+}
+body .nav .nav__links a[href='/begeleiding.html'] {
+  --nav-mark-a: #8F6552;
+  --nav-mark-b: #B88A70;
+  --nav-mark-tilt: .65deg;
+}
+body .nav .nav__links a[href='/werkwijze.html'] {
+  --nav-mark-a: #67715A;
+  --nav-mark-b: #A09167;
+  --nav-mark-tilt: -.45deg;
+}
+body .nav .nav__links a[href='/over-mij.html'] {
+  --nav-mark-a: #9A785E;
+  --nav-mark-b: #65725F;
+  --nav-mark-tilt: .55deg;
+}
+body .nav .nav__links a[href='/contact.html'] {
+  --nav-mark-a: #4F695E;
+  --nav-mark-b: #9A765D;
+  --nav-mark-tilt: -.6deg;
+}
+body .nav .nav__links a[href]::after,
+body.home-page .nav .nav__links a[href]::after,
+body:not(.home-page) .nav .nav__links a[href]::after {
+  background: linear-gradient(90deg, var(--nav-mark-a), var(--nav-mark-b));
+  transform-origin: center;
+  transition:
+    clip-path .62s cubic-bezier(.16, 1, .3, 1),
+    opacity .22s ease,
+    transform .72s cubic-bezier(.16, 1, .3, 1);
+}
+body .nav.is-compact .nav__links a[href]:hover::after,
+body.home-page .nav.is-compact .nav__links a[href]:hover::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:hover::after {
+  background: linear-gradient(90deg, var(--nav-mark-a), var(--nav-mark-b));
+}
+
+/* Open header — zuivere zwarte lettervorm zonder glow. */
+body .nav:not(.is-compact) .nav__links a,
+body.home-page .nav:not(.is-compact) .nav__links a,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a {
+  color: #171915;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+body .nav:not(.is-compact) .nav__links a:hover,
+body .nav:not(.is-compact) .nav__links a:focus-visible,
+body .nav:not(.is-compact) .nav__links a[aria-current='page'],
+body.home-page .nav:not(.is-compact) .nav__links a:hover,
+body.home-page .nav:not(.is-compact) .nav__links a[aria-current='page'],
+body:not(.home-page) .nav:not(.is-compact) .nav__links a:hover,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a[aria-current='page'] {
+  color: #050604;
+  font-weight: 400;
+  font-variation-settings: 'wght' 400;
+  text-shadow: none;
+}
+
+/* Hoverstrokes — krachtiger in de open header, afwezig in de zwarte balk. */
+body .nav:not(.is-compact) .nav__links a[href]::after,
+body.home-page .nav:not(.is-compact) .nav__links a[href]::after,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]::after {
+  width: 2.2rem;
+  height: .54rem;
+  opacity: 0;
+  filter: saturate(1.18) brightness(1.08);
+  transform: translateX(-50%) translateY(1px) scaleY(1.38);
+}
+body .nav:not(.is-compact) .nav__links a[href]:hover::after,
+body.home-page .nav:not(.is-compact) .nav__links a[href]:hover::after,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]:hover::after {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0) rotate(var(--nav-mark-tilt, 0deg)) scaleX(1.035) scaleY(1.38);
+}
+body .nav.is-compact .nav__links a[href]::after,
+body.home-page .nav.is-compact .nav__links a[href]::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]::after,
+body .nav.is-compact .nav__links a[href]:hover::after,
+body.home-page .nav.is-compact .nav__links a[href]:hover::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:hover::after {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-50%) translateY(1px);
+}
+body .nav.is-compact .nav__links a::after,
+body.home-page .nav.is-compact .nav__links a::after,
+body:not(.home-page) .nav.is-compact .nav__links a::after {
+  display: none !important;
+}
+
+/* Headeritems — subtiel grotere, toestand-onafhankelijke lettermaat. */
+body .nav .nav__links a,
+body.home-page .nav .nav__links a,
+body:not(.home-page) .nav .nav__links a,
+body .nav.is-compact .nav__links a,
+body.home-page .nav.is-compact .nav__links a,
+body:not(.home-page) .nav.is-compact .nav__links a {
+  font-size: .78rem;
 }
