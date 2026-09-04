@@ -7193,18 +7193,18 @@ body .nav.is-compact .nav__links a[href='/contact.html'][aria-current='page']::a
 }
 
 /* Navigatieverhaal — vrije, handgetekende strokes in één doorlopend ritme. */
-body .nav .nav__links a[href='/'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h16l7-1 7 1h18' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/begeleiding.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h11l6-2 7 2 7-2 6 2h11' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/werkwijze.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h12V6h12V5h12v2h12' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/over-mij.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h14l10-3 10 3h14' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-body .nav .nav__links a[href='/contact.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h12l6-2 6 2 6-2 6 2h12' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C12 7 17 7 23 6.25S33 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/begeleiding.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C10 7 14 7 19 5.5S24 7 27 7s5-2.5 9-1.5S42 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/werkwijze.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C11 7 14 6.75 18 6.25S25 5.5 30 5.25 38 6.25 42 6.75 46 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/over-mij.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C12 7 16 6.75 21 5S27 4.25 32 5.75 39 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/contact.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12' shape-rendering='geometricPrecision'%3E%3Cpath d='M2 7C10 7 14 6.75 19 5.5S25 7 28 7s5-1.75 9-1.25S43 7 50 7' fill='none' stroke='black' stroke-width='1.45' stroke-linecap='round'/%3E%3C/svg%3E"); }
 body .nav .nav__links a::after,
 body.home-page .nav .nav__links a::after,
 body:not(.home-page) .nav .nav__links a::after {
   display: block;
   bottom: .18rem;
-  width: 2rem;
-  height: .58rem;
+  width: 2.1rem;
+  height: .5rem;
   background: currentColor;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
@@ -7219,7 +7219,7 @@ body:not(.home-page) .nav .nav__links a::after {
 body .nav .nav__links a:not([aria-current='page']):hover::after,
 body.home-page .nav .nav__links a:not([aria-current='page']):hover::after,
 body:not(.home-page) .nav .nav__links a:not([aria-current='page']):hover::after {
-  opacity: .55;
+  opacity: .48;
   clip-path: inset(0 0 0 0);
   transform: translateX(-50%) translateY(0);
 }
@@ -7228,7 +7228,7 @@ body.home-page .nav .nav__links a[aria-current='page']::after,
 body:not(.home-page) .nav .nav__links a[aria-current='page']::after,
 body .nav.is-compact .nav__links a[aria-current='page']::after {
   background: currentColor;
-  opacity: 1;
+  opacity: .84;
   clip-path: inset(0 0 0 0);
   transform: translateX(-50%) translateY(0);
 }
@@ -7252,4 +7252,62 @@ body.home-page .nav.is-compact .brand:hover::before {
 }
 body .nav .brand__image {
   transform: translateY(-50%);
+}
+
+/* Header-morph — vaste navigatiegeometrie en dezelfde signaturen in beide staten. */
+body .nav .nav__links a,
+body.home-page .nav .nav__links a,
+body:not(.home-page) .nav .nav__links a,
+body .nav.is-compact .nav__links a,
+body.home-page .nav.is-compact .nav__links a,
+body:not(.home-page) .nav.is-compact .nav__links a {
+  box-sizing: border-box;
+  min-height: 2.24rem;
+  padding: .75rem 0;
+  line-height: 1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+body .nav .nav__links a[href]::after,
+body.home-page .nav .nav__links a[href]::after,
+body:not(.home-page) .nav .nav__links a[href]::after,
+body .nav.is-compact .nav__links a[href]::after,
+body.home-page .nav.is-compact .nav__links a[href]::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]::after {
+  bottom: .18rem;
+  width: 2.1rem;
+  height: .5rem;
+  background: currentColor;
+  -webkit-mask: var(--nav-mark) center / contain no-repeat;
+  mask: var(--nav-mark) center / contain no-repeat;
+}
+body .nav.is-compact .nav__links a[href][aria-current='page']::after,
+body.home-page .nav.is-compact .nav__links a[href][aria-current='page']::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href][aria-current='page']::after {
+  background: currentColor;
+  opacity: .82;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0);
+}
+body .nav.is-compact .nav__links a[href]:not([aria-current='page']):hover::after,
+body.home-page .nav.is-compact .nav__links a[href]:not([aria-current='page']):hover::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:not([aria-current='page']):hover::after {
+  opacity: .46;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (min-width: 901px) {
+  body .nav .nav__links,
+  body.home-page .nav .nav__links,
+  body:not(.home-page) .nav .nav__links,
+  body .nav.is-compact .nav__links,
+  body.home-page .nav.is-compact .nav__links,
+  body:not(.home-page) .nav.is-compact .nav__links {
+    top: 60px;
+    left: 50%;
+    width: clamp(23rem, 31vw, 26.5rem);
+    gap: 0;
+    transform: translate(-50%, -50%);
+  }
 }
