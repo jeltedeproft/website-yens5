@@ -2000,6 +2000,138 @@ body.is-locked { overflow: hidden; }
 }
 .price-note { margin-top: 1.75rem; font-size: 0.9375rem; color: var(--text-muted); }
 
+/* Aanbod — primaire beslisroute vóór de inhoudelijke verdieping. */
+.offering-intro { padding-bottom: clamp(3rem, 5vw, 4.5rem); }
+.offer-selector {
+  padding: 0 0 clamp(4rem, 7vw, 6.5rem);
+  background: var(--bg);
+}
+.offer-selector__head {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(18rem, 1.2fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.offer-selector__head .eyebrow { margin-bottom: .75rem; }
+.offer-selector__head > p {
+  max-width: 43rem;
+  color: var(--text-body);
+}
+.offer-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--line-strong);
+}
+.offer-selector__item {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  min-width: 0;
+  min-height: 19rem;
+  padding: clamp(1.35rem, 2.5vw, 2rem);
+  color: var(--text);
+  transition: color var(--t-med), background-color var(--t-med);
+}
+.offer-selector__item + .offer-selector__item { border-left: 1px solid var(--line); }
+.offer-selector__item:hover,
+.offer-selector__item:focus-visible {
+  color: var(--text);
+  background: rgba(74, 81, 67, .055);
+  outline: none;
+}
+.offer-selector__index {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--text-muted);
+  font-size: .66rem;
+  letter-spacing: .14em;
+}
+.offer-selector__item > strong {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 500;
+}
+.offer-selector__item > p {
+  margin-top: .8rem;
+  color: var(--text-muted);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+.offer-selector__price {
+  display: block;
+  margin-top: 1.5rem;
+  color: var(--c-forest);
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  font-weight: 500;
+}
+.offer-selector__price small {
+  display: block;
+  margin-top: .2rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: .67rem;
+  font-weight: 400;
+}
+.offer-selector__link {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: .8rem;
+  color: var(--text);
+  font-size: .75rem;
+  font-weight: 600;
+  border-top: 1px solid var(--line);
+}
+.offer-selector__link span { transition: transform var(--t-fast); }
+.offer-selector__item:hover .offer-selector__link span,
+.offer-selector__item:focus-visible .offer-selector__link span { transform: translateY(3px); }
+.offer-selector__start {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.25rem clamp(1.25rem, 2.5vw, 2rem);
+  background: #30372F;
+  color: var(--text-on-dark-muted);
+}
+.offer-selector__start strong { color: var(--text-on-dark); }
+.offer-selector__start .btn { flex: none; }
+#personal-training,
+#duo-training,
+#semi-personal,
+#coaching,
+#tarieven { scroll-margin-top: 7rem; }
+
+@media (max-width: 900px) {
+  .offer-selector__head { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .offer-selector__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .offer-selector__item { min-height: 16rem; }
+  .offer-selector__item:nth-child(3) { border-left: 0; }
+  .offer-selector__item:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 560px) {
+  .offer-selector { padding-bottom: 4rem; }
+  .offer-selector__grid { grid-template-columns: minmax(0, 1fr); }
+  .offer-selector__item {
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    min-height: 0;
+    gap: .25rem 1rem;
+    padding: 1.25rem 0;
+  }
+  .offer-selector__item + .offer-selector__item { border-top: 1px solid var(--line); border-left: 0; }
+  .offer-selector__index { grid-row: 1 / -1; margin: .25rem 0 0; }
+  .offer-selector__item > strong { grid-column: 2; font-size: 1.3rem; }
+  .offer-selector__item > p { grid-column: 2 / -1; margin-top: .3rem; }
+  .offer-selector__price { grid-column: 3; grid-row: 1; margin: .15rem 0 0; text-align: right; white-space: nowrap; }
+  .offer-selector__price small { display: none; }
+  .offer-selector__link { grid-column: 2 / -1; margin-top: .7rem; }
+  .offer-selector__start { align-items: stretch; flex-direction: column; gap: 1rem; }
+  .offer-selector__start .btn { width: 100%; }
+}
+
 /* Uitgebreide personal-trainingtarieven */
 .pricing-flow {
   border-top: 1px solid var(--line-strong);
@@ -2406,7 +2538,616 @@ body.is-locked { overflow: hidden; }
   .pricing-offer .pricing-chapter { padding-inline: 1rem; }
 }
 
-/* ==========================================================================
+/* Aanbod — rustige eindredactie: lijnen en ruimte boven kaartvlakken. */
+.offering-page .offering-intro .split > :first-child { max-width: 42rem; }
+.offering-page .offering-intro .lead { max-width: 38rem; }
+.offering-page .offer-selector__head { max-width: 58rem; }
+.offering-page .offer-selector__grid { border-color: var(--line-strong); }
+.offering-page .offer-selector__item {
+  min-height: 14.5rem;
+  padding-block: clamp(1.35rem, 2vw, 1.75rem);
+}
+.offering-page .offer-selector__item:hover,
+.offering-page .offer-selector__item:focus-visible { background: rgba(74, 81, 67, .032); }
+.offering-page .offer-selector__start {
+  padding-inline: 0;
+  color: var(--text-body);
+  background: transparent;
+  border-bottom: 1px solid var(--line-strong);
+}
+.offering-page .offer-selector__start strong { color: var(--text); }
+.offering-page .page-editorial-pair { padding-bottom: clamp(3.5rem, 6vw, 6rem); }
+.offering-page .page-editorial-pair__grid--aanbod {
+  max-width: 74rem;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+}
+.offering-page #personal-training .split { gap: clamp(3rem, 7vw, 7rem); }
+.offering-page #personal-training .lead { max-width: 31rem; }
+.offering-page #personal-training .stack-lg > * + * { margin-top: 1.75rem; }
+.offering-page #personal-training .fit-list li { padding-block: .48rem; }
+.offering-page #duo-training .section-head { max-width: 47rem; }
+.offering-page #duo-training .grid-2 { gap: clamp(2rem, 5vw, 5rem); }
+.offering-page #duo-training .offer {
+  padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+  background: transparent;
+  border-width: 1px 0;
+  border-color: var(--line-strong);
+  box-shadow: none;
+}
+.offering-page #duo-training .offer:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--line-strong);
+}
+.offering-page #duo-training .offer__tag {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+.offering-page #coaching .split { gap: clamp(4rem, 8vw, 8rem); }
+.offering-page #coaching .lead { max-width: 37rem; }
+.offering-page .pricing-offer__head {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: end;
+  max-width: none;
+}
+.offering-page .pricing-offer__head .eyebrow,
+.offering-page .pricing-offer__head .h-1 { grid-column: 1; }
+.offering-page .pricing-offer__head .lead { grid-column: 2; grid-row: 1 / span 2; }
+.offering-page .pricing-feature {
+  padding-inline: 0;
+  color: var(--text);
+  background: transparent;
+  border-block: 1px solid var(--line-strong);
+}
+.offering-page .pricing-feature > span,
+.offering-page .pricing-feature small { color: var(--text-muted); }
+.offering-page .pricing-feature strong { color: var(--c-forest); }
+.offering-page .pricing-chapter--home {
+  margin-inline: 0;
+  padding-inline: 0;
+  background: transparent;
+}
+.offering-page .pricing-close {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .75rem clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  padding: clamp(2rem, 3vw, 3rem) 0 0;
+  color: var(--text);
+  background: transparent;
+  border-top: 1px solid var(--line-strong);
+}
+.offering-page .pricing-close .eyebrow,
+.offering-page .pricing-close .h-2 { grid-column: 1; color: var(--text); }
+.offering-page .pricing-close > p:not(.eyebrow) {
+  grid-column: 1;
+  max-width: 38rem;
+  color: var(--text-body);
+}
+.offering-page .pricing-close .btn {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: end;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .offering-page .pricing-offer__head { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .offering-page .pricing-offer__head .lead { grid-column: 1; grid-row: auto; }
+  .offering-page .pricing-close { grid-template-columns: minmax(0, 1fr); }
+  .offering-page .pricing-close .btn { grid-column: 1; grid-row: auto; width: 100%; margin-top: 1rem; }
+}
+
+@media (max-width: 560px) {
+  .offering-page .offer-selector__item { min-height: 0; padding-block: 1.25rem; }
+  .offering-page .offer-selector__start { padding-block: 1.25rem; }
+  .offering-page #duo-training .grid-2 { gap: 2rem; }
+}
+
+/* Aanbod — finale compositielaag: warm contrast, vaste assen en verfijnde accenten. */
+.offering-page {
+  --offering-ivory: #F8F5EF;
+  --offering-linen: #F0E9DE;
+  --offering-sage: #DDE3D8;
+  --offering-green: #454D42;
+  --offering-deep: #30372F;
+}
+.offering-page main { background: var(--offering-ivory); }
+.offering-page main > .section { padding-block: clamp(5.5rem, 8vw, 8rem); }
+.offering-page main > .offering-intro {
+  padding-top: clamp(8rem, 15vw, 11rem);
+  padding-bottom: clamp(3.25rem, 5vw, 4.75rem);
+  background: linear-gradient(180deg, #FAF7F2 0%, var(--offering-ivory) 100%);
+}
+.offering-page .eyebrow { color: var(--offering-green); }
+.offering-page .section--dark .eyebrow { color: #B8C2B1; }
+.offering-page .offer-selector { background: var(--offering-ivory); }
+.offering-page .offer-selector {
+  padding-top: clamp(1.75rem, 3.2vw, 2.75rem);
+}
+.offering-page .offer-selector__head > p { max-width: 36rem; }
+.offering-page .offer-selector__grid {
+  border-top-color: rgba(70, 80, 68, .38);
+  border-bottom-color: rgba(70, 80, 68, .22);
+}
+.offering-page .offer-selector__item { position: relative; }
+.offering-page .offer-selector__item::after {
+  content: '';
+  position: absolute;
+  inset: auto 1.5rem 0;
+  height: 2px;
+  background: var(--offering-green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-med);
+}
+.offering-page .offer-selector__item:hover::after,
+.offering-page .offer-selector__item:focus-visible::after { transform: scaleX(1); }
+.offering-page .offer-selector__item:nth-child(2),
+.offering-page .offer-selector__item:nth-child(4) { background: rgba(221, 227, 216, .16); }
+.offering-page .offer-selector__price { color: var(--offering-green); }
+.offering-page .offer-selector__start {
+  margin-top: .15rem;
+  padding-block: 1.35rem;
+  border-bottom-color: rgba(70, 80, 68, .34);
+}
+.offering-page .page-editorial-pair {
+  padding-top: clamp(.5rem, 1.5vw, 1.5rem);
+  background: var(--offering-ivory);
+}
+.offering-page #personal-training {
+  background: linear-gradient(110deg, var(--offering-linen) 0%, #F3EEE6 68%, var(--offering-ivory) 100%);
+}
+.offering-page #personal-training .spec-list { border-top: 1px solid rgba(70, 80, 68, .28); }
+.offering-page #personal-training .spec-list > div { border-bottom-color: rgba(70, 80, 68, .16); }
+.offering-page #duo-training { background: #FAF7F2; }
+.offering-page #duo-training .offer:first-child { border-top-color: var(--offering-green); }
+.offering-page #duo-training .offer:nth-child(2) { border-top-color: #899383; }
+.offering-page #duo-training .offer__tag--preferred { color: var(--offering-green); }
+.offering-page #duo-training .offer__price strong { color: var(--offering-green); }
+.offering-page #duo-training .offer__text { max-width: 34rem; margin-bottom: 1.15rem; }
+.offering-page #duo-training .offer__list { margin-bottom: 1.35rem; }
+.offering-page #coaching { background: var(--offering-deep); }
+.offering-page #coaching .tag {
+  color: #E4E8E0;
+  background: rgba(184, 194, 177, .07);
+  border-color: rgba(184, 194, 177, .22);
+}
+.offering-page #coaching .callout {
+  border-left-color: #AAB5A4;
+  background: rgba(255, 255, 255, .035);
+}
+.offering-page .pricing-offer { background: var(--offering-ivory); }
+.offering-page .pricing-flow { border-top-color: rgba(70, 80, 68, .4); }
+.offering-page .pricing-chapter { border-bottom-color: rgba(70, 80, 68, .22); }
+.offering-page .pricing-chapter__intro p { max-width: 30rem; margin-top: 1rem; }
+.offering-page .pricing-feature {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  background: rgba(221, 227, 216, .58);
+  border-color: rgba(70, 80, 68, .28);
+}
+.offering-page .pricing-rate-key {
+  background: rgba(70, 80, 68, .18);
+  border-color: rgba(70, 80, 68, .18);
+}
+.offering-page .pricing-rate-key span { background: #F4EFE7; }
+.offering-page .pricing-table thead th {
+  color: var(--offering-green);
+  border-top-color: rgba(70, 80, 68, .4);
+  border-bottom-color: rgba(70, 80, 68, .24);
+}
+.offering-page .pricing-table tbody tr:last-child th,
+.offering-page .pricing-table tbody tr:last-child td { border-bottom-color: rgba(70, 80, 68, .28); }
+.offering-page .pricing-note {
+  background: rgba(228, 218, 203, .45);
+  border-left-color: var(--offering-green);
+}
+.offering-page .pricing-facts { border-top-color: rgba(70, 80, 68, .38); }
+.offering-page .pricing-close { border-top-color: rgba(70, 80, 68, .42); }
+
+@media (min-width: 901px) {
+  .offering-page .offering-intro .split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.25vw, 1.25rem);
+    align-items: end;
+  }
+  .offering-page .offering-intro .split > :first-child { grid-column: 1 / span 7; }
+  .offering-page .offering-intro .split > :last-child { grid-column: 9 / span 4; }
+  .offering-page .offer-selector__head {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.25vw, 1.25rem);
+  }
+  .offering-page .offer-selector__head > :first-child { grid-column: 1 / span 5; }
+  .offering-page .offer-selector__head > p { grid-column: 8 / span 5; }
+  .offering-page .page-editorial-pair__grid--aanbod {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(.85rem, 1.4vw, 1.4rem);
+  }
+  .offering-page .page-editorial-photo--group { margin-bottom: clamp(1.5rem, 3vw, 3rem); }
+  .offering-page #personal-training .split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.25vw, 1.25rem);
+  }
+  .offering-page #personal-training .split > :first-child { grid-column: 1 / span 5; }
+  .offering-page #personal-training .split > :last-child { grid-column: 7 / span 6; }
+  .offering-page #duo-training .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.25vw, 1.25rem);
+    align-items: start;
+  }
+  .offering-page #duo-training .offer:first-child { grid-column: 1 / span 7; }
+  .offering-page #duo-training .offer:nth-child(2) {
+    grid-column: 8 / span 5;
+    margin-top: clamp(2rem, 4vw, 4rem);
+  }
+  .offering-page #coaching .split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+  .offering-page #coaching .split > :last-child { margin-top: clamp(2.5rem, 5vw, 5rem); }
+  .offering-page .pricing-chapter {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    column-gap: clamp(3rem, 7vw, 7rem);
+    row-gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .offering-page main > .section { padding-block: clamp(4.5rem, 9vw, 6rem); }
+  .offering-page .page-editorial-photo--group { margin: 0; }
+}
+
+@media (max-width: 560px) {
+  .offering-page main > .section { padding-block: 4.25rem; }
+  .offering-page .offer-selector { padding-top: 1.5rem; }
+  .offering-page .offer-selector__item:nth-child(2),
+  .offering-page .offer-selector__item:nth-child(4) { background: transparent; }
+  .offering-page .offer-selector__item::after { inset-inline: 2rem 0; }
+  .offering-page .pricing-feature { padding-inline: 1rem; }
+}
+
+/* Aanbod — ruimtelijke eindlaag: kleur als accent, witruimte als structuur. */
+.offering-page {
+  --offering-clay: #9A6F59;
+  --offering-moss: #65705F;
+  --offering-stone: #76766C;
+  --offering-gold: #9A8257;
+}
+.offering-page main > .offering-intro {
+  padding-bottom: clamp(5rem, 8vw, 7.5rem);
+}
+.offering-page .offer-selector {
+  padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(7rem, 10vw, 10rem);
+}
+.offering-page .offer-selector__head {
+  margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+.offering-page .offer-selector__head .eyebrow {
+  margin-bottom: 1.15rem;
+}
+.offering-page .offer-selector__head > p {
+  align-self: end;
+  padding-bottom: .35rem;
+  line-height: 1.75;
+}
+.offering-page .offer-selector__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.75rem, 1.4vw, 1.25rem);
+  border: 0;
+}
+.offering-page .offer-selector__item {
+  --offer-accent: var(--offering-green);
+  min-height: 17rem;
+  padding: clamp(1.65rem, 2.5vw, 2.25rem);
+  border: 1px solid color-mix(in srgb, var(--offer-accent) 25%, transparent);
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--offer-accent) 7%, var(--offering-ivory)) 0%,
+    var(--offering-ivory) 62%);
+}
+.offering-page .offer-selector__item::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 1.45rem;
+  height: 1.65rem;
+  background:
+    linear-gradient(58deg, transparent 46%, var(--offer-accent) 47% 52%, transparent 53%) 0 0 / 56% 58% no-repeat,
+    linear-gradient(-58deg, transparent 46%, var(--offer-accent) 47% 52%, transparent 53%) 100% 0 / 56% 58% no-repeat,
+    linear-gradient(90deg, transparent 46%, var(--offer-accent) 47% 53%, transparent 54%) 50% 100% / 100% 56% no-repeat;
+  opacity: .34;
+  pointer-events: none;
+  transition: opacity var(--t-med), transform var(--t-med);
+}
+.offering-page .offer-selector__item:hover::before,
+.offering-page .offer-selector__item:focus-visible::before {
+  opacity: .58;
+  transform: translateY(-2px);
+}
+.offering-page .offer-selector__item:nth-child(2) { --offer-accent: var(--offering-clay); }
+.offering-page .offer-selector__item:nth-child(3) { --offer-accent: var(--offering-moss); }
+.offering-page .offer-selector__item:nth-child(4) { --offer-accent: var(--offering-gold); }
+.offering-page .offer-selector__item + .offer-selector__item { border-left-width: 1px; }
+.offering-page .offer-selector__item::after {
+  inset: 0 1.65rem auto;
+  height: 2px;
+  background: var(--offer-accent);
+}
+.offering-page .offer-selector__item:hover,
+.offering-page .offer-selector__item:focus-visible {
+  background: color-mix(in srgb, var(--offer-accent) 10%, var(--offering-ivory));
+}
+.offering-page .offer-selector__index,
+.offering-page .offer-selector__price { color: var(--offer-accent); }
+.offering-page .offer-selector__index { margin-bottom: clamp(2rem, 3vw, 3rem); }
+.offering-page .offer-selector__item > p { margin-top: 1rem; }
+.offering-page .offer-selector__price { margin-top: 2rem; }
+.offering-page .offer-selector__link { margin-top: 1.5rem; padding-top: 1rem; }
+.offering-page .offer-selector__start {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(22rem, .9fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  padding: clamp(2rem, 3.5vw, 3rem);
+  color: rgba(250, 248, 243, .76);
+  background:
+    radial-gradient(circle at 78% 12%, rgba(154, 130, 87, .16), transparent 32%),
+    linear-gradient(120deg, #30372F 0%, #394138 100%);
+  border: 0;
+}
+.offering-page .offer-selector__start strong { color: #FAF8F3; }
+.offering-page .offer-selector__start-label {
+  display: block;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  color: #B9C3B3;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.offering-page .offer-selector__start-copy p {
+  max-width: 32rem;
+  margin: 0;
+}
+.offering-page .offer-selector__start-copy p > strong {
+  display: block;
+  margin-bottom: .65rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 450;
+  line-height: 1.08;
+}
+.offering-page .offer-selector__start-copy p > span {
+  display: block;
+  max-width: 29rem;
+  line-height: 1.65;
+}
+.offering-page .offer-selector__start-action {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: end;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(250, 248, 243, .18);
+}
+.offering-page .offer-selector__start-price { margin: 0; }
+.offering-page .offer-selector__start-price strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 450;
+  line-height: 1;
+}
+.offering-page .offer-selector__start-price span {
+  display: block;
+  margin-top: .45rem;
+  color: rgba(250, 248, 243, .6);
+  font-size: .7rem;
+}
+.offering-page .offer-selector__start .btn { white-space: nowrap; }
+.offering-page .page-editorial-pair {
+  padding-top: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(7rem, 10vw, 10rem);
+}
+.offering-page main > #personal-training,
+.offering-page main > #duo-training,
+.offering-page main > #coaching,
+.offering-page main > .pricing-offer {
+  padding-block: clamp(7rem, 10vw, 10rem);
+}
+.offering-page #personal-training .stack-lg { gap: clamp(3rem, 5vw, 4.5rem); }
+.offering-page #personal-training .lead { margin-top: 1.75rem !important; }
+.offering-page #personal-training .link { margin-top: 2.75rem !important; }
+.offering-page #duo-training .section-head {
+  margin-bottom: clamp(4rem, 7vw, 6.5rem);
+}
+.offering-page #duo-training .offer {
+  padding-block: clamp(2.25rem, 4vw, 3.25rem);
+}
+.offering-page #duo-training .offer:first-child { border-top-width: 2px; }
+.offering-page #duo-training .offer:nth-child(2) { border-top-width: 2px; border-top-color: var(--offering-clay); }
+.offering-page #duo-training .offer:nth-child(2) .offer__tag,
+.offering-page #duo-training .offer:nth-child(2) .offer__price strong { color: var(--offering-clay); }
+.offering-page #coaching .lead { margin-top: 1.75rem !important; }
+.offering-page #coaching .tags { gap: .75rem; }
+.offering-page #coaching .callout { margin-top: 3.25rem !important; padding-block: .5rem; }
+.offering-page .pricing-offer__head {
+  margin-bottom: clamp(5rem, 8vw, 7.5rem);
+}
+.offering-page .pricing-flow { border-top: 2px solid rgba(70, 80, 68, .42); }
+.offering-page .pricing-chapter {
+  padding-block: clamp(5.5rem, 8vw, 8rem);
+  row-gap: clamp(2.5rem, 4vw, 4rem);
+}
+.offering-page .pricing-chapter__intro .eyebrow { display: inline-block; margin-bottom: 1.15rem; }
+.offering-page .pricing-chapter__intro p { margin-top: 1.5rem; line-height: 1.75; }
+.offering-page .pricing-feature { margin-top: .25rem; padding: clamp(1.75rem, 3vw, 2.5rem); }
+.offering-page .pricing-choice { gap: clamp(2rem, 4vw, 4rem); }
+.offering-page .pricing-choice p,
+.offering-page .pricing-conditions p { padding-top: 1.5rem; line-height: 1.7; }
+.offering-page .pricing-table th,
+.offering-page .pricing-table td { padding-block: 1.5rem; }
+.offering-page .pricing-note { margin-top: .5rem; padding: 1.25rem 1.5rem; }
+.offering-page .pricing-facts > div { padding-block: 1.35rem; }
+.offering-page .pricing-facts dd { margin-top: .45rem; }
+.offering-page .pricing-close {
+  margin-top: clamp(5rem, 8vw, 7rem);
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+}
+
+@media (max-width: 900px) {
+  .offering-page .offer-selector__head { gap: 1.5rem; }
+  .offering-page .offer-selector__grid { gap: .75rem; }
+  .offering-page .offer-selector__start { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .offering-page main > #personal-training,
+  .offering-page main > #duo-training,
+  .offering-page main > #coaching,
+  .offering-page main > .pricing-offer { padding-block: clamp(5.5rem, 10vw, 7rem); }
+}
+
+@media (max-width: 560px) {
+  .offering-page main > .offering-intro { padding-bottom: 4.5rem; }
+  .offering-page .offer-selector { padding-top: 3rem; padding-bottom: 6rem; }
+  .offering-page .offer-selector__head { margin-bottom: 2.75rem; }
+  .offering-page .offer-selector__grid { gap: 0; }
+  .offering-page .offer-selector__item {
+    min-height: 0;
+    padding: 1.65rem 0;
+    border-width: 1px 0 0;
+    background: transparent;
+  }
+  .offering-page .offer-selector__item:last-child { border-bottom-width: 1px; }
+  .offering-page .offer-selector__item::after {
+    inset: 0 auto auto 0;
+    width: 2.5rem;
+    transform: none;
+  }
+  .offering-page .offer-selector__item::before { top: 1.35rem; right: .25rem; }
+  .offering-page .offer-selector__index { margin-top: .35rem; }
+  .offering-page .offer-selector__price { margin-top: .15rem; }
+  .offering-page .offer-selector__start { margin-top: 2rem; }
+  .offering-page .offer-selector__start-action { grid-template-columns: minmax(0, 1fr); }
+  .offering-page .offer-selector__start .btn { width: 100%; }
+  .offering-page .page-editorial-pair { padding-block: 4rem 6rem; }
+  .offering-page .pricing-offer__head { margin-bottom: 4rem; }
+  .offering-page .pricing-chapter { padding-block: 4.75rem; row-gap: 2.5rem; }
+  .offering-page .pricing-feature { padding: 1.5rem; }
+}
+
+/* Aanbod — gedistribueerde kleur: meer nuance, minder kleurvlak. */
+.offering-page .offer-selector__item {
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--offer-accent) 4%, var(--offering-ivory)) 0%,
+    var(--offering-ivory) 68%);
+}
+.offering-page .offer-selector__item:hover,
+.offering-page .offer-selector__item:focus-visible {
+  background: color-mix(in srgb, var(--offer-accent) 7%, var(--offering-ivory));
+}
+.offering-page #personal-training {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(154, 111, 89, .055), transparent 30%),
+    linear-gradient(110deg, #F1EBE1 0%, #F6F1E9 68%, var(--offering-ivory) 100%);
+}
+.offering-page #personal-training .spec-list dt { color: var(--offering-clay); }
+.offering-page #duo-training {
+  background:
+    linear-gradient(125deg, rgba(101, 112, 95, .035), transparent 34%),
+    #FAF7F2;
+}
+.offering-page #coaching {
+  background:
+    radial-gradient(circle at 82% 22%, rgba(154, 130, 87, .09), transparent 34%),
+    var(--offering-deep);
+}
+.offering-page #coaching .tag:nth-child(3n+1) { border-color: rgba(174, 151, 108, .3); }
+.offering-page #coaching .tag:nth-child(3n+2) { border-color: rgba(155, 169, 148, .28); }
+.offering-page .pricing-chapter:nth-child(2) .eyebrow { color: var(--offering-clay); }
+.offering-page .pricing-chapter:nth-child(3) .eyebrow { color: var(--offering-moss); }
+.offering-page .pricing-chapter:nth-child(4) .eyebrow { color: var(--offering-gold); }
+.offering-page .pricing-chapter:nth-child(5) .eyebrow { color: var(--offering-stone); }
+.offering-page .pricing-table tbody tr:nth-child(1) th { color: var(--offering-green); }
+.offering-page .pricing-table tbody tr:nth-child(2) th { color: var(--offering-clay); }
+.offering-page .pricing-table tbody tr:nth-child(3) th { color: var(--offering-moss); }
+.offering-page .pricing-table tbody tr:hover {
+  background: rgba(101, 112, 95, .026);
+}
+.offering-page .pricing-note {
+  background: linear-gradient(90deg, rgba(154, 111, 89, .09), rgba(154, 111, 89, .025));
+}
+.offering-page .pricing-facts dt { color: var(--offering-moss); }
+.offering-page .pricing-close .eyebrow { color: var(--offering-clay); }
+
+.offering-page .offer-selector {
+  background:
+    radial-gradient(circle at 8% 28%, rgba(154, 111, 89, .07), transparent 24%),
+    radial-gradient(circle at 92% 72%, rgba(101, 112, 95, .08), transparent 28%),
+    var(--offering-ivory);
+}
+.offering-page .page-editorial-pair {
+  background:
+    linear-gradient(115deg, rgba(154, 130, 87, .045), transparent 32%),
+    linear-gradient(300deg, rgba(101, 112, 95, .055), transparent 36%),
+    var(--offering-ivory);
+}
+.offering-page .page-editorial-photo--personal {
+  box-shadow: -8px 8px 0 rgba(101, 112, 95, .16);
+}
+.offering-page .page-editorial-photo--group {
+  box-shadow: 8px 8px 0 rgba(154, 111, 89, .14);
+}
+.offering-page #personal-training .h-2 { color: #3F493F; }
+.offering-page #duo-training .h-2 { color: #4B5148; }
+.offering-page .pricing-chapter__intro::before {
+  content: '';
+  display: block;
+  width: 2.75rem;
+  height: 2px;
+  margin-bottom: 1.5rem;
+  background: var(--offering-green);
+}
+.offering-page .pricing-chapter:nth-child(2) .pricing-chapter__intro::before { background: var(--offering-clay); }
+.offering-page .pricing-chapter:nth-child(3) .pricing-chapter__intro::before { background: var(--offering-moss); }
+.offering-page .pricing-chapter:nth-child(4) .pricing-chapter__intro::before { background: var(--offering-gold); }
+.offering-page .pricing-chapter:nth-child(5) .pricing-chapter__intro::before { background: var(--offering-stone); }
+.offering-page .pricing-chapter:nth-child(2) { background: linear-gradient(90deg, rgba(154, 111, 89, .028), transparent 32%); }
+.offering-page .pricing-chapter:nth-child(3) { background: linear-gradient(90deg, rgba(101, 112, 95, .035), transparent 36%); }
+.offering-page .pricing-chapter:nth-child(4) { background: linear-gradient(90deg, rgba(154, 130, 87, .032), transparent 34%); }
+.offering-page .pricing-table tbody tr:nth-child(1) { background: linear-gradient(90deg, rgba(70, 80, 68, .035), transparent 58%); }
+.offering-page .pricing-table tbody tr:nth-child(2) { background: linear-gradient(90deg, rgba(154, 111, 89, .035), transparent 58%); }
+.offering-page .pricing-table tbody tr:nth-child(3) { background: linear-gradient(90deg, rgba(101, 112, 95, .04), transparent 58%); }
+.offering-page .pricing-close { background: linear-gradient(90deg, rgba(154, 111, 89, .045), transparent 46%); }
+
+@media (max-width: 560px) {
+  .offering-page .offer-selector__grid { grid-template-columns: minmax(0, 1fr); }
+  .offering-page .offer-selector__item,
+  .offering-page .offer-selector__item:hover,
+  .offering-page .offer-selector__item:focus-visible { background: transparent; }
+  .offering-page #personal-training {
+    background: linear-gradient(155deg, #F1EBE1 0%, #F7F3EC 72%);
+  }
+  .offering-page .page-editorial-photo--personal,
+  .offering-page .page-editorial-photo--group { box-shadow: none; }
+  .offering-page .pricing-chapter:nth-child(2),
+  .offering-page .pricing-chapter:nth-child(3),
+  .offering-page .pricing-chapter:nth-child(4) { background: transparent; }
+}
+
+@media (min-width: 561px) and (max-width: 900px) {
+  .offering-page .offer-selector__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .offering-page .offer-selector__item:nth-child(3) { grid-column: 1 / -1; }
+}
+
+/* ========================================================================== 
    FAQ accordion
    ========================================================================== */
 .faq { border-top: 1px solid var(--line); }
@@ -5380,7 +6121,7 @@ body .nav.is-initializing .brand {
   place-items: center;
   overflow: hidden;
   background: transparent;
-  color: #556056;
+  color: #20241F;
   pointer-events: auto;
   will-change: opacity;
 }
@@ -5427,30 +6168,37 @@ body .nav.is-initializing .brand {
   width: min(58vw, 30rem);
   aspect-ratio: 861 / 247;
 }
-.brand-intro__symbol,
-.brand-intro__letter {
+.brand-intro__stage {
   position: absolute;
-  display: block;
+  inset: 0;
+  display: grid;
+  place-items: center;
   opacity: 0;
-  will-change: transform, opacity, clip-path;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, filter, transform, clip-path;
+}
+.brand-intro__stage--wordmark { clip-path: inset(0 0 0 27.875%); }
+.brand-intro__symbol,
+.brand-intro__wordmark {
+  position: relative;
+  display: block;
+  object-fit: contain;
+  user-select: none;
 }
 .brand-intro__symbol {
-  z-index: 2;
-  left: .35%;
-  top: 3.2%;
-  width: 25.8%;
-  height: 92.5%;
-  object-fit: contain;
-}
-.brand-intro__letter {
-  inset: 0;
-  z-index: 1;
   width: 100%;
   height: 100%;
+  fill: currentColor;
+  overflow: visible;
 }
-.brand-intro__letter--e { clip-path: inset(0 53.426% 0 27.875%); }
-.brand-intro__letter--n { clip-path: inset(0 27.294% 0 51.568%); }
-.brand-intro__letter--s { clip-path: inset(0 1.858% 0 77.236%); }
+.brand-intro__wordmark {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  overflow: visible;
+}
+.brand-intro__y-part { will-change: opacity, clip-path; }
 body.brand-intro-active { overflow: hidden; }
 body.brand-intro-active .nav { opacity: 0; }
 html.skip-brand-intro .brand-intro { display: none; }
@@ -6224,4 +6972,47 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
     margin-top: clamp(1.75rem, 3vw, 3rem);
     border-top: 1px solid var(--line);
   }
+}
+
+/* Aanbod — YENS editorial type scale en prijslijnen zonder tabellen. */
+.offering-page .offer-selector__item::before { display: none; }
+.offering-page .offering-intro .h-1 { max-width: 11ch; font-size: clamp(3.4rem, 6.4vw, 6.75rem); line-height: .94; letter-spacing: -.055em; }
+.offering-page .offering-intro .lead { max-width: 24rem; font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.45; }
+.offering-page .offer-selector__head .h-2 { font-size: clamp(2.6rem, 4.8vw, 4.75rem); line-height: .96; letter-spacing: -.045em; }
+.offering-page .offer-selector__item > strong { font-size: clamp(1.8rem, 2.8vw, 2.65rem); line-height: 1; }
+.offering-page .offer-selector__price { font-size: clamp(1.4rem, 2.2vw, 2rem); }
+.offering-page #personal-training .h-2,
+.offering-page #duo-training .h-2,
+.offering-page #coaching .h-2 { font-size: clamp(3rem, 5.2vw, 5.25rem); line-height: .96; letter-spacing: -.05em; }
+.offering-page .pricing-offer__head .h-1 { max-width: 10ch; font-size: clamp(3.8rem, 7vw, 7rem); line-height: .9; letter-spacing: -.06em; }
+.offering-page .pricing-chapter__intro .h-2 { max-width: 14ch; font-size: clamp(2.25rem, 3.8vw, 3.85rem); line-height: 1; letter-spacing: -.045em; }
+.offering-page .price-lines { grid-column: 2; align-self: start; border-top: 1px solid rgba(70, 80, 68, .42); }
+.offering-page .price-line { --price-accent: var(--offering-green); display: grid; grid-template-columns: minmax(8rem, 1.15fr) repeat(2, minmax(7rem, .85fr)); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: end; padding: clamp(1.45rem, 2.4vw, 2rem) 0; border-bottom: 1px solid rgba(70, 80, 68, .2); }
+.offering-page .price-line:nth-child(2) { --price-accent: var(--offering-clay); }
+.offering-page .price-line:nth-child(3) { --price-accent: var(--offering-moss); }
+.offering-page .price-line h4 { color: var(--price-accent); font-family: var(--font-serif); font-size: clamp(1.55rem, 2.5vw, 2.2rem); font-weight: 450; line-height: 1; }
+.offering-page .price-line h4 small { display: block; margin-top: .55rem; color: var(--text-muted); font-family: var(--font-sans); font-size: .67rem; font-weight: 500; letter-spacing: .04em; }
+.offering-page .price-line p { margin: 0; }
+.offering-page .price-line p span { display: block; margin-bottom: .5rem; color: var(--text-muted); font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.offering-page .price-line p strong { color: var(--text); font-family: var(--font-serif); font-size: clamp(1.55rem, 2.8vw, 2.45rem); font-weight: 450; line-height: 1; }
+.offering-page .price-lines--home .price-line { grid-template-columns: minmax(7rem, 1fr) repeat(3, minmax(5.5rem, .7fr)); }
+
+@media (max-width: 800px) {
+  .offering-page .price-lines { grid-column: 1; }
+  .offering-page .price-line,
+  .offering-page .price-lines--home .price-line { grid-template-columns: minmax(0, 1fr) repeat(2, minmax(5.5rem, auto)); }
+  .offering-page .price-lines--home .price-line h4 { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .offering-page .offering-intro .h-1 { font-size: clamp(3rem, 14vw, 4.6rem); }
+  .offering-page .offer-selector__head .h-2 { font-size: clamp(2.6rem, 12vw, 4rem); }
+  .offering-page #personal-training .h-2,
+  .offering-page #duo-training .h-2,
+  .offering-page #coaching .h-2 { font-size: clamp(2.75rem, 12vw, 4rem); }
+  .offering-page .pricing-offer__head .h-1 { font-size: clamp(3.25rem, 15vw, 5rem); }
+  .offering-page .price-line,
+  .offering-page .price-lines--home .price-line { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem; }
+  .offering-page .price-line h4 { grid-column: 1 / -1; }
+  .offering-page .price-lines--home .price-line p:last-child { grid-column: 1 / -1; }
 }

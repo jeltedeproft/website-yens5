@@ -796,66 +796,99 @@ function initBrandIntro() {
   // Daardoor worden logo en copy niet pas na de aperture opnieuw gepositioneerd.
   document.body.classList.add('intro-complete');
 
-  const symbol = $('.brand-intro__symbol', intro);
-  const letters = $$('.brand-intro__letter', intro);
+  const symbolStage = $('.brand-intro__stage--symbol', intro);
+  const yStem = $('.brand-intro__y-part--stem', intro);
+  const yLeft = $('.brand-intro__y-part--left', intro);
+  const yRight = $('.brand-intro__y-part--right', intro);
+  const wordmarkStage = $('.brand-intro__stage--wordmark', intro);
+  const lockup = $('.brand-intro__lockup', intro);
+  const planeGroup = $('.brand-intro__planes', intro);
   const timing = {
-    duration: 2800,
-    formStart: 100,
-    travelStart: 680,
-    wordComplete: 1450,
-    lockRelease: 1560,
-    sExitStart: 1560,
-    nExitStart: 1580,
-    eExitStart: 1600,
-    yExitStart: 1620,
-    sExitEnd: 2060,
-    nExitEnd: 2080,
-    eExitEnd: 2100,
-    logoClear: 2120,
-    overlayFadeStart: 1860
+    duration: 3100,
+    stemStart: 70,
+    stemEnd: 500,
+    leftStart: 190,
+    leftEnd: 740,
+    rightStart: 230,
+    rightEnd: 780,
+    assemblyStart: 680,
+    wordmarkIn: 860,
+    wordmarkClear: 1600,
+    colorStart: 720,
+    colorEnd: 2140,
+    wordmarkHold: 2300,
+    logoClear: 2800,
+    overlayStart: 2360,
+    releaseEnd: 3100
   };
   const duration = timing.duration;
   const at = (ms) => ms / duration;
 
   requestAnimationFrame(() => {
-    const symbolRect = symbol.getBoundingClientRect();
-    const centerOffset = window.innerWidth / 2 - (symbolRect.left + symbolRect.width / 2);
     const easing = {
-      form: 'cubic-bezier(.16, 1, .3, 1)',
-      assemble: 'cubic-bezier(.45, 0, .2, 1)',
-      release: 'cubic-bezier(.22, .61, .36, 1)'
+      enter: 'cubic-bezier(.24, .72, .28, 1)',
+      assemble: 'cubic-bezier(.25, .8, .25, 1)',
+      wave: 'cubic-bezier(.45, 0, .55, 1)',
+      release: 'cubic-bezier(.37, 0, .2, 1)'
     };
-    const animations = [symbol.animate([
-      { offset: 0, opacity: 0, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(49% 24% 49% 24%)' },
-      { offset: at(timing.formStart), opacity: 0, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(49% 24% 49% 24%)', easing: easing.form },
-      { offset: at(timing.travelStart), opacity: 1, transform: `translate3d(${centerOffset}px,0,0)`, clipPath: 'inset(0)', easing: easing.assemble },
-      { offset: at(timing.wordComplete), opacity: 1, transform: 'translate3d(0,0,0)' },
-      { offset: at(timing.yExitStart), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0)', easing: easing.release },
-      { offset: at(timing.logoClear), opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: 'inset(0)' },
-      { offset: 1, opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: 'inset(0)' }
+    const animations = [symbolStage.animate([
+      { offset: 0, opacity: 1, transform: 'translate3d(36.75%,0,0)' },
+      { offset: at(timing.assemblyStart), opacity: 1, transform: 'translate3d(36.75%,0,0)', easing: easing.assemble },
+      { offset: at(timing.wordmarkClear), opacity: 1, transform: 'translate3d(0,0,0)' },
+      { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)' }
     ], { duration, easing: 'linear', fill: 'both' })];
 
-    const letterMotion = [
-      { start: 820, end: 1300, exitStart: timing.eExitStart, exitEnd: timing.eExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 72.125% 0 27.875%)', open: 'inset(0 53.426% 0 27.875%)' },
-      { start: 875, end: 1375, exitStart: timing.nExitStart, exitEnd: timing.nExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 48.432% 0 51.568%)', open: 'inset(0 27.294% 0 51.568%)' },
-      { start: 930, end: timing.wordComplete, exitStart: timing.sExitStart, exitEnd: timing.sExitEnd, from: 'translate3d(-6px,0,0)', closed: 'inset(0 22.764% 0 77.236%)', open: 'inset(0 1.858% 0 77.236%)' }
+    const revealPart = (part, start, end, closedClip) => animations.push(part.animate([
+      { offset: 0, opacity: 0, clipPath: closedClip },
+      { offset: at(start), opacity: 0, clipPath: closedClip, easing: easing.enter },
+      { offset: at(end), opacity: 1, clipPath: 'inset(0)' },
+      { offset: 1, opacity: 1, clipPath: 'inset(0)' }
+    ], { duration, easing: 'linear', fill: 'both' }));
+    revealPart(yStem, timing.stemStart, timing.stemEnd, 'inset(0 0 100% 0)');
+    revealPart(yLeft, timing.leftStart, timing.leftEnd, 'inset(0 0 0 100%)');
+    revealPart(yRight, timing.rightStart, timing.rightEnd, 'inset(0 100% 0 0)');
+
+    animations.push(wordmarkStage.animate([
+      { offset: 0, opacity: 0, transform: 'translate3d(7px,0,0)', clipPath: 'inset(0 72.125% 0 27.875%)' },
+      { offset: at(timing.wordmarkIn), opacity: 0, transform: 'translate3d(7px,0,0)', clipPath: 'inset(0 72.125% 0 27.875%)', easing: easing.assemble },
+      { offset: at(timing.wordmarkClear), opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0 0 0 27.875%)' },
+      { offset: 1, opacity: 1, transform: 'translate3d(0,0,0)', clipPath: 'inset(0 0 0 27.875%)' }
+    ], { duration, easing: 'linear', fill: 'both' }));
+
+    const colorParts = [
+      ...$$('.brand-intro__y-part path', intro),
+      ...$$('.brand-intro__wordmark path', intro)
     ];
-    letters.forEach((letter, index) => {
-      const motion = letterMotion[index];
-      animations.push(letter.animate([
-        { offset: 0, opacity: 0, transform: motion.from, clipPath: motion.closed },
-        { offset: at(motion.start), opacity: 0, transform: motion.from, clipPath: motion.closed, easing: easing.form },
-        { offset: at(motion.end), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open },
-        { offset: at(motion.exitStart), opacity: .94, transform: 'translate3d(0,0,0)', clipPath: motion.open, easing: easing.release },
-        { offset: at(motion.exitEnd), opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: motion.open },
-        { offset: 1, opacity: 0, transform: 'translate3d(0,-1px,0)', clipPath: motion.open }
+    colorParts.forEach((part, index) => {
+      const letterIndex = index < 3 ? 0 : index - 2;
+      const colorStarts = [timing.colorStart, 900, 1080, 1260];
+      const start = colorStarts[letterIndex];
+      const end = start + 880;
+      animations.push(part.animate([
+        { offset: 0, fill: '#697366' },
+        { offset: at(start), fill: '#697366', easing: easing.wave },
+        { offset: at(end), fill: '#20241F' },
+        { offset: 1, fill: '#20241F' }
       ], { duration, easing: 'linear', fill: 'both' }));
     });
 
+    animations.push(lockup.animate([
+      { offset: 0, opacity: 1 },
+      { offset: at(timing.wordmarkHold), opacity: 1, easing: easing.release },
+      { offset: at(timing.logoClear), opacity: 0 },
+      { offset: 1, opacity: 0 }
+    ], { duration, easing: 'linear', fill: 'both' }));
+
+    animations.push(planeGroup.animate([
+      { offset: 0, opacity: 1 },
+      { offset: at(timing.overlayStart), opacity: 1, easing: easing.release },
+      { offset: 1, opacity: 0 }
+    ], { duration, easing: 'linear', fill: 'both' }));
+
     const clock = intro.animate([
       { offset: 0, opacity: 1 },
-      { offset: at(timing.overlayFadeStart), opacity: 1, easing: easing.release },
-      { offset: 1, opacity: 0 }
+      { offset: at(timing.wordmarkHold), opacity: 1 },
+      { offset: 1, opacity: 1 }
     ], { duration, easing: 'linear', fill: 'both' });
     animations.push(clock);
 
