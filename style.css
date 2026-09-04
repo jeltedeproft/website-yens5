@@ -2072,6 +2072,14 @@ body.is-locked { overflow: hidden; }
   font-size: .67rem;
   font-weight: 400;
 }
+.offer-selector__price em {
+  margin-right: .25em;
+  font-family: var(--font-sans);
+  font-size: .6em;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
 .offer-selector__link {
   display: flex;
   justify-content: space-between;
@@ -2954,6 +2962,18 @@ body.is-locked { overflow: hidden; }
   font-size: .7rem;
 }
 .offering-page .offer-selector__start .btn { white-space: nowrap; }
+.offering-page .offer-selector__start .btn--primary {
+  background-color: #687463;
+  border-color: #687463;
+  color: #FCFAF5;
+  box-shadow: 0 8px 22px rgba(20, 24, 20, .12);
+}
+.offering-page .offer-selector__start .btn--primary:hover,
+.offering-page .offer-selector__start .btn--primary:focus-visible {
+  background-color: #788273;
+  border-color: #788273;
+  box-shadow: 0 10px 26px rgba(20, 24, 20, .16);
+}
 .offering-page .page-editorial-pair {
   padding-top: clamp(3rem, 6vw, 6rem);
   padding-bottom: clamp(7rem, 10vw, 10rem);
@@ -6411,6 +6431,9 @@ body:not(.home-page) .nav .nav__links {
   gap: 16px;
 }
 
+.js body .nav:not(.is-ready) .nav__links {
+  visibility: hidden;
+}
 body .nav .nav__links a,
 body.home-page .nav .nav__links a,
 body:not(.home-page) .nav .nav__links a {
@@ -6989,6 +7012,17 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
 .offering-page .offering-intro__aside > a:hover span { transform: translateY(3px); }
 .offering-page .offer-selector__head .h-2 { font-size: clamp(2.6rem, 4.8vw, 4.75rem); line-height: .96; letter-spacing: -.045em; }
 .offering-page .offer-selector__item > strong { font-size: clamp(1.8rem, 2.8vw, 2.65rem); line-height: 1; }
+.offering-page .offer-selector__item > strong small {
+  display: block;
+  margin-top: .65rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: .64rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 .offering-page .offer-selector__price { font-size: clamp(1.4rem, 2.2vw, 2rem); }
 .offering-page #personal-training .h-2,
 .offering-page #duo-training .h-2,
@@ -7839,4 +7873,274 @@ body .nav.is-compact .nav__links a,
 body.home-page .nav.is-compact .nav__links a,
 body:not(.home-page) .nav.is-compact .nav__links a {
   font-size: .78rem;
+}
+
+/* Aanbodkeuze — gelijkwaardige kaarten, kleur alleen als bewuste interactie. */
+.offering-page .offer-selector__item,
+.offering-page .offer-selector__item:nth-child(2),
+.offering-page .offer-selector__item:nth-child(3) {
+  --offer-accent: var(--offering-green);
+  border-color: rgba(69, 77, 66, .17);
+  background: var(--offering-ivory);
+  transition:
+    color .42s cubic-bezier(.22, 1, .36, 1),
+    border-color .42s ease,
+    background-color .42s ease;
+}
+.offering-page .offer-selector__item .offer-selector__index,
+.offering-page .offer-selector__item .offer-selector__price {
+  color: #4A4D47;
+  transition: color .42s cubic-bezier(.22, 1, .36, 1);
+}
+.offering-page .offer-selector__item:hover,
+.offering-page .offer-selector__item:focus-visible,
+.offering-page .offer-selector__item:nth-child(2):hover,
+.offering-page .offer-selector__item:nth-child(2):focus-visible,
+.offering-page .offer-selector__item:nth-child(3):hover,
+.offering-page .offer-selector__item:nth-child(3):focus-visible {
+  border-color: rgba(69, 77, 66, .38);
+  background: color-mix(in srgb, var(--offering-green) 6%, var(--offering-ivory));
+}
+.offering-page .offer-selector__item:hover .offer-selector__index,
+.offering-page .offer-selector__item:hover .offer-selector__price,
+.offering-page .offer-selector__item:focus-visible .offer-selector__index,
+.offering-page .offer-selector__item:focus-visible .offer-selector__price {
+  color: var(--offering-green);
+}
+
+/* Self transition — dezelfde pagina duwt zichzelf verticaal uit beeld. */
+html.self-transition-active,
+html.self-transition-active body {
+  overflow: hidden !important;
+}
+html.self-transition-active {
+  scrollbar-gutter: stable;
+}
+.self-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  background: var(--ivory, #f1ede4);
+}
+.self-transition__scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: paint;
+}
+.self-transition__scene--incoming {
+  z-index: 2;
+  box-shadow: 0 -1.1rem 3.2rem rgba(20, 21, 18, .075);
+}
+.self-transition__scene--incoming::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 20;
+  height: 1px;
+  background: rgba(33, 35, 30, .18);
+}
+.self-transition__viewport {
+  position: absolute;
+  inset: 0;
+  min-height: 100vh;
+  transform: translate3d(0, calc(var(--self-transition-scroll) * -1), 0);
+}
+.self-transition__scene *,
+.self-transition__scene *::before,
+.self-transition__scene *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .self-transition { display: none; }
+}
+
+/* Aanbodkeuze — heldere, rustig scanbare kaartopbouw. */
+.offering-page .offer-selector__item {
+  grid-template-rows: auto auto minmax(4.8rem, 1fr) auto auto;
+  min-height: 18.5rem;
+  padding: clamp(1.75rem, 2.6vw, 2.35rem);
+}
+.offering-page .offer-selector__index {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.4rem, 2vw, 1.9rem);
+  color: #74776F;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+}
+.offering-page .offer-selector__index small {
+  color: #666B63;
+  font-size: .61rem;
+  font-weight: 600;
+  letter-spacing: .105em;
+  text-align: right;
+  text-transform: uppercase;
+}
+.offering-page .offer-selector__item > strong {
+  letter-spacing: -.025em;
+}
+.offering-page .offer-selector__item > strong small {
+  margin-top: .7rem;
+  color: #6E716A;
+  letter-spacing: .095em;
+}
+.offering-page .offer-selector__benefits {
+  max-width: 25ch;
+  margin-top: 1.15rem;
+  padding: 0;
+  list-style: none;
+  color: #666962;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+.offering-page .offer-selector__benefits li {
+  position: relative;
+  padding-left: .9rem;
+}
+.offering-page .offer-selector__benefits li::before {
+  content: '';
+  position: absolute;
+  top: .69em;
+  left: 0;
+  width: .28rem;
+  height: 1px;
+  background: #767B72;
+}
+.offering-page .offer-selector__benefits li + li { margin-top: .3rem; }
+.offering-page .offer-selector__choice {
+  position: absolute;
+  top: clamp(4.65rem, 6vw, 5.45rem);
+  right: clamp(1.75rem, 2.6vw, 2.35rem);
+  padding: .3rem .5rem;
+  color: #65533F;
+  border: 1px solid rgba(101, 83, 63, .25);
+  font-size: .56rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.offering-page .offer-selector__price {
+  margin-top: 1.5rem;
+  color: #353A34;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  line-height: 1.05;
+}
+.offering-page .offer-selector__price em {
+  display: block;
+  margin: 0 0 .4rem;
+  color: #74776F;
+  font-size: .39em;
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.offering-page .offer-selector__price small {
+  margin-top: .45rem;
+  color: #74776F;
+  font-size: .64rem;
+  letter-spacing: .015em;
+}
+.offering-page .offer-selector__link {
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  color: #363A34;
+  font-size: .72rem;
+  letter-spacing: .025em;
+}
+
+@media (max-width: 560px) {
+  .offering-page .offer-selector__item {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 0;
+    padding: 1.75rem .25rem 1.65rem;
+  }
+  .offering-page .offer-selector__index {
+    grid-column: 1;
+    grid-row: auto;
+    display: flex;
+    margin: 0 0 1.4rem;
+  }
+  .offering-page .offer-selector__item > strong,
+  .offering-page .offer-selector__benefits,
+  .offering-page .offer-selector__price,
+  .offering-page .offer-selector__link {
+    grid-column: 1;
+  }
+  .offering-page .offer-selector__benefits { margin-top: 1rem; }
+  .offering-page .offer-selector__choice {
+    top: 4.85rem;
+    right: .25rem;
+  }
+  .offering-page .offer-selector__price {
+    grid-row: auto;
+    margin-top: 1.35rem;
+    text-align: left;
+  }
+  .offering-page .offer-selector__price small { display: block; }
+  .offering-page .offer-selector__link { margin-top: 1.25rem; }
+}
+
+/* Eerste stap — gelaagd merkvlak met rustige architecturale diepte. */
+.offering-page .offer-selector__start {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 88% 4%, rgba(204, 181, 134, .23) 0%, rgba(188, 168, 126, .065) 30%, transparent 57%),
+    radial-gradient(ellipse at 4% 108%, rgba(120, 143, 115, .25) 0%, transparent 47%),
+    linear-gradient(128deg, #202720 0%, #303930 53%, #252D26 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .085) inset,
+    0 30px 72px rgba(27, 30, 26, .2);
+}
+.offering-page .offer-selector__start::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  border: 1px solid rgba(250, 248, 243, .075);
+  pointer-events: none;
+}
+.offering-page .offer-selector__start-label {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.offering-page .offer-selector__start-label::after {
+  content: '';
+  width: 2.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(185, 195, 179, .62), transparent);
+}
+.offering-page .offer-selector__start-copy p > strong {
+  color: #FFFDF8;
+  text-wrap: balance;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, .08);
+}
+.offering-page .offer-selector__start-copy p > span {
+  color: rgba(250, 248, 243, .82);
+}
+.offering-page .offer-selector__start-action {
+  border-top-color: rgba(250, 248, 243, .31);
+}
+.offering-page .offer-selector__start-price strong {
+  color: #FFFDF8;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, .1);
+}
+.offering-page .offer-selector__start-price span {
+  color: rgba(250, 248, 243, .72);
 }

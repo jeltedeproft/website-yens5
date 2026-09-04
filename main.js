@@ -112,6 +112,7 @@ function initNav() {
       nav.style.setProperty('--nav-shell-y', `${shellOffset.toFixed(2)}px`);
 
       nav.classList.toggle('is-scrolled', shouldCompact);
+      nav.classList.add('is-ready');
 
       if (!firstScreenIsOutOfView || menuOpen) {
         nav.classList.remove('is-hidden');
@@ -933,10 +934,105 @@ function initInternalHomeNavigation() {
   });
 }
 
+function initSelfPageTransition() {
+  const navigationEntry = performance.getEntriesByType('navigation')[0];
+  let isTransitioning = false;
+
+  const normalizedPath = (url) => {
+    const path = url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+    return `${url.origin}${path}${url.search}`;
+  };
+
+  const createScene = (className) => {
+    const scene = document.createElement('div');
+    scene.className = `self-transition__scene ${className}`;
+    scene.setAttribute('aria-hidden', 'true');
+    scene.style.setProperty('--self-transition-scroll', `${window.scrollY}px`);
+    scene.style.backgroundColor = getComputedStyle(document.body).backgroundColor;
+
+    const viewport = document.createElement('div');
+    viewport.className = 'self-transition__viewport';
+
+    Array.from(document.body.children).forEach((child) => {
+      if (child.matches('script, .brand-intro, .self-transition')) return;
+      const clone = child.cloneNode(true);
+      if (clone.id) clone.removeAttribute('id');
+      clone.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'));
+      if (child.matches('.nav, .nav__mobile')) scene.appendChild(clone);
+      else viewport.appendChild(clone);
+    });
+
+    scene.appendChild(viewport);
+    return scene;
+  };
+
+  const play = (destination) => {
+    if (isTransitioning) return;
+    if (reduceMotion) {
+      if (destination) location.assign(destination);
+      return;
+    }
+
+    isTransitioning = true;
+    const layer = document.createElement('div');
+    layer.className = 'self-transition';
+    const outgoing = createScene('self-transition__scene--outgoing');
+    const incoming = createScene('self-transition__scene--incoming');
+    layer.append(outgoing, incoming);
+    document.body.appendChild(layer);
+    document.documentElement.classList.add('self-transition-active');
+
+    const timing = {
+      duration: 980,
+      easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+      fill: 'both'
+    };
+    const outgoingAnimation = outgoing.animate([
+      { transform: 'translate3d(0, 0, 0)' },
+      { transform: 'translate3d(0, -100%, 0)' }
+    ], timing);
+    const incomingAnimation = incoming.animate([
+      { transform: 'translate3d(0, 100%, 0)' },
+      { transform: 'translate3d(0, 0, 0)' }
+    ], timing);
+
+    Promise.allSettled([outgoingAnimation.finished, incomingAnimation.finished]).then(() => {
+      if (destination) {
+        location.assign(destination);
+        return;
+      }
+      layer.remove();
+      document.documentElement.classList.remove('self-transition-active');
+      isTransitioning = false;
+    });
+  };
+
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || (event.button != null && event.button !== 0)) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('.nav__links a[href]');
+    if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+
+    const target = new URL(link.href, location.href);
+    if (target.origin !== location.origin || normalizedPath(target) !== normalizedPath(new URL(location.href))) return;
+
+    event.preventDefault();
+    if (target.pathname === '/' || target.pathname.endsWith('/index.html')) {
+      try { sessionStorage.setItem('yens-internal-home-navigation', String(Date.now())); } catch (_) {}
+    }
+    play();
+  });
+
+  if (navigationEntry?.type === 'reload' && !window.yensBrandIntroShouldPlay) {
+    requestAnimationFrame(() => requestAnimationFrame(() => play()));
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initBrandIntro();
   initBrandRefresh();
   initInternalHomeNavigation();
+  initSelfPageTransition();
   initSmoothScroll();
   initNav();
   initReveal();

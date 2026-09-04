@@ -26,8 +26,7 @@
       sessionStorage.removeItem('yens-internal-home-navigation');
     } catch (_) {}
     const yensNavigationType = performance.getEntriesByType('navigation')[0]?.type;
-    window.yensBrandIntroShouldPlay = yensNavigationType === 'reload'
-      || yensReplayRequested
+    window.yensBrandIntroShouldPlay = yensReplayRequested
       || (!yensInternalHomeNavigation && !yensIntroSeen);
     if (!window.yensBrandIntroShouldPlay) {
       document.documentElement.classList.add('skip-brand-intro');
