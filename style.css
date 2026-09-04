@@ -7536,3 +7536,12 @@ body:not(.home-page) .nav.is-compact .nav__links a[href]:not([aria-current='page
     line-height: .9;
   }
 }
+
+/* Homepage headline — vaste positie vóór, tijdens en na de intro-handoff. */
+.js body.home-page .hero__title .line > span,
+.js body.home-page:not(.is-loaded) .hero__title .line > span,
+.js body.home-page.is-loaded .hero__title .line > span,
+body.home-page.intro-complete .hero__title .line > span {
+  transform: none !important;
+  transition: none !important;
+}
