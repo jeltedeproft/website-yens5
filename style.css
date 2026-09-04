@@ -6976,8 +6976,17 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
 
 /* Aanbod — YENS editorial type scale en prijslijnen zonder tabellen. */
 .offering-page .offer-selector__item::before { display: none; }
-.offering-page .offering-intro .h-1 { max-width: 11ch; font-size: clamp(3.4rem, 6.4vw, 6.75rem); line-height: .94; letter-spacing: -.055em; }
+.offering-page .offering-intro .h-1 { width: max-content; max-width: 100%; font-size: clamp(3.25rem, 5vw, 5.75rem); line-height: .96; letter-spacing: -.052em; }
+.offering-page .offering-intro__title > span { display: block; white-space: nowrap; }
 .offering-page .offering-intro .lead { max-width: 24rem; font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.45; }
+.offering-page .offering-intro__aside { position: relative; max-width: 30rem; padding-left: clamp(1.75rem, 2.8vw, 2.5rem); transform: translateY(clamp(.75rem, 1.5vw, 1.5rem)); }
+.offering-page .offering-intro__aside::before { content: ''; position: absolute; top: .25rem; left: 0; width: 1px; height: clamp(3.75rem, 5vw, 4.75rem); background: linear-gradient(180deg, var(--offering-clay), rgba(154, 111, 89, .12)); }
+.offering-page .offering-intro__aside .lead { max-width: 27rem; }
+.offering-page .offering-intro__aside .lead strong { display: block; margin-bottom: .55rem; color: var(--text); font-family: var(--font-serif); font-size: 1.12em; font-weight: 450; }
+.offering-page .offering-intro__aside .lead span { display: block; }
+.offering-page .offering-intro__aside > a { display: inline-flex; gap: .75rem; margin-top: 1.5rem; color: var(--offering-green); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.offering-page .offering-intro__aside > a span { transition: transform var(--t-fast); }
+.offering-page .offering-intro__aside > a:hover span { transform: translateY(3px); }
 .offering-page .offer-selector__head .h-2 { font-size: clamp(2.6rem, 4.8vw, 4.75rem); line-height: .96; letter-spacing: -.045em; }
 .offering-page .offer-selector__item > strong { font-size: clamp(1.8rem, 2.8vw, 2.65rem); line-height: 1; }
 .offering-page .offer-selector__price { font-size: clamp(1.4rem, 2.2vw, 2rem); }
@@ -7004,8 +7013,14 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
   .offering-page .price-lines--home .price-line h4 { grid-column: 1 / -1; }
 }
 
+@media (min-width: 901px) {
+  .offering-page .offering-intro .split > :last-child { grid-column: 8 / span 5; }
+}
+
 @media (max-width: 560px) {
-  .offering-page .offering-intro .h-1 { font-size: clamp(3rem, 14vw, 4.6rem); }
+  .offering-page .offering-intro .h-1 { font-size: clamp(2.65rem, 11vw, 3.6rem); }
+  .offering-page .offering-intro__aside { margin-top: 2.75rem; padding: 1.5rem 0 0; transform: none; }
+  .offering-page .offering-intro__aside::before { top: 0; width: 2.75rem; height: 1px; background: linear-gradient(90deg, var(--offering-clay), rgba(154, 111, 89, .12)); }
   .offering-page .offer-selector__head .h-2 { font-size: clamp(2.6rem, 12vw, 4rem); }
   .offering-page #personal-training .h-2,
   .offering-page #duo-training .h-2,
@@ -7015,4 +7030,226 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
   .offering-page .price-lines--home .price-line { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem; }
   .offering-page .price-line h4 { grid-column: 1 / -1; }
   .offering-page .price-lines--home .price-line p:last-child { grid-column: 1 / -1; }
+}
+
+/* Aanbod — kleurharmonie afgestemd op de homepage. */
+.offering-page {
+  --offering-ivory: #F3F0E9;
+  --offering-linen: #EAE5DC;
+  --offering-sage: #DDE2D8;
+  --offering-clay: #92705E;
+  --offering-moss: #626D5E;
+  --offering-stone: #74756D;
+  --offering-gold: #8C7958;
+  --offering-green: #454D42;
+  --offering-deep: #30372F;
+}
+.offering-page main { background: var(--offering-ivory); }
+.offering-page main > .offering-intro {
+  background: linear-gradient(180deg, #F2F0E9 0%, var(--offering-ivory) 100%);
+}
+.offering-page .offer-selector {
+  background:
+    radial-gradient(circle at 8% 28%, rgba(146, 112, 94, .045), transparent 25%),
+    radial-gradient(circle at 92% 72%, rgba(98, 109, 94, .05), transparent 29%),
+    var(--offering-ivory);
+}
+.offering-page .offer-selector__item {
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--offer-accent) 3%, var(--offering-ivory)) 0%,
+    var(--offering-ivory) 70%);
+}
+.offering-page .offer-selector__item:hover,
+.offering-page .offer-selector__item:focus-visible {
+  background: color-mix(in srgb, var(--offer-accent) 5.5%, var(--offering-ivory));
+}
+.offering-page .page-editorial-pair {
+  background:
+    linear-gradient(115deg, rgba(140, 121, 88, .03), transparent 34%),
+    linear-gradient(300deg, rgba(98, 109, 94, .04), transparent 38%),
+    var(--offering-ivory);
+}
+.offering-page #personal-training {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(146, 112, 94, .04), transparent 31%),
+    linear-gradient(110deg, var(--offering-linen) 0%, #F0EBE3 68%, var(--offering-ivory) 100%);
+}
+.offering-page #duo-training {
+  background:
+    linear-gradient(125deg, rgba(98, 109, 94, .025), transparent 36%),
+    #F5F2EC;
+}
+.offering-page #coaching {
+  background:
+    radial-gradient(circle at 82% 22%, rgba(140, 121, 88, .06), transparent 35%),
+    var(--offering-deep);
+}
+.offering-page .pricing-offer { background: var(--offering-ivory); }
+.offering-page .pricing-chapter:nth-child(2) { background: linear-gradient(90deg, rgba(146, 112, 94, .018), transparent 34%); }
+.offering-page .pricing-chapter:nth-child(3) { background: linear-gradient(90deg, rgba(98, 109, 94, .022), transparent 38%); }
+.offering-page .pricing-chapter:nth-child(4) { background: linear-gradient(90deg, rgba(140, 121, 88, .02), transparent 36%); }
+.offering-page .pricing-note { background: linear-gradient(90deg, rgba(146, 112, 94, .065), rgba(146, 112, 94, .018)); }
+.offering-page .pricing-close { background: linear-gradient(90deg, rgba(146, 112, 94, .03), transparent 48%); }
+
+/* Aanbod hero — optische eindafstemming. */
+.offering-page main > .offering-intro { padding-bottom: clamp(1.75rem, 3vw, 2.75rem); }
+.offering-page .offering-intro__aside::before {
+  background: linear-gradient(180deg, rgba(146, 112, 94, .64), rgba(146, 112, 94, .16));
+}
+.offering-page .offering-intro__aside > a {
+  padding-bottom: .3rem;
+  color: #3E473C;
+  font-size: .78rem;
+  border-bottom: 1px solid rgba(69, 77, 66, .28);
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+.offering-page .offering-intro__aside > a:hover,
+.offering-page .offering-intro__aside > a:focus-visible {
+  color: var(--text);
+  border-bottom-color: currentColor;
+}
+@media (min-width: 901px) {
+  .offering-page .offer-selector__head { align-items: start; }
+  .offering-page .offer-selector__head > p {
+    align-self: start;
+    padding-top: 2.15rem;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 560px) {
+  .offering-page .offering-intro__aside::before {
+    background: linear-gradient(90deg, rgba(146, 112, 94, .64), rgba(146, 112, 94, .16));
+  }
+}
+
+/* Fullscreen Aanbod-hero en verfijnde compacte navigatie. */
+.offering-page main > .offering-intro {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(7rem, 12vh, 9rem) !important;
+  padding-bottom: clamp(4rem, 8vh, 6rem);
+}
+.offering-page main > .offering-intro > .container { width: 100%; }
+@media (min-width: 901px) {
+  .offering-page .offering-intro__aside::before {
+    top: calc(100% + clamp(1.5rem, 3vh, 2.5rem));
+    bottom: auto;
+    height: clamp(3rem, 8vh, 5rem);
+    background: linear-gradient(180deg, rgba(146, 112, 94, .68), rgba(146, 112, 94, .08));
+  }
+}
+
+body .nav.is-compact .nav__inner { gap: 14px; }
+body .nav.is-compact .nav__inner::before {
+  border-color: rgba(255, 255, 255, .07);
+  border-radius: 9px;
+  background: rgba(34, 39, 34, .955);
+  box-shadow: 0 8px 22px rgba(9, 12, 9, .12);
+  backdrop-filter: blur(12px) saturate(.72);
+  -webkit-backdrop-filter: blur(12px) saturate(.72);
+}
+body .nav.is-compact .nav__links { gap: 14px; }
+body .nav.is-compact .nav__links a,
+body.home-page .nav.is-compact .nav__links a,
+body:not(.home-page) .nav.is-compact .nav__links a {
+  padding-block: .58rem .82rem;
+  color: rgba(220, 222, 215, .72);
+}
+body .nav.is-compact .nav__links a[aria-current='page'] {
+  color: #F2F1EB;
+}
+body .nav.is-compact .nav__links a[aria-current='page']::after {
+  bottom: .2rem;
+  width: 1.65rem;
+  height: 4px;
+  background-color: transparent;
+  transform: translateX(-50%) scaleX(1);
+  opacity: .9;
+}
+body .nav.is-compact .nav__links a[href='/'][aria-current='page']::after {
+  background: linear-gradient(90deg, currentColor 0 22%, transparent 22% 38%, currentColor 38% 62%, transparent 62% 78%, currentColor 78% 100%) center / 100% 1px no-repeat;
+}
+body .nav.is-compact .nav__links a[href='/begeleiding.html'][aria-current='page']::after {
+  background:
+    linear-gradient(90deg, currentColor 0 38%, transparent 38% 48%, currentColor 48% 100%) 50% 1px / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 0 58%, currentColor 58% 82%, transparent 82%) 50% 3px / 100% 1px no-repeat;
+}
+body .nav.is-compact .nav__links a[href='/werkwijze.html'][aria-current='page']::after {
+  background:
+    linear-gradient(90deg, currentColor 0 28%, transparent 28%) 0 0 / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 0 34%, currentColor 34% 68%, transparent 68%) 0 2px / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 0 72%, currentColor 72% 100%) 0 4px / 100% 1px no-repeat;
+}
+body .nav.is-compact .nav__links a[href='/over-mij.html'][aria-current='page']::after {
+  background:
+    linear-gradient(90deg, currentColor 0 68%, transparent 68%) 0 0 / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent 0 46%, currentColor 46% 100%) 0 3px / 100% 1px no-repeat;
+}
+body .nav.is-compact .nav__links a[href='/contact.html'][aria-current='page']::after {
+  background:
+    radial-gradient(circle, currentColor 0 1px, transparent 1.5px) 0 50% / 5px 5px no-repeat,
+    linear-gradient(90deg, transparent 0 24%, currentColor 24% 100%) 0 50% / 100% 1px no-repeat;
+}
+
+/* Navigatieverhaal — vrije, handgetekende strokes in één doorlopend ritme. */
+body .nav .nav__links a[href='/'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h16l7-1 7 1h18' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/begeleiding.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h11l6-2 7 2 7-2 6 2h11' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/werkwijze.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h12V6h12V5h12v2h12' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/over-mij.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h14l10-3 10 3h14' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a[href='/contact.html'] { --nav-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M2 7h12l6-2 6 2 6-2 6 2h12' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+body .nav .nav__links a::after,
+body.home-page .nav .nav__links a::after,
+body:not(.home-page) .nav .nav__links a::after {
+  display: block;
+  bottom: .18rem;
+  width: 2rem;
+  height: .58rem;
+  background: currentColor;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-50%) translateY(1px);
+  -webkit-mask: var(--nav-mark) center / contain no-repeat;
+  mask: var(--nav-mark) center / contain no-repeat;
+  transition:
+    clip-path .56s cubic-bezier(.22, 1, .36, 1),
+    opacity .26s ease,
+    transform .56s cubic-bezier(.22, 1, .36, 1);
+}
+body .nav .nav__links a:not([aria-current='page']):hover::after,
+body.home-page .nav .nav__links a:not([aria-current='page']):hover::after,
+body:not(.home-page) .nav .nav__links a:not([aria-current='page']):hover::after {
+  opacity: .55;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0);
+}
+body .nav .nav__links a[aria-current='page']::after,
+body.home-page .nav .nav__links a[aria-current='page']::after,
+body:not(.home-page) .nav .nav__links a[aria-current='page']::after,
+body .nav.is-compact .nav__links a[aria-current='page']::after {
+  background: currentColor;
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%) translateY(0);
+}
+body .nav .nav__links a[aria-current='page'],
+body.home-page .nav .nav__links a[aria-current='page'],
+body:not(.home-page) .nav .nav__links a[aria-current='page'] {
+  color: var(--text);
+}
+body .nav.is-compact .nav__links a[aria-current='page'] {
+  color: #F5F3ED;
+}
+body .nav:not(.is-compact) .nav__links a::after { bottom: .24rem; }
+body .nav.is-compact .nav__links a::after { bottom: .17rem; }
+
+/* Headerlogo — hover zonder geometrische verschuiving van het Y-symbool. */
+body .nav .brand:hover::before,
+body.home-page .nav .brand:hover::before,
+body .nav.is-compact .brand:hover::before,
+body.home-page .nav.is-compact .brand:hover::before {
+  transform: translate(-50%, -50%);
+}
+body .nav .brand__image {
+  transform: translateY(-50%);
 }

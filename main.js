@@ -71,14 +71,14 @@ function initNav() {
       nav.classList.toggle('is-compact', shouldCompact);
       const wideWidth = viewportWidth;
       const wideHeight = isMobile ? 76 : 84;
-      const compactHeight = 50;
+      const compactHeight = 46;
       const widePadding = isMobile
         ? 24
         : Math.min(Math.max(viewportWidth * 0.032, 24), 60);
-      const compactPadding = isMobile ? 14 : 16;
+      const compactPadding = isMobile ? 13 : 14;
       const fullBrandWidth = isMobile ? 80 : 94;
       const compactBrandWidth = isMobile ? 31 : 35;
-      const compactGap = isMobile ? 8 : 16;
+      const compactGap = isMobile ? 8 : 14;
       const linksWidth = desktopLinks?.offsetWidth || 0;
       const actionItems = navActions ? Array.from(navActions.children) : [];
       const actionsWidth = actionItems.reduce((total, item) => total + item.offsetWidth, 0);
