@@ -70,6 +70,227 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Teruggedraaide editoriale compositie — bewust inactief gehouden. */
+@media (min-width: 99999px) {
+  /* De pagina-intro's delen een as, maar niet langer een klassieke 50/50-split. */
+  .page-intro .split {
+    position: relative;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+    min-height: clamp(22rem, 36vw, 34rem);
+  }
+
+  .page-intro .split > :first-child {
+    grid-column: 1 / span 8;
+    padding-left: clamp(3.25rem, 6vw, 6.5rem);
+  }
+
+  .page-intro .split > :last-child {
+    grid-column: 9 / span 4;
+    margin-bottom: clamp(1rem, 3vw, 3.5rem);
+  }
+
+  .page-intro .split > :first-child > .eyebrow {
+    position: absolute;
+    top: .35rem;
+    left: 0;
+    margin: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: .2em;
+  }
+
+  .page-intro .h-1 {
+    max-width: 14ch;
+    font-size: clamp(3.75rem, 6.4vw, 7rem);
+    line-height: .95;
+    letter-spacing: -.055em;
+  }
+
+  .page-intro--workflow .split > :last-child,
+  .page-intro--offering .split > :last-child { grid-column: 8 / span 4; }
+
+  /* Fotografische paren mogen de container voelbaar overschrijden. */
+  .page-editorial-pair__grid {
+    width: min(92vw, 94rem);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    gap: clamp(.85rem, 1.8vw, 1.8rem);
+  }
+
+  .page-editorial-pair__grid--workflow {
+    grid-template-columns: minmax(0, 4.25fr) minmax(0, 7.75fr);
+    align-items: center;
+  }
+
+  .page-editorial-pair__grid--workflow .page-editorial-photo--assessment {
+    margin-top: clamp(5rem, 9vw, 9rem);
+  }
+
+  /* Homepage: kop en aanbodlijst gebruiken bewust verschillende assen. */
+  .section--editorial-guidance .section-head {
+    width: min(48rem, 67%);
+    margin-left: clamp(4rem, 10vw, 10rem);
+    margin-bottom: clamp(4.5rem, 8vw, 8rem);
+  }
+
+  .section--editorial-guidance .guidance-list {
+    width: calc(100% + clamp(3rem, 8vw, 8rem));
+    margin-left: clamp(-8rem, -8vw, -3rem);
+  }
+
+  .section--editorial-guidance .guidance-locations {
+    margin-left: clamp(2rem, 17vw, 15rem);
+  }
+
+  /* Verhalen worden een skyline in plaats van drie gelijke kaarten. */
+  .section--editorial-stories .section-head {
+    margin-left: 25%;
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+
+  .home-page .section--editorial-stories .stories-grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr) minmax(0, 1fr);
+    align-items: start;
+    border-top: 0;
+  }
+
+  .home-page .section--editorial-stories .story-panel:nth-child(1) { min-height: 34rem; }
+  .home-page .section--editorial-stories .story-panel:nth-child(2) {
+    min-height: 27rem;
+    margin-top: clamp(4rem, 7vw, 7rem);
+    border-top: 1px solid var(--line);
+  }
+  .home-page .section--editorial-stories .story-panel:nth-child(3) {
+    min-height: 31rem;
+    margin-top: clamp(1.75rem, 3vw, 3rem);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Werkwijze: proces als verticale ruggengraat, tekst als vaste tegenmassa. */
+  .section--journey .split > :first-child {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: 8.5rem;
+  }
+
+  .section--journey .split > :last-child { grid-column: 6 / span 7; }
+  .section--journey .process { padding-left: clamp(4rem, 7vw, 7rem); }
+  .section--journey .step:nth-child(even) { margin-left: clamp(1.5rem, 4vw, 4rem); }
+
+  .section--principles .section-head {
+    width: 42%;
+    margin-left: 50%;
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+
+  .section--principles .principles { margin-left: clamp(3rem, 8vw, 8rem); }
+  .section--principles .principle {
+    grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, .9fr);
+    padding-block: clamp(2.25rem, 4vw, 4rem);
+  }
+  .section--principles .principle:nth-child(even) {
+    margin-left: clamp(4rem, 10vw, 10rem);
+  }
+  .section--principles .principle__num {
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
+    opacity: .48;
+  }
+  .section--principles .principle__title {
+    max-width: 18ch;
+    font-size: clamp(1.6rem, 2.7vw, 2.75rem);
+    line-height: 1.04;
+  }
+
+  .section--progress .split > :first-child { grid-column: 1 / span 5; }
+  .section--progress .split > :last-child {
+    grid-column: 7 / span 5;
+    margin-top: clamp(7rem, 12vw, 12rem);
+  }
+
+  /* Aanbod: twee formules krijgen een bewuste hiërarchie, niet twee gelijke kaarten. */
+  .section--offers-editorial .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    max-width: none;
+    align-items: start;
+  }
+  .section--offers-editorial .section-head .eyebrow { grid-column: 1 / span 2; }
+  .section--offers-editorial .section-head .h-2 { grid-column: 3 / span 5; }
+  .section--offers-editorial .section-head .lead {
+    grid-column: 9 / span 4;
+    margin-top: 0;
+  }
+  .section--offers-editorial .grid-2 {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+    gap: clamp(1.5rem, 3vw, 3.5rem);
+  }
+  .section--offers-editorial .offer:nth-child(2) { margin-top: clamp(5rem, 9vw, 9rem); }
+
+  .section--service-primary .split > :first-child { grid-column: 1 / span 5; }
+  .section--service-primary .split > :last-child { grid-column: 7 / span 6; }
+  .section--service-coaching .split > :first-child { grid-column: 1 / span 7; }
+  .section--service-coaching .split > :last-child {
+    grid-column: 9 / span 4;
+    margin-top: clamp(6rem, 10vw, 10rem);
+  }
+
+  .section--pricing-editorial .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    max-width: none;
+  }
+  .section--pricing-editorial .section-head .eyebrow { grid-column: 1 / span 2; }
+  .section--pricing-editorial .section-head .h-1 { grid-column: 3 / span 5; }
+  .section--pricing-editorial .section-head .lead {
+    grid-column: 9 / span 4;
+    margin-top: clamp(4rem, 7vw, 7rem);
+  }
+  .section--pricing-editorial .price-rows {
+    width: 88%;
+    margin-left: auto;
+  }
+
+  /* Over YENS: statements verschuiven als hoofdstukken rond één centrale as. */
+  .section--manifesto .split > :first-child { grid-column: 1 / span 4; }
+  .section--manifesto .split > :last-child { grid-column: 6 / span 6; }
+  .section--beliefs .section-head { margin-left: 33.333%; }
+  .section--beliefs .principle:nth-child(odd) { padding-right: 8%; }
+  .section--beliefs .principle:nth-child(even) { padding-left: 8%; }
+  .section--credentials .split > :first-child { grid-column: 1 / span 5; }
+  .section--credentials .split > :last-child {
+    grid-column: 7 / span 5;
+    margin-top: clamp(5rem, 9vw, 9rem);
+  }
+}
+
+@media (max-width: 0px) {
+  .page-intro .split > :first-child > .eyebrow {
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .page-intro .h-1 { max-width: 16ch; }
+  .section--editorial-guidance .section-head,
+  .section--editorial-guidance .guidance-list,
+  .section--editorial-guidance .guidance-locations,
+  .section--editorial-stories .section-head,
+  .section--principles .section-head,
+  .section--principles .principles,
+  .section--principles .principle:nth-child(even),
+  .section--pricing-editorial .price-rows,
+  .section--beliefs .section-head {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .section--offers-editorial .offer:nth-child(2),
+  .section--service-coaching .split > :last-child,
+  .section--progress .split > :last-child,
+  .section--credentials .split > :last-child { margin-top: 0; }
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 1.0625rem;
@@ -156,6 +377,123 @@ h4, h5, h6 {
   color: var(--text-muted);
   margin-bottom: 1.25rem;
 }
+.eyebrow::before { content: none !important; display: none !important; }
+.eyebrow::before {
+  content: '';
+  display: block;
+  flex: 0 0 auto;
+  width: .5rem;
+  height: .625rem;
+  background-color: currentColor;
+  opacity: .26;
+  -webkit-mask: url('/images/yens-y-symbol-micro.svg') center / contain no-repeat;
+  mask: url('/images/yens-y-symbol-micro.svg') center / contain no-repeat;
+}
+.eyebrow[data-signature]:not([data-signature="identity"])::before {
+  width: .6875rem;
+  height: .6875rem;
+}
+/* Begeleiding: twee routes vertrekken vanuit één stabiele basis. */
+.eyebrow[data-signature="guidance"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1.15' stroke-linecap='round'/%3E%3Ccircle cx='2.5' cy='2.5' r='1.25'/%3E%3Ccircle cx='11.5' cy='2.5' r='1.25'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1.15' stroke-linecap='round'/%3E%3Ccircle cx='2.5' cy='2.5' r='1.25'/%3E%3Ccircle cx='11.5' cy='2.5' r='1.25'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Focus: alle aandacht komt samen in één centraal punt. */
+.eyebrow[data-signature="focus"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 3.5 3.5M7 7l3.5-3.5' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='7' r='1.65' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 3.5 3.5M7 7l3.5-3.5' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='7' r='1.65' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Verbinding: afzonderlijke punten worden één traject. */
+.eyebrow[data-signature="connection"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 12.5V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3Ccircle cx='2.5' cy='2.5' r='1'/%3E%3Ccircle cx='11.5' cy='2.5' r='1'/%3E%3Ccircle cx='7' cy='12.5' r='1'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 12.5V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3Ccircle cx='2.5' cy='2.5' r='1'/%3E%3Ccircle cx='11.5' cy='2.5' r='1'/%3E%3Ccircle cx='7' cy='12.5' r='1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Groei: één arm reikt bewust verder zonder de basis los te laten. */
+.eyebrow[data-signature="growth"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M6.5 13V7M6.5 7 2.5 3M6.5 7 12 1.5' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='1.5' r='1.15'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M6.5 13V7M6.5 7 2.5 3M6.5 7 12 1.5' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='1.5' r='1.15'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Methode en systeem: de kruising wordt zichtbaar als beslispunt. */
+.eyebrow[data-signature="method"]::before,
+.eyebrow[data-signature="system"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1.05'/%3E%3Ccircle cx='7' cy='7' r='1.8' fill='none' stroke='%23000' stroke-width='.9'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 2.5 2.5M7 7l4.5-4.5' fill='none' stroke='%23000' stroke-width='1.05'/%3E%3Ccircle cx='7' cy='7' r='1.8' fill='none' stroke='%23000' stroke-width='.9'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Maatvoering: twee referentiepunten maken vooruitgang vergelijkbaar. */
+.eyebrow[data-signature="measure"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 3 3M7 7l4-4M1.5 3h3M9.5 3h3' fill='none' stroke='%23000' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 3 3M7 7l4-4M1.5 3h3M9.5 3h3' fill='none' stroke='%23000' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Drempel: de armen openen een heldere doorgang naar de volgende stap. */
+.eyebrow[data-signature="threshold"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 1.5 2M7 7 12.5 2' fill='none' stroke='%23000' stroke-width='1.05' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 13V7M7 7 1.5 2M7 7 12.5 2' fill='none' stroke='%23000' stroke-width='1.05' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.section:first-child .eyebrow::before {
+  width: .625rem;
+  height: .75rem;
+  opacity: .36;
+}
+.section--dark .eyebrow::before { opacity: .48; }
+.cta .eyebrow::before {
+  width: .5625rem;
+  height: .6875rem;
+  opacity: .42;
+}
+
+/* YENS context-as: één vaste meetlijn en Y-splitsing, met semantische eindpunten. */
+.eyebrow::before,
+.eyebrow[data-signature]::before,
+.section:first-child .eyebrow::before,
+.section--dark .eyebrow::before,
+.cta .eyebrow::before {
+  --signature-start: transparent;
+  --signature-junction: transparent;
+  --signature-upper: transparent;
+  --signature-lower: transparent;
+  width: 2rem;
+  height: .75rem;
+  opacity: .32;
+  background:
+    radial-gradient(circle at 3% 50%, var(--signature-start) 0 1.15px, transparent 1.35px),
+    radial-gradient(circle at 72% 50%, var(--signature-junction) 0 1.15px, transparent 1.35px),
+    radial-gradient(circle at 97% 8%, var(--signature-upper) 0 1.15px, transparent 1.35px),
+    radial-gradient(circle at 97% 92%, var(--signature-lower) 0 1.15px, transparent 1.35px),
+    linear-gradient(currentColor, currentColor) left center / 73% 1px no-repeat,
+    linear-gradient(34deg, transparent 46%, currentColor 48%, currentColor 52%, transparent 54%) right top / 31% 58% no-repeat,
+    linear-gradient(-34deg, transparent 46%, currentColor 48%, currentColor 52%, transparent 54%) right bottom / 31% 58% no-repeat;
+  -webkit-mask: none;
+  mask: none;
+}
+.eyebrow[data-signature="guidance"]::before {
+  --signature-upper: currentColor;
+  --signature-lower: currentColor;
+}
+.eyebrow[data-signature="focus"]::before { --signature-junction: currentColor; }
+.eyebrow[data-signature="connection"]::before {
+  --signature-start: currentColor;
+  --signature-upper: currentColor;
+  --signature-lower: currentColor;
+}
+.eyebrow[data-signature="growth"]::before { --signature-upper: currentColor; }
+.eyebrow[data-signature="method"]::before { --signature-junction: currentColor; }
+.eyebrow[data-signature="system"]::before {
+  --signature-start: currentColor;
+  --signature-junction: currentColor;
+  --signature-upper: currentColor;
+  --signature-lower: currentColor;
+}
+.eyebrow[data-signature="measure"]::before {
+  --signature-start: currentColor;
+  --signature-junction: currentColor;
+}
+.eyebrow[data-signature="threshold"]::before {
+  --signature-upper: currentColor;
+  --signature-lower: currentColor;
+}
+.section:first-child .eyebrow::before { opacity: .38; }
+.section--dark .eyebrow::before,
+.cta .eyebrow::before { opacity: .46; }
 .eyebrow--accent { color: var(--accent-text); }
 
 .lead {
@@ -1661,6 +1999,412 @@ body.is-locked { overflow: hidden; }
   letter-spacing: 0.02em;
 }
 .price-note { margin-top: 1.75rem; font-size: 0.9375rem; color: var(--text-muted); }
+
+/* Uitgebreide personal-trainingtarieven */
+.pricing-flow {
+  border-top: 1px solid var(--line-strong);
+}
+.pricing-chapter {
+  display: grid;
+  grid-template-columns: minmax(15rem, .72fr) minmax(0, 1.28fr);
+  column-gap: clamp(2.5rem, 7vw, 7rem);
+  row-gap: clamp(2rem, 3vw, 3rem);
+  padding-block: clamp(4rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--line-strong);
+}
+.pricing-chapter__intro {
+  max-width: 34rem;
+}
+.pricing-chapter__intro .h-2 {
+  max-width: 17ch;
+}
+.pricing-chapter__intro p {
+  margin-top: 1.25rem;
+  color: var(--text-body);
+}
+.pricing-chapter__intro p + p { margin-top: .8rem; }
+.pricing-feature {
+  align-self: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: .5rem 2rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  border-block: 1px solid var(--line-strong);
+}
+.pricing-feature > span {
+  color: var(--text-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.pricing-feature strong {
+  grid-row: span 2;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.75rem);
+  font-weight: 400;
+  line-height: .9;
+  color: var(--text);
+}
+.pricing-feature small { color: var(--text-muted); }
+.pricing-choice {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.pricing-choice p {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--text-body);
+}
+.pricing-choice strong { color: var(--text); }
+.pricing-table-wrap {
+  align-self: start;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.pricing-table {
+  width: 100%;
+  min-width: 35rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.pricing-table th,
+.pricing-table td {
+  padding: 1.25rem 1rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line);
+}
+.pricing-table thead th {
+  padding-top: .7rem;
+  color: var(--text-muted);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--line-strong);
+  border-bottom-color: var(--line-strong);
+}
+.pricing-table th:first-child,
+.pricing-table td:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+.pricing-table th:last-child,
+.pricing-table td:last-child { padding-right: 0; }
+.pricing-table tbody th {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+.pricing-table tbody th small {
+  display: block;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 400;
+}
+.pricing-table tbody td {
+  color: var(--text);
+  font-size: 1rem;
+}
+.pricing-table--compact { min-width: 24rem; }
+.pricing-formulas,
+.pricing-note {
+  grid-column: 2;
+}
+.pricing-rate-key,
+.pricing-conditions { grid-column: 2; }
+.pricing-rate-key {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: -.5rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.pricing-rate-key span {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .85rem 1rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  font-size: .78rem;
+}
+.pricing-rate-key strong { color: var(--text); font-weight: 600; white-space: nowrap; }
+.pricing-conditions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.pricing-conditions p {
+  padding-top: 1rem;
+  color: var(--text-muted);
+  font-size: .875rem;
+  border-top: 1px solid var(--line);
+}
+.pricing-conditions strong { color: var(--text); }
+.pricing-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(1.5rem, 3vw, 3rem);
+  align-self: start;
+  border-top: 1px solid var(--line-strong);
+}
+.pricing-facts > div {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.pricing-facts dt {
+  color: var(--text-muted);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.pricing-facts dd { margin-top: .25rem; color: var(--text); font-size: .9rem; }
+.pricing-formulas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+.pricing-formulas > div {
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
+}
+.pricing-formulas h4 {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+.pricing-formulas h4 span {
+  display: block;
+  margin-top: .25rem;
+  color: var(--accent-text);
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 600;
+}
+.pricing-formulas p {
+  margin-top: .75rem;
+  color: var(--text-muted);
+  font-size: .875rem;
+}
+.pricing-note {
+  padding: 1.15rem 1.25rem;
+  color: var(--text-body);
+  background: var(--bg-alt);
+  border-left: 2px solid var(--accent);
+}
+.pricing-chapter--home {
+  margin-inline: calc(var(--gutter) * -.5);
+  padding-inline: calc(var(--gutter) * .5);
+  background: var(--bg-alt);
+}
+.pricing-practical .fit-list {
+  align-self: start;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .pricing-chapter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+  }
+  .pricing-choice,
+  .pricing-formulas,
+  .pricing-rate-key,
+  .pricing-conditions,
+  .pricing-note {
+    grid-column: 1;
+    margin-top: 0;
+  }
+  .pricing-formulas { grid-template-columns: minmax(0, 1fr); }
+  .pricing-rate-key,
+  .pricing-conditions,
+  .pricing-facts { grid-template-columns: minmax(0, 1fr); }
+  .pricing-choice { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .pricing-table-wrap {
+    margin-right: calc(var(--gutter) * -1);
+    padding-right: var(--gutter);
+  }
+  .pricing-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    padding-right: 1rem;
+    background: var(--bg);
+  }
+  .pricing-chapter--home .pricing-table th:first-child { background: var(--bg-alt); }
+}
+
+@media (max-width: 520px) {
+  .pricing-feature { grid-template-columns: minmax(0, 1fr) auto; }
+  .pricing-feature strong { font-size: 2.75rem; }
+  .pricing-table th,
+  .pricing-table td { padding-inline: .75rem; }
+}
+
+.pricing-offer__head {
+  max-width: 58rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.pricing-offer__head .lead { max-width: 42rem; }
+.pricing-path {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 clamp(4rem, 8vw, 7rem);
+  padding: 0;
+  border-block: 1px solid var(--line-strong);
+  list-style: none;
+}
+.pricing-path li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .2rem .9rem;
+  padding: 1.4rem clamp(1rem, 2vw, 1.75rem);
+}
+.pricing-path li + li { border-left: 1px solid var(--line); }
+.pricing-path span {
+  grid-row: span 2;
+  color: var(--text-muted);
+  font-size: .68rem;
+  letter-spacing: .12em;
+}
+.pricing-path strong {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.pricing-path small { color: var(--text-muted); font-size: .76rem; }
+.pricing-chapter--compact { padding-block: clamp(3rem, 5vw, 4.5rem); }
+.pricing-close {
+  width: min(52rem, 83.333%);
+  margin: clamp(5rem, 9vw, 9rem) 0 0 auto;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  color: var(--text-on-dark);
+  background: var(--bg-dark);
+}
+.pricing-close .eyebrow { color: var(--c-sage); }
+.pricing-close .h-2 { max-width: 18ch; color: var(--text-on-dark); }
+.pricing-close > p:not(.eyebrow) {
+  max-width: 38rem;
+  margin-top: 1rem;
+  color: var(--text-on-dark-muted);
+}
+.pricing-close .btn { margin-top: 2rem; }
+
+/* Aanbod: compacte kleurcodering maakt keuzes onmiddellijk leesbaar. */
+.pricing-offer {
+  background: #F8F5EF;
+}
+.pricing-glance {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: clamp(3rem, 6vw, 5.5rem);
+  border: 1px solid rgba(28, 26, 24, .16);
+}
+.pricing-glance > div {
+  min-height: 9.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.15rem, 2vw, 1.6rem);
+  background: rgba(255, 255, 255, .24);
+}
+.pricing-glance > div:nth-child(2),
+.pricing-glance > div:nth-child(3),
+.pricing-glance > div:nth-child(4) { background: rgba(255, 255, 255, .24); }
+.pricing-glance > div + div { border-left: 1px solid rgba(28, 26, 24, .14); }
+.pricing-glance__intro { color: var(--text-on-dark); background: var(--c-forest) !important; }
+.pricing-glance span {
+  font-size: .69rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.pricing-glance strong {
+  margin-block: 1rem .25rem;
+  color: inherit;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 3vw, 2.8rem);
+  font-weight: 450;
+  line-height: 1;
+}
+.pricing-glance > div:not(.pricing-glance__intro) strong { color: var(--c-forest); }
+.pricing-glance strong em {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 500;
+}
+.pricing-glance small { color: inherit; font-size: .72rem; line-height: 1.4; opacity: .72; }
+.pricing-flow {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line-strong);
+}
+.pricing-offer .pricing-chapter {
+  --pricing-surface: #F8F5EF;
+  padding: clamp(3.25rem, 5.5vw, 5.5rem) 0;
+  background: transparent;
+  border-bottom: 1px solid var(--line-strong);
+}
+.pricing-offer .pricing-chapter:nth-child(2),
+.pricing-offer .pricing-chapter:nth-child(3),
+.pricing-offer .pricing-practical { --pricing-surface: #F8F5EF; }
+.pricing-offer .pricing-chapter--home {
+  --pricing-surface: #F0EAE0;
+  margin-inline: calc(var(--gutter) * -.5);
+  padding-inline: calc(var(--gutter) * .5);
+  background: linear-gradient(90deg, rgba(74, 81, 67, .055), rgba(74, 81, 67, .015));
+}
+.pricing-offer .pricing-feature {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--text-on-dark);
+  background: var(--c-forest);
+  border: 0;
+}
+.pricing-offer .pricing-feature > span,
+.pricing-offer .pricing-feature small { color: var(--c-sage); }
+.pricing-offer .pricing-feature strong { color: var(--text-on-dark); }
+.pricing-offer .pricing-table thead th { border-top-color: rgba(28, 26, 24, .32); }
+.pricing-offer .pricing-rate-key { margin-top: 0; }
+.pricing-offer .pricing-rate-key span { background: var(--pricing-surface); }
+.pricing-offer .pricing-note {
+  background: rgba(248, 246, 241, .52);
+  border-left-color: var(--c-forest);
+}
+.pricing-offer .pricing-close {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  background: #30372F;
+}
+
+@media (max-width: 800px) {
+  .pricing-path { grid-template-columns: minmax(0, 1fr); }
+  .pricing-path li + li { border-top: 1px solid var(--line); border-left: 0; }
+  .pricing-close { width: 100%; margin-top: 4rem; }
+  .pricing-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pricing-glance > div { min-height: 8.5rem; }
+  .pricing-glance > div:nth-child(3) { border-left: 0; border-top: 1px solid rgba(28, 26, 24, .14); }
+  .pricing-glance > div:nth-child(4) { border-top: 1px solid rgba(28, 26, 24, .14); }
+  .pricing-offer .pricing-table th:first-child { background: var(--pricing-surface); }
+}
+
+@media (max-width: 480px) {
+  .pricing-glance { grid-template-columns: minmax(0, 1fr); }
+  .pricing-glance > div { min-height: 7.25rem; }
+  .pricing-glance > div + div { border-top: 1px solid rgba(28, 26, 24, .14); border-left: 0; }
+  .pricing-offer .pricing-chapter { padding-inline: 1rem; }
+}
 
 /* ==========================================================================
    FAQ accordion
@@ -3673,6 +4417,189 @@ body .nav.is-initializing .brand {
 }
 
 /* ========================================================================== 
+   Eigen compositierol per hoofdpagina
+   Eén merkgrid, vier inhoudelijke ritmes
+   ========================================================================== */
+@media (min-width: 99999px) {
+  /* Gedeelde ingang: dezelfde assen, een andere verdeling per verhaal. */
+  .page-intro > .container > .split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.2vw, 1.25rem);
+    align-items: end;
+    min-height: clamp(20rem, 31vw, 31rem);
+  }
+  .page-intro > .container > .split > :first-child { grid-column: 1 / span 7; }
+  .page-intro > .container > .split > :last-child {
+    grid-column: 9 / span 4;
+    margin-bottom: clamp(1rem, 3vw, 3.5rem);
+  }
+  .page-intro .h-1 {
+    max-width: 14ch;
+    font-size: clamp(3.35rem, 5.6vw, 6.25rem);
+    line-height: .97;
+    letter-spacing: -.052em;
+  }
+
+  /* AANBOD — modulair, vergelijkend en horizontaal leesbaar. */
+  .offering-page .page-intro > .container > .split > :first-child { grid-column: 1 / span 6; }
+  .offering-page .page-intro > .container > .split > :last-child { grid-column: 8 / span 5; }
+  .offering-page .page-editorial-pair__grid--aanbod {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+  .offering-page .page-editorial-photo--group { margin-bottom: clamp(-3rem, -3vw, -1.5rem); }
+  .offering-page .section--service-primary .split {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.2vw, 1.25rem);
+    align-items: start;
+  }
+  .offering-page .section--service-primary .split > :first-child { grid-column: 1 / span 4; }
+  .offering-page .section--service-primary .split > :last-child { grid-column: 6 / span 7; }
+  .offering-page .section--offers-editorial .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    max-width: none;
+    align-items: start;
+  }
+  .offering-page .section--offers-editorial .section-head .eyebrow { grid-column: 1 / span 2; }
+  .offering-page .section--offers-editorial .section-head .h-2 { grid-column: 3 / span 5; }
+  .offering-page .section--offers-editorial .section-head .lead {
+    grid-column: 9 / span 4;
+    margin-top: 0;
+  }
+  .offering-page .section--offers-editorial .grid-2 {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+  .offering-page .section--offers-editorial .offer:nth-child(2) { margin-top: clamp(4rem, 7vw, 7rem); }
+  .offering-page .section--service-coaching .split > :first-child { max-width: 43rem; }
+  .offering-page .section--service-coaching .split > :last-child {
+    max-width: 31rem;
+    margin-top: clamp(5rem, 8vw, 8rem);
+  }
+  .offering-page .section--pricing-editorial .section-head { margin-left: 16.666%; }
+  .offering-page .section--pricing-editorial .price-rows { width: 91.666%; margin-left: auto; }
+
+  /* WERKWIJZE — een verticale ruggengraat met opeenvolgende beslismomenten. */
+  .workflow-page .page-intro > .container > .split > :first-child { grid-column: 1 / span 8; }
+  .workflow-page .page-intro > .container > .split > :last-child { grid-column: 9 / span 4; }
+  .workflow-page .page-editorial-pair__grid--workflow {
+    grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+    align-items: center;
+  }
+  .workflow-page .page-editorial-photo--assessment { margin-top: clamp(4rem, 8vw, 8rem); }
+  .workflow-page .section--system .section-head {
+    margin-right: auto;
+    margin-left: 8.333%;
+    text-align: left;
+  }
+  .workflow-page .section--system .section-head .eyebrow { margin-inline: 0; }
+  .workflow-page .section--system .domains { width: 91.666%; margin-left: auto; }
+  .workflow-page .section--journey .split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.2vw, 1.25rem);
+    align-items: start;
+  }
+  .workflow-page .section--journey .split > :first-child {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: 8.5rem;
+  }
+  .workflow-page .section--journey .split > :last-child { grid-column: 6 / span 7; }
+  .workflow-page .section--journey .process { padding-left: clamp(3.5rem, 6vw, 6rem); }
+  .workflow-page .section--journey .step:nth-child(even) { margin-left: clamp(1.25rem, 3vw, 3rem); }
+  .workflow-page .section--principles .section-head {
+    width: 42%;
+    margin-left: 50%;
+  }
+  .workflow-page .section--principles .principle:nth-child(even) { padding-left: 8.333%; }
+  .workflow-page .section--principles .principle:nth-child(odd) { padding-right: 8.333%; }
+  .workflow-page .section--progress .split > :first-child { align-self: start; }
+  .workflow-page .section--progress .split > :last-child { margin-top: clamp(6rem, 10vw, 10rem); }
+
+  /* OVER YENS — portretgedreven, redactioneel en menselijk. */
+  .about-page .page-intro > .container.split {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0;
+    min-height: clamp(38rem, 61vw, 56rem);
+    align-items: center;
+  }
+  .about-page .page-intro .over-intro-photo {
+    grid-column: 1 / span 5;
+    width: calc(100% + var(--gutter));
+    margin-left: calc(var(--gutter) * -1);
+    align-self: stretch;
+  }
+  .about-page .page-intro .over-intro-photo img { height: 100%; object-fit: cover; }
+  .about-page .page-intro > .container.split > :last-child { grid-column: 7 / span 6; }
+  .about-page .page-intro .h-1 { max-width: 13ch; }
+  .about-page .section--manifesto .split {
+    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+    gap: clamp(4rem, 9vw, 9rem);
+  }
+  .about-page .section--manifesto .prose { max-width: 47rem; }
+  .about-page .section--beliefs .section-head {
+    width: 58%;
+    margin-left: 33.333%;
+  }
+  .about-page .section--beliefs .principle:nth-child(odd) { padding-right: 10%; }
+  .about-page .section--beliefs .principle:nth-child(even) { padding-left: 10%; }
+  .about-page .section--credentials .split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    align-items: start;
+  }
+  .about-page .section--credentials .split > :last-child { margin-top: clamp(5rem, 9vw, 9rem); }
+  .about-page .section--about-images .grid-2 {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+  .about-page .section--about-images .photo-frame:nth-child(2) { margin-bottom: clamp(3rem, 6vw, 6rem); }
+
+  /* CONTACT — één kalme beslisruimte, zonder opeenvolgende sectieblokken. */
+  .contact-page .contact-composition > .container {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+  .contact-page .contact-composition .section-head {
+    grid-column: 2 / span 7;
+    max-width: none;
+    margin-bottom: clamp(4rem, 7vw, 7rem) !important;
+  }
+  .contact-page .contact-composition .section-head .h-1 {
+    max-width: 13ch;
+    font-size: clamp(3.2rem, 5vw, 5.75rem);
+    line-height: .98;
+  }
+  .contact-page .contact-composition > .container > .split {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(.75rem, 1.2vw, 1.25rem);
+    align-items: start;
+  }
+  .contact-page .contact-composition form { grid-column: 1 / span 7; }
+  .contact-page .contact-aside {
+    grid-column: 9 / span 4;
+    margin-top: clamp(-5rem, -5vw, -2.5rem);
+  }
+  .contact-page .contact-aside__portrait { aspect-ratio: 4 / 5; }
+  .contact-page .contact-aside__portrait img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+@media (max-width: 900px) {
+  .offering-page .page-editorial-photo--group,
+  .workflow-page .page-editorial-photo--assessment,
+  .about-page .section--about-images .photo-frame:nth-child(2),
+  .contact-page .contact-aside { margin: 0; }
+  .contact-page .contact-composition .section-head { margin-bottom: 3rem !important; }
+}
+
+/* ========================================================================== 
    Mobile-first kwaliteitslaag — gedeeld door alle pagina's
    ========================================================================== */
 /* Vervangen door het geconsolideerde responsive contract onderaan. */
@@ -4712,14 +5639,6 @@ body:not(.home-page) .nav:not(.is-compact) .brand {
   gap: .75rem;
 }
 
-.home-page .section-head .eyebrow::before {
-  content: '';
-  width: 1.75rem;
-  height: 1px;
-  background: currentColor;
-  opacity: .42;
-}
-
 @media (max-width: 900px) {
   .home-page .hero__title .line:nth-child(2) > span {
     margin-left: clamp(.75rem, 5vw, 2rem);
@@ -5044,4 +5963,265 @@ body.intro-complete .nav.is-hidden { opacity: 0 !important; }
   .page-editorial-pair__grid--workflow { grid-template-columns: 1fr; }
   .page-editorial-photo { aspect-ratio: 4 / 3 !important; }
   .page-editorial-photo--board img { object-position: 50% 24%; }
+}
+
+/* Teruggedraaide signature-composities — bewust inactief gehouden. */
+@media (min-width: 99999px) {
+  /* Binnenpagina's openen als een cover: titel, verticale signatuur, context. */
+  .composition-intro .split {
+    position: relative;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    min-height: clamp(24rem, 37vw, 35rem);
+    align-items: end;
+  }
+  .composition-intro .split > :first-child {
+    grid-column: 2 / span 7;
+    position: relative;
+  }
+  .composition-intro .split > :last-child {
+    grid-column: 9 / span 4;
+    margin-bottom: clamp(1.5rem, 4vw, 4.5rem);
+  }
+  .composition-intro .split > :first-child > .eyebrow {
+    position: absolute;
+    right: calc(100% + clamp(1.75rem, 3vw, 3.5rem));
+    top: .35rem;
+    margin: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: .22em;
+  }
+  .composition-intro .h-1 {
+    max-width: 13ch;
+    font-size: clamp(4rem, 6.5vw, 7rem);
+    line-height: .94;
+    letter-spacing: -.06em;
+  }
+
+  /* De fotografische opening overschrijdt bewust het tekstgrid. */
+  .page-editorial-pair__grid {
+    width: min(92vw, 94rem);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    gap: clamp(.9rem, 1.8vw, 1.8rem);
+  }
+  .page-editorial-pair__grid--workflow {
+    grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr);
+    align-items: center;
+  }
+  .page-editorial-pair__grid--workflow .page-editorial-photo--assessment {
+    margin-top: clamp(4rem, 8vw, 8rem);
+  }
+
+  /* Homepage aanbod: monumentale titel tegenover een bredere informatielijn. */
+  .home-page #begeleiding.composition--guidance .section-head {
+    width: min(52rem, 68%);
+    max-width: none;
+    margin-left: clamp(4rem, 12vw, 12rem);
+    margin-bottom: clamp(4.5rem, 8vw, 8rem);
+  }
+  .home-page #begeleiding.composition--guidance .section-head .h-1 {
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: .92;
+    letter-spacing: -.065em;
+  }
+  .home-page #begeleiding.composition--guidance .guidance-list {
+    width: calc(100% + clamp(2rem, 6vw, 6rem));
+    margin-left: clamp(-6rem, -6vw, -2rem);
+  }
+  .home-page #begeleiding.composition--guidance .guidance-locations {
+    margin-left: clamp(4rem, 18vw, 16rem);
+  }
+
+  /* Proces: verticale inhoudsrail en een verschoven tweede tempo. */
+  .home-page #werkwijze.composition--process {
+    position: relative;
+    overflow: hidden;
+  }
+  .home-page #werkwijze.composition--process::after {
+    content: 'KIJKEN  /  PRIKKELEN  /  AANPASSEN  /  OPBOUWEN';
+    position: absolute;
+    top: 50%;
+    right: max(1rem, calc((100vw - var(--max)) / 2 - 2.5rem));
+    color: var(--text-muted);
+    font-size: .58rem;
+    letter-spacing: .24em;
+    writing-mode: vertical-rl;
+    transform: translateY(-50%);
+    opacity: .58;
+  }
+  .home-page #werkwijze.composition--process .process-teaser__grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(5rem, 12vw, 12rem);
+    align-items: start;
+  }
+  .home-page #werkwijze.composition--process .process {
+    margin-top: clamp(6rem, 10vw, 10rem);
+  }
+  .home-page #werkwijze.composition--process .process-word:nth-child(even) {
+    margin-left: clamp(1.25rem, 3vw, 3rem);
+  }
+
+  /* Visie: het tekstvlak snijdt in het grote beeld als een architecturale plaat. */
+  .home-page #over.composition--manifesto .about-editorial {
+    width: min(92vw, 92rem);
+    max-width: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0;
+    align-items: center;
+  }
+  .home-page #over.composition--manifesto .about-editorial__media {
+    grid-column: 1 / span 8;
+    width: 100%;
+  }
+  .home-page #over.composition--manifesto .about-editorial__content {
+    z-index: 2;
+    grid-column: 7 / span 6;
+    margin-left: clamp(-2rem, -3vw, -1rem);
+    padding: clamp(3rem, 6vw, 6rem);
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    box-shadow: -1px 0 0 var(--line);
+  }
+
+  /* Verhalen: drie profielen, drie volumes — geen gelijk kaartentapijt. */
+  .home-page #verhalen.composition--stories .section-head {
+    margin-left: 30%;
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+  .home-page #verhalen.composition--stories .stories-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .82fr) minmax(0, 1.03fr);
+    align-items: start;
+    border-top: 0;
+  }
+  .home-page #verhalen.composition--stories .story-panel:nth-child(1) { min-height: 33rem; }
+  .home-page #verhalen.composition--stories .story-panel:nth-child(2) {
+    min-height: 26rem;
+    margin-top: clamp(4.5rem, 8vw, 8rem);
+    border-top: 1px solid var(--line);
+  }
+  .home-page #verhalen.composition--stories .story-panel:nth-child(3) {
+    min-height: 30rem;
+    margin-top: clamp(1.75rem, 3vw, 3rem);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Werkwijze: vaste visie naast een levende, licht verspringende tijdlijn. */
+  .composition--journey .split > :first-child {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: 8.5rem;
+  }
+  .composition--journey .split > :last-child { grid-column: 6 / span 7; }
+  .composition--journey .process { padding-left: clamp(4rem, 7vw, 7rem); }
+  .composition--journey .step:nth-child(even) { margin-left: clamp(1.5rem, 4vw, 4rem); }
+
+  .composition--principles .section-head {
+    max-width: 34rem;
+    margin-left: 50%;
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+  .composition--principles .principles { margin-left: clamp(3rem, 8vw, 8rem); }
+  .composition--principles .principle {
+    grid-template-columns: 4.5rem minmax(0, 1.05fr) minmax(0, .95fr);
+    padding-block: clamp(2.25rem, 4vw, 4rem);
+  }
+  .composition--principles .principle:nth-child(even) { margin-left: clamp(3rem, 8vw, 8rem); }
+  .composition--principles .principle__num {
+    font-size: clamp(2.75rem, 4.5vw, 5rem);
+    opacity: .44;
+  }
+  .composition--principles .principle__title {
+    max-width: 18ch;
+    font-size: clamp(1.55rem, 2.55vw, 2.65rem);
+    line-height: 1.04;
+  }
+
+  /* Aanbod: inhoud krijgt verschil in gewicht en verticale positie. */
+  .composition--offers .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    max-width: none;
+    align-items: start;
+  }
+  .composition--offers .section-head .eyebrow { grid-column: 1 / span 2; }
+  .composition--offers .section-head .h-2 { grid-column: 3 / span 5; }
+  .composition--offers .section-head .lead {
+    grid-column: 9 / span 4;
+    margin-top: 0;
+  }
+  .composition--offers .grid-2 {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(1.5rem, 3vw, 3.5rem);
+    align-items: start;
+  }
+  .composition--offers .offer:nth-child(2) { margin-top: clamp(4rem, 7vw, 7rem); }
+
+  .composition--deep .split > :first-child { grid-column: 1 / span 7; }
+  .composition--deep .split > :last-child {
+    grid-column: 9 / span 4;
+    margin-top: clamp(6rem, 10vw, 10rem);
+  }
+
+  /* Over YENS: visie en principes wisselen van as zonder kaartdecoratie. */
+  .composition--vision .split > :first-child { grid-column: 1 / span 4; }
+  .composition--vision .split > :last-child { grid-column: 6 / span 6; }
+  .composition--beliefs .section-head { margin-left: 33.333%; }
+  .composition--beliefs .principle:nth-child(odd) { padding-right: 8%; }
+  .composition--beliefs .principle:nth-child(even) { padding-left: 8%; }
+}
+
+@media (max-width: 0px) {
+  .composition-intro .split > :first-child > .eyebrow {
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .composition-intro .h-1 { max-width: 16ch; }
+  .home-page #begeleiding.composition--guidance .section-head,
+  .home-page #begeleiding.composition--guidance .guidance-list,
+  .home-page #begeleiding.composition--guidance .guidance-locations,
+  .home-page #verhalen.composition--stories .section-head,
+  .composition--principles .section-head,
+  .composition--principles .principles,
+  .composition--principles .principle:nth-child(even),
+  .composition--beliefs .section-head {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .home-page #werkwijze.composition--process::after { display: none; }
+  .composition--offers .offer:nth-child(2),
+  .composition--deep .split > :last-child { margin-top: 0; }
+}
+
+/* Teruggedraaide eindcascade — bewust inactief gehouden. */
+@media (min-width: 99999px) {
+  .page-editorial-pair__grid--workflow {
+    grid-template-columns: minmax(0, 4.25fr) minmax(0, 7.75fr);
+  }
+
+  .home-page #verhalen.section--editorial-stories .section-head {
+    margin-left: 25%;
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+
+  .home-page #verhalen.section--editorial-stories .stories-grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr) minmax(0, 1fr);
+    align-items: start;
+    border-top: 0;
+  }
+
+  .home-page #verhalen.section--editorial-stories .story-panel:nth-child(1) { min-height: 34rem; }
+  .home-page #verhalen.section--editorial-stories .story-panel:nth-child(2) {
+    min-height: 27rem;
+    margin-top: clamp(4rem, 7vw, 7rem);
+    border-top: 1px solid var(--line);
+  }
+  .home-page #verhalen.section--editorial-stories .story-panel:nth-child(3) {
+    min-height: 31rem;
+    margin-top: clamp(1.75rem, 3vw, 3rem);
+    border-top: 1px solid var(--line);
+  }
 }
