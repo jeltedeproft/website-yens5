@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./booking-flow.css" />
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="offering-page">
@@ -57,88 +58,47 @@
   </div>
 
   <main id="main">
-
-    <!-- Pagina-intro -->
     <section class="section offering-intro" style="padding-top: clamp(8rem, 15vw, 11rem);">
-      <div class="container">
-        <div class="split split--text-heavy split--top">
-          <div>
-            <span class="eyebrow">Begeleiding</span>
-            <h1 class="h-1 offering-intro__title">
-              <span>Kracht die blijft.</span>
-              <span>Vrijheid die groeit.</span>
-            </h1>
-          </div>
-          <div class="offering-intro__aside">
-            <p class="lead">
-              <strong>Jouw vertrekpunt bepaalt de route.</strong>
-              <span>We bouwen gericht aan kracht die past bij je lichaam, doelen en leven.</span>
-            </p>
-            <a href="#offer-selector-title">Vind je vorm <span aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-      </div>
+      <div class="container"><div class="split split--text-heavy split--top">
+        <div><span class="eyebrow">Personal training</span><h1 class="h-1 offering-intro__title"><span>Ruimte om</span><span>sterker te worden.</span></h1></div>
+        <div class="offering-intro__aside"><p class="lead"><strong>Geen drukte. Geen afleiding.</strong><span>Persoonlijke begeleiding in een rustige omgeving, afgestemd op jouw lichaam, doelen en leven. We vertrekken vanuit waar jij vandaag staat en bouwen van daaruit verder.</span></p><a href="/contact.html?afspraak=eerste-training">Plan je eerste training <span aria-hidden="true">→</span></a><p class="price-note">Eerste training · 60 min · €65</p></div>
+      </div></div>
     </section>
-
-    <!-- Primaire beslisroute -->
-    <section class="offer-selector" aria-labelledby="offer-selector-title">
-      <div class="container">
-        <div class="offer-selector__head">
-          <div>
-            <span class="eyebrow">Drie vormen</span>
-            <h2 class="h-2" id="offer-selector-title">Wat past bij jou?</h2>
-          </div>
-          <p>Eén principe: de juiste prikkel, op jouw maat.</p>
+    <div class="container booking-prices">
+<nav class="offer-flow" aria-label="Je traject in drie stappen"><ol>
+  <li><a href="#eerste-training"><span class="offer-flow__number">01</span><span><strong>Start met één training</strong><small>60 minuten · €65<br>Daarna beslis je of je verdergaat.</small></span><span class="offer-flow__arrow" aria-hidden="true">→</span></a></li>
+  <li><a href="#tarieven"><span class="offer-flow__number">02</span><span><strong>Je starttraject</strong><small>1× per week → 12 trainingen<br>2× per week → 24 trainingen</small></span><span class="offer-flow__arrow" aria-hidden="true">→</span></a></li>
+  <li><a href="#na-je-starttraject"><span class="offer-flow__number">03</span><span><strong>Daarna kies je opnieuw</strong><small>1× per week → per 4 trainingen<br>2× per week → per 8 trainingen<br>Of kies een losse training.</small></span><span class="offer-flow__arrow" aria-hidden="true">↓</span></a></li>
+</ol></nav>
+<section class="price-section flow-step" id="eerste-training">
+        <div class="flow-step__heading"><span class="flow-step__number" aria-hidden="true">01</span><div><span class="eyebrow">Stap 1</span><h2 class="h-2">Start met één training.</h2><p>Eerst ervaren. Daarna beslissen.</p></div></div><div class="training-start"><div><div class="price-heading"><h3 class="h-3">Intake, bewegingsanalyse &amp; eerste training</h3><p>We maken kennis, brengen je doelen en vertrekpunt in kaart en gaan meteen samen aan de slag. Zo ervaar jij hoe ik werk en krijg ik een eerste beeld van wat jij nodig hebt.</p></div><p><strong>Daarna kies je zelf.</strong></p><p>Geen match? Dan stopt het hier, zonder verdere verplichtingen.<br>Klaar om ervoor te gaan? Dan kiezen we samen het ritme dat bij jou past.</p></div><div class="training-start__action"><span>Eerste training</span><strong>€65</strong><p>60 minuten</p><a class="btn btn--primary" href="/contact.html?afspraak=eerste-training">Plan je eerste training</a></div></div>
+      </section>
+<section class="price-section flow-step" id="tarieven">
+        <div class="flow-step__heading"><span class="flow-step__number" aria-hidden="true">02</span><div><span class="eyebrow">Stap 2 · Je starttraject</span><h2 class="h-2">Een engagement van 12 of 24 trainingen.</h2><p>Wil je verder na je eerste training? Dan kies je je ritme en start je een traject van 12 of 24 trainingen.</p></div></div>
+        <div class="rhythm-grid">
+          <article class="rhythm-card"><header><span class="rhythm-card__label">1× per week</span><h3>12 trainingen</h3><p>Rustig en consistent opbouwen</p><p class="rhythm-term">12 trainingen · maximaal 15 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€816</strong><small>voor 12 trainingen · €68 per training</small></dd></div><div><dt>Duo</dt><dd><strong>€504 p.p.</strong><small>voor 12 trainingen · €42 p.p. per training</small></dd></div><div><dt>Semi-PT</dt><dd><strong>€408 p.p.</strong><small>voor 12 trainingen · €34 p.p. per training</small></dd></div></dl></article>
+          <article class="rhythm-card"><header><span class="rhythm-card__label">2× per week</span><h3>24 trainingen</h3><p>Meer ritme. Meer continuïteit.</p><p class="rhythm-term">24 trainingen · maximaal 18 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€1.560</strong><small>voor 24 trainingen · €65 per training</small></dd></div><div><dt>Duo</dt><dd><strong>€960 p.p.</strong><small>voor 24 trainingen · €40 p.p. per training</small></dd></div><div><dt>Semi-PT</dt><dd><strong>€768 p.p.</strong><small>voor 24 trainingen · €32 p.p. per training</small></dd></div></dl></article>
         </div>
-
-        <nav class="offer-selector__grid" aria-label="Kies een begeleidingsvorm">
-          <a class="offer-selector__item" href="#personal-training">
-            <span class="offer-selector__index"><span>01</span><small>Personal training</small></span>
-            <strong>Solo <small>1 persoon</small></strong>
-            <ul class="offer-selector__benefits">
-              <li>Volledige persoonlijke aandacht</li>
-              <li>Opgebouwd op jouw tempo</li>
-            </ul>
-            <span class="offer-selector__price"><em>Vanaf</em> €65 <small>per training</small></span>
-            <span class="offer-selector__link">Bekijk aanpak en tarieven <span aria-hidden="true">↓</span></span>
-          </a>
-          <a class="offer-selector__item" href="#duo-training">
-            <span class="offer-selector__index"><span>02</span><small>Personal training</small></span>
-            <strong>Duo <small>2 personen</small></strong>
-            <span class="offer-selector__choice">Meest gekozen</span>
-            <ul class="offer-selector__benefits">
-              <li>Samen trainen en motiveren</li>
-              <li>Elk begeleiding op maat</li>
-            </ul>
-            <span class="offer-selector__price"><em>Vanaf</em> €40 p.p. <small>per training</small></span>
-            <span class="offer-selector__link">Bekijk aanpak en tarieven <span aria-hidden="true">↓</span></span>
-          </a>
-          <a class="offer-selector__item" href="#semi-personal">
-            <span class="offer-selector__index"><span>03</span><small>Persoonlijk · gedeeld trainingsmoment</small></span>
-            <strong>Semi-PT <small>3 of 4 personen</small></strong>
-            <ul class="offer-selector__benefits">
-              <li>Jouw eigen trainingsplan</li>
-              <li>Maximaal vier deelnemers</li>
-            </ul>
-            <span class="offer-selector__price"><em>Vanaf</em> €32 p.p. <small>per training</small></span>
-            <span class="offer-selector__link">Bekijk aanpak en tarieven <span aria-hidden="true">↓</span></span>
-          </a>
-        </nav>
-
-        <div class="offer-selector__start">
-          <div class="offer-selector__start-copy">
-            <span class="offer-selector__start-label">Je eerste stap</span>
-            <p><strong>Liever eerst ervaren?</strong><span>Intake, bewegingsanalyse en een eerste training.</span></p>
-          </div>
-          <div class="offer-selector__start-action">
-            <p class="offer-selector__start-price"><strong>€60</strong><span>60 minuten · zonder verdere verplichting</span></p>
-            <a class="btn btn--primary" href="/contact.html?begeleiding=personal-training">Plan je eerste afspraak</a>
-          </div>
+      <div class="flow-payment">
+        <div class="price-heading"><span class="eyebrow">Betalen zonder grote sprong</span><h3 class="h-3">Je betaalt standaard per 4 weken.</h3><p>Je engageert je voor het volledige starttraject van 12 of 24 trainingen. Je hoeft dat niet in één keer te betalen.</p></div>
+        <div class="rhythm-grid"><article class="rhythm-card"><header><h4>1× per week</h4><p class="rhythm-term">Betaling per 4 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€272</strong><small>per 4 weken</small></dd></div><div><dt>Duo</dt><dd><strong>€168 p.p.</strong><small>per 4 weken</small></dd></div><div><dt>Semi-PT</dt><dd><strong>€136 p.p.</strong><small>per 4 weken</small></dd></div></dl></article><article class="rhythm-card"><header><h4>2× per week</h4><p class="rhythm-term">Betaling per 4 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€520</strong><small>per 4 weken</small></dd></div><div><dt>Duo</dt><dd><strong>€320 p.p.</strong><small>per 4 weken</small></dd></div><div><dt>Semi-PT</dt><dd><strong>€256 p.p.</strong><small>per 4 weken</small></dd></div></dl></article></div>
+        <p class="price-note">Liever meteen het volledige traject betalen? Dat kan uiteraard ook.</p>
+      </div></section>
+<section class="price-section flow-step" id="na-je-starttraject">
+        <div class="flow-step__heading"><span class="flow-step__number" aria-hidden="true">03</span><div><span class="eyebrow">Stap 3 · Na je starttraject</span><h2 class="h-2">Daarna? Jij kiest hoe je verdergaat.</h2><p>Verder bouwen zonder lang engagement: per 4 trainingen, per 8 trainingen of los. Voor reeksen blijf je trainen aan hetzelfde tarief.</p></div></div>
+        <div class="rhythm-grid rhythm-grid--continuation"><article class="rhythm-card"><header><span class="rhythm-card__label">1× per week</span><h3>Per 4 trainingen</h3><p class="rhythm-term">4 trainingen · af te werken binnen maximaal 6 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€272</strong></dd></div><div><dt>Duo</dt><dd><strong>€168 p.p.</strong></dd></div><div><dt>Semi-PT</dt><dd><strong>€136 p.p.</strong></dd></div></dl></article><article class="rhythm-card"><header><span class="rhythm-card__label">2× per week</span><h3>Per 8 trainingen</h3><p class="rhythm-term">8 trainingen · af te werken binnen maximaal 8 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€520</strong></dd></div><div><dt>Duo</dt><dd><strong>€320 p.p.</strong></dd></div><div><dt>Semi-PT</dt><dd><strong>€256 p.p.</strong></dd></div></dl></article><article class="rhythm-card rhythm-card--loose"><header><span class="rhythm-card__label">Liever los trainen?</span><h3>Losse training</h3><p class="rhythm-term">Per training · afhankelijk van de planning</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€72</strong></dd></div><div><dt>Duo</dt><dd><strong>€45 p.p.</strong></dd></div><div><dt>Semi-PT</dt><dd><strong>€36 p.p.</strong></dd></div></dl><p class="price-note">Lopende trajecten en vaste trainingsmomenten krijgen voorrang in de planning.</p></article></div>
+        <p class="price-note">Na iedere reeks kies je zelf of je verdergaat.</p>
+      </section>
+<section class="price-section" aria-labelledby="offer-selector-title">
+        <div class="price-heading"><span class="eyebrow">Zo kies je je begeleiding</span><h2 class="h-2" id="offer-selector-title">Persoonlijke aandacht. Jouw vorm.</h2></div>
+        <div class="training-formats">
+          <article id="personal-training"><h3>Solo</h3><p>Volledige 1-op-1 begeleiding.</p><p>Alle aandacht voor jouw beweging, doelen, techniek en progressie.</p><a class="link" href="/contact.html?afspraak=eerste-training&amp;begeleiding=personal-training">Plan je eerste training →</a></article>
+          <article id="duo-training"><h3>Duo</h3><p>Samen trainen met je partner, vriend(in) of familielid.</p><p>Jullie trainen samen, maar krijgen allebei persoonlijke begeleiding.</p><a class="link" href="/contact.html?afspraak=eerste-training&amp;begeleiding=duo-training">Plan je eerste training →</a></article>
+          <article id="semi-personal"><h3>Semi personal training</h3><p>Train in een kleine groep van 3–4 personen.</p><p>De energie van samen trainen, met voldoende individuele coaching.</p><a class="link" href="/contact.html?afspraak=eerste-training&amp;begeleiding=semi-personal">Plan je eerste training →</a></article>
         </div>
-      </div>
-    </section>
-
-    <section class="page-editorial-pair" aria-label="Persoonlijke en kleinschalige training">
+      </section>
+</div>
+<section class="page-editorial-pair" aria-label="Persoonlijke en kleinschalige training">
       <div class="container page-editorial-pair__grid page-editorial-pair__grid--aanbod">
         <figure class="page-editorial-photo page-editorial-photo--personal" data-reveal="left">
           <img src="/images/yens-aanbod-personal-v1.png" alt="Persoonlijke correctie tijdens een gecontroleerde krachtoefening" width="1536" height="1024" loading="eager" />
@@ -148,113 +108,29 @@
         </figure>
       </div>
     </section>
-
-    <!-- Personal training -->
-    <section class="section section--alt" id="personal-training">
-      <div class="container">
-        <div class="split split--top">
-          <div data-reveal>
-            <span class="eyebrow">01 — Solo</span>
-            <h2 class="h-2">Solo personal training</h2>
-            <p class="lead" style="margin-top:1.25rem;">
-              Geen drukte. Wel aandacht, richting en ruimte om sterker te worden.
-            </p>
-            <p style="margin-top:1rem;">We bouwen belastbaarheid, geen afhankelijkheid.</p>
-            <a class="link" style="margin-top:2rem;" href="/contact.html?begeleiding=personal-training">Ontdek personal training <span class="arrow">→</span></a>
-          </div>
-
-          <div class="stack-lg" data-reveal="right">
-            <div>
-              <h3 class="h-3">Voor wie</h3>
-              <ul class="fit-list" style="margin-top:0.75rem;">
-                <li>Sterker worden</li>
-                <li>Gericht starten of heropbouwen</li>
-                <li>Sterk ouder worden, met fysieke vrijheid</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 class="h-3">Wat is inbegrepen</h3>
-              <ul class="fit-list" style="margin-top:0.75rem;">
-                <li>Intake, startmeting en persoonlijk plan</li>
-                <li>Training met techniekcorrectie en eigen dosering</li>
-                <li>Progressieve opbouw, aangepast aan jouw week</li>
-                <li>Evaluatie en eventueel een zelfstandig programma</li>
-              </ul>
-            </div>
-
-            <dl class="spec-list">
-              <div><dt>Locatie</dt><dd>Kontich, Ranst of aan huis in regio Antwerpen</dd></div>
-              <div><dt>Frequentie</dt><dd>Normaal één begeleide sessie per week</dd></div>
-              <div><dt>Duur sessie</dt><dd>60 minuten</dd></div>
-              <div><dt>Eerste afspraak</dt><dd>€60, inclusief intake, bewegingsanalyse en training</dd></div>
-              <div><dt>Annulatie</dt><dd>Kosteloos verplaatsen tot 24 uur op voorhand</dd></div>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Duo & semi-personal -->
-    <section class="section" id="duo-training">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="eyebrow">02 — Duo &nbsp;·&nbsp; 03 — Semi-PT</span>
-          <h2 class="h-2">Personal training met twee. Semi-PT met drie of vier.</h2>
-          <p class="lead">
-              Eén trainingsmoment. Een persoonlijke opbouw voor iedereen.
-          </p>
-        </div>
-
-        <div class="grid grid-2">
-          <article class="offer" data-reveal style="--i:0">
-            <span class="offer__tag offer__tag--preferred">Personal training · 2 personen</span>
-            <h3 class="offer__title">Duo personal training</h3>
-            <p class="offer__text">
-              Train samen met iemand die je kent. Dosering en progressie blijven persoonlijk.
-            </p>
-            <ul class="offer__list">
-              <li>Twee deelnemers, één begeleider</li>
-              <li>Eigen oefeningen en gewichten per persoon</li>
-              <li>Gezamenlijke intake, individuele opvolging</li>
-            </ul>
-            <div class="offer__foot">
-              <p class="offer__price">Vanaf <strong>€40</strong> per persoon</p>
-              <a class="link" href="/contact.html?begeleiding=duo-training">Kennismaken <span class="arrow">→</span></a>
-            </div>
-          </article>
-
-          <article class="offer" data-reveal style="--i:1" id="semi-personal">
-            <span class="offer__tag">Semi-PT · 3 of 4 personen</span>
-            <h3 class="offer__title">Semi-personal training</h3>
-            <p class="offer__text">
-              Train met drie of vier. De groep geeft ritme; de coaching blijft persoonlijk.
-            </p>
-            <ul class="offer__list">
-              <li>Drie of vier deelnemers</li>
-              <li>Individueel programma binnen het groepsmoment</li>
-              <li>Persoonlijke correcties en vaste momenten</li>
-            </ul>
-            <div class="offer__foot">
-              <p class="offer__price">Vanaf <strong>€32</strong> per persoon</p>
-              <a class="link" href="/contact.html?begeleiding=semi-personal">Kennismaken <span class="arrow">→</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Health & longevity coaching -->
+<div class="container booking-prices">
+<section class="price-section" id="aan-huis">
+        <div class="price-heading"><span class="eyebrow">Personal training aan huis</span><h2 class="h-2">Dezelfde begeleiding. Bij jou.</h2></div>
+        <div class="rhythm-grid"><article class="rhythm-card"><header><h3>Starttraject</h3><p class="rhythm-term">12 trainingen · maximaal 15 weken</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€912</strong><small>€76 per training</small></dd></div><div><dt>Duo</dt><dd><strong>€552 p.p.</strong><small>€46 p.p. per training</small></dd></div><div><dt>Semi-PT</dt><dd><strong>€432 p.p.</strong><small>€36 p.p. per training</small></dd></div></dl></article><article class="rhythm-card"><header><h3>Betaling</h3><p class="rhythm-term">Per vier trainingen</p></header><dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€304</strong></dd></div><div><dt>Duo</dt><dd><strong>€184 p.p.</strong></dd></div><div><dt>Semi-PT</dt><dd><strong>€144 p.p.</strong></dd></div></dl></article></div>
+        <p class="price-note"><strong>Daarna:</strong> 4 trainingen, af te werken binnen maximaal 6 weken.</p>
+        <div class="price-heading" style="margin-top:2.5rem;"><h3 class="h-3">Los aan huis</h3></div>
+        <dl class="rhythm-prices"><div><dt>Solo</dt><dd><strong>€80</strong></dd></div><div><dt>Duo</dt><dd><strong>€50 p.p.</strong></dd></div><div><dt>Semi-PT</dt><dd><strong>€40 p.p.</strong></dd></div></dl>
+      </section>
+<section class="price-section">
+        <div class="price-heading"><span class="eyebrow">Goed om te weten</span><h2 class="h-2">Duidelijke afspraken.</h2></div>
+        <dl class="spec-list"><div><dt>Duur</dt><dd>60 minuten per training</dd></div><div><dt>1 per week</dt><dd>12 trainingen · maximaal 15 weken</dd></div><div><dt>2 per week</dt><dd>24 trainingen · maximaal 18 weken</dd></div><div><dt>Na je starttraject</dt><dd>4 of 8 trainingen, afhankelijk van je ritme</dd></div><div><dt>Verplaatsen</dt><dd>Tot 24 uur vooraf · kosteloos verplaatsen</dd></div><div><dt>Planning</dt><dd>Vaste trainingsmomenten waar mogelijk</dd></div><div><dt>Betaling</dt><dd>Betaling vooraf via Bancontact of overschrijving</dd></div><div><dt>Beschikbaarheid</dt><dd>Beperkt aantal trajecten</dd></div></dl>
+      </section>
+</div>
     <section class="section section--dark" id="coaching">
       <div class="container">
         <div class="split split--top">
           <div data-reveal="left">
-            <span class="eyebrow">04 — Breder traject</span>
+            <span class="eyebrow">Aanvullende begeleiding</span>
             <h2 class="h-2">Health &amp; longevity coaching</h2>
             <p class="lead" style="margin-top:1.25rem; color:var(--text-on-dark-muted);">
               Training, herstel en gewoonten versterken elkaar. We beginnen bij jouw grootste hefboom.
             </p>
-            <a class="link link--on-dark" style="margin-top:2rem;" href="/contact.html?begeleiding=coaching">Bespreek een traject <span class="arrow">→</span></a>
+            <a class="link link--on-dark" style="margin-top:2rem;" href="/contact.html?afspraak=eerste-training&amp;begeleiding=coaching">Plan je eerste training <span class="arrow">→</span></a>
           </div>
 
           <div data-reveal="right">
@@ -274,122 +150,10 @@
         </div>
       </div>
     </section>
-
-    <!-- Trajecten en tarieven -->
-    <section class="section pricing-offer" id="tarieven">
-      <div class="container">
-        <div class="section-head pricing-offer__head" data-reveal>
-          <span class="eyebrow">Personal training</span>
-          <h2 class="h-1">Eerst voelen. Dan bouwen.</h2>
-          <p class="lead">Start met één training. Daarna kies jij.</p>
-        </div>
-
-        <div class="pricing-flow">
-          <article class="pricing-chapter pricing-chapter--first" data-reveal>
-            <div class="pricing-chapter__intro">
-              <span class="eyebrow">Eerst even ervaren</span>
-              <h3 class="h-2">Intake, bewegingsanalyse &amp; eerste training</h3>
-              <p>We brengen je vertrekpunt in kaart en trainen meteen. Zo voel je of de aanpak past.</p>
-            </div>
-            <div class="pricing-feature">
-              <span>Eerste afspraak</span>
-              <strong>€60</strong>
-              <small>60 minuten · zonder verdere verplichting</small>
-            </div>
-            <div class="pricing-choice">
-              <p><strong>Geen match?</strong><br>Dan stopt het hier, zonder verplichting.</p>
-              <p><strong>Klaar om te bouwen?</strong><br>Dan starten we met 12 trainingen.</p>
-            </div>
-          </article>
-
-          <article class="pricing-chapter" data-reveal>
-            <div class="pricing-chapter__intro">
-              <span class="eyebrow">Je starttraject</span>
-              <h3 class="h-2">12 trainingen. Tijd om echt iets op te bouwen.</h3>
-              <p>12 trainingen, normaal wekelijks, af te werken binnen 15 weken.</p>
-            </div>
-            <div class="price-lines" aria-label="Prijzen van het starttraject">
-              <article class="price-line">
-                <h4>Solo</h4><p><span>Per 4</span><strong>€260</strong></p><p><span>12 trainingen</span><strong>€780</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Duo <small>per persoon</small></h4><p><span>Per 4</span><strong>€160</strong></p><p><span>12 trainingen</span><strong>€480</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Semi-PT <small>3–4 · per persoon</small></h4><p><span>Per 4</span><strong>€128</strong></p><p><span>12 trainingen</span><strong>€384</strong></p>
-              </article>
-            </div>
-            <p class="pricing-note">Betaling in drie delen van vier trainingen.</p>
-          </article>
-
-          <article class="pricing-chapter" data-reveal>
-            <div class="pricing-chapter__intro">
-              <span class="eyebrow">En daarna?</span>
-              <h3 class="h-2">Vast ritme of een losse training.</h3>
-              <p>Ga verder per vier, of train los wanneer de planning het toelaat.</p>
-            </div>
-            <div class="price-lines" aria-label="Prijzen van vervolg- en losse trainingen">
-              <article class="price-line">
-                <h4>Solo</h4><p><span>4 trainingen</span><strong>€260</strong></p><p><span>Los</span><strong>€70</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Duo <small>per persoon</small></h4><p><span>4 trainingen</span><strong>€160</strong></p><p><span>Los</span><strong>€42</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Semi-PT <small>3–4 · per persoon</small></h4><p><span>4 trainingen</span><strong>€128</strong></p><p><span>Los</span><strong>€34</strong></p>
-              </article>
-            </div>
-            <div class="pricing-conditions">
-              <p><strong>Reeks van vier</strong><br>Maximaal 6 weken om af te werken. Na iedere reeks kies je opnieuw.</p>
-              <p><strong>Losse training</strong><br>Afhankelijk van beschikbaarheid. Vaste trajecten krijgen voorrang.</p>
-            </div>
-          </article>
-
-          <article class="pricing-chapter pricing-chapter--home" data-reveal>
-            <div class="pricing-chapter__intro">
-              <span class="eyebrow">Personal training aan huis</span>
-              <h3 class="h-2">Dezelfde begeleiding. Bij jou.</h3>
-              <p>Dezelfde begeleiding en trajectstructuur, bij jou thuis.</p>
-            </div>
-            <div class="price-lines price-lines--home" aria-label="Prijzen voor personal training aan huis">
-              <article class="price-line">
-                <h4>Solo</h4><p><span>Per 4</span><strong>€304</strong></p><p><span>Start · 12</span><strong>€912</strong></p><p><span>Los</span><strong>€80</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Duo <small>per persoon</small></h4><p><span>Per 4</span><strong>€184</strong></p><p><span>Start · 12</span><strong>€552</strong></p><p><span>Los</span><strong>€50</strong></p>
-              </article>
-              <article class="price-line">
-                <h4>Semi-PT <small>3–4 · per persoon</small></h4><p><span>Per 4</span><strong>€144</strong></p><p><span>Start · 12</span><strong>€432</strong></p><p><span>Los</span><strong>€40</strong></p>
-              </article>
-            </div>
-          </article>
-
-          <aside class="pricing-chapter pricing-practical" data-reveal>
-            <div class="pricing-chapter__intro">
-              <span class="eyebrow">Goed om te weten</span>
-              <h3 class="h-2">Duidelijke afspraken.</h3>
-            </div>
-            <dl class="pricing-facts">
-              <div><dt>Duur</dt><dd>60 minuten per training</dd></div>
-              <div><dt>Starttraject</dt><dd>12 trainingen binnen maximaal 15 weken</dd></div>
-              <div><dt>Vervolg</dt><dd>4 trainingen binnen maximaal 6 weken</dd></div>
-              <div><dt>Planning</dt><dd>Waar mogelijk een vast wekelijks moment</dd></div>
-              <div><dt>Verplaatsen</dt><dd>Tot 24 uur vooraf kosteloos</dd></div>
-              <div><dt>Betaling</dt><dd>Vooraf via Bancontact of overschrijving</dd></div>
-              <div><dt>Beschikbaarheid</dt><dd>Een beperkt aantal trajecten voor persoonlijke aandacht</dd></div>
-            </dl>
-          </aside>
-        </div>
-
-        <div class="pricing-close" data-reveal>
-          <p class="eyebrow">Je eerste stap</p>
-          <h3 class="h-2">Eerst ervaren. Daarna beslissen.</h3>
-          <p>Intake, bewegingsanalyse en training. Daarna kies jij.</p>
-          <a class="btn btn--primary btn--lg" href="/contact.html?begeleiding=personal-training">Plan je eerste afspraak · €60</a>
-        </div>
-      </div>
-    </section>
-
+    <section class="section"><div class="container"><div class="training-close">
+      <h2 class="h-2">Begin met je eerste training.</h2><p>Intake, bewegingsanalyse &amp; eerste training<br>60 minuten · €65</p><a class="btn btn--primary" href="/contact.html?afspraak=eerste-training">Plan je eerste training</a>
+      <div class="training-close__secondary"><p>Liever eerst even telefonisch kennismaken?</p><p>Gratis kennismaking · 15 min · €0</p><a href="/contact.html?afspraak=gratis-kennismaking">Plan een gratis kennismaking</a></div>
+    </div></div></section>
   </main>
 
   <footer class="footer">
@@ -410,19 +174,17 @@
           <h3>Praktisch</h3>
           <a href="/werkwijze.html">Werkwijze</a>
           <a href="/begeleiding.html#tarieven">Tarieven</a>
-          <a href="/#locaties">Locaties</a>
+          <a href="/contact.html#locaties">Locaties</a>
           <a href="/#faq">FAQ</a>
           <a href="/contact.html">Contact</a>
         </div>
         <div class="footer__col">
-          <h3>Volgen</h3>
-          <a href="https://instagram.com/" rel="noopener">Instagram</a>
-          <a href="https://linkedin.com/" rel="noopener">LinkedIn</a>
-          <a href="mailto:hallo@yens.be">E-mail</a>
+          <h3>Contact</h3>
+          <a href="https://wa.me/32499007486">WhatsApp</a>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; <span data-year>2026</span> YENS · Ondernemingsnummer BE 0000.000.000</p>
+        <p>&copy; <span data-year>2026</span> YENS · Ondernemingsnummer 1037.809.631</p>
         <div class="footer__legal">
           <a href="/privacy.html">Privacyverklaring</a>
           <a href="/privacy.html#cookies">Cookiebeleid</a>
@@ -434,10 +196,8 @@
   </footer>
 
   <div class="sticky-cta" id="sticky-cta">
-    <a class="btn btn--primary" href="/contact.html">Kennismaken</a>
-    <a class="icon-btn" href="https://wa.me/32000000000" aria-label="Stuur een bericht via WhatsApp">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 8.24 8.24c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-    </a>
+    <a class="btn btn--primary" href="/contact.html?afspraak=eerste-training">Plan je eerste training</a>
+    <a class="btn btn--ghost" href="https://wa.me/32499007486" aria-label="Stuur Yens een bericht via WhatsApp">WhatsApp</a>
   </div>
 
   <script type="module" src="./main.js"></script>

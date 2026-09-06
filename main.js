@@ -1,3 +1,4 @@
+import { initBooking } from './booking-flow.mjs';
 /* ==========================================================================
    YENS — interactie & subtiel bewegingsontwerp
    ========================================================================== */
@@ -11,7 +12,7 @@ import 'lenis/dist/lenis.css';
  * Netlify verwerkt formulieren op de root van de site.
  */
 const FORM_ACTION = '/';
-const CONTACT_EMAIL = 'hallo@yens.be';
+const CONTACT_WHATSAPP = '+32 499 00 74 86';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -153,7 +154,7 @@ function initNav() {
     nav?.classList.remove('is-hidden');
   };
 
-  burger.addEventListener('click', () => {
+burger.addEventListener('click', () => {
     setOpen(burger.getAttribute('aria-expanded') !== 'true');
   });
 
@@ -355,6 +356,7 @@ function initForm() {
   if (!form) return;
 
   const status = $('#form-status');
+  const booking = initBooking(form);
 
   // Velden voorinvullen vanuit een link, bv. /contact.html?locatie=kontich
   const params = new URLSearchParams(window.location.search);
@@ -372,6 +374,7 @@ function initForm() {
   };
 
   const clearError = (field) => {
+    field.removeAttribute('aria-invalid');
     field.closest('.field')?.classList.remove('field--error');
     field.closest('.field')?.querySelector('.field__error')?.remove();
   };
@@ -379,6 +382,7 @@ function initForm() {
   const setError = (field, message) => {
     const wrapper = field.closest('.field');
     if (!wrapper || wrapper.querySelector('.field__error')) return;
+    field.setAttribute('aria-invalid', 'true');
     wrapper.classList.add('field--error');
     const error = document.createElement('p');
     error.className = 'field__error';
@@ -387,6 +391,10 @@ function initForm() {
   };
 
   form.addEventListener('input', (e) => clearError(e.target));
+  form.addEventListener('change', (e) => {
+    clearError(e.target);
+    if (e.target.name === 'afspraak') form.querySelectorAll('[name=afspraak]').forEach(clearError);
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -396,7 +404,9 @@ function initForm() {
 
     let valid = true;
     $$('[required]', form).forEach((field) => {
-      const empty = field.type === 'checkbox' ? !field.checked : !field.value.trim();
+      const empty = field.type === 'radio'
+        ? !Array.from(form.querySelectorAll('input[type=radio]')).some(radio => radio.name === field.name && radio.checked)
+        : field.type === 'checkbox' ? !field.checked : !field.value.trim();
       const badEmail = field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
       if (empty || badEmail) {
         valid = false;
@@ -412,9 +422,12 @@ function initForm() {
     }
 
     // Het honeypot-veld gaat bewust mee: Netlify controleert het serverside.
+    const selectedAppointment = booking.summary();
     const data = new FormData(form);
     const submit = form.querySelector('[type="submit"]');
     const label = submit.textContent;
+    const appointmentChoices = form.querySelectorAll('[name=afspraak]');
+    appointmentChoices.forEach(choice => { choice.disabled = true; });
 
     submit.disabled = true;
     submit.textContent = 'Versturen…';
@@ -428,12 +441,13 @@ function initForm() {
       });
       if (!response.ok) throw new Error(`Netlify gaf status ${response.status}`);
 
-      form.reset();
-      showStatus('Bedankt, je aanvraag is verstuurd. Ik neem binnen twee werkdagen persoonlijk contact met je op.');
+      booking.resetDetails();
+      showStatus(`Bedankt, je aanvraag voor ${selectedAppointment} is verstuurd. Ik neem binnen twee werkdagen contact op om het moment te bevestigen.`);
     } catch (error) {
       status.classList.add('form__status--error');
-      showStatus(`Verzenden lukte niet. Probeer het later opnieuw of mail rechtstreeks naar ${CONTACT_EMAIL}.`);
+      showStatus(`Verzenden lukte niet. Probeer het later opnieuw of stuur een WhatsApp-bericht naar ${CONTACT_WHATSAPP}.`);
     } finally {
+      appointmentChoices.forEach(choice => { choice.disabled = false; });
       submit.disabled = false;
       submit.textContent = label;
     }

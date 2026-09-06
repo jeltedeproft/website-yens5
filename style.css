@@ -8100,12 +8100,13 @@ html.self-transition-active {
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 88% 4%, rgba(204, 181, 134, .23) 0%, rgba(188, 168, 126, .065) 30%, transparent 57%),
-    radial-gradient(ellipse at 4% 108%, rgba(120, 143, 115, .25) 0%, transparent 47%),
-    linear-gradient(128deg, #202720 0%, #303930 53%, #252D26 100%);
+    radial-gradient(ellipse at 88% 4%, rgba(194, 179, 151, .18) 0%, rgba(178, 168, 148, .055) 31%, transparent 58%),
+    radial-gradient(ellipse at 4% 108%, rgba(139, 151, 139, .18) 0%, transparent 48%),
+    linear-gradient(128deg, #292F2C 0%, #383F3A 53%, #2D332F 100%);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, .085) inset,
-    0 30px 72px rgba(27, 30, 26, .2);
+    0 1px 0 rgba(255, 255, 255, .09) inset,
+    0 34px 78px rgba(31, 34, 31, .19),
+    0 -18px 45px rgba(20, 23, 21, .055) inset;
 }
 .offering-page .offer-selector__start::after {
   content: '';
@@ -8143,4 +8144,64 @@ html.self-transition-active {
 }
 .offering-page .offer-selector__start-price span {
   color: rgba(250, 248, 243, .72);
+}
+.offering-page .offer-selector__start .btn--primary {
+  background-color: #748077;
+  border-color: #748077;
+  color: #FFFDF8;
+}
+.offering-page .offer-selector__start .btn--primary:hover,
+.offering-page .offer-selector__start .btn--primary:focus-visible {
+  background-color: #838E85;
+  border-color: #838E85;
+}
+
+/* Aanbodfotografie — verbonden door toon en één gedeelde ruimtelijke as. */
+.offering-page .page-editorial-pair {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    var(--offering-ivory) 0%,
+    color-mix(in srgb, var(--offering-linen) 34%, var(--offering-ivory)) 58%,
+    #F1EBE1 100%
+  );
+}
+.offering-page .page-editorial-pair::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 52%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(70, 80, 68, .11) 12%,
+    rgba(70, 80, 68, .17) 50%,
+    rgba(70, 80, 68, .11) 88%,
+    transparent 100%
+  );
+}
+.offering-page .page-editorial-pair__grid--aanbod {
+  position: relative;
+  z-index: 1;
+}
+.offering-page .page-editorial-photo--personal,
+.offering-page .page-editorial-photo--group {
+  border-bottom: 1px solid rgba(70, 80, 68, .18);
+}
+
+@media (max-width: 900px) {
+  .offering-page .page-editorial-pair::before {
+    top: 50%;
+    background: rgba(70, 80, 68, .12);
+  }
+}
+
+/* Duidelijke afspraaklabels blijven leesbaar in de mobiele contactbalk. */
+@media (max-width: 900px) {
+  .sticky-cta .btn { white-space: normal; text-align: center; font-size: .875rem; line-height: 1.35; padding-inline: .75rem; }
+  .sticky-cta .btn--ghost { flex: 0 0 auto; }
 }
