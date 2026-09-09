@@ -103,7 +103,7 @@ assert.equal(failed.submit.disabled, false);
 assert.ok(failed.choices.every(n => !n.disabled));
 
 const offer = fs.readFileSync(path.join(root, 'begeleiding.html'), 'utf8');
-for (const required of ['€816', '€68', '€504', '€42', '€408', '€34', '€1.560', '€65', '€960', '€40', '€768', '€32', '€272', '€168', '€136', '€520', '€320', '€256', '€72', '€45', '€36', '€912', '€76', '€552', '€46', '€432', '€304', '€184', '€144', '€80', '€50', 'maximaal 15 weken', 'maximaal 18 weken', 'maximaal 6 weken', 'maximaal 8 weken']) assert.ok(offer.includes(required), 'Required price/term: ' + required);
+for (const required of ['€816', '€68', '€504', '€42', '€408', '€34', '€1.560', '€65', '€960', '€40', '€768', '€32', '€272', '€168', '€136', '€520', '€320', '€256', '€72', '€45', '€36', '€912', '€76', '€552', '€46', '€432', '€304', '€184', '€144', '€80', '€50', 'maximaal 15 weken', 'maximaal 16 weken', 'maximaal 2 extra weken']) assert.ok(offer.includes(required), 'Required price/term: ' + required);
 for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
   const html = fs.readFileSync(path.join(root, name), 'utf8');
   assert.ok(!/€60\b|€260\b|€780\b|€160\b|€480\b|€128\b|€384\b|€70\b|eerste afspraak|dertig minuten|14 kalenderdagen/i.test(html), 'Stale content in ' + name);
