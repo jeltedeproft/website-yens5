@@ -29,7 +29,7 @@ export function initBooking(form, search = window.location.search) {
     fields.forEach((field, index) => { field.value = appointment ? [appointment.label, `${appointment.duration} minuten`, `€${appointment.price}`][index] : ''; });
     telephone.required = value === 'gratis-kennismaking';
     telephoneRequired.hidden = !telephone.required;
-    submit.textContent = appointment ? `Vraag ${appointment.label.toLowerCase()} aan` : 'Verstuur je aanvraag';
+    submit.textContent = appointment ? `Plan mijn ${appointment.label.toLowerCase()}` : 'Plan mijn eerste stap';
     const wrapper = telephone.closest('.field');
     if (!telephone.required) {
       wrapper?.classList.remove('field--error');

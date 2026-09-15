@@ -12,7 +12,7 @@ import 'lenis/dist/lenis.css';
  * Netlify verwerkt formulieren op de root van de site.
  */
 const FORM_ACTION = '/';
-const CONTACT_WHATSAPP = '+32 499 00 74 86';
+const CONTACT_WHATSAPP = '+32 491 97 95 41';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (sel, ctx = document) => ctx.querySelector(sel);

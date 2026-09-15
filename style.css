@@ -5327,7 +5327,7 @@ body .nav.is-initializing .brand {
     align-items: start;
   }
   .contact-page .contact-composition .section-head {
-    grid-column: 2 / span 7;
+    grid-column: 1 / span 7;
     max-width: none;
     margin-bottom: clamp(4rem, 7vw, 7rem) !important;
   }
@@ -5346,7 +5346,7 @@ body .nav.is-initializing .brand {
   .contact-page .contact-composition form { grid-column: 1 / span 7; }
   .contact-page .contact-aside {
     grid-column: 9 / span 4;
-    margin-top: clamp(-5rem, -5vw, -2.5rem);
+    margin-top: 0;
   }
   .contact-page .contact-aside__portrait { aspect-ratio: 4 / 5; }
   .contact-page .contact-aside__portrait img { width: 100%; height: 100%; object-fit: cover; }
@@ -7832,37 +7832,61 @@ body:not(.home-page) .nav:not(.is-compact) .nav__links a[aria-current='page'] {
   text-shadow: none;
 }
 
-/* Hoverstrokes — krachtiger in de open header, afwezig in de zwarte balk. */
+/* Navigatie-hover — een rustige meetlijn met eindpunt, passend bij de YENS-as. */
 body .nav:not(.is-compact) .nav__links a[href]::after,
 body.home-page .nav:not(.is-compact) .nav__links a[href]::after,
 body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]::after {
-  width: 2.2rem;
-  height: .54rem;
+  display: block !important;
+  bottom: .18rem;
+  width: 1.9rem;
+  height: .4rem;
+  background:
+    radial-gradient(circle at calc(100% - 1px) 50%, #66725F 0 1.35px, transparent 1.55px),
+    linear-gradient(90deg, #66725F, #66725F) 0 50% / calc(100% - 6px) 1px no-repeat;
+  -webkit-mask: none;
+  mask: none;
+  clip-path: inset(0 100% 0 0);
   opacity: 0;
-  filter: saturate(1.18) brightness(1.08);
-  transform: translateX(-50%) translateY(1px) scaleY(1.38);
+  filter: none;
+  transform: translateX(-50%);
+  transition: clip-path .42s cubic-bezier(.22, 1, .36, 1), opacity .2s ease;
 }
 body .nav:not(.is-compact) .nav__links a[href]:hover::after,
+body .nav:not(.is-compact) .nav__links a[href]:focus-visible::after,
 body.home-page .nav:not(.is-compact) .nav__links a[href]:hover::after,
-body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]:hover::after {
-  opacity: 1;
+body.home-page .nav:not(.is-compact) .nav__links a[href]:focus-visible::after,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]:hover::after,
+body:not(.home-page) .nav:not(.is-compact) .nav__links a[href]:focus-visible::after {
+  opacity: .82;
   clip-path: inset(0 0 0 0);
-  transform: translateX(-50%) translateY(0) rotate(var(--nav-mark-tilt, 0deg)) scaleX(1.035) scaleY(1.38);
+  transform: translateX(-50%);
 }
 body .nav.is-compact .nav__links a[href]::after,
 body.home-page .nav.is-compact .nav__links a[href]::after,
-body:not(.home-page) .nav.is-compact .nav__links a[href]::after,
-body .nav.is-compact .nav__links a[href]:hover::after,
-body.home-page .nav.is-compact .nav__links a[href]:hover::after,
-body:not(.home-page) .nav.is-compact .nav__links a[href]:hover::after {
-  opacity: 0;
+body:not(.home-page) .nav.is-compact .nav__links a[href]::after {
+  display: block !important;
+  bottom: .14rem;
+  width: 1.65rem;
+  height: .36rem;
+  background:
+    radial-gradient(circle at calc(100% - 1px) 50%, #AAB5A4 0 1.25px, transparent 1.45px),
+    linear-gradient(90deg, #AAB5A4, #AAB5A4) 0 50% / calc(100% - 6px) 1px no-repeat;
+  -webkit-mask: none;
+  mask: none;
   clip-path: inset(0 100% 0 0);
-  transform: translateX(-50%) translateY(1px);
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: clip-path .42s cubic-bezier(.22, 1, .36, 1), opacity .2s ease;
 }
-body .nav.is-compact .nav__links a::after,
-body.home-page .nav.is-compact .nav__links a::after,
-body:not(.home-page) .nav.is-compact .nav__links a::after {
-  display: none !important;
+body .nav.is-compact .nav__links a[href]:hover::after,
+body .nav.is-compact .nav__links a[href]:focus-visible::after,
+body.home-page .nav.is-compact .nav__links a[href]:hover::after,
+body.home-page .nav.is-compact .nav__links a[href]:focus-visible::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:hover::after,
+body:not(.home-page) .nav.is-compact .nav__links a[href]:focus-visible::after {
+  opacity: .72;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(-50%);
 }
 
 /* Headeritems — subtiel grotere, toestand-onafhankelijke lettermaat. */
@@ -8204,4 +8228,378 @@ html.self-transition-active {
 @media (max-width: 900px) {
   .sticky-cta .btn { white-space: normal; text-align: center; font-size: .875rem; line-height: 1.35; padding-inline: .75rem; }
   .sticky-cta .btn--ghost { flex: 0 0 auto; }
+}
+
+/* Contact — persoonlijk intakeblad, bewust zonder kaart- of dashboardtaal. */
+.contact-page {
+  --contact-ink: #292d28;
+  --contact-moss: #61705e;
+  --contact-sage: #dfe5da;
+  --contact-warm: #e8d9c5;
+  --contact-paper: #f4efe7;
+}
+.contact-page .contact-editorial {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(8rem, 14vw, 11rem);
+  background:
+    radial-gradient(circle at 92% 5%, rgba(121, 135, 116, .11), transparent 30rem),
+    linear-gradient(180deg, var(--bg) 0%, #f6f2ea 100%);
+}
+.contact-page .contact-editorial::before {
+  content: 'BEGIN WAAR JE STAAT';
+  position: absolute;
+  top: 10rem;
+  right: max(1rem, calc((100vw - var(--max)) / 2 - 3.5rem));
+  color: rgba(54, 63, 53, .38);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .24em;
+  writing-mode: vertical-rl;
+}
+.contact-page .contact-composition .section-head {
+  position: relative;
+  padding-left: clamp(2rem, 4vw, 4rem);
+}
+.contact-steps {
+  display: grid;
+  gap: .45rem;
+  margin: 0 0 clamp(3rem, 6vw, 6rem);
+  padding: 0;
+  list-style: none;
+}
+.contact-steps li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  gap: .9rem;
+  align-items: start;
+  padding: .55rem 0;
+}
+.contact-steps li > span {
+  display: grid;
+  width: 1.9rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: var(--contact-moss);
+  background: var(--contact-sage);
+  border-radius: 50%;
+  font-size: .56rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+.contact-steps strong,
+.contact-steps small { display: block; }
+.contact-steps strong { color: var(--contact-ink); font-size: .87rem; font-weight: 500; }
+.contact-steps small { margin-top: .25rem; color: var(--text-muted); font-size: .73rem; line-height: 1.45; }
+.contact-page .contact-composition .section-head .h-1 {
+  max-width: 12ch;
+  text-wrap: balance;
+}
+.contact-editorial__personal {
+  margin-top: 1.35rem;
+  color: var(--contact-moss);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.contact-page #contact-form {
+  position: relative;
+  gap: 1.65rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  background: var(--contact-paper);
+  border-radius: 0 clamp(1.5rem, 3vw, 3rem) 0 0;
+}
+.contact-page .booking-choice { margin-bottom: 0; }
+.contact-page .booking-choice legend,
+.contact-form__chapter {
+  display: flex;
+  align-items: baseline;
+  gap: .9rem;
+  width: 100%;
+  margin-bottom: 1.4rem;
+  color: var(--contact-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+.contact-page .booking-choice legend > span,
+.contact-form__chapter > span {
+  display: grid;
+  width: 2rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: var(--contact-moss);
+  background: var(--contact-sage);
+  border-radius: 50%;
+  font-family: var(--font-sans);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+}
+.contact-page .booking-choice legend i { font-style: normal; }
+.contact-page .booking-options {
+  grid-template-columns: 1fr;
+  gap: .65rem;
+}
+.contact-page .form .booking-option {
+  grid-template-columns: 1.15rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+  background: rgba(255, 255, 255, .42);
+  border: 0;
+  border-radius: .85rem;
+  box-shadow: none;
+  transition: padding .25s var(--ease), color .25s var(--ease), background .25s var(--ease), transform .25s var(--ease);
+}
+.contact-page .form .booking-option:hover { transform: translateX(.2rem); }
+.contact-page .booking-option:has(input:checked) {
+  color: var(--contact-ink);
+  background: var(--contact-sage);
+  box-shadow: none;
+}
+.contact-page .booking-option:has(input:checked) small { color: #51594e; }
+.contact-page .booking-option b { align-self: center; font-size: 1.2rem; font-weight: 400; }
+.contact-page .booking-confirmation {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1.15rem;
+  align-items: center;
+  margin: -.15rem 0 .75rem;
+  padding: .65rem 0;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+}
+.contact-page .booking-confirmation__mark {
+  display: grid;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  place-items: center;
+  background: var(--contact-warm);
+  border-radius: 50%;
+  opacity: .62;
+  transform: rotate(-4deg);
+  transition: opacity var(--t-fast), transform var(--t-fast), background-color var(--t-fast);
+}
+.contact-page .booking-confirmation__mark img {
+  width: .82rem;
+  height: auto;
+}
+.contact-page .booking-confirmation:has(#booking-description:not(:empty)) .booking-confirmation__mark {
+  background: var(--contact-sage);
+  opacity: 1;
+  transform: rotate(0deg);
+}
+.contact-page .booking-confirmation__copy { min-width: 0; }
+.contact-page .booking-confirmation #booking-summary { color: var(--contact-ink); }
+.contact-form__chapter {
+  margin: .8rem 0 0;
+  padding-top: 2rem;
+}
+.contact-form__chapter h2 { font: inherit; }
+.contact-page #contact-form .field label {
+  color: var(--contact-ink);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.contact-page #contact-form .field input:not([type='radio']):not([type='checkbox']),
+.contact-page #contact-form .field select,
+.contact-page #contact-form .field textarea {
+  padding: .8rem 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(44, 48, 43, .42);
+  border-radius: 0;
+  box-shadow: none;
+}
+.contact-page #contact-form .field input:focus,
+.contact-page #contact-form .field select:focus,
+.contact-page #contact-form .field textarea:focus {
+  border-color: var(--contact-moss);
+  box-shadow: 0 1px 0 var(--contact-moss);
+}
+.contact-page #contact-form .field textarea { min-height: 5.5rem; }
+.contact-page #contact-form .field--checkbox label {
+  color: var(--text-body);
+  font-size: .82rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.55;
+  text-transform: none;
+}
+.contact-page #contact-form .btn {
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0;
+  background: var(--contact-ink);
+  border-color: var(--contact-ink);
+}
+.contact-page #contact-form .btn::after {
+  content: '→';
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+.contact-page .contact-aside { gap: 0; }
+.contact-page .contact-aside__portrait {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 2.25rem) 0, 100% 2.25rem, 100% 100%, 0 100%);
+}
+.contact-page .contact-aside__portrait img { object-position: 50% 20%; }
+.contact-page .contact-aside__portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(21, 25, 22, .62));
+  pointer-events: none;
+}
+.contact-page .contact-aside__portrait figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 1.25rem;
+  bottom: 1.15rem;
+  left: 1.25rem;
+  color: #f7f4ed;
+  font-size: .67rem;
+  line-height: 1.5;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.contact-promise,
+.contact-direct,
+.contact-practical {
+  padding: clamp(1.65rem, 3vw, 2.5rem) 0;
+}
+.contact-promise p {
+  max-width: 19ch;
+  color: var(--contact-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.25vw, 1.9rem);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+.contact-promise { position: relative; }
+.contact-promise::after {
+  content: '';
+  position: absolute;
+  right: .25rem;
+  bottom: 2.2rem;
+  width: 3.2rem;
+  height: .65rem;
+  background: var(--contact-warm);
+  border-radius: 50%;
+  opacity: .8;
+  transform: rotate(-7deg);
+}
+.contact-promise footer {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.contact-aside__label {
+  display: block;
+  margin-bottom: .8rem;
+  color: var(--contact-moss);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.contact-direct h2 {
+  max-width: 15ch;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+.contact-direct__note {
+  max-width: 29ch;
+  margin-top: .7rem;
+  color: var(--text-muted);
+  font-size: .8rem;
+  line-height: 1.55;
+}
+.contact-page .contact-direct .contact-line {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: .85rem 1rem;
+  color: var(--contact-ink);
+  background: var(--contact-sage);
+  border-radius: 999px;
+  font-size: .86rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: background-color var(--t-fast), transform var(--t-fast);
+}
+.contact-page .contact-direct .contact-line:hover {
+  color: var(--contact-ink);
+  background: #d4ddce;
+  transform: translateY(-1px);
+}
+.contact-page .contact-direct .contact-line span { min-width: 0; }
+.contact-page .contact-direct .contact-line b { flex: none; font-size: 1.1rem; font-weight: 400; }
+.contact-page .contact-practical .spec-list {
+  counter-reset: location;
+  padding-top: 0;
+  border-top: 0;
+}
+.contact-page .contact-practical .spec-list > div {
+  position: relative;
+  padding: 1rem 0 1rem 2.5rem;
+  border-bottom: 0;
+  counter-increment: location;
+}
+.contact-page .contact-practical .spec-list > div::before {
+  content: '0' counter(location);
+  position: absolute;
+  top: 1.2rem;
+  left: 0;
+  color: var(--contact-moss);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+.contact-page .contact-practical .spec-list dt { color: var(--contact-ink); }
+.contact-page .contact-practical .spec-list dd { font-size: .8rem; }
+
+@media (max-width: 900px) {
+  .contact-page .contact-editorial::before { display: none; }
+  .contact-page .contact-composition .section-head { padding-left: 1.25rem; }
+  .contact-page .contact-steps { margin-bottom: 3rem; }
+  .contact-page #contact-form { padding: clamp(1.4rem, 5vw, 2.25rem); }
+  .contact-page .contact-aside { margin-top: 3rem; }
+  .contact-page .contact-aside__portrait { aspect-ratio: 4 / 4.2; }
+  .contact-page .contact-aside__portrait img { object-position: 50% 18%; }
+}
+
+@media (min-width: 901px) {
+  .contact-page .contact-composition > .container { column-gap: clamp(.75rem, 1.2vw, 1.25rem); }
+  .contact-page .contact-composition form,
+  .contact-page .contact-aside { min-width: 0; }
+  .contact-page .contact-steps {
+    grid-column: 9 / span 4;
+    align-self: end;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-page .contact-editorial { padding-top: 7.5rem; }
+  .contact-page .contact-composition .section-head { margin-bottom: 2.5rem !important; }
+  .contact-page .contact-composition .section-head .h-1 { font-size: clamp(2.65rem, 13vw, 4rem); }
+  .contact-page #contact-form .form__row { grid-template-columns: 1fr; }
+  .contact-page .form .booking-option { padding-block: 1.25rem; }
+  .contact-page .form .booking-option:hover { transform: none; }
+  .contact-page .contact-direct .contact-line { gap: .65rem; font-size: .8rem; }
+  .contact-page .contact-aside__portrait { aspect-ratio: 4 / 4.6; }
 }

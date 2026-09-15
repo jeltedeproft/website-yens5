@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Afspraak aanvragen | YENS</title>
-  <meta name="description" content="Kies Gratis kennismaking: telefonisch, 15 min, €0, of Eerste training: intake, bewegingsanalyse en training, 60 min, €65." />
+  <title>Jouw eerste stap | YENS</title>
+  <meta name="description" content="Vertel Yens waar je naartoe wilt. Kies voor een korte kennismaking of start meteen met een eerste training." />
   <link rel="canonical" href="https://www.yens.be/contact.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="nl_BE" />
-  <meta property="og:title" content="Afspraak aanvragen | YENS" />
-  <meta property="og:description" content="Laten we bekijken wat bij jou past." />
+  <meta property="og:title" content="Jouw eerste stap | YENS" />
+  <meta property="og:description" content="Geen lange vragenlijst. Kies je start; de rest bespreken we samen." />
   <meta property="og:image" content="/images/hero.jpg" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="./booking-flow.css" />
   <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="contact-page">
   <a class="skip-link" href="#main">Naar de inhoud</a>
 
   <header class="nav" id="nav">
@@ -53,22 +53,29 @@
       <a class="nav__mobile-link" style="--i:4" href="/contact.html">Contact</a>
     </nav>
     <div class="nav__mobile-footer">
-      <p class="nav__mobile-meta">Kontich · Ranst · aan huis in regio Antwerpen</p>
+      <p class="nav__mobile-meta">Kadans Ranst · aan huis in regio Antwerpen</p>
     </div>
   </div>
 
   <main id="main">
 
-    <section class="section" style="padding-top: clamp(8rem, 15vw, 11rem);" id="aanvraag">
+    <section class="section contact-composition contact-editorial" id="aanvraag">
       <div class="container">
-        <div class="section-head" style="margin-bottom: clamp(2rem, 4vw, 3rem);">
-          <span class="eyebrow">Jouw eerste stap</span>
-          <h1 class="h-1">Kies hoe je wilt beginnen.</h1>
+        <div class="section-head">
+          <span class="eyebrow">Zin om te starten?</span>
+          <h1 class="h-1">Vertel me waar je naartoe wilt.</h1>
           <p class="lead">
-            Eerste training · 60 min · €65: intake, bewegingsanalyse &amp; eerste training.
-            Liever eerst even bellen? Gratis kennismaking · 15 min · €0: kort kennismaken, vragen beantwoorden en bekijken of personal training passend lijkt. Geen training.
+            Kies hoe je wilt beginnen en vertel kort wat je zoekt.
+            Geen lange vragenlijst — de rest bespreken we samen.
           </p>
+          <p class="contact-editorial__personal">Elke aanvraag komt rechtstreeks bij mij terecht.</p>
         </div>
+
+        <ol class="contact-steps" aria-label="Zo verloopt je aanvraag">
+          <li><span>01</span><p><strong>Kies je start</strong><small>Een kennismaking of meteen bewegen.</small></p></li>
+          <li><span>02</span><p><strong>Vertel kort over jezelf</strong><small>Alleen wat nu belangrijk is.</small></p></li>
+          <li><span>03</span><p><strong>Ik neem contact op</strong><small>Persoonlijk, binnen twee werkdagen.</small></p></li>
+        </ol>
 
         <div class="split split--text-heavy split--top">
           <form class="form" id="contact-form" name="kennismaking" method="POST"
@@ -76,13 +83,16 @@
             <!-- Netlify koppelt de inzending aan het juiste formulier -->
             <input type="hidden" name="form-name" value="kennismaking" />
 
-            <fieldset class="booking-choice field"><legend>Kies je afspraak <span aria-hidden="true">*</span></legend>
+            <fieldset class="booking-choice field"><legend><span>01</span> Hoe wil je beginnen? <i aria-hidden="true">*</i></legend>
               <div class="booking-options">
-                <label class="booking-option"><input type="radio" name="afspraak" value="eerste-training" required /><span><strong>Eerste training</strong><small>60 min · €65</small><small>Intake, bewegingsanalyse &amp; eerste training</small></span></label>
-                <label class="booking-option"><input type="radio" name="afspraak" value="gratis-kennismaking" required /><span><strong>Gratis kennismaking</strong><small>15 min · €0</small><small>Telefonisch · geen training</small></span></label>
+                <label class="booking-option"><input type="radio" name="afspraak" value="eerste-training" required /><span><strong>Eerste training</strong><small>60 min · €65</small><small>We kijken, bewegen en bepalen van daaruit wat jij nodig hebt.</small></span><b aria-hidden="true">→</b></label>
+                <label class="booking-option"><input type="radio" name="afspraak" value="gratis-kennismaking" required /><span><strong>Gratis kennismaking</strong><small>15 min · €0</small><small>Een kort telefoongesprek om te voelen of het klopt.</small></span><b aria-hidden="true">→</b></label>
               </div>
             </fieldset>
-            <div class="booking-confirmation" aria-live="polite" aria-atomic="true"><p id="booking-summary">Kies hierboven je afspraak. Daarna zie je hier het type, de duur en de prijs.</p><p id="booking-description"></p></div>
+            <div class="booking-confirmation" aria-live="polite" aria-atomic="true">
+              <span class="booking-confirmation__mark" aria-hidden="true"><img src="/images/yens-y-symbol-micro.svg" alt="" /></span>
+              <div class="booking-confirmation__copy"><p id="booking-summary">Kies hierboven je afspraak. Daarna zie je hier het type, de duur en de prijs.</p><p id="booking-description"></p></div>
+            </div>
             <input type="hidden" name="afspraak_type" value="" />
             <input type="hidden" name="afspraak_duur" value="" />
             <input type="hidden" name="afspraak_prijs" value="" />
@@ -92,6 +102,8 @@
               <label for="website">Laat dit veld leeg</label>
               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
             </div>
+
+            <div class="contact-form__chapter"><span>02</span><h2>Jouw gegevens</h2></div>
 
             <div class="form__row">
               <div class="field">
@@ -113,53 +125,28 @@
                 <label for="locatie">Gewenste locatie</label>
                 <select id="locatie" name="locatie">
                   <option value="">Maak een keuze</option>
-                  <option value="kontich">Kontich</option>
-                  <option value="ranst">Ranst</option>
+                  <option value="ranst">Kadans Ranst</option>
                   <option value="aan-huis">Aan huis (regio Antwerpen)</option>
-                  <option value="weet-niet">Weet ik nog niet</option>
                 </select>
               </div>
             </div>
 
-            <div class="form__row">
-              <div class="field">
-                <label for="begeleiding">Soort begeleiding</label>
-                <select id="begeleiding" name="begeleiding">
-                  <option value="">Maak een keuze</option>
-                  <option value="personal-training">Personal training</option>
-                  <option value="duo-training">Duo training</option>
-                  <option value="semi-personal">Semi-personal training</option>
-                  <option value="coaching">Health &amp; longevity coaching</option>
-                  <option value="advies">Nog geen idee — graag advies</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="moment">Voorkeursmoment</label>
-                <input type="text" id="moment" name="moment" placeholder="Bv. weekdagen na 18u" />
-              </div>
+            <div class="field">
+              <label for="begeleiding">Soort begeleiding</label>
+              <select id="begeleiding" name="begeleiding">
+                <option value="">Maak een keuze</option>
+                <option value="personal-training">Personal training</option>
+                <option value="duo-training">Duo training</option>
+                <option value="semi-personal">Semi-personal training</option>
+                <option value="advies">Nog geen idee — graag advies</option>
+              </select>
             </div>
+
+            <div class="contact-form__chapter"><span>03</span><h2>Waar wil je naartoe?</h2></div>
 
             <div class="field">
               <label for="doel">Belangrijkste doel <span aria-hidden="true">*</span></label>
               <textarea id="doel" name="doel" required placeholder="Waar wil je aan werken?"></textarea>
-            </div>
-
-            <div class="field">
-              <label for="klachten">Eventuele klachten of aandachtspunten</label>
-              <textarea id="klachten" name="klachten" placeholder="Bv. terugkerende rugklachten, revalidatie na akkoord van arts of kinesist"></textarea>
-              <span class="hint">Deel enkel wat je zelf relevant vindt. Bij medische problematiek vraag ik je vooraf akkoord van je arts of kinesist.</span>
-            </div>
-
-            <div class="field">
-              <label for="gevonden">Hoe heb je mij gevonden?</label>
-              <select id="gevonden" name="gevonden">
-                <option value="">Maak een keuze</option>
-                <option value="google">Google</option>
-                <option value="instagram">Instagram</option>
-                <option value="doorverwijzing">Doorverwijzing van iemand</option>
-                <option value="ken-yens">Ik ken Yens persoonlijk</option>
-                <option value="anders">Anders</option>
-              </select>
             </div>
 
             <div class="field field--checkbox">
@@ -173,40 +160,34 @@
             <p class="form__status" id="form-status" role="status" hidden></p>
 
             <div>
-              <button class="btn btn--primary btn--lg" type="submit">Verstuur je aanvraag</button><p class="booking-submit-note">Je vraagt een afspraak aan. Ik neem binnen twee werkdagen contact op om het moment te bevestigen.</p>
+              <button class="btn btn--primary btn--lg" type="submit">Plan mijn eerste stap</button><p class="booking-submit-note">Ik antwoord persoonlijk binnen twee werkdagen.</p>
             </div>
           </form>
 
           <aside class="contact-aside" id="contactgegevens">
             <figure class="contact-aside__portrait" data-reveal="right">
-              <img src="/images/hero-longevity-strength.png" alt="Yens in een rustige architecturale trainingsomgeving" width="1664" height="939" loading="eager" />
+              <img src="/images/yens-contact-portrait-plain-v2.png" alt="Portret van Yens De Proft" width="1024" height="1536" loading="eager" />
+              <figcaption>Yens De Proft<br />Strength &amp; longevity coach</figcaption>
             </figure>
 
-            <div class="contact-card">
-              <h3>Liever eerst een vraag stellen?</h3>
-              <a class="contact-line" href="https://wa.me/32499007486">WhatsApp · +32 499 00 74 86</a>
+            <blockquote class="contact-promise">
+              <p>“Je hoeft vooraf niet alles helder te hebben. Dat zoeken we samen uit.”</p>
+              <footer>— Yens</footer>
+            </blockquote>
+
+            <div class="contact-direct">
+              <span class="contact-aside__label">Liever meteen contact?</span>
+              <h2>Stuur me gewoon een bericht.</h2>
+              <p class="contact-direct__note">Je komt rechtstreeks bij mij uit, zonder tussenpersoon.</p>
+              <a class="contact-line" href="https://wa.me/32491979541" aria-label="Stuur Yens een WhatsApp-bericht op +32 491 97 95 41"><span>WhatsApp · +32 491 97 95 41</span><b aria-hidden="true">→</b></a>
             </div>
 
-            <div class="contact-card" id="locaties">
-              <h3>Waar we trainen</h3>
+            <div class="contact-practical" id="locaties">
+              <span class="contact-aside__label">Waar we trainen</span>
               <dl class="spec-list">
-                <div><dt>Kontich</dt><dd>Professionele, rustige trainingsomgeving</dd></div>
-                <div><dt>Ranst</dt><dd>Persoonlijke begeleiding op vaste momenten</dd></div>
-                <div><dt>Aan huis</dt><dd>Geselecteerde regio's rond Antwerpen</dd></div>
+                <div><dt>Kadans Ranst</dt><dd>Rustige, professionele trainingsomgeving.</dd></div>
+                <div><dt>Aan huis</dt><dd>Persoonlijke coaching in je eigen omgeving.</dd></div>
               </dl>
-            </div>
-
-            <div class="contact-card">
-              <h3>Wat je mag verwachten</h3>
-              <p style="font-size:0.9375rem;">
-                Ik antwoord binnen twee werkdagen om het moment af te spreken. Je aanvraag legt nog geen tijdstip vast.
-                Gratis kennismaking: telefonisch, ongeveer 15 minuten, €0, geen training.
-                Eerste training: intake, bewegingsanalyse &amp; eerste training, 60 minuten, €65.
-              </p>
-              <p style="font-size:0.8125rem; color:var(--text-muted); margin-top:1rem;">
-                Je gegevens gebruik ik uitsluitend om contact met je op te nemen en worden niet gedeeld
-                met derden.
-              </p>
             </div>
           </aside>
         </div>
@@ -236,7 +217,7 @@
         </div>
         <div class="footer__col">
           <h3>Contact</h3>
-          <a href="https://wa.me/32499007486">WhatsApp</a>
+          <a href="https://wa.me/32491979541">WhatsApp</a>
         </div>
       </div>
       <div class="footer__bottom">
