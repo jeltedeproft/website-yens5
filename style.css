@@ -8270,23 +8270,29 @@ html.self-transition-active {
 }
 .contact-steps li {
   display: grid;
-  grid-template-columns: 2.1rem minmax(0, 1fr);
-  gap: .9rem;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 1rem;
   align-items: start;
   padding: .55rem 0;
 }
 .contact-steps li > span {
-  display: grid;
-  width: 1.9rem;
-  aspect-ratio: 1;
-  place-items: center;
+  display: inline-flex;
+  width: max-content;
+  min-width: 3.15rem;
+  align-items: center;
+  justify-content: center;
+  padding: .36rem .58rem;
   color: var(--contact-moss);
-  background: var(--contact-sage);
-  border-radius: 50%;
+  background: var(--contact-warm);
+  border-radius: 48% 52% 46% 54% / 56% 45% 55% 44%;
   font-size: .56rem;
   font-weight: 600;
-  letter-spacing: .06em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
 }
+.contact-steps li:nth-child(2) > span { background: var(--contact-sage); transform: rotate(1.5deg); }
+.contact-steps li:nth-child(3) > span { background: #d8ddd3; transform: rotate(-.75deg); }
 .contact-steps strong,
 .contact-steps small { display: block; }
 .contact-steps strong { color: var(--contact-ink); font-size: .87rem; font-weight: 500; }
@@ -8330,13 +8336,8 @@ html.self-transition-active {
   width: 2rem;
   aspect-ratio: 1;
   place-items: center;
-  color: var(--contact-moss);
-  background: var(--contact-sage);
+  background: var(--contact-sage) url('/images/yens-y-symbol-micro.svg') center / .68rem auto no-repeat;
   border-radius: 50%;
-  font-family: var(--font-sans);
-  font-size: .64rem;
-  font-weight: 600;
-  letter-spacing: .16em;
 }
 .contact-page .booking-choice legend i { font-style: normal; }
 .contact-page .booking-options {
@@ -8550,25 +8551,25 @@ html.self-transition-active {
 .contact-page .contact-direct .contact-line span { min-width: 0; }
 .contact-page .contact-direct .contact-line b { flex: none; font-size: 1.1rem; font-weight: 400; }
 .contact-page .contact-practical .spec-list {
-  counter-reset: location;
   padding-top: 0;
   border-top: 0;
 }
 .contact-page .contact-practical .spec-list > div {
   position: relative;
-  padding: 1rem 0 1rem 2.5rem;
+  padding: 1rem 0 1rem 2rem;
   border-bottom: 0;
-  counter-increment: location;
 }
 .contact-page .contact-practical .spec-list > div::before {
-  content: '0' counter(location);
+  content: '';
   position: absolute;
-  top: 1.2rem;
-  left: 0;
-  color: var(--contact-moss);
-  font-size: .58rem;
-  font-weight: 600;
-  letter-spacing: .08em;
+  top: 1.35rem;
+  left: .15rem;
+  width: .55rem;
+  height: .55rem;
+  background: var(--contact-moss);
+  border: 2px solid var(--contact-paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--contact-moss) 58%, transparent);
 }
 .contact-page .contact-practical .spec-list dt { color: var(--contact-ink); }
 .contact-page .contact-practical .spec-list dd { font-size: .8rem; }

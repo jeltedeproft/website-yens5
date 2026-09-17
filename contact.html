@@ -71,11 +71,11 @@
           <p class="contact-editorial__personal">Elke aanvraag komt rechtstreeks bij mij terecht.</p>
         </div>
 
-        <ol class="contact-steps" aria-label="Zo verloopt je aanvraag">
-          <li><span>01</span><p><strong>Kies je start</strong><small>Een kennismaking of meteen bewegen.</small></p></li>
-          <li><span>02</span><p><strong>Vertel kort over jezelf</strong><small>Alleen wat nu belangrijk is.</small></p></li>
-          <li><span>03</span><p><strong>Ik neem contact op</strong><small>Persoonlijk, binnen twee werkdagen.</small></p></li>
-        </ol>
+        <ul class="contact-steps" aria-label="Zo verloopt je aanvraag">
+          <li><span class="contact-steps__verb">Kies</span><p><strong>Kies je start</strong><small>Een kennismaking of meteen bewegen.</small></p></li>
+          <li><span class="contact-steps__verb">Deel</span><p><strong>Vertel kort over jezelf</strong><small>Alleen wat nu belangrijk is.</small></p></li>
+          <li><span class="contact-steps__verb">Start</span><p><strong>Ik neem contact op</strong><small>Persoonlijk, binnen twee werkdagen.</small></p></li>
+        </ul>
 
         <div class="split split--text-heavy split--top">
           <form class="form" id="contact-form" name="kennismaking" method="POST"
@@ -83,7 +83,7 @@
             <!-- Netlify koppelt de inzending aan het juiste formulier -->
             <input type="hidden" name="form-name" value="kennismaking" />
 
-            <fieldset class="booking-choice field"><legend><span>01</span> Hoe wil je beginnen? <i aria-hidden="true">*</i></legend>
+            <fieldset class="booking-choice field"><legend><span class="contact-form__mark" aria-hidden="true"></span> Hoe wil je beginnen? <i aria-hidden="true">*</i></legend>
               <div class="booking-options">
                 <label class="booking-option"><input type="radio" name="afspraak" value="eerste-training" required /><span><strong>Eerste training</strong><small>60 min · €65</small><small>We kijken, bewegen en bepalen van daaruit wat jij nodig hebt.</small></span><b aria-hidden="true">→</b></label>
                 <label class="booking-option"><input type="radio" name="afspraak" value="gratis-kennismaking" required /><span><strong>Gratis kennismaking</strong><small>15 min · €0</small><small>Een kort telefoongesprek om te voelen of het klopt.</small></span><b aria-hidden="true">→</b></label>
@@ -103,7 +103,7 @@
               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
             </div>
 
-            <div class="contact-form__chapter"><span>02</span><h2>Jouw gegevens</h2></div>
+            <div class="contact-form__chapter"><span class="contact-form__mark" aria-hidden="true"></span><h2>Jouw gegevens</h2></div>
 
             <div class="form__row">
               <div class="field">
@@ -142,7 +142,7 @@
               </select>
             </div>
 
-            <div class="contact-form__chapter"><span>03</span><h2>Waar wil je naartoe?</h2></div>
+            <div class="contact-form__chapter"><span class="contact-form__mark" aria-hidden="true"></span><h2>Waar wil je naartoe?</h2></div>
 
             <div class="field">
               <label for="doel">Belangrijkste doel <span aria-hidden="true">*</span></label>
