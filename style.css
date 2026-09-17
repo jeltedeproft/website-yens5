@@ -3927,7 +3927,8 @@ main > .section:first-child:not(.section--dark) {
   opacity: 1;
   transform: none;
 }
-.home-page #verhalen .story-panel__extra blockquote {
+.home-page #verhalen .story-panel__extra blockquote,
+.home-page #verhalen .story-panel__details {
   max-width: 34ch;
   color: var(--text-body);
   font-size: clamp(.94rem, 1.15vw, 1.02rem);
@@ -3981,6 +3982,7 @@ main > .section:first-child:not(.section--dark) {
   .home-page #verhalen .story-panel__portrait { width: 6rem; height: 6rem; }
   .home-page #verhalen .story-panel__content { max-width: 38rem; }
   .home-page #verhalen .story-panel__extra blockquote,
+  .home-page #verhalen .story-panel__details,
   .home-page #verhalen .story-panel__outcome { max-width: 38rem; }
 }
 
