@@ -6350,9 +6350,9 @@ body:not(.home-page) .nav:not(.is-compact) .brand {
   letter-spacing: .12em;
 }
 
-.home-page .home-pillar:nth-child(1)::before { content: '01'; }
-.home-page .home-pillar:nth-child(2)::before { content: '02'; }
-.home-page .home-pillar:nth-child(3)::before { content: '03'; }
+.home-page .home-pillar:nth-child(1)::before { content: 'RESERVE'; }
+.home-page .home-pillar:nth-child(2)::before { content: 'VRIJHEID'; }
+.home-page .home-pillar:nth-child(3)::before { content: 'REGIE'; }
 
 .home-page .home-pillar__icon {
   margin-bottom: auto;
@@ -6388,11 +6388,11 @@ body:not(.home-page) .nav:not(.is-compact) .brand {
     opacity: .72;
   }
 
-  .home-page #begeleiding::before { content: '01 / AANBOD'; }
-  .home-page #werkwijze::before { content: '02 / PROCES'; }
-  .home-page #over::before { content: '03 / VISIE'; }
-  .home-page #verhalen::before { content: '04 / VERHALEN'; }
-  .home-page #faq::before { content: '05 / VRAGEN'; }
+  .home-page #begeleiding::before { content: 'AANBOD'; }
+  .home-page #werkwijze::before { content: 'PROCES'; }
+  .home-page #over::before { content: 'VISIE'; }
+  .home-page #verhalen::before { content: 'VERHALEN'; }
+  .home-page #faq::before { content: 'VRAGEN'; }
 
   .home-page #begeleiding .section-head,
   .home-page #over .section-head,
@@ -8603,4 +8603,149 @@ html.self-transition-active {
   .contact-page .form .booking-option:hover { transform: none; }
   .contact-page .contact-direct .contact-line { gap: .65rem; font-size: .8rem; }
   .contact-page .contact-aside__portrait { aspect-ratio: 4 / 4.6; }
+}
+
+/* ========================================================================== 
+   Nummerloze signatuur — inhoudelijke labels en organische routepunten
+   ========================================================================== */
+.home-page .home-pillar::before {
+  padding: 0 0 .5rem;
+  color: #596654;
+  background: transparent;
+  border-bottom: 1px solid rgba(89, 102, 84, .42);
+  border-radius: 0;
+  letter-spacing: .15em;
+  transform: none;
+}
+
+.home-page .home-pillar:nth-child(2)::before {
+  border-bottom-style: dashed;
+  transform: none;
+}
+
+.home-page .home-pillar:nth-child(3)::before {
+  border-bottom-width: 2px;
+  transform: none;
+}
+
+.principle__cue {
+  display: inline-block;
+  justify-self: start;
+  width: max-content;
+  min-width: 0;
+  padding: 0;
+  color: #596654;
+  background: transparent;
+  border-radius: 0;
+  font-size: .62rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  transform: none;
+}
+
+.principle:nth-child(even) .principle__cue {
+  background: transparent;
+  border-radius: 0;
+  transform: none;
+}
+
+.principles--method .principle__cue {
+  position: relative;
+  padding-bottom: .75rem;
+}
+
+.principles--method .principle__cue::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.3rem;
+  height: 1px;
+  background: linear-gradient(90deg,#84917f 0 68%,transparent 68%);
+}
+
+.principles--method .principle:nth-child(even) .principle__cue::after {
+  width: 3.1rem;
+  background: linear-gradient(90deg,#b0957f 0 42%,transparent 42% 56%,#b0957f 56% 100%);
+}
+
+.principles--beliefs .principle__cue {
+  color: #9b755d;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem,2vw,1.65rem);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -.025em;
+  text-transform: none;
+  opacity: .78;
+}
+
+.principles--beliefs .principle:nth-child(even) .principle__cue {
+  color: #6f7d6a;
+}
+
+.step {
+  position: relative;
+  padding: .4rem 0 clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.step:last-child { padding-bottom: .4rem; }
+
+.step__dot {
+  position: absolute;
+  left: -3.6rem;
+  top: .72rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--line-strong);
+  border-radius: 62% 38% 56% 44% / 43% 61% 39% 57%;
+  transform: rotate(-12deg);
+  transition: background-color 500ms var(--ease), border-color 500ms var(--ease), transform 500ms var(--ease), box-shadow 500ms var(--ease);
+}
+
+.step:nth-of-type(even) .step__dot {
+  border-radius: 41% 59% 37% 63% / 58% 42% 58% 42%;
+  transform: rotate(9deg);
+}
+
+.step.is-reached .step__dot {
+  background: #788673;
+  border-color: #788673;
+  box-shadow: 0 0 0 .32rem rgba(120, 134, 115, .12);
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.step h3 {
+  max-width: 20ch;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+
+.step p {
+  max-width: 56ch;
+  margin-top: .8rem;
+  color: var(--text-body);
+  line-height: 1.72;
+}
+
+@media (max-width: 1080px) {
+  .principle { grid-template-columns: 6.25rem minmax(0, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .step__dot { left: -2.85rem; }
+}
+
+@media (max-width: 560px) {
+  .principle { grid-template-columns: 5.6rem minmax(0, 1fr); }
+  .principle__cue { grid-column: 1; grid-row: 1 / span 2; min-width: 0; font-size: .56rem; }
+  .principles--beliefs .principle__cue { font-size: 1.05rem; }
+  .step__dot { left: -2.45rem; }
 }
