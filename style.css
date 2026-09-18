@@ -8572,22 +8572,22 @@ html.self-transition-active {
    Nummerloze signatuur — inhoudelijke labels en organische routepunten
    ========================================================================== */
 .home-page .home-pillar::before {
-  padding: 0 0 .5rem;
+  padding: 0;
   color: #596654;
   background: transparent;
-  border-bottom: 1px solid rgba(89, 102, 84, .42);
+  border-bottom: 0;
   border-radius: 0;
   letter-spacing: .15em;
   transform: none;
 }
 
 .home-page .home-pillar:nth-child(2)::before {
-  border-bottom-style: dashed;
+  border-bottom: 0;
   transform: none;
 }
 
 .home-page .home-pillar:nth-child(3)::before {
-  border-bottom-width: 2px;
+  border-bottom: 0;
   transform: none;
 }
 
@@ -8737,3 +8737,166 @@ html.self-transition-active {
 .faq-home__closing .btn { margin-top: 1.15rem; }
 
 .guidance-row { cursor: pointer; }
+
+/* Homepage kernbelofte — drie begrippen als editoriale studio-compositie. */
+.home-page .home-pillars {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: #eee9df;
+  border-bottom: 0;
+}
+
+.home-page .home-pillars__grid {
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, .84fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 2.75rem);
+  align-items: end;
+}
+
+.home-page .home-pillar,
+.home-page .home-pillar + .home-pillar {
+  margin: 0;
+  border: 0;
+}
+
+.home-page .home-pillar {
+  min-height: clamp(18rem, 25vw, 24rem);
+  padding: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+.home-page .home-pillar:nth-child(1) {
+  padding-left: clamp(.25rem, 1vw, 1rem);
+}
+
+.home-page .home-pillar:nth-child(2) {
+  min-height: clamp(16rem, 21vw, 20rem);
+  background: #e2dacd;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.25rem), calc(100% - 2.25rem) 100%, 0 100%);
+}
+
+.home-page .home-pillar:nth-child(3) {
+  min-height: clamp(20rem, 28vw, 26rem);
+  color: #f4f1eb;
+  background: #30362f;
+}
+
+.home-page .home-pillar:nth-child(3)::before { color: #bfc9bc; }
+.home-page .home-pillar:nth-child(3) h2 { color: #fffdf8; }
+.home-page .home-pillar:nth-child(3) p { color: rgba(244, 241, 235, .74); }
+
+.home-page .home-pillar__icon {
+  position: relative;
+  display: block;
+  flex: none;
+  color: #667462;
+  fill: initial;
+  stroke: initial;
+  transition: color 450ms ease;
+}
+
+.home-page .home-pillar:nth-child(3) .home-pillar__icon { color: #d9e0d5; }
+
+/* Reserve: zichtbare energiemarge in plaats van een generiek trainingsicoon. */
+.home-page .home-pillar__icon--reserve {
+  width: 3.2rem;
+  height: 1.7rem;
+  margin-top: .45rem;
+  border: 1.5px solid currentColor;
+  border-radius: .15rem;
+}
+.home-page .home-pillar__icon--reserve::after {
+  content: '';
+  position: absolute;
+  top: .48rem;
+  right: -.38rem;
+  width: .28rem;
+  height: .62rem;
+  background: currentColor;
+  border-radius: 0 .12rem .12rem 0;
+}
+.home-page .home-pillar__icon--reserve i {
+  position: absolute;
+  inset: .28rem auto .28rem .28rem;
+  width: 62%;
+  background: currentColor;
+  opacity: .55;
+}
+
+/* Vrijheid: een open doorgang met een beweging naar buiten. */
+.home-page .home-pillar__icon--freedom {
+  width: 3.25rem;
+  height: 3rem;
+}
+.home-page .home-pillar__icon--freedom::before {
+  content: '';
+  position: absolute;
+  left: .2rem;
+  bottom: .15rem;
+  width: 1.55rem;
+  height: 2.55rem;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+}
+.home-page .home-pillar__icon--freedom i {
+  position: absolute;
+  left: .8rem;
+  top: 1.35rem;
+  width: 2.25rem;
+  height: 1.5px;
+  background: currentColor;
+}
+.home-page .home-pillar__icon--freedom i::after {
+  content: '';
+  position: absolute;
+  top: -.32rem;
+  right: 0;
+  width: .68rem;
+  height: .68rem;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Regie: drie afstelpunten die bewust op een andere positie staan. */
+.home-page .home-pillar__icon--control {
+  display: grid;
+  width: 3.25rem;
+  height: 2.65rem;
+  align-content: space-between;
+  padding-block: .18rem;
+}
+.home-page .home-pillar__icon--control i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+}
+.home-page .home-pillar__icon--control i::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: .58rem;
+  height: .58rem;
+  background: #30362f;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.home-page .home-pillar__icon--control i:nth-child(1)::after { left: 24%; }
+.home-page .home-pillar__icon--control i:nth-child(2)::after { left: 68%; }
+.home-page .home-pillar__icon--control i:nth-child(3)::after { left: 43%; }
+
+@media (max-width: 900px) {
+  .home-page .home-pillars { padding: 2rem 0 3rem; }
+  .home-page .home-pillars__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .home-page .home-pillar,
+  .home-page .home-pillar:nth-child(1),
+  .home-page .home-pillar:nth-child(2),
+  .home-page .home-pillar:nth-child(3) {
+    min-height: 15rem;
+    padding: 2rem;
+  }
+  .home-page .home-pillar:nth-child(1) { min-height: 13.5rem; }
+}
