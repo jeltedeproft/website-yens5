@@ -41,6 +41,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./home-v2.css" />
 
   <script>document.documentElement.classList.add('js');</script>
 
@@ -162,16 +163,19 @@
       <div class="container home-pillars__grid">
         <article class="home-pillar">
           <span class="home-pillar__icon home-pillar__icon--reserve" aria-hidden="true"><i></i></span>
+          <span class="home-pillar__label">Reserve</span>
           <h2>Ruimte over na je training</h2>
           <p>Niet alleen meer aankunnen in de training. Ook energie overhouden voor werk, gezin en alles wat je graag doet.</p>
         </article>
         <article class="home-pillar">
           <span class="home-pillar__icon home-pillar__icon--freedom" aria-hidden="true"><i></i></span>
+          <span class="home-pillar__label">Vrijheid</span>
           <h2>Kracht die je gebruikt</h2>
           <p>Tillen, traplopen, reizen of spelen zonder telkens eerst te moeten twijfelen of je lichaam wel mee kan.</p>
         </article>
         <article class="home-pillar">
           <span class="home-pillar__icon home-pillar__icon--control" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="home-pillar__label">Regie</span>
           <h2>Weten wanneer je schakelt</h2>
           <p>Je leert herkennen wanneer je kunt opbouwen en wanneer een stap terug je net verder helpt.</p>
         </article>
@@ -186,33 +190,40 @@
           <h2 class="h-1">Meer aankunnen.<br>Meer leven overhouden.</h2>
         </div>
 
-        <div class="guidance-list" data-reveal>
-          <div class="guidance-category guidance-category--personal">
-            <span class="guidance-category__media" aria-hidden="true"></span>
-            <p class="guidance-category__label">Personal training</p>
-            <a class="guidance-row guidance-row--personal" href="/begeleiding.html#personal-training">
-              <span class="guidance-row__copy">
-                <span class="guidance-row__title">Eén-op-één</span>
-                <span class="guidance-row__desc">Belasting, techniek en herstel op één persoon afgestemd.</span>
-              </span>
-            </a>
-            <a class="guidance-row guidance-row--duo" href="/begeleiding.html#duo-training">
-              <span class="guidance-row__copy">
-                <span class="guidance-row__title">Duo</span>
-                <span class="guidance-row__desc">Samen trainen, met twee verschillende doseringen.</span>
-              </span>
-            </a>
-          </div>
-          <div class="guidance-category guidance-category--semi">
-            <span class="guidance-category__media" aria-hidden="true"></span>
-            <p class="guidance-category__label">Semi-PT</p>
-            <a class="guidance-row guidance-row--semi" href="/begeleiding.html#semi-personal">
-              <span class="guidance-row__copy">
-                <span class="guidance-row__title">Drie tot vier personen</span>
-                <span class="guidance-row__desc">Eén moment. Maximaal vier persoonlijke programma’s.</span>
-              </span>
-            </a>
-          </div>
+        <div class="guidance-list guidance-cards" data-reveal>
+          <a class="guidance-row guidance-card guidance-card--personal" href="/begeleiding.html#personal-training">
+            <span class="guidance-card__visual" aria-hidden="true">
+              <img src="/images/yens-aanbod-personal-v1.png" alt="" loading="lazy" width="1536" height="1024" />
+            </span>
+            <span class="guidance-card__content">
+              <span class="guidance-card__meta">Personal training · solo</span>
+              <strong>Eén-op-één</strong>
+              <span>Alle aandacht voor jouw beweging, belasting en herstel.</span>
+              <span class="guidance-card__action">Bekijk deze vorm <b aria-hidden="true">↗</b></span>
+            </span>
+          </a>
+          <a class="guidance-row guidance-card guidance-card--duo" href="/begeleiding.html#duo-training">
+            <span class="guidance-card__visual" aria-hidden="true">
+              <img src="/images/studio-architectural.jpg" alt="" loading="lazy" width="1200" height="800" />
+            </span>
+            <span class="guidance-card__content">
+              <span class="guidance-card__meta">Personal training · samen</span>
+              <strong>Duo</strong>
+              <span>Samen trainen, met voor ieder een eigen dosering.</span>
+              <span class="guidance-card__action">Bekijk deze vorm <b aria-hidden="true">↗</b></span>
+            </span>
+          </a>
+          <a class="guidance-row guidance-card guidance-card--semi" href="/begeleiding.html#semi-personal">
+            <span class="guidance-card__visual" aria-hidden="true">
+              <img src="/images/semi-pt-group-editorial.jpg" alt="" loading="lazy" width="1536" height="1024" />
+            </span>
+            <span class="guidance-card__content">
+              <span class="guidance-card__meta">Semi-PT · drie tot vier personen</span>
+              <strong>Kleine groep</strong>
+              <span>De energie van samen trainen. Je eigen programma blijft leidend.</span>
+              <span class="guidance-card__action">Bekijk deze vorm <b aria-hidden="true">↗</b></span>
+            </span>
+          </a>
         </div>
       </div>
     </section>
