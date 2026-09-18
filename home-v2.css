@@ -11,6 +11,13 @@
   gap: clamp(.65rem,1.2vw,1.1rem);
   align-items: stretch;
 }
+.home-page .home-pillar::before,
+.home-page .home-pillar:nth-child(1)::before,
+.home-page .home-pillar:nth-child(2)::before,
+.home-page .home-pillar:nth-child(3)::before {
+  content: none;
+  display: none;
+}
 .home-page .home-pillar,
 .home-page .home-pillar:nth-child(1),
 .home-page .home-pillar:nth-child(2),
@@ -30,13 +37,20 @@
 .home-page .home-pillar:nth-child(2) { background: rgba(223,228,218,.84); }
 .home-page .home-pillar:nth-child(3) { background: rgba(230,224,213,.88); }
 .home-page .home-pillar__icon {
+  --pillar-icon-scale: .76;
   grid-column: 1;
   grid-row: 1/4;
   align-self: start;
   margin-top: .15rem;
   color: #687665!important;
-  transform: scale(.76);
+  transform: scale(var(--pillar-icon-scale));
   transform-origin: top left;
+  transition: none;
+}
+.home-page .home-pillar:hover .home-pillar__icon,
+.home-page .home-pillar:focus-within .home-pillar__icon {
+  color: #687665!important;
+  transform: scale(var(--pillar-icon-scale));
 }
 .home-page .home-pillar__label {
   grid-column: 2;
@@ -299,7 +313,7 @@
   .home-page .home-pillar:nth-child(1),
   .home-page .home-pillar:nth-child(2),
   .home-page .home-pillar:nth-child(3) { grid-template-columns: 2.8rem minmax(0,1fr); gap:.65rem 1rem; padding:1.5rem 1.25rem; }
-  .home-page .home-pillar__icon { transform: scale(.66); }
+  .home-page .home-pillar__icon { --pillar-icon-scale: .66; }
   .home-page .guidance-card__content,
   .home-page .guidance-card--duo .guidance-card__content,
   .home-page .guidance-card--semi .guidance-card__content { width: 82%; padding:1.5rem 1.25rem; }
