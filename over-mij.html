@@ -18,9 +18,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./about-v2.css" />
   <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="about-page">
   <a class="skip-link" href="#main">Naar de inhoud</a>
 
   <header class="nav" id="nav">
@@ -58,150 +59,131 @@
 
   <main id="main">
 
-    <!-- Intro -->
-    <section class="section" style="padding-top: clamp(8rem, 15vw, 11rem);">
-      <div class="container split split--image-heavy">
-        <div class="photo-frame photo-frame--portrait over-intro-photo parallax" data-parallax="0.035">
-          <img src="/images/yens-contact-portrait-plain-v2.png" alt="Portret van Yens De Proft" width="1024" height="1536" />
-        </div>
-        <div>
+    <section class="about-hero">
+      <div class="container about-hero__grid">
+        <figure class="about-hero__portrait" data-reveal="left">
+          <img src="/images/yens-contact-portrait-plain-v2.png" alt="Yens De Proft, oprichter en coach bij YENS" width="1024" height="1536" />
+          <figcaption>Yens De Proft · coach en oprichter</figcaption>
+        </figure>
+        <div class="about-hero__content" data-reveal>
           <span class="eyebrow">Over YENS</span>
-          <h1 class="h-1">Ik coach niet voor afhankelijkheid, maar voor een lichaam dat je leert begrijpen</h1>
-          <div class="prose lead" style="margin-top:1.75rem;">
-            <p>
-              Ik ben Yens De Proft, oprichter van YENS. Ik help mensen hun belastbaarheid vergroten en
-              opnieuw vertrouwen op wat hun lichaam kan — zonder extreme methodes, met autonomie als bewust eindpunt.
-            </p>
-          </div>
+          <h1>Ik wil dat je sterker wordt. Niet afhankelijker.</h1>
+          <p class="lead">
+            Ik ben Yens De Proft. Ik help je om je lichaam beter te begrijpen, meer aan te kunnen en met
+            vertrouwen te blijven bewegen. Rustig opgebouwd, helder uitgelegd en afgestemd op jouw leven.
+          </p>
+          <dl class="about-hero__signals">
+            <div><dt>Ik kijk</dt><dd>naar de mens, niet alleen naar de oefening</dd></div>
+            <div><dt>Ik leg uit</dt><dd>zodat je begrijpt waarom we iets doen</dd></div>
+            <div><dt>Jij houdt</dt><dd>steeds meer zelf de regie</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <!-- Wie ik ben / waarom -->
-    <section class="section section--alt">
+    <section class="section about-why">
+      <div class="container about-why__grid">
+        <div class="about-why__heading" data-reveal>
+          <span class="eyebrow">Waarom YENS bestaat</span>
+          <h2 class="h-2">Sterk zijn merk je buiten de fitness.</h2>
+        </div>
+        <div class="about-why__story" data-reveal="right">
+          <p class="about-why__opening">
+            Wanneer een trap weer vanzelf gaat. Wanneer je zonder twijfel iets optilt. Wanneer een drukke
+            week niet meteen alles onderuit haalt. Daar krijgt training voor mij betekenis.
+          </p>
+          <p>
+            Krachttraining is mijn vertrekpunt, niet het volledige verhaal. Slaap, herstel, voeding, stress
+            en gewoonten bepalen mee hoeveel ruimte je lichaam heeft om sterker te worden.
+          </p>
+          <p>
+            Daarom zoek ik niet naar het meest indrukwekkende plan. Ik zoek naar wat jij kunt volhouden,
+            waar je lichaam goed op reageert en wat je dagelijks meer vrijheid geeft.
+          </p>
+          <p class="about-why__signature">Rustig waar het kan. Duidelijk waar het moet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-coach">
       <div class="container">
-        <div class="split split--top">
-          <div data-reveal>
-            <span class="eyebrow">Waarom ik dit werk doe</span>
-            <h2 class="h-2">Kracht creëert vrijheid</h2>
-          </div>
-          <div class="prose" data-reveal="right">
-            <p>
-              Mijn aanpak vertrekt vanuit krachttraining en beweging, maar kijkt ook naar herstel, voeding,
-              stress en dagelijkse gewoonten. Niet omdat alles voortdurend geoptimaliseerd moet worden, maar
-              omdat die factoren samen bepalen hoeveel energie, veerkracht en fysieke vrijheid iemand ervaart.
-            </p>
-            <p>
-              Wat me raakt aan dit werk, is het moment waarop iemand merkt dat het lichaam weer meewerkt.
-              Dat een trap geen inspanning meer is, dat een zware week niet meer betekent dat alles instort,
-              dat de angst om iets te forceren stilaan wegvalt. Dat is geen prestatie voor in de zaal —
-              dat is vrijheid in het dagelijks leven.
-            </p>
-            <p>
-              Ik werk rustig, persoonlijk en nauwkeurig. Ik wil begrijpen wat het lichaam nodig heeft, maar
-              ook wat realistisch past binnen iemands leven.
-            </p>
+        <div class="about-coach__intro" data-reveal>
+          <span class="eyebrow">Zo ben ik als coach</span>
+          <h2 class="h-2">Aandachtig, helder en zonder haastwerk.</h2>
+          <p>Je hoeft bij mij niets te bewijzen. We vertrekken van waar je vandaag staat en bouwen vandaar verder.</p>
+        </div>
+        <div class="about-coach__qualities">
+          <article data-reveal="fade">
+            <span>Goed kijken</span>
+            <h3>Ik wil eerst begrijpen wat er speelt.</h3>
+            <p>Hoe je beweegt, wat je al geprobeerd hebt en hoeveel ruimte er werkelijk is in je week.</p>
+          </article>
+          <article data-reveal="fade">
+            <span>Helder uitleggen</span>
+            <h3>Je weet waarom je iets doet.</h3>
+            <p>Geen oefeningen zonder context. Je leert signalen herkennen en keuzes beter inschatten.</p>
+          </article>
+          <article data-reveal="fade">
+            <span>Eerlijk bijsturen</span>
+            <h3>Het plan beweegt mee met het leven.</h3>
+            <p>Meer wanneer het kan, minder wanneer dat slimmer is. Vooruitgang hoeft niet geforceerd te worden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-scope">
+      <div class="container about-scope__grid">
+        <div class="about-scope__intro" data-reveal="left">
+          <span class="eyebrow">Mijn begeleiding</span>
+          <h2 class="h-2">Kracht als basis. Jouw leven als kader.</h2>
+          <p class="lead">
+            In Ranst en aan huis in regio Antwerpen begeleid ik mensen die sterker willen bewegen, opnieuw
+            willen starten of goed willen blijven functioneren terwijl het leven verandert.
+          </p>
+        </div>
+        <div class="about-scope__work" data-reveal="right">
+          <span class="about-scope__label">Waar we aan kunnen werken</span>
+          <ul>
+            <li>Kracht en dagelijkse belastbaarheid opbouwen</li>
+            <li>Opnieuw beginnen na een langere pauze</li>
+            <li>Trainen met fysieke aandachtspunten</li>
+            <li>Sterk en zelfstandig ouder worden</li>
+            <li>Herstel, slaap en gewoonten werkbaar maken</li>
+          </ul>
+          <div class="about-scope__boundary">
+            <strong>Goede coaching kent haar grenzen.</strong>
+            <p>Bij medische vragen stel ik geen diagnose. Waar nodig stem ik af met je arts, kinesist of diëtist, of verwijs ik gericht door.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Hoe ik coach -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="eyebrow">Hoe ik coach</span>
-          <h2 class="h-2">Waar ik in geloof</h2>
-        </div>
-
-        <div class="principles principles--beliefs">
-          <div class="principle" data-reveal="fade" style="--i:0">
-            <span class="principle__cue">Vrijheid</span>
-            <h3 class="principle__title">Kracht creëert vrijheid</h3>
-            <p class="principle__text">Een sterker lichaam geeft je meer keuzes — vandaag en over twintig jaar.</p>
-          </div>
-          <div class="principle" data-reveal="fade" style="--i:1">
-            <span class="principle__cue">Vitaal</span>
-            <h3 class="principle__title">Gezondheid is meer dan de afwezigheid van ziekte</h3>
-            <p class="principle__text">Niets mankeren is niet hetzelfde als je goed, energiek en belastbaar voelen.</p>
-          </div>
-          <div class="principle" data-reveal="fade" style="--i:2">
-            <span class="principle__cue">Herstel</span>
-            <h3 class="principle__title">Herstel is geen zwakte</h3>
-            <p class="principle__text">Rust is een onderdeel van het plan, geen bewijs van te weinig discipline.</p>
-          </div>
-          <div class="principle" data-reveal="fade" style="--i:3">
-            <span class="principle__cue">Realiteit</span>
-            <h3 class="principle__title">Een plan moet passen bij een echt leven</h3>
-            <p class="principle__text">Werk, gezin en drukke weken zijn geen excuses, maar gegevens waarmee we rekenen.</p>
-          </div>
-          <div class="principle" data-reveal="fade" style="--i:4">
-            <span class="principle__cue">Regie</span>
-            <h3 class="principle__title">Begeleiding maakt mensen sterker én zelfstandiger</h3>
-            <p class="principle__text">Je moet niet eeuwig een coach nodig hebben. Je moet je lichaam leren lezen.</p>
-          </div>
-        </div>
+    <section class="about-images" aria-label="De omgeving en persoonlijke begeleiding bij YENS">
+      <div class="container about-images__grid">
+        <figure data-reveal="left">
+          <img src="/images/nature.jpg" alt="Rustig wandelpad in een groene omgeving" loading="lazy" width="900" height="600" />
+          <figcaption>Ruimte om op te bouwen</figcaption>
+        </figure>
+        <figure data-reveal="right">
+          <img src="/images/coaching-editorial.jpg" alt="Yens begeleidt persoonlijk tijdens een beweging" loading="lazy" width="1200" height="1800" />
+          <figcaption>Aandacht voor hoe jij beweegt</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- Achtergrond -->
-    <section class="section section--alt">
-      <div class="container">
-        <div class="split split--top">
-          <div data-reveal>
-            <span class="eyebrow">Mijn begeleiding</span>
-            <h2 class="h-2">Krachttraining als vertrekpunt</h2>
-            <p class="lead" style="margin-top:1.5rem;">
-              Ik ben Yens De Proft, oprichter van YENS. In Kontich, Ranst en aan huis in regio Antwerpen
-              begeleid ik mensen bij krachttraining, beweging en herstel. De opbouw stem ik af op je
-              lichaam, je doelen en de ruimte die je dagelijkse leven biedt.
-            </p>
+    <section class="section about-final">
+      <div class="container about-final__grid" data-reveal>
+        <div>
+          <span class="eyebrow">Eerst even kennismaken</span>
+          <h2 class="h-1">Voelt deze manier van werken als iets voor jou?</h2>
+        </div>
+        <div class="about-final__next">
+          <p class="lead">In ongeveer 15 minuten bespreken we je vraag en bekijken we of mijn begeleiding bij je past. Gratis en zonder verplichting.</p>
+          <div class="btn-group">
+            <a class="btn btn--on-dark btn--lg" href="/contact.html?afspraak=gratis-kennismaking">Plan een gratis kennismaking</a>
+            <a class="btn btn--outline-light btn--lg" href="/werkwijze.html">Bekijk mijn werkwijze</a>
           </div>
-
-          <div class="stack-lg" data-reveal="right">
-            <div>
-              <h3 class="h-3">Waar ik je bij begeleid</h3>
-              <ul class="fit-list" style="margin-top:0.75rem;">
-                <li>Krachttraining en progressieve opbouw</li>
-                <li>Trainen met fysieke aandachtspunten, na akkoord van arts of kinesist</li>
-                <li>Opnieuw starten na een langere pauze</li>
-                <li>Gezond en sterk ouder worden</li>
-                <li>Herstel, slaap en dagelijkse gewoonten</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="h-3">Samenwerkingen</h3>
-              <p>
-                Waar het aangewezen is, stem ik af met artsen, kinesisten en diëtisten — of verwijs ik door.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Beeld -->
-    <section class="section section--tight">
-      <div class="container grid grid-2">
-        <div class="photo-frame photo-frame--landscape" data-reveal="left">
-          <img src="/images/nature.jpg" alt="Wandelpad in rustige, groene omgeving" loading="lazy" width="900" height="600" />
-        </div>
-        <div class="photo-frame photo-frame--landscape" data-reveal="right">
-          <img src="/images/coaching-editorial.jpg" alt="Aandachtige persoonlijke begeleiding tijdens beweging" loading="lazy" width="1200" height="1800" />
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section section--dark">
-      <div class="container cta" data-reveal>
-        <h2 class="h-1">Meer aankunnen begint met beter begrijpen</h2>
-        <p class="lead">
-          Tijdens Gratis kennismaking maken we telefonisch kort kennis, beantwoorden we je vragen en bekijken we of personal training passend lijkt. Ongeveer 15 minuten · €0 · geen training.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--on-dark btn--lg" href="/contact.html?afspraak=gratis-kennismaking">Plan een gratis kennismaking</a>
-          <a class="btn btn--outline-light btn--lg" href="/werkwijze.html">Zo werk ik</a>
         </div>
       </div>
     </section>
