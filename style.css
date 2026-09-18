@@ -955,7 +955,7 @@ body.is-locked { overflow: hidden; }
   }
   .home-pillar:hover .home-pillar__icon {
     color: var(--text);
-    transform: translateY(-4px);
+    transform: none;
   }
 }
 
@@ -1651,7 +1651,7 @@ body.is-locked { overflow: hidden; }
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .guidance-row { cursor: none; }
+  .guidance-row { cursor: pointer; }
 }
 
 /* ========================================================================== 
@@ -1804,13 +1804,9 @@ body.is-locked { overflow: hidden; }
   background: var(--bg-raised);
   transition: border-color var(--t-fast), transform var(--t-fast), color var(--t-fast);
 }
-.tag:hover { border-color: var(--accent); color: var(--text); transform: translateY(-2px); }
+.tag:hover { border-color: var(--line); color: var(--text-body); transform: none; }
 .tag::before {
-  content: '';
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex: none;
+  display: none;
 }
 .section--dark .tag {
   background: rgba(244, 241, 235, 0.04);
@@ -8283,16 +8279,16 @@ html.self-transition-active {
   justify-content: center;
   padding: .36rem .58rem;
   color: var(--contact-moss);
-  background: var(--contact-warm);
+  background: var(--contact-sage);
   border-radius: 48% 52% 46% 54% / 56% 45% 55% 44%;
   font-size: .56rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  transform: rotate(-2deg);
+  transform: none;
 }
-.contact-steps li:nth-child(2) > span { background: var(--contact-sage); transform: rotate(1.5deg); }
-.contact-steps li:nth-child(3) > span { background: #d8ddd3; transform: rotate(-.75deg); }
+.contact-steps li:nth-child(2) > span,
+.contact-steps li:nth-child(3) > span { background: var(--contact-sage); transform: none; }
 .contact-steps strong,
 .contact-steps small { display: block; }
 .contact-steps strong { color: var(--contact-ink); font-size: .87rem; font-weight: 500; }
@@ -8345,7 +8341,7 @@ html.self-transition-active {
   gap: .65rem;
 }
 .contact-page .form .booking-option {
-  grid-template-columns: 1.15rem minmax(0, 1fr) auto;
+  grid-template-columns: 1.15rem minmax(0, 1fr);
   gap: 1rem;
   padding: 1.25rem 1rem;
   background: rgba(255, 255, 255, .42);
@@ -8361,37 +8357,14 @@ html.self-transition-active {
   box-shadow: none;
 }
 .contact-page .booking-option:has(input:checked) small { color: #51594e; }
-.contact-page .booking-option b { align-self: center; font-size: 1.2rem; font-weight: 400; }
 .contact-page .booking-confirmation {
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 1.15rem;
+  display: block;
   align-items: center;
   margin: -.15rem 0 .75rem;
   padding: .65rem 0;
   background: transparent;
   border: 0;
   color: var(--text-muted);
-}
-.contact-page .booking-confirmation__mark {
-  display: grid;
-  width: 2.5rem;
-  aspect-ratio: 1;
-  place-items: center;
-  background: var(--contact-warm);
-  border-radius: 50%;
-  opacity: .62;
-  transform: rotate(-4deg);
-  transition: opacity var(--t-fast), transform var(--t-fast), background-color var(--t-fast);
-}
-.contact-page .booking-confirmation__mark img {
-  width: .82rem;
-  height: auto;
-}
-.contact-page .booking-confirmation:has(#booking-description:not(:empty)) .booking-confirmation__mark {
-  background: var(--contact-sage);
-  opacity: 1;
-  transform: rotate(0deg);
 }
 .contact-page .booking-confirmation__copy { min-width: 0; }
 .contact-page .booking-confirmation #booking-summary { color: var(--contact-ink); }
@@ -8472,10 +8445,10 @@ html.self-transition-active {
   text-transform: uppercase;
 }
 .contact-promise,
-.contact-direct,
 .contact-practical {
   padding: clamp(1.65rem, 3vw, 2.5rem) 0;
 }
+.contact-direct { padding: 1.25rem 0 1.5rem; }
 .contact-promise p {
   max-width: 19ch;
   color: var(--contact-ink);
@@ -8528,13 +8501,13 @@ html.self-transition-active {
 }
 .contact-page .contact-direct .contact-line {
   display: flex;
-  width: 100%;
+  width: min(100%, 22rem);
   min-width: 0;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
-  padding: .85rem 1rem;
+  padding: .72rem .9rem;
   color: var(--contact-ink);
   background: var(--contact-sage);
   border-radius: 999px;
@@ -8555,21 +8528,11 @@ html.self-transition-active {
   border-top: 0;
 }
 .contact-page .contact-practical .spec-list > div {
-  position: relative;
-  padding: 1rem 0 1rem 2rem;
+  padding: .85rem 0;
   border-bottom: 0;
 }
 .contact-page .contact-practical .spec-list > div::before {
-  content: '';
-  position: absolute;
-  top: 1.35rem;
-  left: .15rem;
-  width: .55rem;
-  height: .55rem;
-  background: var(--contact-moss);
-  border: 2px solid var(--contact-paper);
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--contact-moss) 58%, transparent);
+  display: none;
 }
 .contact-page .contact-practical .spec-list dt { color: var(--contact-ink); }
 .contact-page .contact-practical .spec-list dd { font-size: .8rem; }
@@ -8652,23 +8615,12 @@ html.self-transition-active {
 }
 
 .principles--method .principle__cue {
-  position: relative;
-  padding-bottom: .75rem;
+  position: static;
+  padding-bottom: 0;
 }
 
 .principles--method .principle__cue::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 2.3rem;
-  height: 1px;
-  background: linear-gradient(90deg,#84917f 0 68%,transparent 68%);
-}
-
-.principles--method .principle:nth-child(even) .principle__cue::after {
-  width: 3.1rem;
-  background: linear-gradient(90deg,#b0957f 0 42%,transparent 42% 56%,#b0957f 56% 100%);
+  display: none;
 }
 
 .principles--beliefs .principle__cue {
@@ -8749,3 +8701,39 @@ html.self-transition-active {
   .principles--beliefs .principle__cue { font-size: 1.05rem; }
   .step__dot { left: -2.45rem; }
 }
+
+/* Feedbackronde — minder visuele ruis, duidelijkere acties. */
+.footer__top {
+  display: flex;
+  width: max-content;
+  min-height: 44px;
+  align-items: center;
+  gap: .65rem;
+  margin: 0 0 1.5rem auto;
+  color: rgba(244, 241, 235, .72);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.footer__top span {
+  font-size: 1rem;
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.footer__top:hover,
+.footer__top:focus-visible { color: #fffdf8; }
+.footer__top:hover span,
+.footer__top:focus-visible span { transform: translateY(-2px); }
+
+.home-page #faq .faq { border-top: 0; }
+.home-page #faq .faq__item { border-bottom: 0; }
+.home-page #faq .faq__trigger {
+  min-height: 0;
+  padding: 1rem 0;
+}
+.home-page #faq .faq__panel-inner { padding-bottom: 1.2rem; }
+.faq-home__closing .btn { margin-top: 1.15rem; }
+
+.guidance-row { cursor: pointer; }

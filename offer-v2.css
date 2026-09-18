@@ -12,24 +12,14 @@
 .offer-v2__journey { padding:clamp(4rem,7vw,7rem) 0; background:#262b27; color:var(--text-on-dark); }
 .offer-v2__section-intro { display:grid; grid-template-columns:minmax(8rem,.4fr) minmax(0,1fr); gap:2rem; align-items:start; margin-bottom:clamp(2.5rem,5vw,5rem); }
 .offer-v2__section-intro h2 { max-width:13ch; color:inherit; font-size:clamp(2.8rem,5.8vw,6rem); font-weight:400; line-height:.95; letter-spacing:-.05em; }
-.offer-v2__journey .eyebrow { color:#acb4a7; }
+.offer-v2__journey .eyebrow { color:#d2d9cf; }
 .offer-v2__journey-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin:0; padding:0; list-style:none; border-block:1px solid rgba(255,255,255,.18); }
 .offer-v2__journey-grid li+li { border-left:1px solid rgba(255,255,255,.14); }
-.offer-v2__journey-grid a { position:relative; display:flex; flex-direction:column; min-height:18rem; padding:1.6rem; color:inherit; transition:background-color .25s ease; }
+.offer-v2__journey-grid a { position:relative; display:flex; flex-direction:column; min-height:15rem; padding:1.6rem; color:inherit; transition:background-color .25s ease; }
 .offer-v2__journey-grid a:hover { background:rgba(255,255,255,.055); }
-.offer-v2__route-mark { position:relative; display:block; width:2.8rem; height:2rem; color:#d7ded3; }
-.offer-v2__route-mark::before,.offer-v2__route-mark::after { content:""; position:absolute; }
-.offer-v2__journey-grid li:nth-child(1) .offer-v2__route-mark::before { inset:.12rem auto auto .12rem; width:1.45rem; height:1.45rem; border:1px solid currentColor; border-radius:50%; opacity:.65; }
-.offer-v2__journey-grid li:nth-child(1) .offer-v2__route-mark::after { left:.68rem; top:.68rem; width:.42rem; height:.42rem; background:currentColor; border-radius:50%; }
-.offer-v2__journey-grid li:nth-child(2) .offer-v2__route-mark::before { left:.15rem; top:.38rem; width:2.15rem; height:.85rem; border-top:1px solid currentColor; border-right:1px solid currentColor; border-radius:0 1.1rem 0 0; transform:rotate(-8deg); opacity:.7; }
-.offer-v2__journey-grid li:nth-child(2) .offer-v2__route-mark::after { right:.28rem; bottom:.25rem; width:.36rem; height:.36rem; background:currentColor; border-radius:50%; }
-.offer-v2__journey-grid li:nth-child(3) .offer-v2__route-mark::before { left:1.1rem; top:.08rem; width:1px; height:1.72rem; background:currentColor; transform:rotate(-28deg); transform-origin:bottom; opacity:.72; }
-.offer-v2__journey-grid li:nth-child(3) .offer-v2__route-mark::after { left:1.08rem; top:.02rem; width:1px; height:1.35rem; background:currentColor; transform:rotate(31deg); transform-origin:bottom; opacity:.72; }
-.offer-v2__journey-grid li:nth-child(4) .offer-v2__route-mark::before { left:.1rem; top:.85rem; width:2.25rem; height:1px; background:linear-gradient(90deg,currentColor 0 68%,transparent 68%); opacity:.72; }
-.offer-v2__journey-grid li:nth-child(4) .offer-v2__route-mark::after { right:.28rem; top:.55rem; width:.62rem; height:.62rem; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
-.offer-v2__journey-grid small { margin-top:auto; color:#aeb9aa; font-size:.68rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
+.offer-v2__journey-grid small { margin-top:auto; color:#d5ddd2; font-size:.68rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; }
 .offer-v2__journey-grid strong { display:block; margin-top:.75rem; color:#fffdf8; font-size:clamp(1.25rem,1.8vw,1.65rem); font-weight:400; line-height:1.2; }
-.offer-v2__journey-grid p { margin-top:.75rem; color:rgba(244,241,235,.64); font-size:.88rem; line-height:1.6; }
+.offer-v2__journey-grid p { margin-top:.75rem; color:rgba(244,241,235,.78); font-size:.88rem; line-height:1.6; }
 .offer-v2__section { padding:clamp(5.5rem,10vw,10rem) 0; }
 .offer-v2__section:nth-of-type(even) { background:#f0ece3; }
 .offer-v2__split { display:grid; grid-template-columns:minmax(16rem,.52fr) minmax(0,1fr); gap:clamp(3rem,8vw,9rem); align-items:start; }
@@ -42,9 +32,10 @@
 .offer-v2__step-head > p { max-width:58ch; margin-top:1.5rem; font-size:1.05rem; line-height:1.7; }
 .offer-v2__first-card { display:grid; grid-template-columns:minmax(0,1.2fr) auto; gap:2rem 3rem; padding:clamp(2rem,4vw,4rem); color:var(--text-on-dark); background:#2e342f; }
 .offer-v2__first-card h3 { color:#fffdf8; font-size:clamp(1.65rem,3vw,3rem); font-weight:400; line-height:1.08; letter-spacing:-.035em; }
+.offer-v2__first-card .eyebrow { color:#d1d9ce; }
 .offer-v2__first-price { text-align:right; }
 .offer-v2__first-price strong { display:block; color:#fffdf8; font-size:clamp(3.5rem,6vw,6rem); font-weight:300; line-height:.9; }
-.offer-v2__first-price span { display:block; margin-top:.7rem; color:#bdc5b9; font-size:.85rem; }
+.offer-v2__first-price span { display:block; margin-top:.7rem; color:#d5dcd2; font-size:.85rem; }
 .offer-v2__first-copy { grid-column:1/-1; max-width:66ch; padding-top:2rem; border-top:1px solid rgba(255,255,255,.16); }
 .offer-v2__first-copy p { color:rgba(244,241,235,.77); line-height:1.75; }
 .offer-v2__first-copy p+p { margin-top:1rem; }
@@ -105,25 +96,27 @@
 .offer-v2__catchup p { max-width:68ch; line-height:1.7; }
 .offer-v2__home { padding:clamp(5.5rem,10vw,10rem) 0; background:#2c322e; color:var(--text-on-dark); }
 .offer-v2__home-head { display:grid; grid-template-columns:minmax(10rem,.4fr) minmax(0,.8fr) minmax(16rem,.6fr); gap:clamp(2rem,5vw,5rem); align-items:end; margin-bottom:clamp(3rem,6vw,6rem); }
-.offer-v2__home-head .eyebrow { color:#b5bdb1; }
+.offer-v2__home-head .eyebrow { color:#d2d9cf; }
 .offer-v2__home-head h2 { color:#fffdf8; font-size:clamp(3rem,5.5vw,5.8rem); font-weight:400; line-height:.94; letter-spacing:-.05em; }
 .offer-v2__home-head p { color:rgba(244,241,235,.7); line-height:1.7; }
 .offer-v2__home-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(18rem,.65fr); gap:1.25rem; }
 .offer-v2__home-grid>article { padding:clamp(1.5rem,3vw,3rem); background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.14); }
 .offer-v2__home-grid h3 { color:#fffdf8; font-size:clamp(1.6rem,3vw,2.8rem); font-weight:400; }
-.offer-v2__home .offer-v2__plan-label { color:#bcc6b9; }
+.offer-v2__home .offer-v2__plan-label { color:#d2d9cf; }
 .offer-v2__home .offer-v2__table-wrap,.offer-v2__home .offer-v2__price-list { border-color:rgba(255,255,255,.25); }
 .offer-v2__home .offer-v2__table th,.offer-v2__home .offer-v2__table td,.offer-v2__home .offer-v2__price-list>div { border-color:rgba(255,255,255,.12); }
 .offer-v2__home .offer-v2__table th,.offer-v2__home .offer-v2__table td,.offer-v2__home .offer-v2__table strong,.offer-v2__home .offer-v2__price-list dt,.offer-v2__home .offer-v2__price-list dd { color:#f5f2eb; }
 .offer-v2__home .offer-v2__table thead th { color:#aeb6ab; }
 .offer-v2__home .offer-v2__allowance strong { color:#f5f2eb; }
-.offer-v2__home .offer-v2__allowance small,.offer-v2__home-note { color:rgba(244,241,235,.65); }
+.offer-v2__home .offer-v2__allowance>span { color:#d2d9cf; }
+.offer-v2__home .offer-v2__allowance small,.offer-v2__home-note { color:rgba(244,241,235,.8); }
+.offer-v2__home-note strong { color:#f5f2eb; }
 .offer-v2__home-note { margin-top:1.5rem; line-height:1.65; }
 .offer-v2__home-loose { margin-top:2rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.17); }
 .offer-v2__facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--line-strong); }
 .offer-v2__facts article { min-height:13rem; padding:1.5rem 1.5rem 1.5rem 0; border-bottom:1px solid var(--line); }
 .offer-v2__facts article:not(:nth-child(3n+1)) { padding-left:1.5rem; border-left:1px solid var(--line); }
-.offer-v2__facts span { display:inline-block; padding-top:.65rem; color:#667462; border-top:2px solid #a9b5a5; font-size:.64rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
+.offer-v2__facts span { display:inline-block; color:#667462; font-size:.64rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
 .offer-v2__facts h3 { margin-top:2.5rem; color:var(--text); font-size:1.15rem; font-weight:500; }
 .offer-v2__facts p { max-width:32ch; margin-top:.75rem; font-size:.9rem; line-height:1.65; }
 .offer-v2__final { padding:clamp(6rem,11vw,11rem) 0; background:#ebe5da; }
