@@ -143,3 +143,172 @@
   .offer-v2__plan>header{display:grid;min-height:0}.offer-v2__plan-count{margin-top:1rem}.offer-v2__table{min-width:31rem}.offer-v2__continue-grid{gap:.75rem}.offer-v2__catchup{grid-template-columns:1fr;gap:.75rem}.offer-v2__facts{grid-template-columns:1fr}.offer-v2__facts article:nth-child(even){padding-left:0;border-left:0}.offer-v2__facts article{min-height:0}.offer-v2__final .btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.offer-v2__journey-grid a{transition:none}}
+
+/* Aanbod — scanlaag en YENS-signatuur. */
+.offer-v2__hero {
+  background:
+    radial-gradient(circle at 78% 20%,rgba(100,117,96,.2),transparent 28rem),
+    linear-gradient(120deg,#eee8dd 0%,#f7f4ed 56%,#e2e5dc 100%);
+}
+.offer-v2__hero-aside {
+  padding: clamp(1.5rem,3vw,2.5rem);
+  background: rgba(250,248,243,.56);
+  clip-path: polygon(0 0,100% 0,100% calc(100% - 2rem),calc(100% - 2rem) 100%,0 100%);
+  backdrop-filter: blur(7px);
+}
+.offer-v2__hero-facts {
+  display: grid;
+  gap: .65rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+}
+.offer-v2__hero-facts div {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0,1fr);
+  gap: 1rem;
+  align-items: baseline;
+}
+.offer-v2__hero-facts dt {
+  color: #667462;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.offer-v2__hero-facts dd {
+  margin: 0;
+  color: var(--text);
+  font-size: .83rem;
+}
+
+.offer-v2__journey { padding: clamp(3.25rem,5vw,5rem) 0; }
+.offer-v2__journey .offer-v2__section-intro {
+  grid-template-columns: minmax(7rem,.3fr) minmax(0,1fr);
+  margin-bottom: 2.25rem;
+}
+.offer-v2__journey .offer-v2__section-intro h2 {
+  max-width: 21ch;
+  font-size: clamp(2.2rem,4vw,4.1rem);
+}
+.offer-v2__journey-grid a {
+  min-height: 9.5rem;
+  padding: 1.3rem;
+}
+.offer-v2__journey-grid small { margin-top: 0; }
+.offer-v2__journey-grid strong { margin-top: 1.3rem; font-size: clamp(1.05rem,1.5vw,1.35rem); }
+.offer-v2__journey-grid p { margin-top: .45rem; font-size: .78rem; line-height: 1.5; }
+
+#ervaar,#kies,#bouw,#blijf,#aan-huis,#tarieven { scroll-margin-top: 6rem; }
+.offer-v2__section { padding: clamp(4.5rem,7.5vw,7.5rem) 0; }
+.offer-v2__step { font-size: clamp(1.65rem,3vw,3rem); color:#6c7968; }
+.offer-v2__step::after { display:none; }
+.offer-v2__step-head--wide .offer-v2__step { font-size: clamp(1.65rem,3vw,3rem); }
+.offer-v2__step-head h2 { font-size: clamp(2.4rem,4.25vw,4.4rem); }
+
+.offer-v2__choice-note {
+  max-width: 48rem;
+  margin: 0 0 2rem;
+  padding: 1.15rem 1.35rem;
+  color: #4f574c;
+  background: #e3e7de;
+  clip-path: polygon(0 0,100% 0,100% calc(100% - .9rem),calc(100% - .9rem) 100%,0 100%);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+.offer-v2__choice-note strong { color: var(--text); }
+
+.offer-v2__formats { gap: .8rem; border: 0; }
+.offer-v2__formats article {
+  min-height: 29rem;
+  padding: clamp(1.5rem,2.5vw,2.4rem);
+  background: #faf8f3;
+}
+.offer-v2__formats article:nth-child(2) { background:#ece4d7; }
+.offer-v2__formats article:nth-child(3) {
+  background:#dfe5da;
+  clip-path: polygon(0 0,100% 0,100% calc(100% - 2rem),calc(100% - 2rem) 100%,0 100%);
+}
+.offer-v2__formats article+article { border:0; }
+.offer-v2__formats h3 { margin-top: 2.5rem; }
+.offer-v2__formats strong { min-height: 0; }
+.offer-v2__format-meta {
+  display: grid;
+  gap: .65rem;
+  margin: auto 0 0;
+  padding-top: 1.5rem;
+}
+.offer-v2__format-meta div {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0,1fr);
+  gap: .75rem;
+}
+.offer-v2__format-meta dt {
+  color:#667462;
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.offer-v2__format-meta dd {
+  margin:0;
+  color:var(--text-body);
+  font-size:.78rem;
+  line-height:1.45;
+}
+.offer-v2__formats a {
+  margin-top: 1.6rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid currentColor;
+}
+
+.offer-v2__image-break { min-height: clamp(28rem,45vw,44rem); }
+.offer-v2__plan-grid { gap: .8rem; }
+.offer-v2__plan { border:0; background:#faf8f3; }
+.offer-v2__plan--accent {
+  background:#dfe5da;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 2rem),calc(100% - 2rem) 100%,0 100%);
+}
+.offer-v2__reassurance {
+  border:0;
+  background:#e9e2d6;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 2rem),calc(100% - 2rem) 100%,0 100%);
+}
+
+.offer-v2__continue-grid { gap:.8rem; }
+.offer-v2__continue-grid>article { border:0; }
+.offer-v2__continue-grid>article:nth-child(2) { background:#e3e7de; }
+.offer-v2__continue-grid>article:nth-child(3) { background:#f7f4ed!important; }
+
+.offer-v2__facts {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(2rem,4vw,4.5rem) clamp(2rem,7vw,7rem);
+  border:0;
+}
+.offer-v2__facts article,
+.offer-v2__facts article:not(:nth-child(3n+1)) {
+  min-height:0;
+  padding:0;
+  border:0;
+}
+.offer-v2__facts h3 { margin-top: .7rem; }
+.offer-v2__final { background:linear-gradient(120deg,#ebe4d8,#e1e5db); }
+
+@media(max-width:900px){
+  .offer-v2__hero-aside{max-width:42rem}
+  .offer-v2__journey-grid a{min-height:8.75rem}
+  .offer-v2__formats{gap:.65rem}
+  .offer-v2__formats article{min-height:0}
+  .offer-v2__formats article+article{border:0}
+  .offer-v2__formats h3{margin-top:2.25rem}
+  .offer-v2__format-meta{margin-top:2rem}
+  .offer-v2__facts article:nth-child(even){padding-left:0;border-left:0}
+}
+
+@media(max-width:600px){
+  .offer-v2__hero-aside{padding:1.4rem}
+  .offer-v2__hero-facts div{grid-template-columns:3.25rem minmax(0,1fr)}
+  .offer-v2__journey-grid a{min-height:0;padding:1.25rem 0}
+  .offer-v2__journey-grid strong{margin-top:.7rem}
+  .offer-v2__choice-note{padding:1rem}
+  .offer-v2__facts{grid-template-columns:1fr;gap:2.25rem}
+}
