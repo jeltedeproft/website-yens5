@@ -312,3 +312,152 @@
   .offer-v2__choice-note{padding:1rem}
   .offer-v2__facts{grid-template-columns:1fr;gap:2.25rem}
 }
+
+/* Aanbod — heldere eerste kennismaking. */
+.offer-v2__hero {
+  min-height: min(780px,88svh);
+}
+.offer-v2__hero h1 { max-width: 8.5ch; }
+.offer-v2__hero-aside {
+  box-shadow: 1.25rem 1.25rem 0 rgba(94,108,89,.09);
+}
+
+.offer-v2__quicknav {
+  position: relative;
+  z-index: 2;
+  color: #f8f5ee;
+  background: #2b312c;
+}
+.offer-v2__quicknav-inner {
+  display: grid;
+  grid-template-columns: .7fr repeat(4,minmax(0,1fr));
+  align-items: stretch;
+}
+.offer-v2__quicknav-inner > span,
+.offer-v2__quicknav a {
+  display: flex;
+  align-items: center;
+  min-height: 5.75rem;
+  padding: 1rem clamp(.75rem,1.5vw,1.5rem);
+}
+.offer-v2__quicknav-inner > span {
+  padding-left: 0;
+  color: #aeb8aa;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.offer-v2__quicknav a {
+  position: relative;
+  gap: .8rem;
+  color: #f8f5ee;
+  font-size: .8rem;
+  line-height: 1.35;
+  transition: color .2s ease,background-color .2s ease;
+}
+.offer-v2__quicknav a::before {
+  content: "";
+  flex: 0 0 auto;
+  width: .65rem;
+  height: .65rem;
+  background: #9eab99;
+  clip-path: polygon(0 0,100% 0,100% 60%,60% 100%,0 100%);
+  transform: rotate(var(--quick-turn,0deg));
+}
+.offer-v2__quicknav a:nth-of-type(2) { --quick-turn: 90deg; }
+.offer-v2__quicknav a:nth-of-type(3) { --quick-turn: 180deg; }
+.offer-v2__quicknav a:nth-of-type(4) { --quick-turn: 270deg; }
+.offer-v2__quicknav a:hover,
+.offer-v2__quicknav a:focus-visible {
+  color: #fff;
+  background: rgba(255,255,255,.055);
+}
+
+#praktisch { scroll-margin-top: 6rem; }
+.offer-v2__step-head--wide { margin-bottom: clamp(2.5rem,5vw,4.75rem); }
+.offer-v2__formats article {
+  min-height: 22rem;
+  overflow: hidden;
+}
+.offer-v2__formats article:nth-child(1) {
+  background: linear-gradient(145deg,#fbf9f4,#f1ede4);
+}
+.offer-v2__formats h3 { margin-top: 2.25rem; }
+.offer-v2__formats p {
+  max-width: 28ch;
+  color: #51574f;
+}
+.offer-v2__format-meta { margin-top: auto; }
+.offer-v2__format-meta div { grid-template-columns: 5.25rem minmax(0,1fr); }
+
+.offer-v2__image-break { min-height: clamp(25rem,38vw,36rem); }
+.offer-v2__image-break figcaption strong { max-width: 8ch; }
+
+.offer-v2__reassurance-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+.offer-v2__reassurance-list div {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0,1fr);
+  gap: 1.25rem;
+  padding: .85rem 0;
+}
+.offer-v2__reassurance-list div + div { border-top: 1px solid rgba(69,74,67,.16); }
+.offer-v2__reassurance-list dt {
+  color: #657061;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.offer-v2__reassurance-list dd {
+  margin: 0;
+  color: #4f554d;
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+.offer-v2__facts {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: clamp(2rem,5vw,6rem);
+}
+.offer-v2__practical .offer-v2__section-intro { margin-bottom: clamp(2.5rem,4vw,4rem); }
+.offer-v2__final { padding: clamp(5rem,8vw,8rem) 0; }
+.offer-v2__final-price { margin-top: 0!important; }
+
+@media(max-width:900px){
+  .offer-v2__hero{min-height:auto}
+  .offer-v2__quicknav-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .offer-v2__quicknav-inner>span{grid-column:1/-1;min-height:auto;padding:1.25rem 0 .4rem}
+  .offer-v2__quicknav a{min-height:4.75rem;padding-left:0}
+  .offer-v2__formats article{min-height:18rem}
+  .offer-v2__facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media(max-width:600px){
+  .offer-v2__hero{padding-bottom:3.5rem}
+  .offer-v2__hero h1{font-size:clamp(3.8rem,17vw,5.5rem)}
+  .offer-v2__hero-aside{box-shadow:.75rem .75rem 0 rgba(94,108,89,.09)}
+  .offer-v2__quicknav a{min-height:4.4rem;padding-right:.5rem;font-size:.74rem}
+  .offer-v2__formats article{min-height:0;padding:1.5rem}
+  .offer-v2__formats h3{margin-top:1.75rem}
+  .offer-v2__formats p{max-width:none}
+  .offer-v2__format-meta{margin-top:2rem}
+  .offer-v2__reassurance-list div{grid-template-columns:4.5rem minmax(0,1fr);gap:.75rem}
+  .offer-v2__facts{grid-template-columns:1fr;gap:2rem}
+  .offer-v2__table{min-width:0}
+  .offer-v2__table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .offer-v2__table tbody,.offer-v2__table tr,.offer-v2__table th,.offer-v2__table td{display:block}
+  .offer-v2__table tr{padding:1rem 0;border-bottom:1px solid var(--line)}
+  .offer-v2__table tbody th{padding:0 0 .7rem;border:0;font-size:1rem}
+  .offer-v2__table td{display:flex;justify-content:space-between;gap:1rem;padding:.25rem 0;border:0;text-align:right}
+  .offer-v2__table td::before{color:var(--text-muted);font-size:.68rem;font-weight:500;text-align:left}
+  .offer-v2__table td:nth-of-type(1)::before{content:"Per training"}
+  .offer-v2__table td:nth-of-type(2)::before{content:"Per 4 weken"}
+  .offer-v2__table td:nth-of-type(3)::before{content:"Totaal"}
+  .offer-v2__home .offer-v2__table tr{border-color:rgba(255,255,255,.12)}
+  .offer-v2__home .offer-v2__table td::before{color:#aeb6ab}
+}
