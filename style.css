@@ -8900,3 +8900,110 @@ html.self-transition-active {
   }
   .home-page .home-pillar:nth-child(1) { min-height: 13.5rem; }
 }
+
+/* YENS-homepage — warm, fysiek en redactioneel in plaats van een SaaS-opbouw. */
+.home-page .section { border-bottom: 0; }
+
+.home-page .hero__note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .65rem;
+  max-width: 28rem;
+  margin-top: 2rem;
+  color: #6c6a63;
+  font-size: .66rem;
+  line-height: 1.5;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.home-page .hero__note::after { display: none; }
+.home-page .hero__note strong { color: #485044; font-weight: 600; }
+.home-page .hero__note small {
+  flex-basis: 100%;
+  margin-top: .15rem;
+  color: #78756e;
+  font-size: .68rem;
+  letter-spacing: .035em;
+  text-transform: none;
+}
+
+.home-page #begeleiding { background: #f5f1e9; }
+.home-page #werkwijze { background: #dfe4da; }
+.home-page #over { background: #eee8dd; }
+.home-page #verhalen { background: #f6f2ea; }
+.home-page #faq { background: #e6e0d5; }
+
+.home-page .section-head .eyebrow::before,
+.home-page .process-teaser__intro > .eyebrow::before,
+.home-page .about-editorial__content > .eyebrow::before,
+.home-page .faq-home__intro > .eyebrow::before {
+  content: '';
+  display: inline-block;
+  flex: none;
+  width: .72rem;
+  height: .72rem;
+  margin-right: 0;
+  background: #74816f;
+  clip-path: polygon(0 0,100% 0,100% 58%,58% 100%,0 100%);
+}
+
+.home-page .process-teaser__intro > .eyebrow,
+.home-page .about-editorial__content > .eyebrow,
+.home-page .faq-home__intro > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+@media (min-width: 901px) {
+  .home-page #begeleiding::before { content: 'PERSOONLIJK'; }
+  .home-page #werkwijze::before {
+    content: 'DOSEREN';
+    top: auto;
+    right: var(--gutter);
+    bottom: clamp(2rem, 4vw, 4rem);
+    writing-mode: vertical-rl;
+  }
+  .home-page #over::before { content: 'VRIJ BEWEGEN'; }
+  .home-page #verhalen::before {
+    content: 'EIGEN TEMPO';
+    right: auto;
+    left: var(--gutter);
+  }
+  .home-page #faq::before { content: 'EERST WETEN'; }
+
+  .home-page #begeleiding .section-head {
+    max-width: 52rem;
+    margin-left: clamp(2rem, 7vw, 7rem);
+  }
+  .home-page #verhalen .section-head {
+    max-width: 54rem;
+    margin-left: clamp(5rem, 12vw, 12rem);
+  }
+}
+
+.home-page .about-editorial__principles {
+  padding: .55rem .7rem;
+  color: #f4f1eb;
+  background: rgba(36, 40, 35, .48);
+  backdrop-filter: blur(4px);
+}
+
+.home-final__meta {
+  margin-top: 1.15rem;
+  color: rgba(244, 241, 235, .48);
+  font-size: .67rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .home-page .hero__note { margin-top: 1.5rem; }
+  .home-page .section-head .eyebrow::before,
+  .home-page .process-teaser__intro > .eyebrow::before,
+  .home-page .about-editorial__content > .eyebrow::before,
+  .home-page .faq-home__intro > .eyebrow::before {
+    width: .62rem;
+    height: .62rem;
+  }
+}
