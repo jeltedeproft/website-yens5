@@ -461,3 +461,289 @@
   .offer-v2__home .offer-v2__table tr{border-color:rgba(255,255,255,.12)}
   .offer-v2__home .offer-v2__table td::before{color:#aeb6ab}
 }
+
+/* Aanbod — YENS-route en prijsarchitectuur. */
+.offer-v2__hero h1 { max-width: 9ch; }
+.offer-v2__quicknav {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 50%,rgba(174,184,170,.1) 0 1px,transparent 2px) 0 0/13px 13px,
+    #2b312c;
+}
+.offer-v2__quicknav-inner {
+  grid-template-columns: .65fr repeat(5,minmax(0,1fr));
+  gap: clamp(.25rem,1vw,1rem);
+}
+.offer-v2__quicknav a {
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: .15rem;
+  min-height: 7rem;
+  padding-left: 2rem;
+  background: transparent;
+}
+.offer-v2__quicknav a::before {
+  position: absolute;
+  left: .35rem;
+  top: 50%;
+  width: .8rem;
+  height: .8rem;
+  margin-top: -.4rem;
+  background: #aebaaa;
+  transition: transform .25s ease,background-color .25s ease;
+}
+.offer-v2__quicknav a strong {
+  color: #fffdf8;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem,1.7vw,1.65rem);
+  font-weight: 400;
+  line-height: 1;
+}
+.offer-v2__quicknav a small {
+  color: rgba(244,241,235,.62);
+  font-size: .65rem;
+  line-height: 1.3;
+}
+.offer-v2__quicknav a:hover,
+.offer-v2__quicknav a:focus-visible { background: transparent; }
+.offer-v2__quicknav a:hover::before,
+.offer-v2__quicknav a:focus-visible::before {
+  background: #d7dfd3;
+  transform: rotate(var(--quick-turn,0deg)) scale(1.28);
+}
+
+.offer-v2__section[id] {
+  background-image: radial-gradient(circle at 88% 8%,rgba(108,121,104,.09),transparent 18rem);
+}
+#ervaar { background-color: #efe9df; }
+#kies { background-color: #f7f4ed; }
+#bouw { background-color: #ebe7de; }
+#blijf { background-color: #f7f4ed; }
+.offer-v2__step {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.offer-v2__step::before {
+  content: "";
+  width: .72rem;
+  height: .72rem;
+  background: #82907e;
+  clip-path: polygon(0 0,100% 0,100% 58%,58% 100%,0 100%);
+  transform: rotate(-8deg);
+}
+
+.offer-v2__first-copy {
+  padding: 1.25rem;
+  border: 0;
+  background: rgba(255,255,255,.055);
+}
+.offer-v2__price-options {
+  display: grid;
+  gap: .55rem;
+}
+.offer-v2__price-options > article {
+  display: grid;
+  grid-template-columns: minmax(6rem,.58fr) minmax(8rem,.72fr) minmax(10rem,1fr);
+  gap: clamp(.75rem,2vw,1.5rem);
+  align-items: center;
+  min-height: 6.75rem;
+  padding: 1rem clamp(1rem,2vw,1.5rem);
+  background: rgba(231,227,218,.65);
+  clip-path: polygon(0 0,100% 0,100% calc(100% - .55rem),calc(100% - .55rem) 100%,0 100%);
+}
+.offer-v2__price-options > article:nth-child(2) { background: rgba(224,229,220,.78); }
+.offer-v2__price-options > article:nth-child(3) { background: rgba(238,233,224,.82); }
+.offer-v2__plan--accent .offer-v2__price-options > article { background: rgba(250,248,243,.58); }
+.offer-v2__plan--accent .offer-v2__price-options > article:nth-child(2) { background: rgba(255,255,255,.7); }
+.offer-v2__price-options > article > div > strong {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.offer-v2__price-options > article > div > small,
+.offer-v2__price-options > article > p span {
+  display: block;
+  margin-top: .15rem;
+  color: var(--text-muted);
+  font-size: .66rem;
+}
+.offer-v2__price-options > article > p strong {
+  display: block;
+  color: var(--text);
+  font-size: clamp(1.45rem,2.2vw,2rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+.offer-v2__price-options dl {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .75rem;
+  margin: 0;
+}
+.offer-v2__price-options dt {
+  color: var(--text-muted);
+  font-size: .61rem;
+  line-height: 1.25;
+}
+.offer-v2__price-options dd {
+  margin: .2rem 0 0;
+  color: var(--text);
+  font-size: .79rem;
+  font-weight: 600;
+}
+.offer-v2__allowance > span {
+  width: 1.45rem;
+  height: 1.45rem;
+  color: transparent;
+  background: #82907e;
+  clip-path: polygon(0 0,100% 0,100% 58%,58% 100%,0 100%);
+  transform: rotate(5deg);
+}
+
+.offer-v2__reassurance-list div + div { border: 0; }
+.offer-v2__reassurance-list div { position: relative; padding-left: 1rem; }
+.offer-v2__reassurance-list div::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: .35rem;
+  height: .35rem;
+  background: #849080;
+  transform: rotate(45deg);
+}
+.offer-v2__price-list { border: 0; }
+.offer-v2__price-list > div {
+  margin-top: .38rem;
+  padding: .75rem .85rem;
+  border: 0;
+  background: rgba(255,255,255,.48);
+}
+.offer-v2__continue-grid > article:nth-child(2) .offer-v2__price-list > div { background: rgba(255,255,255,.42); }
+.offer-v2__catchup {
+  padding: 1.25rem 1.5rem;
+  border: 0;
+  background: #ebe5da;
+  clip-path: polygon(0 0,100% 0,100% calc(100% - .75rem),calc(100% - .75rem) 100%,0 100%);
+}
+
+.offer-v2__home-head { margin-bottom: clamp(2.5rem,5vw,4.5rem); }
+.offer-v2__home-summary {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .65rem;
+  margin-bottom: .85rem;
+}
+.offer-v2__home-summary > div {
+  min-height: 5.25rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,.065);
+}
+.offer-v2__home-summary span {
+  display: block;
+  color: #aeb8aa;
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.offer-v2__home-summary strong {
+  display: block;
+  margin-top: .45rem;
+  color: #fffdf8;
+  font-size: .9rem;
+  font-weight: 500;
+}
+.offer-v2__home-grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .85rem;
+}
+.offer-v2__home-grid > article {
+  border: 0;
+  background: rgba(255,255,255,.06);
+}
+.offer-v2__home-grid > article:nth-child(2) { background: rgba(206,217,202,.1); }
+.offer-v2__home-grid > article:nth-child(3) {
+  background: rgba(238,228,211,.09);
+  clip-path: polygon(0 0,100% 0,100% calc(100% - 1.25rem),calc(100% - 1.25rem) 100%,0 100%);
+}
+.offer-v2__home-grid h3 {
+  margin-top: 2.5rem;
+  font-size: clamp(2rem,3vw,3.15rem);
+}
+.offer-v2__home-grid h3 small {
+  display: block;
+  margin-top: .4rem;
+  color: #b8c0b5;
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.offer-v2__home-grid article > p {
+  min-height: 2.6rem;
+  margin-top: 1.25rem;
+  color: rgba(244,241,235,.66);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.offer-v2__home-rates {
+  display: grid;
+  gap: .42rem;
+  margin: 1.5rem 0 0;
+}
+.offer-v2__home-rates > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .72rem .8rem;
+  background: rgba(255,255,255,.055);
+}
+.offer-v2__home-rates dt { color: #b7bfb4; font-size: .68rem; }
+.offer-v2__home-rates dd { margin: 0; color: #fffdf8; font-size: .78rem; font-weight: 600; text-align: right; }
+.offer-v2__home-footnote {
+  max-width: 58rem;
+  margin: 1.25rem 0 0;
+  color: rgba(244,241,235,.66);
+  font-size: .78rem;
+  line-height: 1.6;
+}
+.offer-v2__final-price {
+  padding: 1.25rem;
+  border: 0;
+  background: rgba(255,255,255,.46);
+  clip-path: polygon(0 0,100% 0,100% calc(100% - .75rem),calc(100% - .75rem) 100%,0 100%);
+}
+
+@media(max-width:1050px){
+  .offer-v2__quicknav-inner{grid-template-columns:.55fr repeat(5,minmax(0,1fr))}
+  .offer-v2__quicknav a{padding-left:1.6rem}
+  .offer-v2__price-options>article{grid-template-columns:minmax(5.5rem,.5fr) minmax(7rem,.7fr) minmax(9rem,1fr)}
+}
+
+@media(max-width:900px){
+  .offer-v2__quicknav-inner{grid-template-columns:repeat(3,minmax(0,1fr));padding-bottom:1rem}
+  .offer-v2__quicknav-inner>span{grid-column:1/-1}
+  .offer-v2__quicknav a{min-height:5.2rem}
+  .offer-v2__home-grid{grid-template-columns:1fr}
+  .offer-v2__home-grid article>p{min-height:0}
+}
+
+@media(max-width:600px){
+  .offer-v2__quicknav-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .offer-v2__quicknav a{min-height:4.8rem;padding-left:1.65rem}
+  .offer-v2__quicknav a strong{font-size:1.25rem}
+  .offer-v2__plan{padding:1.25rem}
+  .offer-v2__price-options>article{grid-template-columns:1fr auto;gap:.75rem;padding:1rem}
+  .offer-v2__price-options>article>p{text-align:right}
+  .offer-v2__price-options dl{grid-column:1/-1}
+  .offer-v2__reassurance-list div{padding-left:1rem}
+  .offer-v2__home-summary{grid-template-columns:1fr;gap:.45rem}
+  .offer-v2__home-summary>div{min-height:0}
+  .offer-v2__home-grid>article{padding:1.5rem}
+  .offer-v2__home-grid h3{margin-top:1.75rem}
+}
