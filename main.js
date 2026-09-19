@@ -1,4 +1,4 @@
-import { initBooking } from './booking-flow.mjs';
+import { initBooking, initContactJourney } from './booking-flow.mjs';
 /* ==========================================================================
    YENS — interactie & subtiel bewegingsontwerp
    ========================================================================== */
@@ -358,14 +358,17 @@ function initForm() {
   const status = $('#form-status');
   const booking = initBooking(form);
 
-  // Velden voorinvullen vanuit een link, bv. /contact.html?locatie=kontich
+  // Locatie voorinvullen vanuit een link naar de contactpagina.
   const params = new URLSearchParams(window.location.search);
-  ['locatie', 'begeleiding'].forEach((name) => {
-    const value = params.get(name);
-    const field = form.querySelector(`[name="${name}"]`);
-    if (!value || !field) return;
-    if (Array.from(field.options).some((o) => o.value === value)) field.value = value;
-  });
+  const requestedLocation = params.get('locatie');
+  const locationAliases = { ranst: 'Kadans Ranst', 'aan-huis': 'Aan huis' };
+  const locationValue = locationAliases[requestedLocation] || requestedLocation;
+  if (locationValue) {
+    const locationChoice = [...form.querySelectorAll('[name="locatie"]')]
+      .find(choice => choice.value === locationValue);
+    if (locationChoice) locationChoice.checked = true;
+  }
+  initContactJourney(form);
 
   const showStatus = (message) => {
     if (!status) return;

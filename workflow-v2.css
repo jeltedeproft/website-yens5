@@ -594,6 +594,7 @@
   .page-editorial-pair__grid,
   .page-editorial-photo,
   .workflow-system__context,
+  .workflow-system__focus-head,
   .workflow-system__field,
   .workflow-system__field > div,
   .process,
@@ -658,7 +659,47 @@
   color: #424a40;
   font-size: clamp(.95rem,1.3vw,1.08rem);
 }
-.workflow-system__field { margin-top: .7rem; }
+.workflow-system__focus-head {
+  display: grid;
+  grid-template-columns: repeat(12,minmax(0,1fr));
+  gap: clamp(.7rem,1.5vw,1.35rem);
+  align-items: end;
+  margin-top: clamp(3.5rem,7vw,6.5rem);
+  padding-bottom: clamp(1.25rem,2.5vw,2rem);
+}
+.workflow-system__focus-head > span {
+  grid-column: 1/4;
+  align-self: start;
+  padding-top: .45rem;
+  color: #bdc8b9;
+  font-size: .59rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.workflow-system__focus-head > h3 {
+  grid-column: 4/9;
+  margin: 0;
+  color: #fffdf8;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem,3.2vw,3.2rem);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.035em;
+}
+.workflow-system__focus-head > h3 em {
+  color: #bdc8b9;
+  font-weight: inherit;
+}
+.workflow-system__focus-head > p {
+  grid-column: 9/13;
+  max-width: 34ch;
+  margin: 0;
+  color: rgba(244,241,235,.72);
+  font-size: clamp(.9rem,1.15vw,1rem);
+  line-height: 1.6;
+}
+.workflow-system__field { margin-top: 0; }
 .workflow-system__field > div:not(.workflow-system__center) {
   padding-right: clamp(1rem,4vw,4rem);
 }
@@ -682,12 +723,21 @@
 @media(max-width:900px){
   .workflow-system__context{grid-template-columns:1fr}
   .workflow-system__context>div:first-child{padding-left:1.35rem;background:rgba(255,255,255,.04)}
+  .workflow-system__focus-head{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .workflow-system__focus-head>span{grid-column:1/-1;padding-top:0}
+  .workflow-system__focus-head>h3{grid-column:1}
+  .workflow-system__focus-head>p{grid-column:2;align-self:end}
 }
 
 @media(max-width:600px){
   .workflow-page main :where(h1,h2,h3,p,li,dd,strong,span,a){overflow-wrap:anywhere}
   .workflow-system__context>div{padding:1.2rem}
   .workflow-system__context>div:first-child{padding-left:1.2rem}
+  .workflow-system__focus-head{grid-template-columns:1fr;gap:.7rem}
+  .workflow-system__focus-head>span,
+  .workflow-system__focus-head>h3,
+  .workflow-system__focus-head>p{grid-column:1}
+  .workflow-system__focus-head>p{max-width:32rem}
   .workflow-system__field>div:not(.workflow-system__center){padding-right:0}
   .workflow-final .btn-group{width:100%}
 }
@@ -706,6 +756,7 @@
 .workflow-hero__aside .lead { max-width: 38ch; }
 .workflow-system .section-head,
 .workflow-system__context,
+.workflow-system__focus-head,
 .workflow-system__field,
 .workflow-journey .split,
 .workflow-principles .section-head,

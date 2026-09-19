@@ -6,13 +6,11 @@
   <title>Jouw eerste stap | YENS</title>
   <meta name="description" content="Vertel Yens waar je naartoe wilt. Kies voor een korte kennismaking of start meteen met een eerste training." />
   <link rel="canonical" href="https://www.yens.be/contact.html" />
-
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="nl_BE" />
   <meta property="og:title" content="Jouw eerste stap | YENS" />
   <meta property="og:description" content="Geen lange vragenlijst. Kies je start; de rest bespreken we samen." />
   <meta property="og:image" content="/images/hero.jpg" />
-
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +21,6 @@
 </head>
 <body class="contact-page">
   <a class="skip-link" href="#main">Naar de inhoud</a>
-
   <header class="nav" id="nav">
     <div class="container nav__inner">
       <a class="brand" href="/" aria-label="YENS — naar de homepage">
@@ -43,7 +40,6 @@
       </div>
     </div>
   </header>
-
   <div class="nav__mobile" id="nav-mobile">
     <nav aria-label="Mobiele navigatie">
       <a class="nav__mobile-link" style="--i:0" href="/">Home</a>
@@ -52,143 +48,112 @@
       <a class="nav__mobile-link" style="--i:3" href="/over-mij.html">Over YENS</a>
       <a class="nav__mobile-link" style="--i:4" href="/contact.html">Contact</a>
     </nav>
-    <div class="nav__mobile-footer">
-      <p class="nav__mobile-meta">Kadans Ranst · aan huis in regio Antwerpen</p>
-    </div>
+    <div class="nav__mobile-footer"><p class="nav__mobile-meta">Kadans Ranst · aan huis in regio Antwerpen</p></div>
   </div>
 
   <main id="main">
-
-    <section class="section contact-composition contact-editorial" id="aanvraag">
+    <section class="contact-intake" id="aanvraag">
       <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Zin om te starten?</span>
+        <header class="contact-intake__hero">
+          <span class="eyebrow">Jouw eerste stap</span>
           <h1 class="h-1">Vertel me waar je naartoe wilt.</h1>
-          <p class="lead">
-            Kies hoe je wilt beginnen en vertel kort wat je zoekt.
-            Geen lange vragenlijst — de rest bespreken we samen.
-          </p>
-          <p class="contact-editorial__personal">Elke aanvraag komt rechtstreeks bij mij terecht.</p>
-        </div>
+          <p class="lead">Je hoeft vooraf nog niet precies te weten wat je nodig hebt.<br>Dat bekijken we samen.</p>
+        </header>
 
-        <ul class="contact-steps" aria-label="Zo verloopt je aanvraag">
-          <li><span class="contact-steps__verb">Kies</span><p><strong>Kies je start</strong><small>Een kennismaking of meteen bewegen.</small></p></li>
-          <li><span class="contact-steps__verb">Deel</span><p><strong>Vertel kort over jezelf</strong><small>Alleen wat nu belangrijk is.</small></p></li>
-          <li><span class="contact-steps__verb">Start</span><p><strong>Ik neem contact op</strong><small>Persoonlijk, binnen twee werkdagen.</small></p></li>
-        </ul>
-
-        <div class="split split--text-heavy split--top">
-          <form class="form" id="contact-form" name="kennismaking" method="POST"
-                data-netlify="true" data-netlify-honeypot="website" novalidate>
-            <!-- Netlify koppelt de inzending aan het juiste formulier -->
+        <div class="contact-intake__conversation">
+          <form class="contact-journey" id="contact-form" name="kennismaking" method="POST" data-netlify="true" data-netlify-honeypot="website" novalidate data-contact-journey>
             <input type="hidden" name="form-name" value="kennismaking" />
-
-            <fieldset class="booking-choice field"><legend><span class="contact-form__mark" aria-hidden="true"></span> Hoe wil je beginnen? <i aria-hidden="true">*</i></legend>
-              <div class="booking-options">
-                <label class="booking-option"><input type="radio" name="afspraak" value="eerste-training" required /><span><strong>Eerste training</strong><small>60 min · €65</small><small>We kijken, bewegen en bepalen van daaruit wat jij nodig hebt.</small></span></label>
-                <label class="booking-option"><input type="radio" name="afspraak" value="gratis-kennismaking" required /><span><strong>Gratis kennismaking</strong><small>15 min · €0</small><small>Een kort telefoongesprek om te voelen of het klopt.</small></span></label>
-              </div>
-            </fieldset>
-            <div class="booking-confirmation" aria-live="polite" aria-atomic="true">
-              <div class="booking-confirmation__copy"><p id="booking-summary">Kies hierboven je afspraak. Daarna zie je hier het type, de duur en de prijs.</p><p id="booking-description"></p></div>
-            </div>
+            <input type="hidden" name="subject" value="Nieuwe aanvraag via YENS" data-remove-prefix />
             <input type="hidden" name="afspraak_type" value="" />
             <input type="hidden" name="afspraak_duur" value="" />
             <input type="hidden" name="afspraak_prijs" value="" />
-            <noscript><p>Kies je afspraak hierboven. Gratis kennismaking: telefonisch, ongeveer 15 minuten, €0, geen training. Eerste training: intake, bewegingsanalyse &amp; eerste training, 60 minuten, €65.</p></noscript>
-            <!-- Spamveld: bewust verborgen, wordt ook serverside door Netlify gecontroleerd -->
             <div class="honeypot" aria-hidden="true">
               <label for="website">Laat dit veld leeg</label>
               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
             </div>
 
-            <div class="contact-form__chapter"><h2>Jouw gegevens</h2></div>
-
-            <div class="form__row">
-              <div class="field">
-                <label for="naam">Naam <span aria-hidden="true">*</span></label>
-                <input type="text" id="naam" name="naam" autocomplete="name" required />
+            <fieldset class="journey-step field journey-step--start is-current" data-journey-step="1">
+              <legend class="journey-step__heading"><span class="journey-step__cue">Je start</span><span>Hoe wil je beginnen?</span></legend>
+              <div class="journey-step__summary" data-step-summary aria-live="polite"></div>
+              <div class="journey-step__body">
+                <div class="start-options">
+                  <label class="start-option">
+                    <input type="radio" name="afspraak" value="gratis-kennismaking" required />
+                    <span class="start-option__copy"><span class="start-option__top"><strong>Even kennismaken</strong><small>15 min&nbsp;&nbsp; telefonisch&nbsp;&nbsp; gratis</small></span><span class="start-option__description">Kort kennismaken en horen waar je naar op zoek bent.</span></span>
+                  </label>
+                  <label class="start-option">
+                    <input type="radio" name="afspraak" value="eerste-training" required />
+                    <span class="start-option__copy"><span class="start-option__top"><strong>Meteen aan de slag</strong><small>60 min&nbsp;&nbsp; €65</small></span><span class="start-option__description">Intake, bewegingsanalyse en eerste training.</span></span>
+                  </label>
+                </div>
               </div>
-              <div class="field">
-                <label for="email">E-mail <span aria-hidden="true">*</span></label>
-                <input type="email" id="email" name="email" autocomplete="email" required />
+            </fieldset>
+
+            <fieldset class="journey-step field journey-goals" data-journey-step="2" hidden>
+              <legend class="journey-step__heading"><span class="journey-step__cue">Je richting</span><span>Waar wil je naartoe?</span></legend>
+              <div class="journey-step__summary" data-step-summary aria-live="polite"></div>
+              <div class="journey-step__body">
+                <p class="journey-step__intro">Kies gerust meer dan één.</p>
+                <div class="goal-options">
+                  <label><input type="checkbox" name="doelen" value="Sterker worden" /><span>Sterker worden</span></label>
+                  <label><input type="checkbox" name="doelen" value="Fitter voelen" /><span>Fitter voelen</span></label>
+                  <label><input type="checkbox" name="doelen" value="Beter bewegen" /><span>Beter bewegen</span></label>
+                  <label><input type="checkbox" name="doelen" value="Meer energie" /><span>Meer energie</span></label>
+                  <label><input type="checkbox" name="doelen" value="Gezond ouder worden" /><span>Gezond ouder worden</span></label>
+                  <label><input type="checkbox" name="doelen" value="Iets anders" /><span>Iets anders</span></label>
+                </div>
+                <div class="field journey-note">
+                  <label for="doel"><strong>Wil je er iets bij vertellen?</strong><small>Hoeft niet. Een paar woorden is genoeg.</small></label>
+                  <textarea id="doel" name="toelichting" placeholder="Vertel wat voor jou belangrijk is"></textarea>
+                </div>
               </div>
-            </div>
+            </fieldset>
 
-            <div class="form__row">
-              <div class="field">
-                <label for="telefoon">Telefoonnummer <span id="telephone-required" aria-hidden="true" hidden>*</span></label>
-                <input type="tel" id="telefoon" name="telefoon" autocomplete="tel" aria-describedby="telephone-hint" /><span class="hint" id="telephone-hint">Nodig voor je gratis telefonische kennismaking.</span>
+            <fieldset class="journey-step field journey-step--location" data-journey-step="3" hidden>
+              <legend class="journey-step__heading"><span class="journey-step__cue">Je plek</span><span>Waar wil je trainen?</span></legend>
+              <div class="journey-step__summary" data-step-summary aria-live="polite"></div>
+              <div class="journey-step__body">
+                <div class="location-options">
+                  <label><input type="radio" name="locatie" value="Kadans Ranst" required /><span><strong>Kadans Ranst</strong><small>Rustige trainingsomgeving in Ranst.</small></span></label>
+                  <label><input type="radio" name="locatie" value="Aan huis" required /><span><strong>Aan huis</strong><small>In regio Antwerpen.</small></span></label>
+                  <label><input type="radio" name="locatie" value="Nog niet zeker" required /><span><strong>Nog niet zeker</strong><small>Dat bekijken we samen.</small></span></label>
+                </div>
               </div>
-              <div class="field">
-                <label for="locatie">Gewenste locatie</label>
-                <select id="locatie" name="locatie">
-                  <option value="">Maak een keuze</option>
-                  <option value="ranst">Kadans Ranst</option>
-                  <option value="aan-huis">Aan huis (regio Antwerpen)</option>
-                </select>
+            </fieldset>
+
+            <fieldset class="journey-step journey-step--details" data-journey-step="4" hidden>
+              <legend class="journey-step__heading"><span class="journey-step__cue">Jouw gegevens</span><span>Wie mag ik contacteren?</span></legend>
+              <div class="journey-step__body">
+                <div class="form__row">
+                  <div class="field">
+                    <label for="voornaam">Voornaam <span aria-hidden="true">*</span></label>
+                    <input type="text" id="voornaam" name="voornaam" autocomplete="given-name" placeholder="Yens" required />
+                  </div>
+                  <div class="field">
+                    <label for="telefoon">Telefoon <span id="telephone-required" aria-hidden="true" hidden>*</span></label>
+                    <input type="tel" id="telefoon" name="telefoon" autocomplete="tel" placeholder="+32 ..." aria-describedby="telephone-hint" />
+                    <span class="hint" id="telephone-hint">Voor een korte telefonische kennismaking.</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="email">E-mail <span id="email-required" aria-hidden="true" hidden>*</span></label>
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="naam@email.be" aria-describedby="email-hint" />
+                  <span class="hint" id="email-hint">Voor je praktische bevestiging.</span>
+                </div>
+                <div class="field field--checkbox journey-privacy">
+                  <input type="checkbox" id="privacy" name="privacy" required />
+                  <label for="privacy">Ik ga ermee akkoord dat mijn gegevens worden gebruikt om contact met mij op te nemen. Zie de <a href="/privacy.html">privacyverklaring</a>.</label>
+                </div>
+                <p class="form__status" id="form-status" role="status" hidden></p>
+                <div class="journey-submit">
+                  <button class="btn btn--primary btn--lg" type="submit" data-static-label>Verstuur mijn aanvraag</button>
+                  <p>Ik neem persoonlijk contact met je op binnen twee werkdagen.</p>
+                </div>
               </div>
-            </div>
-
-            <div class="field">
-              <label for="begeleiding">Soort begeleiding</label>
-              <select id="begeleiding" name="begeleiding">
-                <option value="">Maak een keuze</option>
-                <option value="personal-training">Personal training</option>
-                <option value="duo-training">Duo training</option>
-                <option value="semi-personal">Semi-personal training</option>
-                <option value="advies">Nog geen idee — graag advies</option>
-              </select>
-            </div>
-
-            <div class="contact-form__chapter"><h2>Waar wil je naartoe?</h2></div>
-
-            <div class="field">
-              <label for="doel">Belangrijkste doel <span aria-hidden="true">*</span></label>
-              <textarea id="doel" name="doel" required placeholder="Waar wil je aan werken?"></textarea>
-            </div>
-
-            <div class="field field--checkbox">
-              <input type="checkbox" id="privacy" name="privacy" required />
-              <label for="privacy">
-                Ik ga ermee akkoord dat mijn gegevens worden gebruikt om contact met mij op te nemen.
-                Zie de <a href="/privacy.html" style="text-decoration:underline;">privacyverklaring</a>.
-              </label>
-            </div>
-
-            <p class="form__status" id="form-status" role="status" hidden></p>
-
-            <div>
-              <button class="btn btn--primary btn--lg" type="submit">Plan mijn eerste stap</button><p class="booking-submit-note">Ik antwoord persoonlijk binnen twee werkdagen.</p>
-            </div>
+            </fieldset>
+            <p class="journey-submit__whatsapp">Liever gewoon even sturen? <a href="https://wa.me/32491979541" target="_blank" rel="noopener noreferrer">Stuur me een WhatsApp</a></p>
+            <noscript><p class="journey-noscript">Schakel JavaScript in om het formulier stap voor stap te openen, of stuur me rechtstreeks een bericht via WhatsApp op +32 491 97 95 41.</p></noscript>
           </form>
-
-          <aside class="contact-aside" id="contactgegevens">
-            <figure class="contact-aside__portrait" data-reveal="right">
-              <img src="/images/yens-contact-portrait-plain-v2.png" alt="Portret van Yens De Proft" width="1024" height="1536" loading="eager" />
-              <figcaption>Yens De Proft<br />Strength &amp; longevity coach</figcaption>
-            </figure>
-
-            <blockquote class="contact-promise">
-              <p>“Je hoeft vooraf niet alles helder te hebben. Dat zoeken we samen uit.”</p>
-              <footer>— Yens</footer>
-            </blockquote>
-
-            <div class="contact-direct">
-              <span class="contact-aside__label">Liever meteen contact?</span>
-              <h2>Stuur me gewoon een bericht.</h2>
-              <p class="contact-direct__note">Je komt rechtstreeks bij mij uit, zonder tussenpersoon.</p>
-              <a class="contact-line" href="https://wa.me/32491979541" aria-label="Stuur Yens een WhatsApp-bericht op +32 491 97 95 41"><span>WhatsApp · +32 491 97 95 41</span><b aria-hidden="true">→</b></a>
-            </div>
-
-            <div class="contact-practical" id="locaties">
-              <span class="contact-aside__label">Waar we trainen</span>
-              <dl class="spec-list">
-                <div><dt>Kadans Ranst</dt><dd>Rustige, professionele trainingsomgeving.</dd></div>
-                <div><dt>Aan huis</dt><dd>Persoonlijke coaching in je eigen omgeving.</dd></div>
-              </dl>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
@@ -198,40 +163,17 @@
     <div class="container">
       <a class="footer__top" href="#main">Terug naar boven <span aria-hidden="true">↑</span></a>
       <div class="footer__grid">
-        <div>
-          <span class="brand__name">YENS</span>
-          <p class="footer__tagline">Sterker bewegen. Beter herstellen. Langer goed leven.</p>
-        </div>
-        <div class="footer__col">
-          <h3>Begeleiding</h3>
-          <a href="/begeleiding.html#personal-training">Personal training</a>
-          <a href="/begeleiding.html#duo-training">Duo training</a>
-          <a href="/begeleiding.html#semi-personal">Semi-personal training</a>        </div>
-        <div class="footer__col">
-          <h3>Praktisch</h3>
-          <a href="/werkwijze.html">Werkwijze</a>
-          <a href="/begeleiding.html#tarieven">Tarieven</a>
-          <a href="/contact.html#locaties">Locaties</a>
-          <a href="/#faq">FAQ</a>
-          <a href="/contact.html">Contact</a>
-        </div>
-        <div class="footer__col">
-          <h3>Contact</h3>
-          <a href="https://wa.me/32491979541">WhatsApp</a>
-        </div>
+        <div><span class="brand__name">YENS</span><p class="footer__tagline">Sterker bewegen. Beter herstellen. Langer goed leven.</p></div>
+        <div class="footer__col"><h3>Begeleiding</h3><a href="/begeleiding.html#personal-training">Personal training</a><a href="/begeleiding.html#duo-training">Duo training</a><a href="/begeleiding.html#semi-personal">Semi-personal training</a></div>
+        <div class="footer__col"><h3>Praktisch</h3><a href="/werkwijze.html">Werkwijze</a><a href="/begeleiding.html#tarieven">Tarieven</a><a href="/contact.html">Contact</a></div>
+        <div class="footer__col"><h3>Contact</h3><a href="https://wa.me/32491979541">WhatsApp</a></div>
       </div>
       <div class="footer__bottom">
         <p>&copy; <span data-year>2026</span> YENS · Ondernemingsnummer 1037.809.631</p>
-        <div class="footer__legal">
-          <a href="/privacy.html">Privacyverklaring</a>
-          <a href="/privacy.html#cookies">Cookiebeleid</a>
-          <a href="/voorwaarden.html">Algemene voorwaarden</a>
-          <a href="/voorwaarden.html#annulatie">Annulatievoorwaarden</a>
-        </div>
+        <div class="footer__legal"><a href="/privacy.html">Privacyverklaring</a><a href="/privacy.html#cookies">Cookiebeleid</a><a href="/voorwaarden.html">Algemene voorwaarden</a><a href="/voorwaarden.html#annulatie">Annulatievoorwaarden</a></div>
       </div>
     </div>
   </footer>
-
   <script type="module" src="./main.js"></script>
 </body>
 </html>
